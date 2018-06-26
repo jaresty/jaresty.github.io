@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../overview.html"><img src="../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-06-22 11:20:17 -0400'>2017-06-22 11:20:17 -0400</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-director/lib/bosh/director/deployment_plan /</small> persistent_disk_collection.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">166</span><small> lines of codes</small></div>
+              <div><span class="metric">19</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">7.2</span><small> complexity/method</small></div>
+              <div><span class="metric">11</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">135.95</span><small> complexity</small></div>
+              <div><span class="metric">44</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                22
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director
+  module DeploymentPlan
+    class PersistentDiskCollection<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection has no descriptive comment</span>          </div>  </li></ol>
+      include Enumerable
+
+      attr_reader :collection
+
+      def initialize(logger)
+        @collection = []
+        @logger = logger
+      end
+
+      def each(&amp;block)
+        @collection.each(&amp;block)
+      end
+
+      def add_by_disk_size(disk_size)
+        raise Exception, &#39;This instance group is not supposed to have multiple disks,
+                          but tried to attach multiple disks.&#39; if @collection.size &gt; 0
+
+        add_to_collection(ManagedPersistentDisk.new(DiskType.new(SecureRandom.uuid, disk_size, {})))
+      end
+
+      def add_by_disk_type(disk_type)
+        raise Exception, &#39;This instance group is not supposed to have multiple disks,
+                        but tried to attach multiple disks.&#39; if @collection.size &gt; 0
+
+        add_to_collection(ManagedPersistentDisk.new(disk_type))
+      end
+
+      def add_by_model(disk_model)
+        add_to_collection(ModelPersistentDisk.new(disk_model))
+      end
+
+      def add_by_disk_name_and_type(disk_name, disk_type)
+        unless collection.find { |disk| disk.managed? }.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#add_by_disk_name_and_type performs a nil-check</span>          </div>  </li></ol>
+          raise Exception, &#39;This instance group cannot have multiple disks when using a managed disk.&#39;
+        end
+
+        add_to_collection(NewPersistentDisk.new(disk_name, disk_type))
+      end
+
+      def non_managed_disks
+        collection.reject { |disk| disk.managed? }
+      end
+
+      def needs_disk?
+        collection.length &gt; 0
+      end
+
+      def self.changed_disk_pairs(old_disk_collection, old_variable_set, new_disk_collection, new_variable_set)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::changed_disk_pairs has a flog score of 28</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#self.changed_disk_pairs has 4 parameters</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#self.changed_disk_pairs has approx 14 statements</span>          </div>  </li></ol>
+        paired = []
+
+        new_disk_collection.each do |new_disk|
+          old_disk = old_disk_collection.find { |disk| new_disk.name == disk.name }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#self.changed_disk_pairs calls 'disk.name' 2 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L55" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L64" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#self.changed_disk_pairs contains iterators nested 2 deep</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L55" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L64" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+          paired &lt;&lt; {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#self.changed_disk_pairs calls 'paired << { ... }' 2 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L57" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L67" class="js-smell-location">1</a>                  </div>  </li></ol>
+            old: old_disk,
+            new: new_disk,
+          }
+        end
+
+        old_disk_collection.each do |old_disk|
+          new_disk = new_disk_collection.find { |disk| old_disk.name == disk.name }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#self.changed_disk_pairs calls 'disk.name' 2 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L55" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L64" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#self.changed_disk_pairs contains iterators nested 2 deep</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L55" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L64" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+          if new_disk.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#self.changed_disk_pairs performs a nil-check</span>          </div>  </li></ol>
+            paired &lt;&lt; {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#self.changed_disk_pairs calls 'paired << { ... }' 2 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L57" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L67" class="js-smell-location">1</a>                  </div>  </li></ol>
+              old: old_disk,
+              new: new_disk,
+            }
+          end
+        end
+
+        disk_comparator = Bosh::Director::Disk::PersistentDiskComparator.new
+
+        paired.select do |disk_pair|
+          old_pair = Bosh::Director::Disk::PersistentDiskVariableSetPair.new(disk_pair[:old], old_variable_set)
+          new_pair = Bosh::Director::Disk::PersistentDiskVariableSetPair.new(disk_pair[:new], new_variable_set)
+          !disk_comparator.is_equal?(old_pair, new_pair)
+        end
+      end
+
+      def generate_spec<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#generate_spec has approx 6 statements</span>          </div>  </li></ol>
+        if @collection.empty?
+          return {&#39;persistent_disk&#39; =&gt; 0}
+        end
+
+        spec = {}
+
+        if collection.length == 1 &amp;&amp; collection[0].managed?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#generate_spec calls 'collection[0]' 4 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L90" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L92" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L95" class="js-smell-location">2</a>                  <a href="persistent_disk_collection.html#L96" class="js-smell-location">3</a>                  </div>  </li></ol>
+          # supply both for reverse compatibility with old agent
+          spec[&#39;persistent_disk&#39;] = collection[0].size<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#generate_spec calls 'collection[0]' 4 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L90" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L92" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L95" class="js-smell-location">2</a>                  <a href="persistent_disk_collection.html#L96" class="js-smell-location">3</a>                  </div>  </li></ol>
+          # old agents will ignore this pool
+          # keep disk pool for backwards compatibility
+          spec[&#39;persistent_disk_pool&#39;] = collection[0].spec<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#generate_spec calls 'collection[0]' 4 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L90" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L92" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L95" class="js-smell-location">2</a>                  <a href="persistent_disk_collection.html#L96" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#generate_spec calls 'collection[0].spec' 2 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L95" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L96" class="js-smell-location">1</a>                  </div>  </li></ol>
+          spec[&#39;persistent_disk_type&#39;] = collection[0].spec<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#generate_spec calls 'collection[0]' 4 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L90" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L92" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L95" class="js-smell-location">2</a>                  <a href="persistent_disk_collection.html#L96" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection#generate_spec calls 'collection[0].spec' 2 times</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L95" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L96" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+
+        spec
+      end
+
+      private
+
+      def add_to_collection(disk)
+        @collection &lt;&lt; disk
+      end
+
+      class PersistentDisk<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::PersistentDisk has no descriptive comment</span>          </div>  </li></ol>
+        attr_reader :name, :cloud_properties, :size
+
+        def initialize(name, cloud_properties, size)
+          @name = name
+          @cloud_properties = cloud_properties
+          @size = size
+        end
+
+        def to_s
+          {name: name, size: size, cloud_properties: cloud_properties}.inspect
+        end
+
+        def managed?
+          name == &#39;&#39;
+        end
+
+        def ==(other)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L125" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L131" class="js-smell-location">1</a>                  </div>  </li></ol>
+          return false unless other.is_a? PersistentDisk<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::PersistentDisk#== refers to 'other' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L126" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L127" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L128" class="js-smell-location">2</a>                  </div>  </li></ol>
+          cloud_properties == other.cloud_properties &amp;&amp;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::PersistentDisk#== refers to 'other' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L126" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L127" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L128" class="js-smell-location">2</a>                  </div>  </li></ol>
+            size == other.size &amp;&amp; name == other.name<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::PersistentDisk#== refers to 'other' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L126" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L127" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L128" class="js-smell-location">2</a>                  </div>  </li></ol>
+        end
+
+        def size_diff_only?(other)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L125" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L131" class="js-smell-location">1</a>                  </div>  </li></ol>
+          return false unless other.is_a? PersistentDisk<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::PersistentDisk#size_diff_only? refers to 'other' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L132" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L133" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L134" class="js-smell-location">2</a>                  </div>  </li></ol>
+          cloud_properties == other.cloud_properties &amp;&amp;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::PersistentDisk#size_diff_only? refers to 'other' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L132" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L133" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L134" class="js-smell-location">2</a>                  </div>  </li></ol>
+            size != other.size &amp;&amp; name == other.name<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::PersistentDisk#size_diff_only? refers to 'other' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L132" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L133" class="js-smell-location">1</a>                  <a href="persistent_disk_collection.html#L134" class="js-smell-location">2</a>                  </div>  </li></ol>
+        end
+      end
+
+      class NewPersistentDisk &lt; PersistentDisk<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::NewPersistentDisk has no descriptive comment</span>          </div>  </li></ol>
+        attr_reader :spec
+
+        def initialize(name, type)
+          super(name, type.cloud_properties, type.disk_size)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::NewPersistentDisk#initialize refers to 'type' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L142" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L143" class="js-smell-location">1</a>                  </div>  </li></ol>
+          @spec = type.spec<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::NewPersistentDisk#initialize refers to 'type' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L142" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L143" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+      end
+
+      class ManagedPersistentDisk &lt; PersistentDisk<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::ManagedPersistentDisk has no descriptive comment</span>          </div>  </li></ol>
+        attr_reader :spec
+
+        def initialize(type)
+          super(&#39;&#39;, type.cloud_properties, type.disk_size)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::ManagedPersistentDisk#initialize refers to 'type' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L151" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L152" class="js-smell-location">1</a>                  </div>  </li></ol>
+          @spec = type.spec<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::ManagedPersistentDisk#initialize refers to 'type' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="persistent_disk_collection.html#L151" class="js-smell-location">0</a>                  <a href="persistent_disk_collection.html#L152" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+      end
+
+      class ModelPersistentDisk &lt; PersistentDisk<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::ModelPersistentDisk has no descriptive comment</span>          </div>  </li></ol>
+        attr_reader :model
+
+        def initialize(disk_model)
+          @model = disk_model
+          super(disk_model.name, disk_model.cloud_properties, disk_model.size)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::PersistentDiskCollection::ModelPersistentDisk#initialize refers to 'disk_model' more than self (maybe move it to another class?)</span>          </div>  </li></ol>
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

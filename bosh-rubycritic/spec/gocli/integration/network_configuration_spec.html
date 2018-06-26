@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-05-31 11:26:55 -0700'>2018-05-31 11:26:55 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/gocli/integration /</small> network_configuration_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">451</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">30</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">852.12</span><small> complexity</small></div>
+              <div><span class="metric">131</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                18
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require_relative &#39;../spec_helper&#39;
+
+describe &#39;network configuration&#39;, type: :integration do
+  context &#39;with dns enabled&#39; do
+    with_reset_sandbox_before_each
+
+    it &#39;reserves first available dynamic ip&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(with dns enabled)::it#reserves first available dynamic ip has a flog score of 31</span>          </div>  </li></ol>
+      cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+      cloud_config_hash[&#39;vm_types&#39;].first[&#39;size&#39;] = 3
+      cloud_config_hash[&#39;networks&#39;].first[&#39;subnets&#39;][0] = {
+        &#39;range&#39;    =&gt; &#39;192.168.1.0/24&#39;,
+        &#39;gateway&#39;  =&gt; &#39;192.168.1.1&#39;,
+        &#39;dns&#39;      =&gt; [&#39;192.168.1.1&#39;],
+        &#39;static&#39;   =&gt; [&#39;192.168.1.11&#39;, &#39;192.168.1.14&#39;],
+        &#39;reserved&#39; =&gt; %w(
+        192.168.1.2-192.168.1.10
+        192.168.1.12-192.168.1.13
+        192.168.1.20-192.168.1.254
+      ),
+        &#39;cloud_properties&#39; =&gt; {},
+      }
+
+      manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 3
+
+      deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+
+      # Available dynamic ips - 192.168.1.15 - 192.168.1.19
+      output = table(bosh_runner.run(&#39;vms&#39;, deployment_name: &#39;simple&#39;, json: true))
+      expect(output.map { |instance| instance[&#39;ips&#39;] }).to contain_exactly(&#39;192.168.1.15&#39;, &#39;192.168.1.16&#39;, &#39;192.168.1.17&#39;)
+      # expect(output).to include(/foobar.* 192\.168\.1\.15/)
+      # expect(output).to match(/foobar.* 192\.168\.1\.16/)
+      # expect(output).to match(/foobar.* 192\.168\.1\.17/)
+    end
+
+    it &#39;recreates VM when specifying static IP on job&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(with dns enabled)::it#recreates VM when specifying static IP on job has a flog score of 42</span>          </div>  </li></ol>
+      cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+      cloud_config_hash[&#39;networks&#39;].first[&#39;subnets&#39;].first[&#39;static&#39;] = %w(192.168.1.100)
+      cloud_config_hash[&#39;vm_types&#39;].first[&#39;size&#39;] = 1
+
+      manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 1
+
+      deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;].first[&#39;static_ips&#39;] = &#39;192.168.1.100&#39;
+      deploy_simple_manifest(manifest_hash: manifest_hash)
+
+      output = table(bosh_runner.run(&#39;vms&#39;, deployment_name: &#39;simple&#39;, json: true))
+      expect(output.first[&#39;ips&#39;]).to eq(&#39;192.168.1.100&#39;)
+    end
+
+    context &#39;Network settings are changed&#39; do
+      let(:cloud_config_hash) { Bosh::Spec::NewDeployments.simple_cloud_config }
+      let(:manifest_hash) { Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups }
+
+      it &#39;recreates VM when DNS nameservers are changed&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(with dns enabled)::context(Network settings are changed)::it#recreates VM when DNS nameservers are changed has a flog score of 71</span>          </div>  </li></ol>
+        cloud_config_hash[&#39;networks&#39;].first[&#39;subnets&#39;].first[&#39;dns&#39;] = [&#39;8.8.8.8&#39;]
+
+        deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+
+        director.instances.each do |instance|
+          expect(instance.get_state[&#39;networks&#39;][&#39;a&#39;][&#39;dns&#39;]).to match_array([&#39;8.8.8.8&#39;])
+        end
+
+        cloud_config_hash[&#39;networks&#39;].first[&#39;subnets&#39;].first[&#39;dns&#39;] = [&#39;8.8.8.8&#39;, &#39;127.0.0.5&#39;]
+
+        upload_cloud_config(cloud_config_hash: cloud_config_hash)
+        deploy_simple_manifest(manifest_hash: manifest_hash)
+
+        director.instances.each do |instance|
+          expect(instance.get_state[&#39;networks&#39;][&#39;a&#39;][&#39;dns&#39;]).to match_array([&#39;8.8.8.8&#39;, &#39;127.0.0.5&#39;])
+        end
+      end
+
+      it &#39;recreates VM when gateway is changed&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(with dns enabled)::context(Network settings are changed)::it#recreates VM when gateway is changed has a flog score of 42</span>          </div>  </li></ol>
+        deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+
+        cloud_config_hash[&#39;networks&#39;].first[&#39;subnets&#39;].first[&#39;gateway&#39;] = &#39;192.168.1.254&#39;
+
+        upload_cloud_config(cloud_config_hash: cloud_config_hash)
+        deploy_simple_manifest(manifest_hash: manifest_hash)
+
+        director.instances.each do |instance|
+          expect(instance.get_state[&#39;networks&#39;][&#39;a&#39;][&#39;gateway&#39;]).to eq &#39;192.168.1.254&#39;
+        end
+      end
+    end
+
+    it &#39;preserves existing network reservations on a second deployment&#39; do
+      cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+      subnet = {                                      # For routed subnets larger than /31 or /32,
+        &#39;range&#39;    =&gt; &#39;192.168.1.0/29&#39;,               # the number of available host addresses is usually reduced by two,
+        &#39;gateway&#39;  =&gt; &#39;192.168.1.1&#39;,                  # namely the largest address, which is reserved as the broadcast address,
+        &#39;dns&#39;      =&gt; [&#39;192.168.1.1&#39;, &#39;192.168.1.2&#39;], # and the smallest address, which identifies the network itself.
+        &#39;static&#39;   =&gt; [],                             # range(8) - identity(1) - broadcast(1) - dns(2) = 4 available IPs
+        &#39;reserved&#39; =&gt; [],
+        &#39;cloud_properties&#39; =&gt; {},
+      }
+      cloud_config_hash[&#39;networks&#39;].first[&#39;subnets&#39;][0] = subnet
+      cloud_config_hash[&#39;vm_types&#39;].first[&#39;size&#39;] = 4
+
+      manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 4
+
+      deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+      deploy_simple_manifest(manifest_hash: manifest_hash) # expected to not failed
+    end
+
+    it &#39;does not recreate VM when re-deploying with legacy (non-cloud-config) unchanged dynamic and vip networking&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(with dns enabled)::it(does not recreate VM when re-deploying with legacy (non-cloud-config) unchanged dynamic and vip networking)#does not recreate VM when re-deploying with legacy (non-cloud-config) unchanged dynamic and vip networking has a flog score of 73</span>          </div>  </li></ol>
+      cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+      cloud_config_hash[&#39;networks&#39;] = [{<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 3 nodes</span>              <span>Locations:</span>                  <a href="network_configuration_spec.html#L112" class="js-smell-location">0</a>                  <a href="network_configuration_spec.html#L145" class="js-smell-location">1</a>                  <a href="network_configuration_spec.html#L195" class="js-smell-location">2</a>                  </div>  </li></ol>
+        &#39;name&#39; =&gt; &#39;a&#39;,
+        &#39;type&#39; =&gt; &#39;dynamic&#39;,
+        &#39;cloud_properties&#39; =&gt; {}
+      },
+        {
+          &#39;name&#39; =&gt; &#39;b&#39;,
+          &#39;type&#39; =&gt; &#39;vip&#39;,
+          &#39;static_ips&#39; =&gt; [&#39;69.69.69.69&#39;],
+        }
+      ]
+
+      manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 1
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;].first[&#39;default&#39;] = [&#39;dns&#39;, &#39;gateway&#39;]
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;] &lt;&lt; {&#39;name&#39; =&gt; &#39;b&#39;, &#39;static_ips&#39; =&gt; [&#39;69.69.69.69&#39;]}
+
+      legacy_manifest = Bosh::Spec::Deployments.legacy_manifest
+      legacy_manifest[&#39;networks&#39;] = cloud_config_hash[&#39;networks&#39;]
+      legacy_manifest[&#39;jobs&#39;].first[&#39;instances&#39;] = 1
+      legacy_manifest[&#39;jobs&#39;].first[&#39;networks&#39;].first[&#39;default&#39;] = [&#39;dns&#39;, &#39;gateway&#39;]
+      legacy_manifest[&#39;jobs&#39;].first[&#39;networks&#39;] &lt;&lt; {&#39;name&#39; =&gt; &#39;b&#39;, &#39;static_ips&#39; =&gt; [&#39;69.69.69.69&#39;]}
+
+      current_sandbox.cpi.commands.make_create_vm_always_use_dynamic_ip(&#39;127.0.0.101&#39;)
+
+      deploy_from_scratch(manifest_hash: legacy_manifest, legacy: true)
+      agent_id = director.instances.first.agent_id
+      deploy_simple_manifest(manifest_hash: legacy_manifest, legacy: true)
+      expect(director.instances.map(&amp;:agent_id)).to eq([agent_id])
+    end
+
+    it &#39;does not recreate VM when re-deploying with cloud-config unchanged dynamic and vip networking&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(with dns enabled)::it#does not recreate VM when re-deploying with cloud-config unchanged dynamic and vip networking has a flog score of 54</span>          </div>  </li></ol>
+      cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+      cloud_config_hash[&#39;networks&#39;] = [{<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 3 nodes</span>              <span>Locations:</span>                  <a href="network_configuration_spec.html#L112" class="js-smell-location">0</a>                  <a href="network_configuration_spec.html#L145" class="js-smell-location">1</a>                  <a href="network_configuration_spec.html#L195" class="js-smell-location">2</a>                  </div>  </li></ol>
+        &#39;name&#39; =&gt; &#39;a&#39;,
+        &#39;type&#39; =&gt; &#39;dynamic&#39;,
+        &#39;cloud_properties&#39; =&gt; {}
+      },
+        {
+          &#39;name&#39; =&gt; &#39;b&#39;,
+          &#39;type&#39; =&gt; &#39;vip&#39;,
+          &#39;static_ips&#39; =&gt; [&#39;69.69.69.69&#39;],
+        }
+      ]
+
+      manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 1
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;].first[&#39;default&#39;] = [&#39;dns&#39;, &#39;gateway&#39;]
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;] &lt;&lt; {&#39;name&#39; =&gt; &#39;b&#39;, &#39;static_ips&#39; =&gt; [&#39;69.69.69.69&#39;]}
+
+      current_sandbox.cpi.commands.make_create_vm_always_use_dynamic_ip(&#39;127.0.0.101&#39;)
+
+      deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+      deploy_simple_manifest(manifest_hash: manifest_hash) # expected to not failed
+      agent_id = director.instances.first.agent_id
+      deploy_simple_manifest(manifest_hash: manifest_hash)
+      expect(director.instances.map(&amp;:agent_id)).to eq([agent_id])
+    end
+
+    it &#39;does not recreate VMs when switching between networks with the exact same configuration&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(with dns enabled)::it#does not recreate VMs when switching between networks with the exact same configuration has a flog score of 39</span>          </div>  </li></ol>
+      cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+      manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+      deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+
+      before_ips = director.instances.first.ips
+
+      cloud_config_hash[&#39;networks&#39;] &lt;&lt; cloud_config_hash[&#39;networks&#39;][0].merge({&#39;name&#39; =&gt; &#39;b&#39;})
+      upload_cloud_config(cloud_config_hash: cloud_config_hash)
+
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;] = [{&#39;name&#39; =&gt; &#39;b&#39;}]
+      deploy_simple_manifest(manifest_hash: manifest_hash)
+
+      after_ips = director.instances.first.ips
+
+      expect(after_ips).to eq(before_ips)
+    end
+  end
+
+  context &#39;when dns is disabled&#39; do
+    with_reset_sandbox_before_each(dns_enabled: false)
+
+    it &#39;does not recreate VM when re-deploying with cloud-config unchanged dynamic and vip networking&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(when dns is disabled)::it#does not recreate VM when re-deploying with cloud-config unchanged dynamic and vip networking has a flog score of 53</span>          </div>  </li></ol>
+      cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+      cloud_config_hash[&#39;networks&#39;] = [{<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 3 nodes</span>              <span>Locations:</span>                  <a href="network_configuration_spec.html#L112" class="js-smell-location">0</a>                  <a href="network_configuration_spec.html#L145" class="js-smell-location">1</a>                  <a href="network_configuration_spec.html#L195" class="js-smell-location">2</a>                  </div>  </li></ol>
+          &#39;name&#39; =&gt; &#39;a&#39;,
+          &#39;type&#39; =&gt; &#39;dynamic&#39;,
+          &#39;cloud_properties&#39; =&gt; {}
+        },
+        {
+          &#39;name&#39; =&gt; &#39;b&#39;,
+          &#39;type&#39; =&gt; &#39;vip&#39;,
+          &#39;static_ips&#39; =&gt; [&#39;69.69.69.69&#39;],
+        }
+      ]
+
+      manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 1
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;].first[&#39;default&#39;] = [&#39;dns&#39;, &#39;gateway&#39;]
+      manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;] &lt;&lt; {&#39;name&#39; =&gt; &#39;b&#39;, &#39;static_ips&#39; =&gt; [&#39;69.69.69.69&#39;]}
+
+      current_sandbox.cpi.commands.make_create_vm_always_use_dynamic_ip(&#39;127.0.0.101&#39;)
+
+      deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+      agent_id = director.instances.first.agent_id
+      deploy_simple_manifest(manifest_hash: manifest_hash)
+      expect(director.instances.map(&amp;:agent_id)).to eq([agent_id])
+    end
+
+    context &#39;when the cloud config has overlapping networks&#39; do
+      let(:cloud_config_hash) do
+        cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+        cloud_config_hash[&#39;networks&#39;] &lt;&lt; Bosh::Common::DeepCopy.copy(cloud_config_hash[&#39;networks&#39;][0]).tap do |new_network|
+          new_network[&#39;name&#39;] = &#39;b&#39;
+        end
+        cloud_config_hash
+      end
+
+      let(:manifest_hash) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="global_networking/dynamic_networks_spec.html#L22" class="js-smell-location">0</a>                  <a href="global_networking/ip_reservations/allocating_static_ips_spec.html#L58" class="js-smell-location">1</a>                  <a href="global_networking/ip_reservations/allocating_static_ips_using_legacy_spec.html#L58" class="js-smell-location">2</a>                  <a href="global_networking/migrating_to_cloud_config_spec.html#L17" class="js-smell-location">3</a>                  <a href="health_monitor/resurrector_spec.html#L18" class="js-smell-location">4</a>                  <a href="health_monitor/resurrector_spec.html#L26" class="js-smell-location">5</a>                  <a href="network_configuration_spec.html#L229" class="js-smell-location">6</a>                  <a href="network_configuration_spec.html#L317" class="js-smell-location">7</a>                  </div>  </li></ol>
+        manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+        manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 1
+        manifest_hash
+      end
+
+      context &#39;when the manifest requests NIC in both networks for instance&#39; do
+        it &#39;does not recreate VM&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(when dns is disabled)::context(when the cloud config has overlapping networks)::context(when the manifest requests NIC in both networks for instance)::it#does not recreate VM has a flog score of 76</span>          </div>  </li></ol>
+          manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;].first[&#39;default&#39;] = [&#39;dns&#39;, &#39;gateway&#39;]
+          manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;] &lt;&lt; {&#39;name&#39; =&gt; &#39;b&#39;}
+          deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+          agent_id = director.instances.first.agent_id
+          deploy_simple_manifest(manifest_hash: manifest_hash)
+          expect(director.instances.map(&amp;:agent_id)).to eq([agent_id])
+
+          output = table(bosh_runner.run(&#39;vms&#39;, deployment_name: &#39;simple&#39;, json: true))
+          expect(output.length).to eq 1
+
+          first_instance_ips = output[0][&#39;ips&#39;].split(&quot;\n&quot;)
+          expect(first_instance_ips.length).to eq 2
+        end
+      end
+
+      context &#39;when the manifest only refers to one of the networks&#39; do
+        it &#39;does not recreate VM&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(when dns is disabled)::context(when the cloud config has overlapping networks)::context(when the manifest only refers to one of the networks)::it#does not recreate VM has a flog score of 91</span>          </div>  </li></ol>
+          deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+          agent_id = director.instances.first.agent_id
+          output = table(bosh_runner.run(&#39;vms&#39;, deployment_name: &#39;simple&#39;, json: true))
+          expect(output.length).to eq 1
+          ips = output[0][&#39;ips&#39;].split(&quot;\n&quot;)
+          expect(ips.length).to eq 1
+
+          deploy_simple_manifest(manifest_hash: manifest_hash)
+          expect(director.instances.map(&amp;:agent_id)).to eq([agent_id])
+
+          output = table(bosh_runner.run(&#39;vms&#39;, deployment_name: &#39;simple&#39;, json: true))
+          expect(output.length).to eq 1
+
+          new_ips = output[0][&#39;ips&#39;].split(&quot;\n&quot;)
+          expect(new_ips.length).to eq 1
+          expect(new_ips[0]).to eq ips[0]
+        end
+      end
+    end
+  end
+
+  context &#39;#spec.ip&#39; do
+    let(:client_env) do
+      { &#39;BOSH_CLIENT&#39; =&gt; &#39;test&#39;, &#39;BOSH_CLIENT_SECRET&#39; =&gt; &#39;secret&#39; }
+    end
+
+    with_reset_sandbox_before_each
+
+    context &#39;instance group has multiple networks&#39; do
+      let(:cloud_config_hash) do
+        cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+        cloud_config_hash[&#39;vm_types&#39;].first[&#39;size&#39;] = 1
+        cloud_config_hash[&#39;networks&#39;] = [
+          {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="network_configuration_spec.html#L287" class="js-smell-location">0</a>                  <a href="network_configuration_spec.html#L300" class="js-smell-location">1</a>                  </div>  </li></ol>
+            &#39;name&#39; =&gt; &#39;a&#39;,
+            &#39;subnets&#39; =&gt; [
+              {
+                &#39;range&#39; =&gt; &#39;192.168.1.0/24&#39;,
+                &#39;gateway&#39; =&gt; &#39;192.168.1.1&#39;,
+                &#39;dns&#39; =&gt; [&#39;192.168.1.2&#39;],
+                &#39;static&#39; =&gt; [&#39;192.168.1.10&#39;],
+                &#39;reserved&#39; =&gt; [],
+                &#39;cloud_properties&#39; =&gt; {},
+              },
+            ],
+          },
+          {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="network_configuration_spec.html#L287" class="js-smell-location">0</a>                  <a href="network_configuration_spec.html#L300" class="js-smell-location">1</a>                  </div>  </li></ol>
+            &#39;name&#39; =&gt; &#39;b&#39;,
+            &#39;subnets&#39; =&gt; [
+              {
+                &#39;range&#39; =&gt; &#39;192.168.2.0/24&#39;,
+                &#39;gateway&#39; =&gt; &#39;192.168.2.1&#39;,
+                &#39;dns&#39; =&gt; [&#39;192.168.2.2&#39;],
+                &#39;static&#39; =&gt; [&#39;192.168.2.10&#39;],
+                &#39;reserved&#39; =&gt; [],
+                &#39;cloud_properties&#39; =&gt; {},
+              },
+            ],
+          },
+        ]
+        cloud_config_hash
+      end
+
+      let(:manifest_hash) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="global_networking/dynamic_networks_spec.html#L22" class="js-smell-location">0</a>                  <a href="global_networking/ip_reservations/allocating_static_ips_spec.html#L58" class="js-smell-location">1</a>                  <a href="global_networking/ip_reservations/allocating_static_ips_using_legacy_spec.html#L58" class="js-smell-location">2</a>                  <a href="global_networking/migrating_to_cloud_config_spec.html#L17" class="js-smell-location">3</a>                  <a href="health_monitor/resurrector_spec.html#L18" class="js-smell-location">4</a>                  <a href="health_monitor/resurrector_spec.html#L26" class="js-smell-location">5</a>                  <a href="network_configuration_spec.html#L229" class="js-smell-location">6</a>                  <a href="network_configuration_spec.html#L317" class="js-smell-location">7</a>                  </div>  </li></ol>
+        manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+        manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 1
+        manifest_hash
+      end
+
+      context &#39;default &quot;addressable&quot; network is specified&#39; do
+        it &#39;uses ip from default &quot;addressable&quot; network&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(#spec.ip)::context(instance group has multiple networks)::context(default "addressable" network is specified)::it#uses ip from default "addressable" network has a flog score of 26</span>          </div>  </li></ol>
+          manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;] = [
+            {
+              &#39;name&#39; =&gt; &#39;a&#39;,
+              &#39;static_ips&#39; =&gt; &#39;192.168.1.10&#39;,
+              &#39;default&#39; =&gt; %w(dns gateway addressable)},
+            {
+              &#39;name&#39; =&gt; &#39;b&#39;,
+              &#39;static_ips&#39; =&gt; &#39;192.168.2.10&#39;,
+            }
+          ]
+
+          deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+
+          instance = director.instance(&#39;foobar&#39;, &#39;0&#39;, deployment_name: &#39;simple&#39;, env: client_env)
+          template = instance.read_job_template(&#39;foobar&#39;, &#39;bin/foobar_ctl&#39;)
+          expect(template).to include(&#39;spec.ip=192.168.1.10&#39;)
+        end
+
+        it &#39;ignores default &quot;gateway&quot; network&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(#spec.ip)::context(instance group has multiple networks)::context(default "addressable" network is specified)::it#ignores default "gateway" network has a flog score of 26</span>          </div>  </li></ol>
+          manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;] = [
+            {
+              &#39;name&#39; =&gt; &#39;a&#39;,
+              &#39;static_ips&#39; =&gt; &#39;192.168.1.10&#39;,
+              &#39;default&#39; =&gt; %w(dns gateway)},
+            {
+              &#39;name&#39; =&gt; &#39;b&#39;,
+              &#39;static_ips&#39; =&gt; &#39;192.168.2.10&#39;,
+              &#39;default&#39; =&gt; %w(addressable),
+            }
+          ]
+
+          deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+
+          instance = director.instance(&#39;foobar&#39;, &#39;0&#39;, deployment_name: &#39;simple&#39;, env: client_env)
+          template = instance.read_job_template(&#39;foobar&#39;, &#39;bin/foobar_ctl&#39;)
+          expect(template).to include(&#39;spec.ip=192.168.2.10&#39;)
+        end
+
+        it &#39;errors if specified on multiple networks&#39; do
+          manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;] = [
+            {
+              &#39;name&#39; =&gt; &#39;a&#39;,
+              &#39;static_ips&#39; =&gt; &#39;192.168.1.10&#39;,
+              &#39;default&#39; =&gt; %w(dns gateway addressable)},
+            {
+              &#39;name&#39; =&gt; &#39;b&#39;,
+              &#39;static_ips&#39; =&gt; &#39;192.168.2.10&#39;,
+              &#39;default&#39; =&gt; %w(addressable),
+            }
+          ]
+
+          expect {
+            deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+          }.to raise_error
+        end
+      end
+
+      context &#39;default &quot;addressable&quot; network not specified&#39; do
+        it &#39;uses ip from default &quot;gateway&quot; network&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(#spec.ip)::context(instance group has multiple networks)::context(default "addressable" network not specified)::it#uses ip from default "gateway" network has a flog score of 25</span>          </div>  </li></ol>
+          manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;] = [
+            {
+              &#39;name&#39; =&gt; &#39;a&#39;,
+              &#39;static_ips&#39; =&gt; &#39;192.168.1.10&#39;,
+              &#39;default&#39; =&gt; %w(dns gateway)},
+            {
+              &#39;name&#39; =&gt; &#39;b&#39;,
+              &#39;static_ips&#39; =&gt; &#39;192.168.2.10&#39;
+            }
+          ]
+
+          deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+
+          instance = director.instance(&#39;foobar&#39;, &#39;0&#39;, deployment_name: &#39;simple&#39;, env: client_env)
+          template = instance.read_job_template(&#39;foobar&#39;, &#39;bin/foobar_ctl&#39;)
+          expect(template).to include(&#39;spec.ip=192.168.1.10&#39;)
+        end
+      end
+    end
+
+    context &#39;instance group has single network&#39; do
+      it &#39;uses ip from available network&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(#spec.ip)::context(instance group has single network)::it#uses ip from available network has a flog score of 40</span>          </div>  </li></ol>
+        cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+        cloud_config_hash[&#39;networks&#39;].first[&#39;subnets&#39;].first[&#39;static&#39;] = [&#39;192.168.1.100&#39;]
+        cloud_config_hash[&#39;vm_types&#39;].first[&#39;size&#39;] = 1
+
+        manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+        manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 1
+        manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;].first[&#39;static_ips&#39;] = &#39;192.168.1.100&#39;
+
+        deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+
+        instance = director.instance(&#39;foobar&#39;, &#39;0&#39;, deployment_name: &#39;simple&#39;, env: client_env)
+        template = instance.read_job_template(&#39;foobar&#39;, &#39;bin/foobar_ctl&#39;)
+        expect(template).to include(&#39;spec.ip=192.168.1.100&#39;)
+      end
+    end
+
+    context &#39;dynamic network&#39; do
+      with_reset_hm_before_each
+
+      it &#39;should update spec.ip with new ip on recreate&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(network configuration)::context(#spec.ip)::context(dynamic network)::it#should update spec.ip with new ip on recreate has a flog score of 60</span>          </div>  </li></ol>
+        cloud_config_hash = Bosh::Spec::NewDeployments.simple_cloud_config
+        cloud_config_hash[&#39;networks&#39;] = [{
+            &#39;name&#39; =&gt; &#39;a&#39;,
+            &#39;type&#39; =&gt; &#39;dynamic&#39;,
+            &#39;cloud_properties&#39; =&gt; {}
+          }
+        ]
+
+        manifest_hash = Bosh::Spec::NewDeployments.simple_manifest_with_instance_groups
+        manifest_hash[&#39;instance_groups&#39;].first[&#39;instances&#39;] = 1
+        manifest_hash[&#39;instance_groups&#39;].first[&#39;networks&#39;].first[&#39;default&#39;] = [&#39;dns&#39;, &#39;gateway&#39;]
+
+        deploy_from_scratch(cloud_config_hash: cloud_config_hash, manifest_hash: manifest_hash)
+        instance = director.instance(&#39;foobar&#39;,&#39;0&#39;, deployment_name: &#39;simple&#39;, env: client_env)
+        template = instance.read_job_template(&#39;foobar&#39;, &#39;bin/foobar_ctl&#39;)
+        expect(template).to include(&#39;spec.ip=&#39; + instance.ips[0])
+
+        director.kill_vm_and_wait_for_resurrection(instance)
+
+        instance = director.instance(&#39;foobar&#39;,&#39;0&#39;, deployment_name: &#39;simple&#39;, env: client_env)
+        template = instance.read_job_template(&#39;foobar&#39;, &#39;bin/foobar_ctl&#39;)
+        expect(template).to include(&#39;spec.ip=&#39; + instance.ips[0])
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

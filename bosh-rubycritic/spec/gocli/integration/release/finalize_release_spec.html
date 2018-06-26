@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-01-30 16:21:13 -0800'>2018-01-30 16:21:13 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/gocli/integration/release /</small> finalize_release_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">203</span><small> lines of codes</small></div>
+              <div><span class="metric">3</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">165.1</span><small> complexity/method</small></div>
+              <div><span class="metric">13</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">495.25</span><small> complexity</small></div>
+              <div><span class="metric">144</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                23
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;securerandom&#39;
+require_relative &#39;../../spec_helper&#39;
+
+describe &#39;finalize release&#39;, type: :integration do
+  include Bosh::Spec::CreateReleaseOutputParsers
+  with_reset_sandbox_before_each
+  SHA1_REGEXP = /^[0-9a-f]{40}$/
+
+  before { setup_test_release_dir }
+
+
+  let(:sha_generator) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="create_release_spec.html#L15" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L12" class="js-smell-location">1</a>                  </div>  </li></ol>
+    path = File.expand_path(&#39;../../../../tmp/verify-multidigest/verify-multidigest&#39;, File.dirname(__FILE__))
+    Bosh::Director::BoshDigest::MultiDigest.new(logger, path)
+  end
+
+  describe &#39;release finalization&#39; do
+    context &#39;when finalizing a release that was built elsewhere&#39; do
+      it &#39;updates the .final_builds index for each job and package&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(finalize release)::describe(release finalization)::context(when finalizing a release that was built elsewhere)::it#updates the .final_builds index for each job and package has a flog score of 71</span>          </div>  </li></ol>
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          bosh_runner.run_in_current_dir(&quot;finalize-release #{spec_asset(&#39;dummy-gocli-release.tgz&#39;)} --force&quot;)
+
+          job_index = Psych.load_file(File.absolute_path(&#39;.final_builds/jobs/dummy/index.yml&#39;))
+          expect(job_index).to include(&#39;builds&#39;)
+          expect(job_index[&#39;builds&#39;]).to include(&#39;a2f501d07c3e96689185ee6ebe26c15d54d4849a&#39;)
+          expect(job_index[&#39;builds&#39;][&#39;a2f501d07c3e96689185ee6ebe26c15d54d4849a&#39;]).to include(&#39;version&#39;, &#39;blobstore_id&#39;, &#39;sha1&#39;)
+
+          package_index = Psych.load_file(File.absolute_path(&#39;.final_builds/packages/dummy_package/index.yml&#39;))
+          expect(package_index).to include(&#39;builds&#39;)
+          expect(package_index[&#39;builds&#39;]).to include(&#39;a29b3b1174dc200826055732082bf21c7a765669&#39;)
+          expect(package_index[&#39;builds&#39;][&#39;a29b3b1174dc200826055732082bf21c7a765669&#39;]).to include(&#39;version&#39;, &#39;blobstore_id&#39;, &#39;sha1&#39;)
+        end
+      end
+
+      it &#39;prints release summary&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(finalize release)::describe(release finalization)::context(when finalizing a release that was built elsewhere)::it#prints release summary has a flog score of 26</span>          </div>  </li></ol>
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          out = table(bosh_runner.run_in_current_dir(&quot;finalize-release #{spec_asset(&#39;dummy-gocli-release.tgz&#39;)} --force&quot;, json: true))
+          expect(out).to include(
+            {&#39;job&#39;=&gt;&quot;dummy/a2f501d07c3e96689185ee6ebe26c15d54d4849a&quot;, &#39;digest&#39;=&gt;&quot;16baf0c24e2dac2a21ccdcd4655be403a602f573&quot;, &#39;packages&#39;=&gt;&quot;&quot;},
+            {&#39;job&#39;=&gt;&quot;dummy_with_bad_package/0c5fa6ab55ab9d030354a26c722fe3b6e83a775b&quot;, &#39;digest&#39;=&gt;&quot;6c67d40fa0df7a0ccfd49c873db533cb555b5f9c&quot;, &#39;packages&#39;=&gt;&quot;&quot;},
+            {&#39;job&#39;=&gt;&quot;dummy_with_package/97a702673f3096a8251273cd7962ae39c0f63b7b&quot;, &#39;digest&#39;=&gt;&quot;e1f50e9b1fd987e1c36c1cc322cbbcbf51a577a8&quot;, &#39;packages&#39;=&gt;&quot;&quot;},
+            {&#39;job&#39;=&gt;&quot;dummy_with_properties/c55e682be87812d0cb378c82150d619c0b9252e9&quot;, &#39;digest&#39;=&gt;&quot;415b4a9f29c21c1e193b540536fd15550fcefad3&quot;, &#39;packages&#39;=&gt;&quot;&quot;},
+            {&#39;job&#39;=&gt;&quot;multi-monit-dummy/1441e36bc3a9888ae638baab4c6c19654cfdaf9e&quot;, &#39;digest&#39;=&gt;&quot;0059f555ab6e1e70e419665e19926a2290ffdd20&quot;, &#39;packages&#39;=&gt;&quot;&quot;}
+          )
+          expect(out).to include(
+            {&#39;package&#39;=&gt;&quot;bad_package/e44d6e76a3cb74bfda0ec6d56dfbb334ca798209&quot;, &#39;digest&#39;=&gt;&quot;19b574c0f3d0d4910d4a4db85ede41ab9c734469&quot;, &#39;dependencies&#39;=&gt;&quot;&quot;},
+            {&#39;package&#39;=&gt;&quot;dummy_package/a29b3b1174dc200826055732082bf21c7a765669&quot;, &#39;digest&#39;=&gt;&quot;42ade2b5b3495a989a8ffeeacc7e08c2387d29ba&quot;, &#39;dependencies&#39;=&gt;&quot;&quot;}
+          )
+        end
+      end
+
+      it &#39;updates the releases index&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(finalize release)::describe(release finalization)::context(when finalizing a release that was built elsewhere)::it#updates the releases index has a flog score of 40</span>          </div>  </li></ol>
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          bosh_runner.run_in_current_dir(&quot;finalize-release #{spec_asset(&#39;dummy-gocli-release.tgz&#39;)} --force&quot;)
+          job_index = Psych.load_file(File.absolute_path(&#39;.final_builds/jobs/dummy/index.yml&#39;))
+          expect(job_index).to include(&#39;builds&#39;)
+          expect(job_index[&#39;builds&#39;]).to include(&#39;a2f501d07c3e96689185ee6ebe26c15d54d4849a&#39;)
+          expect(job_index[&#39;builds&#39;][&#39;a2f501d07c3e96689185ee6ebe26c15d54d4849a&#39;]).to include(&#39;version&#39;, &#39;blobstore_id&#39;, &#39;sha1&#39;)
+        end
+      end
+
+      it &#39;cannot create a final release without the blobstore configured&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L62" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L70" class="js-smell-location">1</a>                  </div>  </li></ol>
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          FileUtils.cp(spec_asset(&#39;empty_blobstore_config.yml&#39;), &#39;config/final.yml&#39;)
+          out = bosh_runner.run_in_current_dir(&quot;finalize-release #{spec_asset(&#39;dummy-gocli-release.tgz&#39;)} --force&quot;, json: true, failure_expected: true)
+          expect(out).to match(/Expected non-empty &#39;blobstore.provider&#39; in config .*\/config\/final\.yml/)
+        end
+      end
+
+      it &#39;cannot create a final release without the blobstore secret configured&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L62" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L70" class="js-smell-location">1</a>                  </div>  </li></ol>
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          FileUtils.cp(spec_asset(&#39;blobstore_config_requiring_credentials.yml&#39;), &#39;config/final.yml&#39;)
+          out = bosh_runner.run_in_current_dir(&quot;finalize-release #{spec_asset(&#39;dummy-gocli-release.tgz&#39;)} --force&quot;, json: true, failure_expected: true)
+          expect(out).to match(/Creating blob in inner blobstore:\\n\s+Generating blobstore ID:\\n\s+the client operates in read only mode. Change &#39;credentials_source&#39; parameter value/)
+        end
+      end
+
+      context &#39;when no previous releases have been made&#39; do
+        it &#39;finalize-release uploads the job &amp; package blobs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(finalize release)::describe(release finalization)::context(when finalizing a release that was built elsewhere)::context(when no previous releases have been made)::it#finalize-release uploads the job & package blobs has a flog score of 67</span>          </div>  </li></ol>
+          Dir.chdir(ClientSandbox.test_release_dir) do
+            expect(Dir).to_not exist(&#39;releases&#39;)
+            expect(Dir).to_not exist(&#39;dev_releases&#39;)
+            expect(Dir).to_not exist(&#39;.final_builds&#39;)
+            expect(Dir).to_not exist(&#39;.dev_builds&#39;)
+            expect(Dir).to_not exist(ClientSandbox.blobstore_dir)
+
+            bosh_runner.run_in_current_dir(&quot;finalize-release #{spec_asset(&#39;dummy-gocli-release.tgz&#39;)} --force&quot;)
+            expect(File).to exist(&#39;releases/dummy/dummy-1.yml&#39;)
+            expect(File).to exist(&#39;.final_builds/jobs/dummy/index.yml&#39;)
+            expect(File).to exist(&#39;.final_builds/packages/bad_package/index.yml&#39;)
+            uploaded_blob_count = Dir[File.join(ClientSandbox.blobstore_dir, &#39;**&#39;, &#39;*&#39;)].length
+            expect(uploaded_blob_count).to eq(7)
+          end
+        end
+      end
+    end
+
+    context &#39;when finalizing a release that was built in the current release dir&#39; do
+      let!(:release_file) { Tempfile.new(&#39;release.tgz&#39;) }
+      after { release_file.delete }
+
+      it &#39;can finalize the dev release tarball&#39; do
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          bosh_runner.run_in_current_dir(&quot;create-release --force --tarball=#{release_file.path} --name=test-release&quot;)
+          out = bosh_runner.run_in_current_dir(&quot;finalize-release #{release_file.path} --force&quot;)
+          expect(out).to match(&quot;Added final release &#39;test-release/1&#39;&quot;)
+        end
+      end
+
+      def includes_the_LICENSE_file(expected_license_version)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(finalize release)::describe(release finalization)::context#includes_the_LICENSE_file has a flog score of 53</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>includes_the_LICENSE_file has approx 10 statements</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Method-Name.md" target="_blank"><b>UncommunicativeMethodName</b></a>        </span>      </div>      <span>includes_the_LICENSE_file has the name 'includes_the_LICENSE_file'</span>          </div>  </li></ol>
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          expect(File).to_not exist(&#39;NOTICE&#39;)
+          File.open(&#39;LICENSE&#39;, &#39;w&#39;) do |f|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>includes_the_LICENSE_file has the variable name 'f'</span>          </div>  </li></ol>
+            f.write(&#39;This is an example license file&#39;)
+          end
+          bosh_runner.run_in_current_dir(&quot;create-release --force --tarball=#{release_file.path} --name=test-release&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>includes_the_LICENSE_file calls 'release_file.path' 2 times</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L116" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L117" class="js-smell-location">1</a>                  </div>  </li></ol>
+          out = bosh_runner.run_in_current_dir(&quot;finalize-release #{release_file.path} --force&quot;, json: true)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>includes_the_LICENSE_file calls 'release_file.path' 2 times</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L116" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L117" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+          expect(out).to match(/Added license &#39;license\/#{expected_license_version}&#39;/)
+          expect(blobstore_tarball_listing(expected_license_version)).to eq %w(./ ./LICENSE)
+
+          actual_digest = sha_generator.create(digest_algorithms, blobstore_license_file_path(expected_license_version))
+          expect(actual_digest).to eq manifest_sha1_of_license(expected_license_version)
+        end
+      end
+
+      def includes_the_NOTICE_file_if_no_LICENSE_was_present(expected_license_version)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(finalize release)::describe(release finalization)::context#includes_the_NOTICE_file_if_no_LICENSE_was_present has a flog score of 49</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>includes_the_NOTICE_file_if_no_LICENSE_was_present has approx 10 statements</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Method-Name.md" target="_blank"><b>UncommunicativeMethodName</b></a>        </span>      </div>      <span>includes_the_NOTICE_file_if_no_LICENSE_was_present has the name 'includes_the_NOTICE_file_if_no_LICENSE_was_present'</span>          </div>  </li></ol>
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          File.delete(&#39;LICENSE&#39;)
+          File.open(&#39;NOTICE&#39;, &#39;w&#39;) do |f|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>includes_the_NOTICE_file_if_no_LICENSE_was_present has the variable name 'f'</span>          </div>  </li></ol>
+            f.write(&#39;This is an example license file called NOTICE&#39;)
+          end
+          bosh_runner.run_in_current_dir(&quot;create-release --force --tarball=#{release_file.path} --name=test-release&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>includes_the_NOTICE_file_if_no_LICENSE_was_present calls 'release_file.path' 2 times</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L133" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L134" class="js-smell-location">1</a>                  </div>  </li></ol>
+          out = bosh_runner.run_in_current_dir(&quot;finalize-release #{release_file.path} --force&quot;, json: true)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>includes_the_NOTICE_file_if_no_LICENSE_was_present calls 'release_file.path' 2 times</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L133" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L134" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+          expect(out).to match(/Added license &#39;license\/#{expected_license_version}&#39;/)
+          expect(blobstore_tarball_listing(expected_license_version)).to eq %w(./ ./NOTICE)
+          actual_digest = sha_generator.create(digest_algorithms, blobstore_license_file_path(expected_license_version))
+          expect(actual_digest).to eq manifest_sha1_of_license(expected_license_version)
+        end
+      end
+
+      it &#39;works without a NOTICE or LICENSE present&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(finalize release)::describe(release finalization)::context(when finalizing a release that was built in the current release dir)::it#works without a NOTICE or LICENSE present has a flog score of 31</span>          </div>  </li></ol>
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          File.delete(&#39;LICENSE&#39;)
+          expect(File).to_not exist(&#39;NOTICE&#39;)
+          bosh_runner.run_in_current_dir(&quot;create-release --force --tarball=#{release_file.path} --name=test-release&quot;)
+          out = bosh_runner.run_in_current_dir(&quot;finalize-release #{release_file.path} --force&quot;, json: true)
+          expect(out).to_not match(/Added license/)
+        end
+      end
+
+      def includes_both_NOTICE_and_LICENSE_files_when_present(expected_license_version)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(finalize release)::describe(release finalization)::context#includes_both_NOTICE_and_LICENSE_files_when_present has a flog score of 48</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>includes_both_NOTICE_and_LICENSE_files_when_present has approx 9 statements</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Method-Name.md" target="_blank"><b>UncommunicativeMethodName</b></a>        </span>      </div>      <span>includes_both_NOTICE_and_LICENSE_files_when_present has the name 'includes_both_NOTICE_and_LICENSE_files_when_present'</span>          </div>  </li></ol>
+        Dir.chdir(ClientSandbox.test_release_dir) do
+          File.open(&#39;NOTICE&#39;, &#39;w&#39;) do |f|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>includes_both_NOTICE_and_LICENSE_files_when_present has the variable name 'f'</span>          </div>  </li></ol>
+            f.write(&#39;This is an example license file called NOTICE&#39;)
+          end
+          bosh_runner.run_in_current_dir(&quot;create-release --force --tarball=#{release_file.path} --name=test-release&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>includes_both_NOTICE_and_LICENSE_files_when_present calls 'release_file.path' 2 times</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L158" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L159" class="js-smell-location">1</a>                  </div>  </li></ol>
+          out = bosh_runner.run_in_current_dir(&quot;finalize-release #{release_file.path} --force&quot;, json: true)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>includes_both_NOTICE_and_LICENSE_files_when_present calls 'release_file.path' 2 times</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L158" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L159" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+          # an artifact&#39;s version and fingerprint are set identical in recent BOSH versions
+          expect(out).to match(/Added license &#39;license\/#{expected_license_version}&#39;/)
+          expect(blobstore_tarball_listing(expected_license_version)).to eq %w(./ ./LICENSE ./NOTICE)
+          actual_digest = sha_generator.create(digest_algorithms, blobstore_license_file_path(expected_license_version))
+          expect(actual_digest).to eq manifest_sha1_of_license(expected_license_version)
+        end
+      end
+
+      describe &#39;when using sha1&#39;, sha1: true do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L169" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L186" class="js-smell-location">1</a>                  </div>  </li></ol>
+        let(:digest_algorithms) { [Bosh::Director::BoshDigest::MultiDigest::SHA1] }
+
+        it &#39;includes the LICENSE file&#39; do
+          includes_the_LICENSE_file(&#39;7a59f7973cddfa0301ca34a29d4cc876247dd7de&#39;)
+        end
+
+        it &#39;includes the NOTICE file if no LICENSE was present&#39; do
+          includes_the_NOTICE_file_if_no_LICENSE_was_present(&#39;af23c9afabd1eae2ff49db2545937b0467c61dd3&#39;)
+        end
+
+        it &#39;includes both NOTICE and LICENSE files when present&#39; do
+          includes_both_NOTICE_and_LICENSE_files_when_present(&#39;4b31262e2a9d1718eb36f6bb5c6b051df6c41ae1&#39;)
+        end
+      end
+
+
+      describe &#39;when using sha2&#39;, sha2: true do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="finalize_release_spec.html#L169" class="js-smell-location">0</a>                  <a href="finalize_release_spec.html#L186" class="js-smell-location">1</a>                  </div>  </li></ol>
+        let(:digest_algorithms) { [Bosh::Director::BoshDigest::MultiDigest::SHA256] }
+
+        it &#39;includes the LICENSE file&#39; do
+          includes_the_LICENSE_file(&#39;24f59b89c3a9f4eed2f4b9b07bc754891fadc49d8ec0dda25c562d90e568b375&#39;)
+        end
+
+        it &#39;includes the NOTICE file if no LICENSE was present&#39; do
+          includes_the_NOTICE_file_if_no_LICENSE_was_present(&#39;eb70cb1dcc90b1d1b1271bfa26a57e62240e46a38a87c64fbde94e2b65fe0c37&#39;)
+        end
+
+        it &#39;includes both NOTICE and LICENSE files when present&#39; do
+          includes_both_NOTICE_and_LICENSE_files_when_present(&#39;28b1b5c589a8e798e4859f32e9e610ef66cd272edc9698a9e036906e63416dbb&#39;)
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../overview.html"><img src="../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-02-13 11:00:10 -0500'>2018-02-13 11:00:10 -0500</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/support /</small> integration_example_group.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">441</span><small> lines of codes</small></div>
+              <div><span class="metric">52</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">8.7</span><small> complexity/method</small></div>
+              <div><span class="metric">140</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">451.88</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                50
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;yaml&#39;
+require &#39;bosh/dev/sandbox/main&#39;
+require &#39;bosh/dev/legacy_agent_manager&#39;
+require &#39;bosh/dev/verify_multidigest_manager&#39;
+require &#39;bosh/dev/gnatsd_manager&#39;
+
+module IntegrationExampleGroup<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>IntegrationExampleGroup has no descriptive comment</span>          </div>  </li></ol>
+  def logger
+    @logger ||= current_sandbox.logger
+  end
+
+  def director
+    @director ||= Bosh::Spec::Director.new(
+      bosh_runner,
+      waiter,
+      current_sandbox.agent_tmp_path,
+      current_sandbox.db,
+      current_sandbox.director_nats_config,
+      logger,
+    )
+  end
+
+  def health_monitor
+    @health_monitor ||= Bosh::Spec::HealthMonitor.new(
+      current_sandbox.health_monitor_process,
+      logger,
+    )
+  end
+
+  def bosh_runner
+    @bosh_runner ||= make_a_bosh_runner
+  end
+
+  def make_a_bosh_runner(opts={})
+    Bosh::Spec::BoshGoCliRunner.new(
+      opts.fetch(:work_dir, ClientSandbox.bosh_work_dir),
+      opts.fetch(:config_path, ClientSandbox.bosh_config),
+      current_sandbox.cpi.method(:agent_log_path),
+      current_sandbox.nats_log_path,
+      current_sandbox.saved_logs_path,
+      logger,
+      ENV[&#39;SHA2_MODE&#39;] == &#39;true&#39;,
+    )
+  end
+
+  def bosh_runner_in_work_dir(work_dir)
+    make_a_bosh_runner(work_dir: work_dir)
+  end
+
+  def waiter
+    @waiter ||= Bosh::Spec::Waiter.new(logger)
+  end
+
+  def upload_cloud_config(options={})
+    cloud_config_hash = options.fetch(:cloud_config_hash, Bosh::Spec::NewDeployments.simple_cloud_config)
+    cloud_config_manifest = yaml_file(&#39;simple&#39;, cloud_config_hash)
+    bosh_runner.run(&quot;update-cloud-config #{cloud_config_manifest.path}&quot;, options)
+  end
+
+  def upload_runtime_config(options={})
+    runtime_config_hash = options.fetch(:runtime_config_hash, Bosh::Spec::Deployments.simple_runtime_config)
+    name = options.fetch(:name, &#39;&#39;)
+    runtime_config_manifest = yaml_file(&#39;simple&#39;, runtime_config_hash)
+    bosh_runner.run(&quot;update-runtime-config --name=#{name} #{runtime_config_manifest.path}&quot;, options)
+  end
+
+  def create_and_upload_test_release(options={})
+    create_args = options.fetch(:force, false) ? &#39;--force&#39; : &#39;&#39;
+    bosh_runner.run_in_dir(&quot;create-release #{create_args}&quot;, ClientSandbox.test_release_dir, options)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#create_and_upload_test_release calls 'ClientSandbox.test_release_dir' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L69" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L70" class="js-smell-location">1</a>                  </div>  </li></ol>
+    bosh_runner.run_in_dir(&#39;upload-release&#39;, ClientSandbox.test_release_dir, options)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#create_and_upload_test_release calls 'ClientSandbox.test_release_dir' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L69" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L70" class="js-smell-location">1</a>                  </div>  </li></ol>
+  end
+
+  def update_release
+    Dir.chdir(ClientSandbox.test_release_dir) do
+      File.open(File.join(&#39;src&#39;, &#39;foo&#39;), &#39;w&#39;) { |f| f.write(SecureRandom.uuid) }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>IntegrationExampleGroup#update_release has the variable name 'f'</span>          </div>  </li></ol>
+    end
+    create_and_upload_test_release(force: true)
+  end
+
+  def upload_stemcell(options={})
+    bosh_runner.run(&quot;upload-stemcell #{spec_asset(&#39;valid_stemcell.tgz&#39;)}&quot;, options)
+  end
+
+  def upload_stemcell_2(options={})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Method-Name.md" target="_blank"><b>UncommunicativeMethodName</b></a>        </span>      </div>      <span>IntegrationExampleGroup#upload_stemcell_2 has the name 'upload_stemcell_2'</span>          </div>  </li></ol>
+    bosh_runner.run(&quot;upload-stemcell #{spec_asset(&#39;valid_stemcell_2.tgz&#39;)}&quot;, options)
+  end
+
+  def delete_stemcell
+    bosh_runner.run(&#39;delete-stemcell ubuntu-stemcell/1&#39;)
+  end
+
+  def deployment_file(manifest_hash)
+    # Hold reference to the tempfile so that it stays around
+    # until the end of tests or next deploy.
+    yaml_file(&#39;simple&#39;, manifest_hash)
+  end
+
+  def deploy(options={})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy has a flog score of 47</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy has approx 21 statements</span>          </div>  </li></ol>
+    cmd = options.fetch(:no_color, false) ? &#39;--no-color &#39; : &#39;&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+
+    deployment_hash = options.fetch(:manifest_hash, Bosh::Spec::Deployments.simple_manifest)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+    cmd += &quot; -d #{deployment_hash[&#39;name&#39;]}&quot;
+
+    cmd += &#39; deploy&#39;
+    cmd += options.fetch(:no_redact, false) ? &#39; --no-redact&#39; : &#39;&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+    cmd += options.fetch(:recreate, false) ? &#39; --recreate&#39; : &#39;&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+    cmd += options.fetch(:dry_run, false) ? &#39; --dry-run&#39; : &#39;&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+    cmd += options.fetch(:fix, false) ? &#39; --fix&#39; : &#39;&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+    cmd += options.fetch(:json, false) ? &#39; --json&#39; : &#39;&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+
+    if options[:skip_drain]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy calls 'options[:skip_drain]' 3 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L111" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+      if options[:skip_drain].is_a?(Array)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy calls 'options[:skip_drain]' 3 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L111" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+        cmd += options[:skip_drain].map { |skip| &quot; --skip-drain=#{skip}&quot; }.join(&#39;&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy calls 'options[:skip_drain]' 3 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L111" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+      else
+        cmd += &quot; --skip-drain&quot;
+      end
+    end
+
+    if options[:manifest_file]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy calls 'options[:manifest_file]' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L119" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+      cmd += &quot; #{spec_asset(options[:manifest_file])}&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy calls 'options[:manifest_file]' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L119" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L99" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L101" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L105" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L106" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L107" class="js-smell-location">4</a>                  <a href="integration_example_group.html#L108" class="js-smell-location">5</a>                  <a href="integration_example_group.html#L109" class="js-smell-location">6</a>                  <a href="integration_example_group.html#L111" class="js-smell-location">7</a>                  <a href="integration_example_group.html#L112" class="js-smell-location">8</a>                  <a href="integration_example_group.html#L113" class="js-smell-location">9</a>                  <a href="integration_example_group.html#L119" class="js-smell-location">10</a>                  <a href="integration_example_group.html#L120" class="js-smell-location">11</a>                  </div>  </li></ol>
+    else
+      cmd += &quot; #{deployment_file(deployment_hash).path}&quot;
+    end
+
+    bosh_runner.run(cmd, options)
+  end
+
+  def stop_job(vm_name)
+    bosh_runner.run(&quot;stop -d #{Bosh::Spec::Deployments::DEFAULT_DEPLOYMENT_NAME} #{vm_name}&quot;, {})
+  end
+
+  def deploy_from_scratch(options={})
+    prepare_for_deploy(options)
+    deploy_simple_manifest(options)
+  end
+
+  def prepare_for_deploy(options={})
+    create_and_upload_test_release(options)
+    upload_stemcell(options)
+    upload_cloud_config(options) unless options[:legacy]
+    if options[:runtime_config_hash]
+      upload_runtime_config(options)
+    end
+  end
+
+  def deploy_simple_manifest(options={})
+    return_exit_code = options.fetch(:return_exit_code, false)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy_simple_manifest refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L147" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L149" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L151" class="js-smell-location">2</a>                  </div>  </li></ol>
+
+    output, exit_code = deploy(options.merge({return_exit_code: true}))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy_simple_manifest refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L147" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L149" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L151" class="js-smell-location">2</a>                  </div>  </li></ol>
+
+    if exit_code != 0 &amp;&amp; !options.fetch(:failure_expected, false)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#deploy_simple_manifest refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L147" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L149" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L151" class="js-smell-location">2</a>                  </div>  </li></ol>
+      raise &quot;Deploy failed. Exited #{exit_code}: #{output}&quot;
+    end
+
+    return_exit_code ? [output, exit_code] : output
+  end
+
+  def run_errand(errand_job_name, options={})
+    failure_expected = options.fetch(:failure_expected, true)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#run_errand refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L159" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L162" class="js-smell-location">1</a>                  </div>  </li></ol>
+    output, exit_code = bosh_runner.run(
+      &quot;run-errand #{errand_job_name}&quot;,
+      options.merge({return_exit_code: true, failure_expected: failure_expected})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#run_errand refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L159" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L162" class="js-smell-location">1</a>                  </div>  </li></ol>
+    )
+    return output, exit_code == 0
+  end
+
+  def yaml_file(name, object)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationExampleGroup#yaml_file doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    FileUtils.mkdir_p(ClientSandbox.manifests_dir)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#yaml_file calls 'ClientSandbox.manifests_dir' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L168" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L169" class="js-smell-location">1</a>                  </div>  </li></ol>
+    file_path = File.join(ClientSandbox.manifests_dir, &quot;#{name}-#{SecureRandom.uuid}&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#yaml_file calls 'ClientSandbox.manifests_dir' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L168" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L169" class="js-smell-location">1</a>                  </div>  </li></ol>
+    File.open(file_path, &#39;w&#39;) { |f| f.write(Psych.dump(object)); f }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>IntegrationExampleGroup#yaml_file has the variable name 'f'</span>          </div>  </li></ol>
+  end
+
+  def spec_asset(name)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationExampleGroup#spec_asset doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    File.expand_path(&quot;#{ASSETS_DIR}/#{name}&quot;, __FILE__)
+  end
+
+  def regexp(string)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationExampleGroup#regexp doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    Regexp.compile(Regexp.escape(string))
+  end
+
+  def scrub_random_ids(bosh_output)
+    sub_in_records(bosh_output, /[0-9a-f]{8}-[0-9a-f-]{27}/, &#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;)
+  end
+
+  def scrub_event_time(bosh_output)
+    sub_in_records(bosh_output, /[A-Za-z]{3} [A-Za-z]{3}\s{1,2}[0-9]{1,2} [0-9]{2}:[0-9]{2}:[0-9]{2} UTC [0-9]{4}/, &#39;xxx xxx xx xx:xx:xx UTC xxxx&#39;)
+  end
+
+  def scrub_event_parent_ids(bosh_output)
+    sub_in_records(bosh_output, /[0-9]{1,3} &lt;- [0-9]{1,3} [ ]{0,}/, &#39;x &lt;- x &#39;)
+  end
+
+  def scrub_event_ids(bosh_output)
+    sub_in_records(bosh_output, /[ ][0-9]{1,3} [ ]{0,}/, &#39; x      &#39;)
+  end
+
+  def scrub_event_specific(bosh_output)
+    bosh_output_after_ids = scrub_random_ids(bosh_output)
+    bosh_output_after_cids = scrub_random_cids(bosh_output_after_ids)
+    bosh_output_after_time = scrub_event_time(bosh_output_after_cids)
+    bosh_output_after_parent_ids = scrub_event_parent_ids(bosh_output_after_time)
+    scrub_event_ids(bosh_output_after_parent_ids)
+  end
+
+  def scrub_random_cids(bosh_output)
+    sub_in_records(bosh_output, /[0-9a-f]{32}/, &#39;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#39;)
+  end
+
+  def cid_from(bosh_output)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationExampleGroup#cid_from doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    bosh_output[/[0-9a-f]{32}/, 0]
+  end
+
+  def scrub_time(bosh_output)
+    output = sub_in_records(bosh_output, /[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} [-+][0-9]{4}/, &#39;0000-00-00 00:00:00 -0000&#39;)
+    sub_in_records(output, /[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} UTC/, &#39;0000-00-00 00:00:00 UTC&#39;)
+  end
+
+  def extract_agent_messages(nats_messages, agent_id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationExampleGroup#extract_agent_messages doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    nats_messages.select { |val|
+      # messages for the agent we care about
+      val[0] == &quot;agent.#{agent_id}&quot;
+    }.map { |val|
+      # parse JSON payload
+      JSON.parse(val[1])
+    }.flat_map { |val|
+      # extract method from messages that have it
+      val[&#39;method&#39;] ? [val[&#39;method&#39;]] : []<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#extract_agent_messages calls 'val['method']' 2 times</span>          </div>  </li></ol>
+    }
+  end
+
+  def expect_table(cmd, expected, options={})
+    options[:json] = true
+    expect(table(bosh_runner.run(cmd, options))).to contain_exactly(*expected)
+  end
+
+  def check_for_unknowns(instances)
+    uniq_vm_names = instances.map(&amp;:instance_group_name).uniq<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#check_for_unknowns refers to 'instances' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L237" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L239" class="js-smell-location">1</a>                  </div>  </li></ol>
+    if uniq_vm_names.size == 1 &amp;&amp; uniq_vm_names.first == &#39;unknown&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#check_for_unknowns refers to 'uniq_vm_names' more than self (maybe move it to another class?)</span>          </div>  </li></ol>
+      bosh_runner.print_agent_debug_logs(instances.first.agent_id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#check_for_unknowns refers to 'instances' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L237" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L239" class="js-smell-location">1</a>                  </div>  </li></ol>
+    end
+  end
+
+  def expect_running_vms_with_names_and_count(instance_group_names_to_instance_counts, options={deployment_name: Bosh::Spec::Deployments::DEFAULT_DEPLOYMENT_NAME})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_running_vms_with_names_and_count has a flog score of 45</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_running_vms_with_names_and_count has approx 13 statements</span>          </div>  </li></ol>
+    instances = director.instances(options)
+    check_for_unknowns(instances)
+    names = instances.map(&amp;:instance_group_name)
+    total_expected_vms = instance_group_names_to_instance_counts.values.inject(0) {|sum, count| sum + count}
+    updated_vms = instances.select { |instance| !instance.vm_cid.empty? }
+
+    expect(updated_vms.size).to eq(total_expected_vms), &quot;Expected #{total_expected_vms} VMs, got #{updated_vms.size}. Present were VMs with job name: #{names}&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_running_vms_with_names_and_count calls 'updated_vms.size' 2 times</span>          </div>  </li></ol>
+
+    instance_group_names_to_instance_counts.each do |instance_group_name, expected_count|
+      actual_count = names.select { |name| name == instance_group_name }.size<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_running_vms_with_names_and_count contains iterators nested 2 deep</span>          </div>  </li></ol>
+      expect(actual_count).to eq(expected_count), &quot;Expected instance group #{instance_group_name} to have #{expected_count} VMs, got #{actual_count}&quot;
+    end
+
+    expect(updated_vms.map(&amp;:last_known_state).uniq).to eq([&#39;running&#39;])
+  end
+
+  def expect_logs_not_to_contain(deployment_name, task_id, list_of_strings, options = {})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain has a flog score of 40</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain has 4 parameters</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain has approx 9 statements</span>          </div>  </li></ol>
+    debug_output = bosh_runner.run(&quot;task #{task_id} --debug&quot;, options.merge(deployment_name: deployment_name))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain calls 'options.merge(deployment_name: deployment_name)' 4 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L261" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L262" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L263" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L264" class="js-smell-location">3</a>                  </div>  </li></ol>
+    cpi_output = bosh_runner.run(&quot;task #{task_id} --cpi&quot;, options.merge(deployment_name: deployment_name))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain calls 'options.merge(deployment_name: deployment_name)' 4 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L261" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L262" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L263" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L264" class="js-smell-location">3</a>                  </div>  </li></ol>
+    events_output = bosh_runner.run(&quot;task #{task_id} --event&quot;, options.merge(deployment_name: deployment_name))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain calls 'options.merge(deployment_name: deployment_name)' 4 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L261" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L262" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L263" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L264" class="js-smell-location">3</a>                  </div>  </li></ol>
+    result_output = bosh_runner.run(&quot;task #{task_id} --result&quot;, options.merge(deployment_name: deployment_name))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain calls 'options.merge(deployment_name: deployment_name)' 4 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L261" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L262" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L263" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L264" class="js-smell-location">3</a>                  </div>  </li></ol>
+
+    list_of_strings.each do |token|
+      expect(debug_output).to_not include(token)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain calls 'include(token)' 4 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L267" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L268" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L269" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L270" class="js-smell-location">3</a>                  </div>  </li></ol>
+      expect(cpi_output).to_not include(token)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain calls 'include(token)' 4 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L267" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L268" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L269" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L270" class="js-smell-location">3</a>                  </div>  </li></ol>
+      expect(events_output).to_not include(token)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain calls 'include(token)' 4 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L267" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L268" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L269" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L270" class="js-smell-location">3</a>                  </div>  </li></ol>
+      expect(result_output).to_not include(token)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationExampleGroup#expect_logs_not_to_contain calls 'include(token)' 4 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L267" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L268" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L269" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L270" class="js-smell-location">3</a>                  </div>  </li></ol>
+    end
+  end
+
+  def get_legacy_agent_path(legacy_agent_name)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationExampleGroup#get_legacy_agent_path doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    Bosh::Dev::LegacyAgentManager.generate_executable_full_path(legacy_agent_name)
+  end
+
+  private
+
+  def sub_in_records(output, regex_pattern, replace_pattern)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>IntegrationExampleGroup#sub_in_records has approx 6 statements</span>          </div>  </li></ol>
+    output.map do |record|
+      if record.kind_of?(Hash)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#sub_in_records refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L282" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L283" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L284" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L287" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L288" class="js-smell-location">4</a>                  </div>  </li></ol>
+        record.each do |key, value|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#sub_in_records refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L282" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L283" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L284" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L287" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L288" class="js-smell-location">4</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>IntegrationExampleGroup#sub_in_records contains iterators nested 2 deep</span>          </div>  </li></ol>
+          record[key] = value.gsub(regex_pattern, replace_pattern)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#sub_in_records refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L282" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L283" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L284" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L287" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L288" class="js-smell-location">4</a>                  </div>  </li></ol>
+        end
+        record
+      elsif record.kind_of?(String)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#sub_in_records refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L282" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L283" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L284" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L287" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L288" class="js-smell-location">4</a>                  </div>  </li></ol>
+        record.gsub(regex_pattern, replace_pattern)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>IntegrationExampleGroup#sub_in_records refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L282" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L283" class="js-smell-location">1</a>                  <a href="integration_example_group.html#L284" class="js-smell-location">2</a>                  <a href="integration_example_group.html#L287" class="js-smell-location">3</a>                  <a href="integration_example_group.html#L288" class="js-smell-location">4</a>                  </div>  </li></ol>
+      else
+        raise &#39;Unknown record type&#39;
+      end
+    end
+  end
+end
+
+module IntegrationSandboxHelpers<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers has no descriptive comment</span>          </div>  </li></ol>
+  def start_sandbox<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#start_sandbox has a flog score of 29</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#start_sandbox has approx 12 statements</span>          </div>  </li></ol>
+    unless sandbox_started?
+      at_exit do
+        begin
+          status = $! ? ($!.is_a?(::SystemExit) ? $!.status : 1) : 0
+          logger.info(&quot;\n  Stopping sandboxed environment for BOSH tests...&quot;)
+          current_sandbox.stop
+          cleanup_client_sandbox_dir
+        rescue =&gt; e<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#start_sandbox has the variable name 'e'</span>          </div>  </li></ol>
+          logger.error &quot;Failed to stop sandbox! #{e.message}\n#{e.backtrace.join(&quot;\n&quot;)}&quot;
+        ensure
+          exit(status)
+        end
+      end
+    end
+
+    $sandbox_started = true
+
+    logger.info(&#39;Starting sandboxed environment for BOSH tests...&#39;)
+    current_sandbox.start
+  end
+
+  def reset_sandbox(example, options)
+    prepare_sandbox
+    reconfigure_sandbox(options)
+    if !sandbox_started?
+      start_sandbox
+    elsif example == nil || !example.metadata[:no_reset]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#reset_sandbox performs a nil-check</span>          </div>  </li></ol>
+      current_sandbox.reset
+    end
+  end
+
+  def sandbox_started?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#sandbox_started? doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    !!$sandbox_started
+  end
+
+  def current_sandbox
+    sandbox = Thread.current[:sandbox]
+    raise &quot;call prepare_sandbox to set up this thread&#39;s sandbox&quot; if sandbox.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#current_sandbox performs a nil-check</span>          </div>  </li></ol>
+    sandbox
+  end
+
+  def prepare_sandbox
+    cleanup_client_sandbox_dir
+    setup_test_release_dir
+    setup_bosh_work_dir
+    setup_home_dir
+    Thread.current[:sandbox] ||= Bosh::Dev::Sandbox::Main.from_env
+  end
+
+  def reconfigure_sandbox(options)
+    current_sandbox.reconfigure(options)
+  end
+
+  def setup_test_release_dir(destination_dir = ClientSandbox.test_release_dir)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#setup_test_release_dir has approx 12 statements</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#setup_test_release_dir doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    FileUtils.rm_rf(destination_dir)
+    FileUtils.cp_r(TEST_RELEASE_TEMPLATE, destination_dir, :preserve =&gt; true)
+
+    final_config_path = File.join(destination_dir, &#39;config&#39;, &#39;final.yml&#39;)
+    final_config = YAML.load_file(final_config_path)
+    final_config[&#39;blobstore&#39;][&#39;options&#39;][&#39;blobstore_path&#39;] = ClientSandbox.blobstore_dir
+    File.open(final_config_path, &#39;w&#39;) { |file| file.write(YAML.dump(final_config)) }
+
+    Dir.chdir(destination_dir) do
+      ignore = %w(
+        blobs
+        dev-releases
+        config/dev.yml
+        config/private.yml
+        releases/*.tgz
+        dev_releases
+        .dev_builds
+        .final_builds/jobs/**/*.tgz
+        .final_builds/packages/**/*.tgz
+        blobs
+        .blobs
+        .DS_Store
+      )
+
+      File.open(&#39;.gitignore&#39;, &#39;w+&#39;) do |f|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#setup_test_release_dir has the variable name 'f'</span>          </div>  </li></ol>
+        f.write(ignore.join(&quot;\n&quot;) + &quot;\n&quot;)
+      end
+
+      `git init;
+       git config user.name &quot;John Doe&quot;;
+       git config user.email &quot;john.doe@example.org&quot;;
+       git add .;
+       git commit -m &quot;Initial Test Commit&quot;`
+    end
+  end
+
+  private
+
+  def setup_bosh_work_dir<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#setup_bosh_work_dir doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    FileUtils.cp_r(BOSH_WORK_TEMPLATE, ClientSandbox.bosh_work_dir, :preserve =&gt; true)
+  end
+
+  def setup_home_dir<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#setup_home_dir doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    FileUtils.mkdir_p(ClientSandbox.home_dir)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#setup_home_dir calls 'ClientSandbox.home_dir' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L395" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L396" class="js-smell-location">1</a>                  </div>  </li></ol>
+    ENV[&#39;HOME&#39;] = ClientSandbox.home_dir<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#setup_home_dir calls 'ClientSandbox.home_dir' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L395" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L396" class="js-smell-location">1</a>                  </div>  </li></ol>
+  end
+
+  def cleanup_client_sandbox_dir<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#cleanup_client_sandbox_dir doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    FileUtils.rm_rf(ClientSandbox.base_dir)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#cleanup_client_sandbox_dir calls 'ClientSandbox.base_dir' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L400" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L401" class="js-smell-location">1</a>                  </div>  </li></ol>
+    FileUtils.mkdir_p(ClientSandbox.base_dir)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>IntegrationSandboxHelpers#cleanup_client_sandbox_dir calls 'ClientSandbox.base_dir' 2 times</span>              <span>Locations:</span>                  <a href="integration_example_group.html#L400" class="js-smell-location">0</a>                  <a href="integration_example_group.html#L401" class="js-smell-location">1</a>                  </div>  </li></ol>
+  end
+end
+
+module IntegrationSandboxBeforeHelpers<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>IntegrationSandboxBeforeHelpers has no descriptive comment</span>          </div>  </li></ol>
+  def with_reset_sandbox_before_each(options={})
+    before do |example|
+      reset_sandbox(example, options)
+    end
+  end
+
+  def with_reset_sandbox_before_all
+    # `example` is not available in before(:all)
+    before(:all) do
+      prepare_sandbox
+      if !sandbox_started?
+        start_sandbox
+      else
+        current_sandbox.reset
+      end
+    end
+  end
+
+  def with_reset_hm_before_each
+    before do
+      current_sandbox.reconfigure_health_monitor
+    end
+    after do
+      current_sandbox.health_monitor_process.stop
+    end
+  end
+end
+
+RSpec.configure do |config|
+  config.include(IntegrationExampleGroup, type: :integration)
+  config.include(IntegrationExampleGroup, type: :upgrade)
+  config.include(IntegrationSandboxHelpers, type: :integration)
+  config.include(IntegrationSandboxHelpers, type: :upgrade)
+  config.extend(IntegrationSandboxBeforeHelpers, type: :integration)
+  config.extend(IntegrationSandboxBeforeHelpers, type: :upgrade)
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/prettify.js'></script>
+    <script src='../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+    <script src='../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

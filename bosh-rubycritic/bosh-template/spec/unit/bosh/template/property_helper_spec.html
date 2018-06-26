@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../overview.html"><img src="../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-09-12 13:53:34 -0700'>2017-09-12 13:53:34 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-template/spec/unit/bosh/template /</small> property_helper_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">162</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">7</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">153.81</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                1
+                smell
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+require &#39;bosh/template/property_helper&#39;
+require &#39;bosh/template/invalid_property_type&#39;
+
+module Bosh
+  module Template<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Template has no descriptive comment</span>          </div>  </li></ol>
+    describe PropertyHelper do
+      before do
+        @helper = Object.new
+        @helper.extend(PropertyHelper)
+      end
+
+      it &#39;can copy named property from one collection to another&#39; do
+        dst = {}
+        src = {&#39;foo&#39; =&gt; {&#39;bar&#39; =&gt; &#39;baz&#39;, &#39;secret&#39; =&gt; &#39;zazzle&#39;}}
+
+        @helper.copy_property(dst, src, &#39;foo.bar&#39;)
+        expect(dst).to eq({&#39;foo&#39; =&gt; {&#39;bar&#39; =&gt; &#39;baz&#39;}})
+
+        @helper.copy_property(dst, src, &#39;no.such.prop&#39;, &#39;default&#39;)
+        expect(dst).to eq({
+          &#39;foo&#39; =&gt; {&#39;bar&#39; =&gt; &#39;baz&#39;},
+          &#39;no&#39; =&gt; {
+            &#39;such&#39; =&gt; {&#39;prop&#39; =&gt; &#39;default&#39;}
+          }
+        })
+      end
+
+      it &#39;should return the default value if the value not found in src&#39; do
+        dst = {}
+        src = {}
+        @helper.copy_property(dst, src, &#39;foo.bar&#39;, &#39;foobar&#39;)
+        expect(dst).to eq({&#39;foo&#39; =&gt; {&#39;bar&#39; =&gt; &#39;foobar&#39;}})
+      end
+
+      context &#39;when src parameter is not a hash&#39; do
+        it &#39;should raise a useful exception&#39; do
+          dst = {}
+          src = false
+          expect {
+            @helper.copy_property(dst, src, &#39;foo.bar&#39;, &#39;foobar&#39;)
+          }.to raise_error(InvalidPropertyType, &quot;Property &#39;foo.bar&#39; expects a hash, but received &#39;#{src.class}&#39;&quot;)
+        end
+      end
+
+      it &quot;should return the &#39;false&#39; value when parsing a boolean false value&quot; do
+        dst = {}
+        src = {&#39;foo&#39; =&gt; {&#39;bar&#39; =&gt; false}}
+        @helper.copy_property(dst, src, &#39;foo.bar&#39;, true)
+        expect(dst).to eq({&#39;foo&#39; =&gt; {&#39;bar&#39; =&gt; false}})
+      end
+
+      it &#39;should get a nil when value not found in src and no default value specified &#39; do
+        dst = {}
+        src = {}
+        @helper.copy_property(dst, src, &#39;foo.bar&#39;)
+        expect(dst).to eq({&#39;foo&#39; =&gt; {&#39;bar&#39; =&gt; nil}})
+      end
+
+      it &#39;can lookup the property in a Hash using dot-syntax&#39; do
+        properties = {
+          &#39;foo&#39; =&gt; {&#39;bar&#39; =&gt; &#39;baz&#39;},
+          &#39;router&#39; =&gt; {&#39;token&#39; =&gt; &#39;foo&#39;}
+        }
+
+        expect(@helper.lookup_property(properties, &#39;foo.bar&#39;)).to eq(&#39;baz&#39;)
+        expect(@helper.lookup_property(properties, &#39;router&#39;)).to eq({&#39;token&#39; =&gt; &#39;foo&#39;})
+        expect(@helper.lookup_property(properties, &#39;no.prop&#39;)).to be_nil
+      end
+
+      context &#39;#set_property&#39; do
+        it &#39;should update the hash @ path with provided value&#39; do
+          dst = {}
+          name = &#39;foo&#39;
+          value = &#39;bar&#39;
+          @helper.set_property(dst, name, value)
+          expect(dst[&#39;foo&#39;]).to eq(&#39;bar&#39;)
+        end
+
+        it &#39;should update the nested hash @ dot separated path with provided value&#39; do
+          dst = {}
+          name = &#39;foo.smurf.color&#39;
+          value = &#39;green&#39;
+          @helper.set_property(dst, name, value)
+          expect(dst[&#39;foo&#39;][&#39;smurf&#39;][&#39;color&#39;]).to eq(&#39;green&#39;)
+        end
+
+      end
+
+      context &#39;#sort_property&#39; do
+        it &#39;should sort hash property based on keys&#39; do
+          prop = {
+           &#39;n5&#39; =&gt; {
+             &#39;m2&#39; =&gt; &quot;foo&quot;,
+             &#39;m1&#39; =&gt; &quot;foo&quot;,
+           },
+           &#39;n1&#39; =&gt; &#39;foo&#39;,
+           &#39;n3&#39; =&gt; [3, 2, 1, 5, 4],
+          }
+          sorted_property = @helper.sort_property(prop)
+          expect(sorted_property.to_json).to eq(
+            {
+              &#39;n1&#39; =&gt; &#39;foo&#39;,
+              &#39;n3&#39; =&gt; [3, 2, 1, 5, 4],
+              &#39;n5&#39; =&gt; {
+                &#39;m1&#39; =&gt; &quot;foo&quot;,
+                &#39;m2&#39; =&gt; &quot;foo&quot;,
+              }
+            }.to_json
+          )
+        end
+
+        it &#39;does not sort non-hash values&#39; do
+          expect{ @helper.sort_property(&quot;foo&quot;) }.not_to raise_error
+        end
+      end
+
+      context &#39;#validate_properties_format&#39; do
+        context &#39;when deployment manifest properties are valid&#39; do
+
+          let(:props) do
+            {
+              &#39;foo&#39; =&gt; {
+                &#39;bar&#39; =&gt; &#39;omg&#39;,
+              }
+            }
+          end
+
+          it &#39;doesnt raise error&#39; do
+              @helper.validate_properties_format(props, &#39;foo.bar&#39;)
+          end
+        end
+
+        context &#39;when deployment manifest properties are  NOT valid&#39; do
+          let(:props) do
+            {
+              &#39;foo&#39; =&gt; {
+                &#39;yarb&#39; =&gt; &#39;i am incorrect&#39;
+              }
+            }
+          end
+
+          it &#39;raises an Bosh::Template::InvalidPropertyType error&#39; do
+            key = &#39;foo.yarb.pow&#39;
+
+            expect{
+              @helper.validate_properties_format(props, key)
+            }.to raise_error(Bosh::Template::InvalidPropertyType, &quot;Property &#39;foo.yarb.pow&#39; expects a hash, but received &#39;String&#39;&quot;)
+          end
+
+          context &#39;when the properties variable is not a hash&#39; do
+            it &#39;raises an Bosh::Template::InvalidPropertyType if the properties is not a hash&#39; do
+              expect{
+                @helper.validate_properties_format(false, &#39;a&#39;)
+              }.to raise_error(Bosh::Template::InvalidPropertyType, &quot;Property &#39;a&#39; expects a hash, but received &#39;FalseClass&#39;&quot;)
+            end
+          end
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

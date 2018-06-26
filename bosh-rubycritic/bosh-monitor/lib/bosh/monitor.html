@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-12-26 12:17:04 +0100'>2017-12-26 12:17:04 +0100</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-monitor/lib/bosh /</small> monitor.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating a big">
+              A
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">80</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">23</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">0.0</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                1
+                smell
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh
+  module Monitor<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Monitor has no descriptive comment</span>          </div>  </li></ol>
+  end
+end
+
+Bhm = Bosh::Monitor
+
+begin
+  require &#39;fiber&#39;
+rescue LoadError
+  unless defined? Fiber
+    $stderr.puts &#39;FATAL: HealthMonitor requires Ruby implementation that supports fibers&#39;
+    exit 1
+  end
+end
+
+require &#39;ostruct&#39;
+require &#39;set&#39;
+
+require &#39;em-http-request&#39;
+require &#39;eventmachine&#39;
+require &#39;logging&#39;
+require &#39;nats/client&#39;
+require &#39;sinatra&#39;
+require &#39;thin&#39;
+require &#39;securerandom&#39;
+
+# Helpers
+require &#39;bosh/monitor/yaml_helper&#39;
+
+# Basic blocks
+require &#39;bosh/monitor/agent&#39;
+require &#39;bosh/monitor/instance&#39;
+require &#39;bosh/monitor/deployment&#39;
+require &#39;bosh/monitor/auth_provider&#39;
+require &#39;bosh/monitor/config&#39;
+require &#39;bosh/monitor/core_ext&#39;
+require &#39;bosh/monitor/director&#39;
+require &#39;bosh/monitor/director_monitor&#39;
+require &#39;bosh/monitor/errors&#39;
+require &#39;bosh/monitor/metric&#39;
+require &#39;bosh/monitor/runner&#39;
+require &#39;bosh/monitor/version&#39;
+
+# Processing
+require &#39;bosh/monitor/instance_manager&#39;
+require &#39;bosh/monitor/resurrection_manager&#39;
+require &#39;bosh/monitor/event_processor&#39;
+
+# HTTP endpoints
+require &#39;bosh/monitor/api_controller&#39;
+
+# Protocols
+require &#39;bosh/monitor/protocols/tcp_connection&#39;
+require &#39;bosh/monitor/protocols/tsdb_connection&#39;
+require &#39;bosh/monitor/protocols/graphite_connection&#39;
+
+
+# Events
+require &#39;bosh/monitor/events/base&#39;
+require &#39;bosh/monitor/events/alert&#39;
+require &#39;bosh/monitor/events/heartbeat&#39;
+
+# Plugins
+require &#39;bosh/monitor/plugins/base&#39;
+require &#39;bosh/monitor/plugins/dummy&#39;
+require &#39;bosh/monitor/plugins/http_request_helper&#39;
+require &#39;bosh/monitor/plugins/resurrector_helper&#39;
+require &#39;bosh/monitor/plugins/datadog&#39;
+require &#39;bosh/monitor/plugins/paging_datadog_client&#39;
+require &#39;bosh/monitor/plugins/email&#39;
+require &#39;bosh/monitor/plugins/graphite&#39;
+require &#39;bosh/monitor/plugins/json&#39;
+require &#39;bosh/monitor/plugins/logger&#39;
+require &#39;bosh/monitor/plugins/pagerduty&#39;
+require &#39;bosh/monitor/plugins/resurrector&#39;
+require &#39;bosh/monitor/plugins/riemann&#39;
+require &#39;bosh/monitor/plugins/tsdb&#39;
+require &#39;bosh/monitor/plugins/consul_event_forwarder&#39;
+require &#39;bosh/monitor/plugins/event_logger&#39;
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

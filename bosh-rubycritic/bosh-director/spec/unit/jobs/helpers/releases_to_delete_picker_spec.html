@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../overview.html"><img src="../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-05-23 11:12:20 -0700'>2017-05-23 11:12:20 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-director/spec/unit/jobs/helpers /</small> releases_to_delete_picker_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">61</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">3</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">98.47</span><small> complexity</small></div>
+              <div><span class="metric">32</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                6
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+module Bosh::Director<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director has no descriptive comment</span>          </div>  </li></ol>
+  describe Jobs::Helpers::ReleasesToDeletePicker do
+    subject(:releases_to_delete_picker) { Jobs::Helpers::ReleasesToDeletePicker.new(Api::ReleaseManager.new) }
+    let(:release_1) { Models::Release.make(name: &#39;release-1&#39;) }
+    let(:release_2) { Models::Release.make(name: &#39;release-2&#39;) }
+
+    describe &#39;#pick&#39; do
+      before do
+        deployment_1 = Models::Deployment.make(name: &#39;first&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director has the variable name 'deployment_1'</span>          </div>  </li></ol>
+        deployment_2 = Models::Deployment.make(name: &#39;second&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director has the variable name 'deployment_2'</span>          </div>  </li></ol>
+
+        release_version_with_deployment_1 = Models::ReleaseVersion.make(version: 1, release: release_1)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director has the variable name 'release_version_with_deployment_1'</span>          </div>  </li></ol>
+        release_version_with_deployment_1.add_deployment(deployment_1)
+
+        release_version_with_deployment_2 = Models::ReleaseVersion.make(version: 2, release: release_2)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director has the variable name 'release_version_with_deployment_2'</span>          </div>  </li></ol>
+        release_version_with_deployment_2.add_deployment(deployment_2)
+
+        Models::ReleaseVersion.make(version: 5, release: release_2)
+      end
+
+      context &#39;when removing all releases&#39; do
+        it &#39;picks unused releases&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="releases_to_delete_picker_spec.html#L24" class="js-smell-location">0</a>                  <a href="releases_to_delete_picker_spec.html#L39" class="js-smell-location">1</a>                  </div>  </li></ol>
+          expect(releases_to_delete_picker.pick(0)).to match_array([
+                {&#39;name&#39; =&gt; &#39;release-2&#39;, &#39;versions&#39; =&gt; [&#39;5&#39;]}
+              ])
+        end
+      end
+
+      context &#39;when removing all except the latest two releases&#39; do
+        before do
+          Models::ReleaseVersion.make(version: 10, release: release_1)
+          Models::ReleaseVersion.make(version: 9, release: release_1)
+          Models::ReleaseVersion.make(version: 10, release: release_2)
+          Models::ReleaseVersion.make(version: 9, release: release_2)
+        end
+
+        it &#39;leaves out the latest two versions of each release&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="releases_to_delete_picker_spec.html#L24" class="js-smell-location">0</a>                  <a href="releases_to_delete_picker_spec.html#L39" class="js-smell-location">1</a>                  </div>  </li></ol>
+          expect(releases_to_delete_picker.pick(2)).to match_array([
+                {&#39;name&#39; =&gt; &#39;release-2&#39;, &#39;versions&#39; =&gt; [&#39;5&#39;]}
+              ])
+        end
+      end
+
+      context &#39;when removing multiple versions&#39; do
+        before do
+          Models::ReleaseVersion.make(version: 10, release: release_1)
+          Models::ReleaseVersion.make(version: 9, release: release_1)
+          Models::ReleaseVersion.make(version: 8, release: release_1)
+        end
+
+        it &#39;leaves out the latest two versions of each release&#39; do
+          expect(releases_to_delete_picker.pick(1)).to match_array([
+                {&#39;name&#39; =&gt; &#39;release-1&#39;, &#39;versions&#39; =&gt; [&#39;8&#39;, &#39;9&#39;]}
+              ])
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

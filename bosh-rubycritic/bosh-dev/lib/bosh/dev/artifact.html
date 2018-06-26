@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-09-13 12:31:15 -0400'>2017-09-13 12:31:15 -0400</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-dev/lib/bosh/dev /</small> artifact.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating a big">
+              A
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">65</span><small> lines of codes</small></div>
+              <div><span class="metric">9</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">5.3</span><small> complexity/method</small></div>
+              <div><span class="metric">1</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">47.63</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                6
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Dev::Artifact
+  class Info &lt; Struct.new(:name, :rev, :darwin_sha256, :linux_sha256, :bucket_name)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Dev::Artifact::Info has no descriptive comment</span>          </div>  </li></ol>
+    def sha256<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Method-Name.md" target="_blank"><b>UncommunicativeMethodName</b></a>        </span>      </div>      <span>Bosh::Dev::Artifact::Info#sha256 has the name 'sha256'</span>          </div>  </li></ol>
+      darwin? ? darwin_sha256 : linux_sha256
+    end
+
+    def platform
+      darwin? ? &#39;darwin&#39; : &#39;linux&#39;
+    end
+
+    def file_name_to_download
+      &quot;#{name}-#{rev}-#{platform}-amd64&quot;
+    end
+
+    private
+
+    def darwin?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Dev::Artifact::Info#darwin? doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+      RUBY_PLATFORM =~ /darwin/
+    end
+  end
+
+  class Installer<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Dev::Artifact::Installer has no descriptive comment</span>          </div>  </li></ol>
+    attr_reader :info, :install_dir, :executable_name
+
+    def initialize(info, install_dir, executable_name)
+      @info = info
+      @install_dir = install_dir
+      @executable_name = executable_name
+    end
+
+    def install
+      FileUtils.mkdir_p(install_dir)
+
+      downloaded_file_path = download
+
+      FileUtils.copy(downloaded_file_path, executable_path)
+      FileUtils.remove(downloaded_file_path, :force =&gt; true)
+      File.chmod(0700, executable_path)
+    end
+
+    def executable_path
+      repo_root = File.expand_path(&#39;../../../../&#39;, File.dirname(__FILE__))
+
+      File.expand_path(File.join(install_dir, executable_name), repo_root)
+    end
+
+    private
+
+    def download
+      destination_path = File.join(install_dir, info.file_name_to_download)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Dev::Artifact::Installer#download calls 'info.file_name_to_download' 2 times</span>              <span>Locations:</span>                  <a href="artifact.html#L50" class="js-smell-location">0</a>                  <a href="artifact.html#L54" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+      unless File.exist?(destination_path)
+        retryable.retryer do
+          `#{File.dirname(__FILE__)}/sandbox/services/install_binary.sh #{info.file_name_to_download} #{destination_path} #{info.sha256} #{info.bucket_name}`<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Dev::Artifact::Installer#download calls 'info.file_name_to_download' 2 times</span>              <span>Locations:</span>                  <a href="artifact.html#L50" class="js-smell-location">0</a>                  <a href="artifact.html#L54" class="js-smell-location">1</a>                  </div>  </li></ol>
+          $? == 0
+        end
+      end
+      destination_path
+    end
+
+    def retryable<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Dev::Artifact::Installer#retryable doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+      Bosh::Retryable.new({tries: 6})
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

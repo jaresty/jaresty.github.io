@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2016-11-28 13:48:14 -0800'>2016-11-28 13:48:14 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-director/db/migrations/director /</small> 20150102234124_denormalize_task_user_id_to_task_username.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating a big">
+              A
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">38</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">3</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">20.8</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                0
+                smell
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">Sequel.migration do
+  up do
+    # mysql doesn&#39;t let us drop tasks&#39; user_id column because it has a foreign key,
+    # and sequel won&#39;t let us drop the foreign key, so we&#39;re recreating the table
+    # from scratch. Sorry.
+
+    create_table :tasks_new do
+      primary_key :id
+      String :state, :null =&gt; false
+      Time :timestamp, :null =&gt; false
+      String :description, :null =&gt; false
+      String :result, :text =&gt; true, :null =&gt; true
+      String :output, :null =&gt; true
+      Time :checkpoint_time
+      String :type, :null =&gt; false
+      String :username, :null =&gt; true
+    end
+
+    run &quot;INSERT INTO tasks_new
+           (state, timestamp, description, result, output, checkpoint_time, type, username)
+         SELECT t.state, t.timestamp, t.description, t.result, t.output, t.checkpoint_time, t.type, u.username
+           FROM tasks t
+             LEFT OUTER JOIN users u ON t.user_id = u.id&quot;
+
+    drop_table :tasks
+    rename_table :tasks_new, :tasks
+
+    alter_table :tasks do
+      add_index :state
+      add_index :timestamp
+      add_index :description
+    end
+  end
+
+  down do
+    raise Sequel::Error, &quot;Irreversible migration, tasks:user_id might contain nulls so we cannot enforce &#39;not null&#39; constraint&quot;
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

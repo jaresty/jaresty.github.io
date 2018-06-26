@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../overview.html"><img src="../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2016-11-28 13:48:14 -0800'>2016-11-28 13:48:14 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-director/lib/bosh/director/dns /</small> powerdns.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">133</span><small> lines of codes</small></div>
+              <div><span class="metric">14</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">5.0</span><small> complexity/method</small></div>
+              <div><span class="metric">8</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">69.67</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                15
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director
+  class PowerDns<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns has no descriptive comment</span>          </div>  </li></ol>
+    SOA = &#39;localhost hostmaster@localhost 0 10800 604800 30&#39;
+    TTL_5M = 300
+    TTL_4H = 3600 * 4
+    TTL_5H = 3600 * 5
+
+    def initialize(domain_name, logger)
+      @domain_name = domain_name
+      @logger = logger
+    end
+
+    def find_dns_record(dns_record_name, ip_address)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#find_dns_record doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+      Models::Dns::Record.find(name: dns_record_name, type: &#39;A&#39;, content: ip_address)
+    end
+
+    def find_dns_records_by_ip(ip_address)
+      domain_id = find_domain_id
+      return [] unless domain_id
+
+      Models::Dns::Record.filter(domain_id: domain_id, type: &#39;A&#39;, content: ip_address)
+    end
+
+    def create_or_update_nameserver(ip_address)
+      create_or_update_domain
+      create_or_update_record(@domain_name, SOA, TTL_5M, &#39;SOA&#39;)
+      create_or_update_record(@domain_name, &quot;ns.#{@domain_name}&quot;, TTL_4H, &#39;NS&#39;)
+      create_or_update_record(&quot;ns.#{@domain_name}&quot;, ip_address, TTL_5H, &#39;A&#39;)
+    end
+
+    def create_or_update_dns_records(dns_record_name, ip_address)
+      create_or_update_record(dns_record_name, ip_address, TTL_5M, &#39;A&#39;)
+      update_ptr_record(dns_record_name, ip_address)
+    end
+
+    def find_dns_records_by_pattern(record_pattern)
+      records = Models::Dns::Record.grep(:name, record_pattern)
+      records.filter(:domain_id =&gt; find_domain_id).all
+    end
+
+    def delete(record_pattern)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#delete has approx 9 statements</span>          </div>  </li></ol>
+      records = find_dns_records_by_pattern(record_pattern)
+
+      # delete A records and collect all IPs for later
+      ips = []
+      records.each do |record|
+        ips &lt;&lt; record.content<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#delete refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="powerdns.html#L47" class="js-smell-location">0</a>                  <a href="powerdns.html#L48" class="js-smell-location">1</a>                  <a href="powerdns.html#L52" class="js-smell-location">2</a>                  <a href="powerdns.html#L53" class="js-smell-location">3</a>                  </div>  </li></ol>
+        Models::Dns::Record.grep(:content, record.name).each do |ptr|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#delete calls 'record.name' 2 times</span>              <span>Locations:</span>                  <a href="powerdns.html#L48" class="js-smell-location">0</a>                  <a href="powerdns.html#L52" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#delete refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="powerdns.html#L47" class="js-smell-location">0</a>                  <a href="powerdns.html#L48" class="js-smell-location">1</a>                  <a href="powerdns.html#L52" class="js-smell-location">2</a>                  <a href="powerdns.html#L53" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#delete contains iterators nested 2 deep</span>          </div>  </li></ol>
+          @logger.info(&quot;Deleting reverse DNS record: #{ptr.name} -&gt; #{ptr.content}&quot;)
+          ptr.destroy
+        end
+        @logger.info(&quot;Deleting DNS record: #{record.name}&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#delete calls 'record.name' 2 times</span>              <span>Locations:</span>                  <a href="powerdns.html#L48" class="js-smell-location">0</a>                  <a href="powerdns.html#L52" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#delete refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="powerdns.html#L47" class="js-smell-location">0</a>                  <a href="powerdns.html#L48" class="js-smell-location">1</a>                  <a href="powerdns.html#L52" class="js-smell-location">2</a>                  <a href="powerdns.html#L53" class="js-smell-location">3</a>                  </div>  </li></ol>
+        record.destroy<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#delete refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="powerdns.html#L47" class="js-smell-location">0</a>                  <a href="powerdns.html#L48" class="js-smell-location">1</a>                  <a href="powerdns.html#L52" class="js-smell-location">2</a>                  <a href="powerdns.html#L53" class="js-smell-location">3</a>                  </div>  </li></ol>
+      end
+    end
+
+    private
+
+    def create_or_update_domain
+      Models::Dns::Domain.safe_find_or_create(name: @domain_name, type: &#39;NATIVE&#39;)
+    end
+
+    def create_or_update_record(dns_record_name, ip_address, ttl, type)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#create_or_update_record has 4 parameters</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#create_or_update_record has approx 6 statements</span>          </div>  </li></ol>
+      record = Models::Dns::Record.find(name: dns_record_name, type: type)
+      if record.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#create_or_update_record refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="powerdns.html#L65" class="js-smell-location">0</a>                  <a href="powerdns.html#L71" class="js-smell-location">1</a>                  <a href="powerdns.html#L72" class="js-smell-location">2</a>                  <a href="powerdns.html#L73" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#create_or_update_record performs a nil-check</span>          </div>  </li></ol>
+        domain = create_or_update_domain
+        record = Models::Dns::Record.new(domain_id: domain.id,
+          name: dns_record_name, type: type,
+          ttl: ttl)
+      end
+      record.content = ip_address<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#create_or_update_record refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="powerdns.html#L65" class="js-smell-location">0</a>                  <a href="powerdns.html#L71" class="js-smell-location">1</a>                  <a href="powerdns.html#L72" class="js-smell-location">2</a>                  <a href="powerdns.html#L73" class="js-smell-location">3</a>                  </div>  </li></ol>
+      record.change_date = Time.now.to_i<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#create_or_update_record refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="powerdns.html#L65" class="js-smell-location">0</a>                  <a href="powerdns.html#L71" class="js-smell-location">1</a>                  <a href="powerdns.html#L72" class="js-smell-location">2</a>                  <a href="powerdns.html#L73" class="js-smell-location">3</a>                  </div>  </li></ol>
+      record.save<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#create_or_update_record refers to 'record' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="powerdns.html#L65" class="js-smell-location">0</a>                  <a href="powerdns.html#L71" class="js-smell-location">1</a>                  <a href="powerdns.html#L72" class="js-smell-location">2</a>                  <a href="powerdns.html#L73" class="js-smell-location">3</a>                  </div>  </li></ol>
+    end
+
+    # create/update DNS PTR records (for reverse lookups)
+    def update_ptr_record(record_name, ip_address)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#update_ptr_record has approx 7 statements</span>          </div>  </li></ol>
+      reverse_domain = reverse_domain(ip_address)
+      reverse_host = reverse_host(ip_address)
+
+      rdomain = Models::Dns::Domain.safe_find_or_create(name: reverse_domain, type: &#39;NATIVE&#39;)
+
+      Models::Dns::Record.find_or_create(
+        domain: rdomain,
+        name: reverse_domain,
+        type: &#39;SOA&#39;, content: SOA,
+        ttl: TTL_4H
+      )
+
+      Models::Dns::Record.find_or_create(
+        domain: rdomain,
+        name: reverse_domain,
+        type: &#39;NS&#39;, ttl: TTL_4H,
+        content: &quot;ns.#{@domain_name}&quot;
+      )
+
+      record = Models::Dns::Record.find_or_create(content: record_name, type: &#39;PTR&#39;)
+      record.update(
+        domain: rdomain,
+        name: reverse_host,
+        content: record_name,
+        type: &#39;PTR&#39;,
+        ttl: TTL_5M,
+        change_date: Time.now.to_i
+      )
+    end
+
+    def find_domain_id
+      dns_domain = Models::Dns::Domain.find(
+        :name =&gt; @domain_name,
+        :type =&gt; &#39;NATIVE&#39;,
+      )
+      dns_domain.nil? ? nil : dns_domain.id<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#find_domain_id refers to 'dns_domain' more than self (maybe move it to another class?)</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#find_domain_id performs a nil-check</span>          </div>  </li></ol>
+    end
+
+    # @param [String] ip IP address
+    # @return [String] reverse dns name for an IP used for a PTR record
+    def reverse_host(ip)
+      reverse(ip, 4)
+    end
+
+    # @param [String] ip IP address
+    # @return [String] reverse dns domain name for an IP
+    def reverse_domain(ip)
+      reverse(ip, 3)
+    end
+
+    def reverse(ip, n)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Parameter-Name.md" target="_blank"><b>UncommunicativeParameterName</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#reverse has the parameter name 'n'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::PowerDns#reverse doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+      octets = ip.split(/\./)
+      &quot;#{octets[0..(n-1)].reverse.join(&quot;.&quot;)}.in-addr.arpa&quot;
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-07-30 10:55:24 +0200'>2017-07-30 10:55:24 +0200</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-monitor/lib/bosh/monitor /</small> deployment.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">118</span><small> lines of codes</small></div>
+              <div><span class="metric">13</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">5.7</span><small> complexity/method</small></div>
+              <div><span class="metric">8</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">74.51</span><small> complexity</small></div>
+              <div><span class="metric">36</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                13
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Monitor
+  class Deployment<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment has at least 6 instance variables</span>          </div>  </li></ol>
+
+    attr_reader :name
+    attr_reader :agent_id_to_agent
+    attr_reader :instance_id_to_agent
+    attr_reader :teams
+
+    def initialize(deployment_data)
+      @logger = Bhm.logger
+      @name = deployment_data[&#39;name&#39;]
+      @teams = deployment_data[&#39;teams&#39;]
+      @instance_id_to_instance = {}
+      @agent_id_to_agent = {}
+      @instance_id_to_agent = {}
+    end
+
+    def self.create(deployment_data)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="deployment.html#L18" class="js-smell-location">0</a>                  <a href="instance.html#L17" class="js-smell-location">1</a>                  </div>  </li></ol>
+      unless deployment_data.kind_of?(Hash)
+        Bhm.logger.error(&quot;Invalid format for Deployment data: expected Hash, got #{deployment_data.class}: #{deployment_data}&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#self.create calls 'Bhm.logger' 2 times</span>              <span>Locations:</span>                  <a href="deployment.html#L20" class="js-smell-location">0</a>                  <a href="deployment.html#L25" class="js-smell-location">1</a>                  </div>  </li></ol>
+        return nil
+      end
+
+      unless deployment_data[&#39;name&#39;]
+        Bhm.logger.error(&quot;Deployment data has no name: got #{deployment_data}&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#self.create calls 'Bhm.logger' 2 times</span>              <span>Locations:</span>                  <a href="deployment.html#L20" class="js-smell-location">0</a>                  <a href="deployment.html#L25" class="js-smell-location">1</a>                  </div>  </li></ol>
+        return nil
+      end
+
+      Deployment.new(deployment_data)
+    end
+
+    def add_instance(instance)
+      unless instance
+        return false
+      end
+
+      instance.deployment = name
+      @logger.debug(&quot;Discovered new instance #{instance.id}&quot;) if @instance_id_to_instance[instance.id].nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#add_instance calls 'instance.id' 3 times</span>              <span>Locations:</span>                  <a href="deployment.html#L38" class="js-smell-location">0</a>                  <a href="deployment.html#L39" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#add_instance performs a nil-check</span>          </div>  </li></ol>
+      @instance_id_to_instance[instance.id] = instance<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#add_instance calls 'instance.id' 3 times</span>              <span>Locations:</span>                  <a href="deployment.html#L38" class="js-smell-location">0</a>                  <a href="deployment.html#L39" class="js-smell-location">1</a>                  </div>  </li></ol>
+      true
+    end
+
+    def remove_instance(instance_id)
+      @instance_id_to_agent.delete(instance_id)
+      @instance_id_to_instance.delete(instance_id)
+    end
+
+    def instance(instance_id)
+      @instance_id_to_instance[instance_id]
+    end
+
+    def instances
+      @instance_id_to_instance.values
+    end
+
+    def instance_ids
+      @instance_id_to_instance.keys.to_set
+    end
+
+    # Processes VM data from BOSH Director,
+    # extracts relevant agent data, wraps it into Agent object
+    # and adds it to a list of managed agents.
+    def upsert_agent(instance)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent has a flog score of 37</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent has approx 15 statements</span>          </div>  </li></ol>
+      @logger.info(&quot;Adding agent #{instance.agent_id} (#{instance.job}/#{instance.id}) to #{name}...&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent calls 'instance.agent_id' 2 times</span>              <span>Locations:</span>                  <a href="deployment.html#L64" class="js-smell-location">0</a>                  <a href="deployment.html#L66" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent calls 'instance.id' 4 times</span>              <span>Locations:</span>                  <a href="deployment.html#L64" class="js-smell-location">0</a>                  <a href="deployment.html#L73" class="js-smell-location">1</a>                  <a href="deployment.html#L90" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent calls 'instance.job' 2 times</span>              <span>Locations:</span>                  <a href="deployment.html#L64" class="js-smell-location">0</a>                  <a href="deployment.html#L80" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+      agent_id = instance.agent_id<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent calls 'instance.agent_id' 2 times</span>              <span>Locations:</span>                  <a href="deployment.html#L64" class="js-smell-location">0</a>                  <a href="deployment.html#L66" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+      if agent_id.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent performs a nil-check</span>              <span>Locations:</span>                  <a href="deployment.html#L68" class="js-smell-location">0</a>                  <a href="deployment.html#L80" class="js-smell-location">1</a>                  <a href="deployment.html#L86" class="js-smell-location">2</a>                  </div>  </li></ol>
+        @logger.warn(&quot;No agent id for Instance: #{instance.inspect}&quot;)
+        #count agents for instances with deleted vm, which expect to have vm
+        if instance.expects_vm? &amp;&amp; !instance.has_vm?
+          agent = Agent.new(&quot;agent_with_no_vm&quot;, deployment: name)
+          @instance_id_to_agent[instance.id] = agent<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent calls 'instance.id' 4 times</span>              <span>Locations:</span>                  <a href="deployment.html#L64" class="js-smell-location">0</a>                  <a href="deployment.html#L73" class="js-smell-location">1</a>                  <a href="deployment.html#L90" class="js-smell-location">2</a>                  </div>  </li></ol>
+          agent.update_instance(instance)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent calls 'agent.update_instance(instance)' 2 times</span>              <span>Locations:</span>                  <a href="deployment.html#L74" class="js-smell-location">0</a>                  <a href="deployment.html#L93" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+        return false
+      end
+
+      # Idle VMs, we don&#39;t care about them, but we still want to track them
+      if instance.job.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent calls 'instance.job' 2 times</span>              <span>Locations:</span>                  <a href="deployment.html#L64" class="js-smell-location">0</a>                  <a href="deployment.html#L80" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent performs a nil-check</span>              <span>Locations:</span>                  <a href="deployment.html#L68" class="js-smell-location">0</a>                  <a href="deployment.html#L80" class="js-smell-location">1</a>                  <a href="deployment.html#L86" class="js-smell-location">2</a>                  </div>  </li></ol>
+        @logger.debug(&quot;VM with no job found: #{agent_id}&quot;)
+      end
+
+      agent = @agent_id_to_agent[agent_id]
+
+      if agent.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent performs a nil-check</span>              <span>Locations:</span>                  <a href="deployment.html#L68" class="js-smell-location">0</a>                  <a href="deployment.html#L80" class="js-smell-location">1</a>                  <a href="deployment.html#L86" class="js-smell-location">2</a>                  </div>  </li></ol>
+        @logger.debug(&quot;Discovered agent #{agent_id}&quot;)
+        agent = Agent.new(agent_id, deployment: name)
+        @agent_id_to_agent[agent_id] = agent
+        @instance_id_to_agent.delete(instance.id) if @instance_id_to_agent[instance.id]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent calls 'instance.id' 4 times</span>              <span>Locations:</span>                  <a href="deployment.html#L64" class="js-smell-location">0</a>                  <a href="deployment.html#L73" class="js-smell-location">1</a>                  <a href="deployment.html#L90" class="js-smell-location">2</a>                  </div>  </li></ol>
+      end
+
+      agent.update_instance(instance)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Monitor::Deployment#upsert_agent calls 'agent.update_instance(instance)' 2 times</span>              <span>Locations:</span>                  <a href="deployment.html#L74" class="js-smell-location">0</a>                  <a href="deployment.html#L93" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+      true
+    end
+
+    def remove_agent(agent_id)
+      @agent_id_to_agent.delete(agent_id)
+    end
+
+    def agent(agent_id)
+      @agent_id_to_agent[agent_id]
+    end
+
+    def agents
+      @agent_id_to_agent.values
+    end
+
+    def agent_ids
+      @agent_id_to_agent.keys.to_set
+    end
+
+    def update_teams(new_teams)
+      @teams = new_teams
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

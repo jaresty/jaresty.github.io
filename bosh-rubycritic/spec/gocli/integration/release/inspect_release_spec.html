@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-03-07 09:56:55 -0800'>2017-03-07 09:56:55 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/gocli/integration/release /</small> inspect_release_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">266</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">7</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">76.27</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                0
+                smell
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require_relative &#39;../../spec_helper&#39;
+
+describe &#39;inspect release&#39;, type: :integration do
+  with_reset_sandbox_before_each
+
+  context &#39;with a director targeted&#39; do
+    it &#39;prints an error when version is not specified&#39; do
+      out, exit_code = bosh_runner.run(&#39;inspect-release name-without-version&#39;, { return_exit_code: true, failure_expected: true })
+      expect(out).to include(&quot;release &#39;name-without-version&#39; to be in format &#39;name/version&#39;&quot;)
+      expect(exit_code).to eq(1)
+    end
+
+    it &#39;shows jobs and source pacakges&#39; do
+      bosh_runner.run(&quot;upload-release #{spec_asset(&#39;compiled_releases/test_release/releases/test_release/test_release-1.tgz&#39;)}&quot;)
+      out = scrub_random_ids(table(bosh_runner.run(&#39;inspect-release test_release/1&#39;, json: true)))
+
+      expect(out).to eq([
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_1/9a5f09364b2cdc18a45172c15dca21922b3ff196&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;a7d51f65cda79d2276dc9cc254e6fec523b07b02&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_1_and_2/673c3689362f2adb37baed3d8d4344cf03ff7637&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;c9acbf245d4b4721141b54b26bee20bfa58f4b54&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_2/8e9e3b5aebc7f15d661280545e9d1c1c7d19de74&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;79475b0b035fe70f13a777758065210407170ec3&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_3/54120dd68fab145433df83262a9ba9f3de527a4b&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;ab4e6077ecf03399f215e6ba16153fd9ebbf1b5f&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_4/0ebdb544f9c604e9a3512299a02b6f04f6ea6d0c&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;1ff32a12e0c574720dd8e5111834bac67229f5c1&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_5/fb41300edf220b1823da5ab4c243b085f9f249af&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;37350e20c6f78ab96a1191e5d97981a8d2831665&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_1/16b4c8ef1574b3f98303307caad40227c208371f&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;93fade7dd8950d8a1dd2bf5ec751e478af3150e9&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_2/f5c1c303c2308404983cf1e7566ddc0a22a22154&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;b2751daee5ef20b3e4f3ebc3452943c28f584500&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_3_depends_on_2/413e3e9177f0037b1882d19fb6b377b5b715be1c&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;62fff2291aac72f5bd703dba0c5d85d0e23532e0&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_4_depends_on_3/9207b8a277403477e50cfae52009b31c840c49d4&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;603f212d572b0307e4c51807c5e03c47944bb9c3&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_5_depends_on_4_and_1/3cacf579322370734855c20557321dadeee3a7a4&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;ad733ca76ab4747747d8f9f1ddcfa568519a2e00&#39;
+        }
+      ])
+    end
+
+    it &#39;shows jobs and packages compiled against multiple stemcells&#39; do
+      bosh_runner.run(&quot;upload-stemcell #{spec_asset(&#39;light-bosh-stemcell-3001-aws-xen-hvm-centos-7-go_agent.tgz&#39;)}&quot;)
+      bosh_runner.run(&quot;upload-release #{spec_asset(&#39;compiled_releases/release-test_release-1-on-centos-7-stemcell-3001.tgz&#39;)}&quot;)
+      out = scrub_random_ids(table(bosh_runner.run(&#39;inspect-release test_release/1&#39;, json: true)))
+
+      expect(out).to eq([
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_1/9a5f09364b2cdc18a45172c15dca21922b3ff196&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;a7d51f65cda79d2276dc9cc254e6fec523b07b02&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_1_and_2/673c3689362f2adb37baed3d8d4344cf03ff7637&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;c9acbf245d4b4721141b54b26bee20bfa58f4b54&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_2/8e9e3b5aebc7f15d661280545e9d1c1c7d19de74&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;79475b0b035fe70f13a777758065210407170ec3&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_3/54120dd68fab145433df83262a9ba9f3de527a4b&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;ab4e6077ecf03399f215e6ba16153fd9ebbf1b5f&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_4/0ebdb544f9c604e9a3512299a02b6f04f6ea6d0c&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;1ff32a12e0c574720dd8e5111834bac67229f5c1&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;job_using_pkg_5/fb41300edf220b1823da5ab4c243b085f9f249af&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;37350e20c6f78ab96a1191e5d97981a8d2831665&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_1/16b4c8ef1574b3f98303307caad40227c208371f&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;&#39;,
+          &#39;digest&#39;=&gt;&#39;&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_1/16b4c8ef1574b3f98303307caad40227c208371f&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;centos-7/3001&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;735987b52907d970106f38413825773eec7cc577&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_2/f5c1c303c2308404983cf1e7566ddc0a22a22154&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;&#39;,
+          &#39;digest&#39;=&gt;&#39;&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_2/f5c1c303c2308404983cf1e7566ddc0a22a22154&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;centos-7/3001&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;5b21895211d8592c129334e3d11bd148033f7b82&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_3_depends_on_2/413e3e9177f0037b1882d19fb6b377b5b715be1c&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;&#39;,
+          &#39;digest&#39;=&gt;&#39;&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_3_depends_on_2/413e3e9177f0037b1882d19fb6b377b5b715be1c&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;centos-7/3001&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;f5cc94a01d2365bbeea00a4765120a29cdfb3bd7&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_4_depends_on_3/9207b8a277403477e50cfae52009b31c840c49d4&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;&#39;,
+          &#39;digest&#39;=&gt;&#39;&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_4_depends_on_3/9207b8a277403477e50cfae52009b31c840c49d4&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;centos-7/3001&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;f21275861158ad864951faf76da0dce9c1b5f215&#39;
+        },
+        {
+          &#39;package&#39;=&gt; &#39;pkg_5_depends_on_4_and_1/3cacf579322370734855c20557321dadeee3a7a4&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;&#39;,
+          &#39;digest&#39;=&gt;&#39;&#39;
+        },
+        {
+          &#39;package&#39;=&gt; &#39;pkg_5_depends_on_4_and_1/3cacf579322370734855c20557321dadeee3a7a4&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;centos-7/3001&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;002deec46961440df01c620be491e5b12246c5df&#39;
+        }
+      ])
+    end
+
+    it &#39;shows consumed and provided links of release jobs&#39; do
+      bosh_runner.run(&quot;upload-release #{spec_asset(&#39;links_releases/release_with_optional_links-0+dev.1.tgz&#39;)}&quot;)
+      out = scrub_random_ids(table(bosh_runner.run(&#39;inspect-release release_with_optional_links/0+dev.1&#39;, json: true)))
+
+      expect(out).to eq([
+        {
+          &#39;job&#39;=&gt;&#39;api_server/a910dd03699797ba52f73f56f70475c794f9ff43&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;1e1ccbc60fefa8713c9c52510968bf0399f7dfda&#39;,
+          &#39;links_consumed&#39; =&gt; &quot;- name: db\n  type: db\n  optional: true\n- name: backup_db\n  type: db&quot;,
+          &#39;links_provided&#39; =&gt; &#39;&#39;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;backup_database/2ea09882747364709dad9f45267965ac176ae5ad&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;46965969e112507cfb29119052a864e40f785d80&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &quot;- name: backup_db\n  type: db&quot;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;database/a9f952f94a82c13a3129ac481030f704a33d027f&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;9fbd6941108389f769c8f7dafc93410c386f1bd5&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &quot;- name: db\n  type: db&quot;
+        },
+        {
+          &#39;job&#39;=&gt;&#39;mongo_db/1a57f0be3eb19e263261536693db0d5a521261a6&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;36705751b05ab71b9580d82f8347b71f7de31f0b&#39;,
+          &#39;links_consumed&#39; =&gt; &#39;&#39;,
+          &#39;links_provided&#39; =&gt; &quot;- name: read_only_db\n  type: db&quot;
+
+        },
+        {
+          &#39;job&#39;=&gt;&#39;node/20df71b951455e465845eab32743822693977b30&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;db867641e909c4ab1d22bb86037489530ee7d7f1&#39;,
+          &#39;links_consumed&#39; =&gt; &quot;- name: node1\n  type: node1\n- name: node2\n  type: node2\n  optional: true&quot;,
+          &#39;links_provided&#39; =&gt; &quot;- name: node1\n  type: node1\n- name: node2\n  type: node2&quot;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_1/16b4c8ef1574b3f98303307caad40227c208371f&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;cbf4e5b05e58f31076c124c343485f6a758b2c34&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_2/4b74be7d5aa14487c7f7b0d4516875f7c0eeb010&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;c49e3985d896d13d7da7fc99f66b0ad43c0ac417&#39;
+        },
+        {
+          &#39;package&#39;=&gt;&#39;pkg_3_depends_on_2/413e3e9177f0037b1882d19fb6b377b5b715be1c&#39;,
+          &#39;compiled_for&#39;=&gt;&#39;(source)&#39;,
+          &#39;blobstore_id&#39;=&gt;&#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+          &#39;digest&#39;=&gt;&#39;3ba0f08957427b0e7f060ee059473a632a712d1f&#39;
+        }
+			])
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

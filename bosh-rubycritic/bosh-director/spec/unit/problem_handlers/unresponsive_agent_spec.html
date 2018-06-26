@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-05-31 10:14:31 -0700'>2018-05-31 10:14:31 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-director/spec/unit/problem_handlers /</small> unresponsive_agent_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">316</span><small> lines of codes</small></div>
+              <div><span class="metric">2</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">364.9</span><small> complexity/method</small></div>
+              <div><span class="metric">73</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">729.78</span><small> complexity</small></div>
+              <div><span class="metric">304</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                27
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+module Bosh::Director<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director has no descriptive comment</span>          </div>  </li></ol>
+  describe ProblemHandlers::UnresponsiveAgent do
+    let(:planner) { instance_double(Bosh::Director::DeploymentPlan::Planner, use_short_dns_addresses?: false, ip_provider: double(:ip_provider)) }
+    let(:planner_factory) { instance_double(Bosh::Director::DeploymentPlan::PlannerFactory) }
+
+    def make_handler(instance, cloud, _, data = {})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director#make_handler has a flog score of 30</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Bosh::Director#make_handler has 4 parameters</span>          </div>  </li></ol>
+      handler = ProblemHandlers::UnresponsiveAgent.new(instance.id, data)
+      allow(handler).to receive(:cloud).and_return(cloud)
+      allow(AgentClient).to receive(:with_agent_id).with(@instance.agent_id, anything).and_return(@agent)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#make_handler calls '@instance.agent_id' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L11" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L12" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#make_handler calls 'allow(AgentClient)' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L11" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L12" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#make_handler calls 'receive(:with_agent_id)' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L11" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L12" class="js-smell-location">1</a>                  </div>  </li></ol>
+      allow(AgentClient).to receive(:with_agent_id).with(@instance.agent_id).and_return(@agent)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#make_handler calls '@instance.agent_id' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L11" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L12" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#make_handler calls 'allow(AgentClient)' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L11" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L12" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#make_handler calls 'receive(:with_agent_id)' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L11" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L12" class="js-smell-location">1</a>                  </div>  </li></ol>
+      handler
+    end
+
+    before(:each) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::before#each has a flog score of 104</span>          </div>  </li></ol>
+      allow(Config).to receive(:uuid).and_return(&#39;woof-uuid&#39;)
+      allow(Config).to receive(:cloud_options).and_return({&#39;provider&#39; =&gt; {&#39;path&#39; =&gt; &#39;/path/to/default/cpi&#39;}})
+
+      @cloud = instance_double(Bosh::Clouds::ExternalCpi)
+      allow(@cloud).to receive(:info)
+      allow(@cloud).to receive(:request_cpi_api_version).and_return(1)
+      allow(@cloud).to receive(:request_cpi_api_version=)
+      allow(Bosh::Clouds::ExternalCpi).to receive(:new).with(&#39;/path/to/default/cpi&#39;, &#39;woof-uuid&#39;, stemcell_api_version: nil).and_return(@cloud)
+
+      @agent = double(Bosh::Director::AgentClient)
+
+      allow(@agent).to receive(:sync_dns) do |_,_,_,&amp;blk|
+        blk.call({&#39;value&#39; =&gt; &#39;synced&#39;})
+      end.and_return(0)
+
+      manifest = Bosh::Spec::Deployments.legacy_manifest
+      deployment_model = Models::Deployment.make(name: manifest[&#39;name&#39;], manifest: YAML.dump(manifest))
+
+      @instance = Models::Instance.make(
+        job: &#39;mysql_node&#39;,
+        index: 0,
+        uuid: &#39;uuid-1&#39;,
+        deployment: deployment_model,
+        cloud_properties_hash: {&#39;foo&#39; =&gt; &#39;bar&#39;},
+        spec: {&#39;networks&#39; =&gt; networks},
+      )
+
+      @vm = Models::Vm.make(
+        cid: &#39;vm-cid&#39;,
+        agent_id: &#39;agent-007&#39;,
+        instance_id: @instance.id
+      )
+
+      @instance.active_vm = @vm
+      @instance.save
+      allow(Bosh::Director::Config).to receive(:current_job).and_return(job)
+      allow(Bosh::Director::Config).to receive(:name).and_return(&#39;fake-director-name&#39;)
+
+      allow(Bosh::Director::DeploymentPlan::PlannerFactory).to receive(:create).with(logger).and_return(planner_factory)
+      allow(planner_factory).to receive(:create_from_model).with(@instance.deployment).and_return(planner)
+    end
+
+    let!(:local_dns_blob) { Models::LocalDnsBlob.make }
+    let(:event_manager) { Bosh::Director::Api::EventManager.new(true) }
+    let(:job) { instance_double(Bosh::Director::Jobs::BaseJob, username: &#39;user&#39;, task_id: 42, event_manager: event_manager) }
+
+    let(:networks) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L63" class="js-smell-location">0</a>                  <a href="../../../../spec/gocli/integration/links/optional_links_spec.html#L96" class="js-smell-location">1</a>                  </div>  </li></ol>
+      { &#39;A&#39; =&gt; { &#39;ip&#39; =&gt; &#39;1.1.1.1&#39; }, &#39;B&#39; =&gt; { &#39;ip&#39; =&gt; &#39;2.2.2.2&#39; }, &#39;C&#39; =&gt; { &#39;ip&#39; =&gt; &#39;3.3.3.3&#39; } }
+    end
+
+    let :handler do
+      make_handler(@instance, @cloud, @agent)
+    end
+
+    it &#39;registers under unresponsive_agent type&#39; do
+      handler = ProblemHandlers::Base.create_by_type(:unresponsive_agent, @instance.id, {})
+      expect(handler).to be_kind_of(ProblemHandlers::UnresponsiveAgent)
+    end
+
+    it &#39;has well-formed description&#39; do
+      expect(handler.description).to eq(&quot;VM for &#39;mysql_node/uuid-1 (0)&#39; with cloud ID &#39;vm-cid&#39; is not responding.&quot;)
+    end
+
+    describe &#39;reboot_vm resolution&#39; do
+      it &#39;skips reboot if CID is not present&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L81" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L117" class="js-smell-location">1</a>                  </div>  </li></ol>
+        @instance.active_vm = nil
+        expect {
+          handler.apply_resolution(:reboot_vm)
+        }.to raise_error(ProblemHandlerError, /is no longer in the database/)
+      end
+
+      it &#39;skips reboot if agent is now alive&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L88" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L277" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L298" class="js-smell-location">2</a>                  </div>  </li></ol>
+        expect(@agent).to receive(:ping).and_return(:pong)
+
+        expect {
+          handler.apply_resolution(:reboot_vm)
+        }.to raise_error(ProblemHandlerError, &#39;Agent is responding now, skipping resolution&#39;)
+      end
+
+      it &#39;reboots VM&#39; do
+        expect(@agent).to receive(:ping).and_raise(RpcTimeout)
+        expect(@cloud).to receive(:reboot_vm).with(&#39;vm-cid&#39;)
+        expect(@agent).to receive(:wait_until_ready)
+
+        handler.apply_resolution(:reboot_vm)
+      end
+
+      it &#39;reboots VM and whines if it is still unresponsive&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(reboot_vm resolution)::it#reboots VM and whines if it is still unresponsive has a flog score of 31</span>          </div>  </li></ol>
+        expect(@agent).to receive(:ping).and_raise(RpcTimeout)
+        expect(@cloud).to receive(:reboot_vm).with(&#39;vm-cid&#39;)
+        expect(@agent).to receive(:wait_until_ready).
+          and_raise(RpcTimeout)
+
+        expect {
+          handler.apply_resolution(:reboot_vm)
+        }.to raise_error(ProblemHandlerError, &#39;Agent still unresponsive after reboot&#39;)
+      end
+    end
+
+    describe &#39;recreate_vm resolution&#39; do
+      it &#39;skips recreate if CID is not present&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L81" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L117" class="js-smell-location">1</a>                  </div>  </li></ol>
+        @instance.active_vm = nil
+
+        expect {
+          handler.apply_resolution(:recreate_vm)
+        }.to raise_error(ProblemHandlerError, /is no longer in the database/)
+      end
+
+      it &quot;doesn&#39;t recreate VM if agent is now alive&quot; do
+        allow(@agent).to receive_messages(ping: :pong)
+
+        expect {
+          handler.apply_resolution(:recreate_vm)
+        }.to raise_error(ProblemHandlerError, &#39;Agent is responding now, skipping resolution&#39;)
+      end
+
+      context &#39;when no errors&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(recreate_vm resolution)::context#when no errors has a flog score of 68</span>          </div>  </li></ol>
+        let(:spec) do
+          {
+            &#39;deployment&#39; =&gt; &#39;simple&#39;,
+            &#39;job&#39; =&gt; {&#39;name&#39; =&gt; &#39;job&#39;},
+            &#39;index&#39; =&gt; 0,
+            &#39;vm_type&#39; =&gt; {
+              &#39;name&#39; =&gt; &#39;fake-vm-type&#39;,
+              &#39;cloud_properties&#39; =&gt; {&#39;foo&#39; =&gt; &#39;bar&#39;},
+            },
+            &#39;stemcell&#39; =&gt; {
+              &#39;name&#39; =&gt; &#39;stemcell-name&#39;,
+              &#39;version&#39; =&gt; &#39;3.0.2&#39;
+            },
+            &#39;networks&#39; =&gt; networks,
+            &#39;template_hashes&#39; =&gt; {},
+            &#39;configuration_hash&#39; =&gt; {&#39;configuration&#39; =&gt; &#39;hash&#39;},
+            &#39;rendered_templates_archive&#39; =&gt; {&#39;some&#39; =&gt; &#39;template&#39;},
+            &#39;env&#39; =&gt; {&#39;key1&#39; =&gt; &#39;value1&#39;}
+          }
+        end
+        let(:agent_spec) do
+          {
+            &#39;deployment&#39; =&gt; &#39;simple&#39;,
+            &#39;job&#39; =&gt; {&#39;name&#39; =&gt; &#39;job&#39;},
+            &#39;index&#39; =&gt; 0,
+            &#39;networks&#39; =&gt; networks,
+            &#39;template_hashes&#39; =&gt; {},
+            &#39;configuration_hash&#39; =&gt; {&#39;configuration&#39; =&gt; &#39;hash&#39;},
+            &#39;rendered_templates_archive&#39; =&gt; {&#39;some&#39; =&gt; &#39;template&#39;}
+          }
+        end
+        let(:fake_new_agent) { double(Bosh::Director::AgentClient) }
+
+        before do
+          Models::Stemcell.make(name: &#39;stemcell-name&#39;, version: &#39;3.0.2&#39;, cid: &#39;sc-302&#39;)
+          @instance.update(spec: spec)
+          allow(AgentClient).to receive(:with_agent_id).with(&#39;agent-222&#39;, anything).and_return(fake_new_agent)
+          allow(AgentClient).to receive(:with_agent_id).with(&#39;agent-222&#39;).and_return(fake_new_agent)
+          allow(SecureRandom).to receive_messages(uuid: &#39;agent-222&#39;)
+          fake_app
+          allow(App.instance.blobstores.blobstore).to receive(:create).and_return(&#39;fake-blobstore-id&#39;)
+
+          allow(fake_new_agent).to receive(:sync_dns) do |_,_,_,&amp;blk|
+            blk.call({&#39;value&#39; =&gt; &#39;synced&#39;})
+          end.and_return(0)
+        end
+
+        def expect_vm_to_be_created<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(recreate_vm resolution)::context#expect_vm_to_be_created has a flog score of 116</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created has approx 12 statements</span>          </div>  </li></ol>
+          allow(@agent).to receive(:ping).and_raise(RpcTimeout)
+
+          expect(@cloud).to receive(:delete_vm).with(&#39;vm-cid&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'expect(@cloud)' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L184" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L185" class="js-smell-location">1</a>                  </div>  </li></ol>
+          expect(@cloud).<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'expect(@cloud)' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L184" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L185" class="js-smell-location">1</a>                  </div>  </li></ol>
+            to receive(:create_vm).with(&#39;agent-222&#39;, &#39;sc-302&#39;, {&#39;foo&#39; =&gt; &#39;bar&#39;}, networks, [], {&#39;key1&#39; =&gt; &#39;value1&#39;, &#39;bosh&#39; =&gt; {&#39;group&#39; =&gt; String, &#39;groups&#39; =&gt; anything}})
+                 .and_return(&#39;new-vm-cid&#39;)
+
+          expect(fake_new_agent).to receive(:wait_until_ready).ordered<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'expect(fake_new_agent)' 7 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L189" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L190" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L191" class="js-smell-location">2</a>                  <a href="unresponsive_agent_spec.html#L192" class="js-smell-location">3</a>                  <a href="unresponsive_agent_spec.html#L193" class="js-smell-location">4</a>                  <a href="unresponsive_agent_spec.html#L194" class="js-smell-location">5</a>                  <a href="unresponsive_agent_spec.html#L195" class="js-smell-location">6</a>                  </div>  </li></ol>
+          expect(fake_new_agent).to receive(:update_settings).ordered<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'expect(fake_new_agent)' 7 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L189" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L190" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L191" class="js-smell-location">2</a>                  <a href="unresponsive_agent_spec.html#L192" class="js-smell-location">3</a>                  <a href="unresponsive_agent_spec.html#L193" class="js-smell-location">4</a>                  <a href="unresponsive_agent_spec.html#L194" class="js-smell-location">5</a>                  <a href="unresponsive_agent_spec.html#L195" class="js-smell-location">6</a>                  </div>  </li></ol>
+          expect(fake_new_agent).to receive(:apply).with({&#39;deployment&#39; =&gt; &#39;simple&#39;, &#39;job&#39; =&gt; {&#39;name&#39; =&gt; &#39;job&#39;}, &#39;index&#39; =&gt; 0, &#39;networks&#39; =&gt; networks}).ordered<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'expect(fake_new_agent)' 7 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L189" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L190" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L191" class="js-smell-location">2</a>                  <a href="unresponsive_agent_spec.html#L192" class="js-smell-location">3</a>                  <a href="unresponsive_agent_spec.html#L193" class="js-smell-location">4</a>                  <a href="unresponsive_agent_spec.html#L194" class="js-smell-location">5</a>                  <a href="unresponsive_agent_spec.html#L195" class="js-smell-location">6</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'receive(:apply)' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L191" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L193" class="js-smell-location">1</a>                  </div>  </li></ol>
+          expect(fake_new_agent).to receive(:get_state).and_return(agent_spec).ordered<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'expect(fake_new_agent)' 7 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L189" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L190" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L191" class="js-smell-location">2</a>                  <a href="unresponsive_agent_spec.html#L192" class="js-smell-location">3</a>                  <a href="unresponsive_agent_spec.html#L193" class="js-smell-location">4</a>                  <a href="unresponsive_agent_spec.html#L194" class="js-smell-location">5</a>                  <a href="unresponsive_agent_spec.html#L195" class="js-smell-location">6</a>                  </div>  </li></ol>
+          expect(fake_new_agent).to receive(:apply).with(agent_spec).ordered<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'expect(fake_new_agent)' 7 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L189" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L190" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L191" class="js-smell-location">2</a>                  <a href="unresponsive_agent_spec.html#L192" class="js-smell-location">3</a>                  <a href="unresponsive_agent_spec.html#L193" class="js-smell-location">4</a>                  <a href="unresponsive_agent_spec.html#L194" class="js-smell-location">5</a>                  <a href="unresponsive_agent_spec.html#L195" class="js-smell-location">6</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'receive(:apply)' 2 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L191" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L193" class="js-smell-location">1</a>                  </div>  </li></ol>
+          expect(fake_new_agent).to receive(:run_script).with(&#39;pre-start&#39;, {}).ordered<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'expect(fake_new_agent)' 7 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L189" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L190" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L191" class="js-smell-location">2</a>                  <a href="unresponsive_agent_spec.html#L192" class="js-smell-location">3</a>                  <a href="unresponsive_agent_spec.html#L193" class="js-smell-location">4</a>                  <a href="unresponsive_agent_spec.html#L194" class="js-smell-location">5</a>                  <a href="unresponsive_agent_spec.html#L195" class="js-smell-location">6</a>                  </div>  </li></ol>
+          expect(fake_new_agent).to receive(:start).ordered<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#expect_vm_to_be_created calls 'expect(fake_new_agent)' 7 times</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L189" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L190" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L191" class="js-smell-location">2</a>                  <a href="unresponsive_agent_spec.html#L192" class="js-smell-location">3</a>                  <a href="unresponsive_agent_spec.html#L193" class="js-smell-location">4</a>                  <a href="unresponsive_agent_spec.html#L194" class="js-smell-location">5</a>                  <a href="unresponsive_agent_spec.html#L195" class="js-smell-location">6</a>                  </div>  </li></ol>
+
+          expect(Models::Vm.find(agent_id: &#39;agent-007&#39;, cid: &#39;vm-cid&#39;)).not_to be_nil
+          expect(Models::Vm.find(agent_id: &#39;agent-222&#39;, cid: &#39;new-vm-cid&#39;)).to be_nil
+        end
+
+        context &#39;when update is specified&#39; do
+          let(:spec) do
+            {
+              &#39;deployment&#39; =&gt; &#39;simple&#39;,
+              &#39;job&#39; =&gt; {&#39;name&#39; =&gt; &#39;job&#39;},
+              &#39;index&#39; =&gt; 0,
+              &#39;vm_type&#39; =&gt; {
+                &#39;name&#39; =&gt; &#39;fake-vm-type&#39;,
+                &#39;cloud_properties&#39; =&gt; {&#39;foo&#39; =&gt; &#39;bar&#39;},
+              },
+              &#39;stemcell&#39; =&gt; {
+                &#39;name&#39; =&gt; &#39;stemcell-name&#39;,
+                &#39;version&#39; =&gt; &#39;3.0.2&#39;
+              },
+              &#39;networks&#39; =&gt; networks,
+              &#39;template_hashes&#39; =&gt; {},
+              &#39;configuration_hash&#39; =&gt; {&#39;configuration&#39; =&gt; &#39;hash&#39;},
+              &#39;rendered_templates_archive&#39; =&gt; {&#39;some&#39; =&gt; &#39;template&#39;},
+              &#39;env&#39; =&gt; {&#39;key1&#39; =&gt; &#39;value1&#39;},
+              &#39;update&#39; =&gt; {
+                &#39;canaries&#39; =&gt; 1,
+                &#39;max_in_flight&#39; =&gt; 10,
+                &#39;canary_watch_time&#39; =&gt; &#39;1000-30000&#39;,
+                &#39;update_watch_time&#39; =&gt; &#39;1000-30000&#39;
+              }
+            }
+          end
+
+          describe &#39;recreate_vm_skip_post_start&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="missing_vm_spec.html#L172" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L229" class="js-smell-location">1</a>                  </div>  </li></ol>
+            it &#39;has a plan&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(recreate_vm resolution)::context(when no errors)::context(when update is specified)::describe(recreate_vm_skip_post_start)::it#has a plan has a flog score of 25</span>          </div>  </li></ol>
+              plan_summary = handler.instance_eval(&amp;ProblemHandlers::UnresponsiveAgent.plan_for(:recreate_vm_skip_post_start))
+              expect(plan_summary).to eq(&#39;Recreate VM without waiting for processes to start&#39;)
+            end
+
+            it &#39;recreates the VM and skips post_start script&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(recreate_vm resolution)::context(when no errors)::context(when update is specified)::describe(recreate_vm_skip_post_start)::it#recreates the VM and skips post_start script has a flog score of 34</span>          </div>  </li></ol>
+              expect_vm_to_be_created
+
+              expect(fake_new_agent).to_not receive(:run_script).with(&#39;post-start&#39;, {})
+              handler.apply_resolution(:recreate_vm_skip_post_start)
+
+              expect(Models::Vm.find(agent_id: &#39;agent-007&#39;, cid: &#39;vm-cid&#39;)).to be_nil
+              expect(Models::Vm.find(agent_id: &#39;agent-222&#39;, cid: &#39;new-vm-cid&#39;)).not_to be_nil
+            end
+          end
+
+          describe &#39;recreate_vm&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="missing_vm_spec.html#L188" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L246" class="js-smell-location">1</a>                  </div>  </li></ol>
+            it &#39;has a plan&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(recreate_vm resolution)::context(when no errors)::context(when update is specified)::describe(recreate_vm)::it#has a plan has a flog score of 25</span>          </div>  </li></ol>
+              plan_summary = handler.instance_eval(&amp;ProblemHandlers::UnresponsiveAgent.plan_for(:recreate_vm))
+              expect(plan_summary).to eq(&#39;Recreate VM and wait for processes to start&#39;)
+            end
+
+            it &#39;recreates the VM and runs post_start script&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(recreate_vm resolution)::context(when no errors)::context(when update is specified)::describe(recreate_vm)::it#recreates the VM and runs post_start script has a flog score of 46</span>          </div>  </li></ol>
+              allow(fake_new_agent).to receive(:get_state).and_return({&#39;job_state&#39; =&gt; &#39;running&#39;})
+
+              expect_vm_to_be_created
+              expect(fake_new_agent).to receive(:run_script).with(&#39;post-start&#39;, {}).ordered
+              handler.apply_resolution(:recreate_vm)
+
+              expect(Models::Vm.find(agent_id: &#39;agent-007&#39;, cid: &#39;vm-cid&#39;)).to be_nil
+              expect(Models::Vm.find(agent_id: &#39;agent-222&#39;, cid: &#39;new-vm-cid&#39;)).not_to be_nil
+            end
+          end
+        end
+
+        it &#39;recreates the VM&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="missing_vm_spec.html#L144" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L265" class="js-smell-location">1</a>                  </div>  </li></ol>
+          expect_vm_to_be_created
+          handler.apply_resolution(:recreate_vm)
+
+          expect(Models::Vm.find(agent_id: &#39;agent-007&#39;, cid: &#39;vm-cid&#39;)).to be_nil
+          expect(Models::Vm.find(agent_id: &#39;agent-222&#39;, cid: &#39;new-vm-cid&#39;)).not_to be_nil
+        end
+      end
+    end
+
+    describe &#39;delete_vm resolution&#39; do
+
+      it &#39;skips deleting VM if agent is now alive&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L88" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L277" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L298" class="js-smell-location">2</a>                  </div>  </li></ol>
+        expect(@agent).to receive(:ping).and_return(:pong)
+
+        expect {
+          handler.apply_resolution(:delete_vm)
+        }.to raise_error(ProblemHandlerError, &#39;Agent is responding now, skipping resolution&#39;)
+      end
+
+      it &#39;deletes VM from Cloud&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(delete_vm resolution)::it#deletes VM from Cloud has a flog score of 33</span>          </div>  </li></ol>
+        expect(@cloud).to receive(:delete_vm).with(&#39;vm-cid&#39;)
+        expect(@agent).to receive(:ping).and_raise(RpcTimeout)
+        expect {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L288" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L308" class="js-smell-location">1</a>                  </div>  </li></ol>
+          handler.apply_resolution(:delete_vm)
+        }.to change {
+          Models::Vm.where(cid: &#39;vm-cid&#39;).count
+        }.from(1).to(0)
+      end
+    end
+
+    describe &#39;delete_vm_reference resolution&#39; do
+
+      it &#39;skips deleting VM ref if agent is now alive&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L88" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L277" class="js-smell-location">1</a>                  <a href="unresponsive_agent_spec.html#L298" class="js-smell-location">2</a>                  </div>  </li></ol>
+        expect(@agent).to receive(:ping).and_return(:pong)
+
+        expect {
+          handler.apply_resolution(:delete_vm_reference)
+        }.to raise_error(ProblemHandlerError, &#39;Agent is responding now, skipping resolution&#39;)
+      end
+
+      it &#39;deletes VM reference&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(delete_vm_reference resolution)::it#deletes VM reference has a flog score of 26</span>          </div>  </li></ol>
+        expect(@agent).to receive(:ping).and_raise(RpcTimeout)
+        expect {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="unresponsive_agent_spec.html#L288" class="js-smell-location">0</a>                  <a href="unresponsive_agent_spec.html#L308" class="js-smell-location">1</a>                  </div>  </li></ol>
+          handler.apply_resolution(:delete_vm_reference)
+        }.to change {
+          Models::Vm.where(cid: &#39;vm-cid&#39;).count
+        }.from(1).to(0)
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

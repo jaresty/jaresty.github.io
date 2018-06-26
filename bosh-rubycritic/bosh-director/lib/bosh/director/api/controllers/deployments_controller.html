@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../../overview.html"><img src="../../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-06-22 16:57:24 +0200'>2018-06-22 16:57:24 +0200</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-director/lib/bosh/director/api/controllers /</small> deployments_controller.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">602</span><small> lines of codes</small></div>
+              <div><span class="metric">14</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">64.8</span><small> complexity/method</small></div>
+              <div><span class="metric">151</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">907.65</span><small> complexity</small></div>
+              <div><span class="metric">180</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                41
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;bosh/director/api/controllers/base_controller&#39;
+
+module Bosh::Director
+  module Api::Controllers
+    module DeploymentsSecurity<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsSecurity has no descriptive comment</span>          </div>  </li></ol>
+      def route(verb, path, options = {}, &amp;block)
+        options[:scope] ||= :authorization<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsSecurity#route refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L7" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L8" class="js-smell-location">1</a>                  </div>  </li></ol>
+        options[:authorization] ||= :admin<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsSecurity#route refers to 'options' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L7" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L8" class="js-smell-location">1</a>                  </div>  </li></ol>
+        super(verb, path, options, &amp;block)
+      end
+
+      def authorization(perm)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsSecurity#authorization has a flog score of 26</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsSecurity#authorization has approx 11 statements</span>          </div>  </li></ol>
+        return unless perm
+
+        condition do
+          subject = :director
+          permission = perm
+
+          if permission == :diff
+            begin
+              @deployment = Bosh::Director::Api::DeploymentLookup.new.by_name(params[:deployment])<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsSecurity#authorization calls 'Bosh::Director::Api::DeploymentLookup.new.by_name(params[:deployment])' 2 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L21" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L29" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsSecurity#authorization calls 'params[:deployment]' 2 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L21" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L29" class="js-smell-location">1</a>                  </div>  </li></ol>
+              subject = @deployment
+              permission = :admin
+            rescue DeploymentNotFound
+              permission = :create_deployment
+            end
+          else
+            if params.key?(&#39;deployment&#39;)
+              @deployment = Bosh::Director::Api::DeploymentLookup.new.by_name(params[:deployment])<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsSecurity#authorization calls 'Bosh::Director::Api::DeploymentLookup.new.by_name(params[:deployment])' 2 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L21" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L29" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsSecurity#authorization calls 'params[:deployment]' 2 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L21" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L29" class="js-smell-location">1</a>                  </div>  </li></ol>
+              subject = @deployment
+            end
+          end
+
+          @permission_authorizer.granted_or_raise(subject, permission, token_scopes)
+        end
+      end
+    end
+
+    class DeploymentsController &lt; BaseController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController assumes too much for instance variable '@resurrector_manager'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController has at least 7 instance variables</span>          </div>  </li></ol>
+      register DeploymentsSecurity
+      include LegacyDeploymentHelper
+
+      def initialize(config)
+        super(config)
+        @deployment_manager = Api::DeploymentManager.new
+        @problem_manager = Api::ProblemManager.new
+        @property_manager = Api::PropertyManager.new
+        @instance_manager = Api::InstanceManager.new
+        @deployments_repo = DeploymentPlan::DeploymentRepo.new
+        @instance_ignore_manager = Api::InstanceIgnoreManager.new
+      end
+
+      get &#39;/:deployment/jobs/:job/:index_or_id&#39; do
+        instance = @instance_manager.find_by_name(deployment, params[:job], params[:index_or_id])
+
+        response = {
+          deployment: deployment.name,
+          job: instance.job,
+          index: instance.index,
+          id: instance.uuid,
+          state: instance.state,
+          disks: instance.persistent_disks.map(&amp;:disk_cid),
+        }
+
+        json_encode(response)
+      end
+
+      # PUT /deployments/foo/jobs/dea?new_name=dea_new or
+      # PUT /deployments/foo/jobs/dea?state={started,stopped,detached,restart,recreate}&amp;skip_drain=true&amp;fix=true
+      put &#39;/:deployment/jobs/:job&#39;, consumes: :yaml do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController::put#/:deployment/jobs/:job has a flog score of 87</span>          </div>  </li></ol>
+        options = {
+          &#39;job_states&#39; =&gt; {
+            params[:job] =&gt; {
+              &#39;state&#39; =&gt; params[&#39;state&#39;],
+            },
+          },
+        }
+
+        options[&#39;skip_drain&#39;] = params[:job] if params[&#39;skip_drain&#39;] == &#39;true&#39;
+        options[&#39;canaries&#39;] = params[:canaries] if !!params[&#39;canaries&#39;]
+        options[&#39;max_in_flight&#39;] = params[:max_in_flight] if !!params[&#39;max_in_flight&#39;]
+        options[&#39;fix&#39;] = true if params[&#39;fix&#39;] == &#39;true&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController tests 'params['fix'] == 'true'' at least 3 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L82" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L126" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L399" class="js-smell-location">2</a>                  </div>  </li></ol>
+        options[&#39;dry_run&#39;] = true if params[&#39;dry_run&#39;] == &#39;true&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController tests 'params['dry_run'] == 'true'' at least 3 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L83" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L127" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L396" class="js-smell-location">2</a>                  </div>  </li></ol>
+
+        if (request.content_length.nil? || request.content_length.to_i == 0) &amp;&amp; params[&#39;state&#39;]
+          manifest = deployment.manifest
+          latest_cloud_configs = deployment.cloud_configs
+          latest_runtime_configs = deployment.runtime_configs
+          options[&#39;manifest_text&#39;] = manifest
+        else
+          manifest_hash = validate_manifest_yml(request.body.read, nil)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L91" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L135" class="js-smell-location">1</a>                  </div>  </li></ol>
+          manifest = YAML.dump(manifest_hash)
+          teams = deployment.teams
+          latest_cloud_configs = Models::Config.latest_set_for_teams(&#39;cloud&#39;, *teams)
+          latest_runtime_configs = Models::Config.latest_set_for_teams(&#39;runtime&#39;, *teams)
+        end
+
+        task = @deployment_manager.create_deployment(
+          current_user,
+          manifest,
+          latest_cloud_configs,
+          latest_runtime_configs,
+          deployment,
+          options,
+        )
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      # PUT /deployments/foo/jobs/dea/2?state={started,stopped,detached,restart,recreate}&amp;skip_drain=true&amp;fix=true
+      put &#39;/:deployment/jobs/:job/:index_or_id&#39;, consumes: :yaml do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController::put#/:deployment/jobs/:job/:index_or_id has a flog score of 79</span>          </div>  </li></ol>
+        validate_instance_index_or_id(params[:index_or_id])
+
+        instance = @instance_manager.find_by_name(deployment, params[:job], params[:index_or_id])
+        index = instance.index
+
+        options = {
+          &#39;job_states&#39; =&gt; {
+            params[:job] =&gt; {
+              &#39;instance_states&#39; =&gt; {
+                index =&gt; params[&#39;state&#39;],
+              },
+            },
+          },
+        }
+        options[&#39;skip_drain&#39;] = params[:job] if params[&#39;skip_drain&#39;] == &#39;true&#39;
+        options[&#39;fix&#39;] = true if params[&#39;fix&#39;] == &#39;true&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController tests 'params['fix'] == 'true'' at least 3 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L82" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L126" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L399" class="js-smell-location">2</a>                  </div>  </li></ol>
+        options[&#39;dry_run&#39;] = true if params[&#39;dry_run&#39;] == &#39;true&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController tests 'params['dry_run'] == 'true'' at least 3 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L83" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L127" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L396" class="js-smell-location">2</a>                  </div>  </li></ol>
+
+        if request.content_length.nil? || request.content_length.to_i == 0
+          manifest = deployment.manifest
+          latest_cloud_configs = deployment.cloud_configs
+          latest_runtime_configs = deployment.runtime_configs
+          options[&#39;manifest_text&#39;] = manifest
+        else
+          manifest_hash = validate_manifest_yml(request.body.read, nil)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L91" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L135" class="js-smell-location">1</a>                  </div>  </li></ol>
+          manifest = YAML.dump(manifest_hash)
+          teams = deployment.teams
+          latest_cloud_configs = Models::Config.latest_set_for_teams(&#39;cloud&#39;, *teams)
+          latest_runtime_configs = Models::Config.latest_set_for_teams(&#39;runtime&#39;, *teams)
+        end
+
+        task = @deployment_manager.create_deployment(
+          current_user,
+          manifest,
+          latest_cloud_configs,
+          latest_runtime_configs,
+          deployment,
+          options,
+        )
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      # GET /deployments/foo/jobs/dea/2/logs
+      get &#39;/:deployment/jobs/:job/:index_or_id/logs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController::get#/:deployment/jobs/:job/:index_or_id/logs has a flog score of 36</span>          </div>  </li></ol>
+        job = params[:job] == &#39;*&#39; ? nil : params[:job]
+        index_or_id = params[:index_or_id] == &#39;*&#39; ? nil : params[:index_or_id]
+        options = {
+          &#39;type&#39; =&gt; params[:type].to_s.strip,
+          &#39;filters&#39; =&gt; params[:filters].to_s.strip.split(/[\s\,]+/),
+        }
+
+        task = @instance_manager.fetch_logs(current_user, deployment, job, index_or_id, options)
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      get &#39;/:deployment/snapshots&#39; do
+        json_encode(@snapshot_manager.snapshots(deployment))
+      end
+
+      get &#39;/:deployment/jobs/:job/:index/snapshots&#39; do
+        json_encode(@snapshot_manager.snapshots(deployment, params[:job], params[:index]))
+      end
+
+      post &#39;/:deployment/snapshots&#39; do
+        # until we can tell the agent to flush and wait, all snapshots are considered dirty
+        options = { clean: false }
+
+        task = @snapshot_manager.create_deployment_snapshot_task(current_user, deployment, options)
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      put &#39;/:deployment/jobs/:job/:index_or_id/resurrection&#39;, consumes: :json do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L182" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L193" class="js-smell-location">1</a>                  </div>  </li></ol>
+        payload = json_decode(request.body.read)
+        @resurrector_manager.set_pause_for_instance(
+          deployment,
+          params[:job],
+          params[:index_or_id],
+          payload[&#39;resurrection_paused&#39;],
+        )
+        status(200)
+      end
+
+      put &#39;/:deployment/instance_groups/:instancegroup/:id/ignore&#39;, consumes: :json do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L182" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L193" class="js-smell-location">1</a>                  </div>  </li></ol>
+        payload = json_decode(request.body.read)
+        @instance_ignore_manager.set_ignore_state_for_instance(deployment, params[:instancegroup], params[:id], payload[&#39;ignore&#39;])
+        status(200)
+      end
+
+      post &#39;/:deployment/jobs/:job/:index_or_id/snapshots&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController::post#/:deployment/jobs/:job/:index_or_id/snapshots has a flog score of 30</span>          </div>  </li></ol>
+        instance = if params[:index_or_id].to_s.match?(/^\d+$/)
+                     @instance_manager.find_by_name(deployment, params[:job], params[:index_or_id])
+                   else
+                     @instance_manager.filter_by(deployment, uuid: params[:index_or_id]).first
+                   end
+        # until we can tell the agent to flush and wait, all snapshots are considered dirty
+        options = { clean: false }
+
+        task = @snapshot_manager.create_snapshot_task(current_user, instance, options)
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      delete &#39;/:deployment/snapshots&#39; do
+        task = @snapshot_manager.delete_deployment_snapshots_task(current_user, deployment)
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      delete &#39;/:deployment/snapshots/:cid&#39; do
+        @snapshot_manager.find_by_cid(deployment, params[:cid])
+
+        task = @snapshot_manager.delete_snapshots_task(current_user, [params[:cid]])
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      def used_cloud_config_state(deployment)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#used_cloud_config_state doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        latest_cloud_configs = Models::Config.latest_set_for_teams(&#39;cloud&#39;, *deployment.teams).map(&amp;:id).sort
+        if deployment.cloud_configs.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#used_cloud_config_state calls 'deployment.cloud_configs' 2 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L226" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L228" class="js-smell-location">1</a>                  </div>  </li></ol>
+          &#39;none&#39;
+        elsif deployment.cloud_configs.map(&amp;:id).sort == latest_cloud_configs<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#used_cloud_config_state calls 'deployment.cloud_configs' 2 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L226" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L228" class="js-smell-location">1</a>                  </div>  </li></ol>
+          &#39;latest&#39;
+        else
+          &#39;outdated&#39;
+        end
+      end
+
+      def stemcells_state(deployment)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#stemcells_state doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        deployment.stemcells.map { |sc| { &#39;name&#39; =&gt; sc.name, &#39;version&#39; =&gt; sc.version } }
+      end
+
+      def releases_state(deployment)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#releases_state doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        sorted_releases = deployment.release_versions.sort do |a, b|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#releases_state has the variable name 'a'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#releases_state has the variable name 'b'</span>          </div>  </li></ol>
+          [a.release.name, a.version] &lt;=&gt; [b.release.name, b.version]
+        end
+        sorted_releases.map { |rv| { &#39;name&#39; =&gt; rv.release.name, &#39;version&#39; =&gt; rv.version.to_s } }
+      end
+
+      get &#39;/&#39;, authorization: :list_deployments do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController::get#/ has a flog score of 40</span>          </div>  </li></ol>
+        excludes = {
+          exclude_configs: params[:exclude_configs] == &#39;true&#39;,
+          exclude_releases: params[:exclude_releases] == &#39;true&#39;,
+          exclude_stemcells: params[:exclude_stemcells] == &#39;true&#39;,
+        }
+        all_deployments = @deployment_manager.all_by_name_asc_without(excludes)
+
+        my_deployments = all_deployments.select do |deployment|
+          @permission_authorizer.is_granted?(deployment, :read, token_scopes)
+        end
+        deployments = my_deployments.map do |deployment|
+          response = {
+            &#39;name&#39; =&gt; deployment.name,
+            &#39;teams&#39; =&gt; deployment.teams.map(&amp;:name),
+          }
+          response[&#39;cloud_config&#39;] = used_cloud_config_state(deployment) unless excludes[:exclude_configs]
+          response[&#39;stemcells&#39;] = stemcells_state(deployment) unless excludes[:exclude_stemcells]
+          response[&#39;releases&#39;] = releases_state(deployment) unless excludes[:exclude_releases]
+          response
+        end
+
+        json_encode(deployments)
+      end
+
+      get &#39;/:deployment&#39;, authorization: :read do
+        JSON.generate(&#39;manifest&#39; =&gt; deployment.manifest_text)
+      end
+
+      get &#39;/:deployment/vms&#39;, authorization: :read do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L275" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L286" class="js-smell-location">1</a>                  </div>  </li></ol>
+        format = params[:format]
+        if format == &#39;full&#39;
+          task = @instance_manager.fetch_instances_with_vm(current_user, deployment, format)
+          redirect &quot;/tasks/#{task.id}&quot;
+        else
+          vms_instances_hash = @instance_manager.vms_by_instances_for_deployment(deployment)
+          JSON.generate(create_vms_response(vms_instances_hash))
+        end
+      end
+
+      get &#39;/:deployment/instances&#39;, authorization: :read do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L275" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L286" class="js-smell-location">1</a>                  </div>  </li></ol>
+        format = params[:format]
+        if format == &#39;full&#39;
+          task = @instance_manager.fetch_instances(current_user, deployment, format)
+          redirect &quot;/tasks/#{task.id}&quot;
+        else
+          instances = @instance_manager.find_instances_by_deployment(deployment)
+          JSON.generate(create_instances_response_with_vm_expected(instances))
+        end
+      end
+
+      delete &#39;/:deployment&#39; do
+        options = {}
+        options[&#39;force&#39;] = true if params[&#39;force&#39;] == &#39;true&#39;
+        options[&#39;keep_snapshots&#39;] = true if params[&#39;keep_snapshots&#39;] == &#39;true&#39;
+        task = @deployment_manager.delete_deployment(current_user, deployment, options, @current_context_id)
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      post &#39;/:deployment/ssh&#39;, consumes: [:json] do
+        payload = json_decode(request.body.read)
+        task = @instance_manager.ssh(current_user, deployment, payload)
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      # Property management
+      get &#39;/:deployment/properties&#39; do
+        properties = @property_manager.get_properties(deployment).map do |property|
+          { &#39;name&#39; =&gt; property.name, &#39;value&#39; =&gt; property.value }
+        end
+        json_encode(properties)
+      end
+
+      get &#39;/:deployment/properties/:property&#39; do
+        property = @property_manager.get_property(deployment, params[:property])
+        json_encode(&#39;value&#39; =&gt; property.value)
+      end
+
+      post &#39;/:deployment/properties&#39;, consumes: [:json] do
+        payload = json_decode(request.body.read)
+        @property_manager.create_property(deployment, payload[&#39;name&#39;], payload[&#39;value&#39;])
+        status(204)
+      end
+
+      put &#39;/:deployment/properties/:property&#39;, consumes: [:json] do
+        payload = json_decode(request.body.read)
+        @property_manager.update_property(deployment, params[:property], payload[&#39;value&#39;])
+        status(204)
+      end
+
+      delete &#39;/:deployment/properties/:property&#39; do
+        @property_manager.delete_property(deployment, params[:property])
+        status(204)
+      end
+
+      get &#39;/:deployment/variables&#39; do
+        result = deployment.variables.map do |variable|
+          {
+            &#39;id&#39; =&gt; variable.variable_id,
+            &#39;name&#39; =&gt; variable.variable_name,
+          }
+        end.uniq
+
+        json_encode(result)
+      end
+
+      # Cloud check
+
+      # Initiate deployment scan
+      post &#39;/:deployment/scans&#39; do
+        start_task { @problem_manager.perform_scan(current_user, deployment) }
+      end
+
+      # Get the list of problems for a particular deployment
+      get &#39;/:deployment/problems&#39; do
+        problems = @problem_manager.get_problems(deployment).map do |problem|
+          {
+            &#39;id&#39; =&gt; problem.id,
+            &#39;type&#39; =&gt; problem.type,
+            &#39;data&#39; =&gt; problem.data,
+            &#39;description&#39; =&gt; problem.description,
+            &#39;resolutions&#39; =&gt; problem.resolutions,
+          }
+        end
+
+        json_encode(problems)
+      end
+
+      put &#39;/:deployment/problems&#39;, consumes: [:json] do
+        payload = json_decode(request.body.read)
+        start_task { @problem_manager.apply_resolutions(current_user, deployment, payload[&#39;resolutions&#39;]) }
+      end
+
+      put &#39;/:deployment/scan_and_fix&#39;, consumes: :json do
+        jobs_json = json_decode(request.body.read)[&#39;jobs&#39;]
+        payload = convert_job_instance_hash(jobs_json)
+        if deployment_has_instance_to_resurrect?(deployment)
+          start_task { @problem_manager.scan_and_fix(current_user, deployment, payload) }
+        end
+      end
+
+      post &#39;/&#39;, authorization: :create_deployment, consumes: :yaml do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController::post#/ has a flog score of 74</span>          </div>  </li></ol>
+        manifest_text = request.body.read.force_encoding(&#39;utf-8&#39;)
+        manifest_hash = validate_manifest_yml(manifest_text, nil)
+
+        raise ValidationMissingField, &quot;Deployment manifest must have a &#39;name&#39; key&quot; unless manifest_hash[&#39;name&#39;]
+
+        deployment_name = manifest_hash[&#39;name&#39;]
+
+        options = {}
+        options[&#39;dry_run&#39;] = true if params[&#39;dry_run&#39;] == &#39;true&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController tests 'params['dry_run'] == 'true'' at least 3 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L83" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L127" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L396" class="js-smell-location">2</a>                  </div>  </li></ol>
+        options[&#39;recreate&#39;] = true if params[&#39;recreate&#39;] == &#39;true&#39;
+        options[&#39;skip_drain&#39;] = params[&#39;skip_drain&#39;] if params[&#39;skip_drain&#39;]
+        options[&#39;fix&#39;] = true if params[&#39;fix&#39;] == &#39;true&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController tests 'params['fix'] == 'true'' at least 3 times</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L82" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L126" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L399" class="js-smell-location">2</a>                  </div>  </li></ol>
+        options[&#39;scopes&#39;] = token_scopes
+
+        # since authorizer does not look at manifest payload for deployment name
+        @deployment = Models::Deployment[name: deployment_name]
+        if @deployment
+          teams = @deployment.teams
+        else
+          teams = Bosh::Director::Models::Team.transform_admin_team_scope_to_teams(token_scopes)
+        end
+
+        if params[&#39;context&#39;]
+          @logger.debug(&quot;Deploying with context #{params[&#39;context&#39;]}&quot;)
+          context = JSON.parse(params[&#39;context&#39;])
+
+          begin
+            cloud_configs = Models::Config.find_by_ids_for_teams(context[&#39;cloud_config_ids&#39;], *teams)
+            runtime_configs = Models::Config.find_by_ids_for_teams(context[&#39;runtime_config_ids&#39;], *teams)
+          rescue Sequel::NoMatchingRow
+            raise DeploymentInvalidConfigReference, &#39;Context includes invalid config ID&#39;
+          end
+        else
+          cloud_configs = Models::Config.latest_set_for_teams(&#39;cloud&#39;, *teams)
+          runtime_configs = Models::Config.latest_set_for_teams(&#39;runtime&#39;, *teams)
+        end
+
+        options[&#39;cloud_configs&#39;] = cloud_configs
+        options[&#39;runtime_configs&#39;] = runtime_configs
+        options[&#39;deploy&#39;] = true
+
+        options[&#39;new&#39;] = @deployment.nil? ? true : false
+        deployment_model = @deployments_repo.find_or_create_by_name(deployment_name, options)
+
+        task = @deployment_manager.create_deployment(
+          current_user,
+          manifest_text,
+          cloud_configs,
+          runtime_configs,
+          deployment_model,
+          options,
+          @current_context_id,
+        )
+
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      post &#39;/:deployment/diff&#39;, authorization: :diff, consumes: :yaml do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController::post#/:deployment/diff has a flog score of 61</span>          </div>  </li></ol>
+        begin
+          manifest_text = request.body.read
+          manifest_hash = validate_manifest_yml(manifest_text, nil)
+
+          ignore_cc = ignore_cloud_config?(manifest_hash)
+
+          if deployment
+            before_manifest = Manifest.load_from_model(deployment, resolve_interpolation: false, ignore_cloud_config: ignore_cc)
+            before_manifest.resolve_aliases
+            teams = deployment.teams
+          else
+            before_manifest = Manifest.generate_empty_manifest
+            teams = Bosh::Director::Models::Team.transform_admin_team_scope_to_teams(token_scopes)
+          end
+
+          after_cloud_configs = ignore_cc ? nil : Bosh::Director::Models::Config.latest_set_for_teams(&#39;cloud&#39;, *teams)
+          after_runtime_configs = Bosh::Director::Models::Config.latest_set_for_teams(&#39;runtime&#39;, *teams)
+
+          after_manifest = Manifest.load_from_hash(
+            manifest_hash,
+            manifest_text,
+            after_cloud_configs,
+            after_runtime_configs,
+            resolve_interpolation:
+            false,
+          )
+          after_manifest.resolve_aliases
+
+          redact = params[&#39;redact&#39;] != &#39;false&#39;
+
+          result = {
+            &#39;context&#39; =&gt; {
+              &#39;cloud_config_ids&#39; =&gt; after_cloud_configs ? after_cloud_configs.map(&amp;:id) : nil,
+              &#39;runtime_config_ids&#39; =&gt; after_runtime_configs.map(&amp;:id),
+            },
+          }
+
+          diff = before_manifest.diff(after_manifest, redact)
+          result[&#39;diff&#39;] = diff.map { |l| [l.to_s, l.status] }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController has the variable name 'l'</span>          </div>  </li></ol>
+        rescue StandardError =&gt; error
+          result = {
+            &#39;diff&#39; =&gt; [],
+            &#39;error&#39; =&gt; &quot;Unable to diff manifest: #{error.inspect}\n#{error.backtrace.join(&quot;\n&quot;)}&quot;,
+          }
+          status(200)
+        end
+
+        json_encode(result)
+      end
+
+      post &#39;/:deployment/errands/:errand_name/runs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController::post#/:deployment/errands/:errand_name/runs has a flog score of 29</span>          </div>  </li></ol>
+        errand_name = params[:errand_name]
+        parsed_request_body = json_decode(request.body.read)
+        keep_alive = parsed_request_body[&#39;keep-alive&#39;] || false
+        when_changed = parsed_request_body[&#39;when-changed&#39;] || false
+        instances = parsed_request_body[&#39;instances&#39;] || []
+
+        task = JobQueue.new.enqueue(
+          current_user,
+          Jobs::RunErrand,
+          &quot;run errand #{errand_name} from deployment #{deployment.name}&quot;,
+          [deployment.name, errand_name, keep_alive, when_changed, instances],
+          deployment,
+          @current_context_id,
+        )
+
+        redirect &quot;/tasks/#{task.id}&quot;
+      end
+
+      get &#39;/:deployment/errands&#39;, authorization: :read do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController::get#/:deployment/errands has a flog score of 26</span>          </div>  </li></ol>
+        deployment_plan = load_deployment_plan
+
+        errands_instance_groups = deployment_plan.instance_groups.select(&amp;:errand?)
+        errands = errands_instance_groups.map(&amp;:name)
+
+        deployment_plan.instance_groups.each do |instance_group|
+          instance_group.jobs.each do |job|
+            errands &lt;&lt; job.name if job.runs_as_errand?
+          end
+        end
+
+        errands_hash = errands.uniq.map { |errand| { &#39;name&#39; =&gt; errand } }
+
+        json_encode(errands_hash)
+      end
+
+      private
+
+      attr_accessor :deployment
+
+      def load_deployment_plan
+        planner_factory = Bosh::Director::DeploymentPlan::PlannerFactory.create(Config.logger)
+        planner_factory.create_from_model(deployment)
+      end
+
+      def convert_job_instance_hash(hash)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#convert_job_instance_hash doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        hash.reduce([]) do |jobs, kv|
+          job, indicies = kv
+          jobs + indicies.map { |index| [job, index] }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#convert_job_instance_hash contains iterators nested 2 deep</span>          </div>  </li></ol>
+        end
+      end
+
+      def deployment_has_instance_to_resurrect?(deployment)
+        return false if deployment.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#deployment_has_instance_to_resurrect? performs a nil-check</span>          </div>  </li></ol>
+        return false if @resurrector_manager.pause_for_all?
+        instances = @instance_manager.filter_by(deployment, resurrection_paused: false, ignore: false)
+        instances.any?
+      end
+
+      def validate_instance_index_or_id(str)
+        Integer(str)
+      rescue ArgumentError
+        raise InstanceInvalidIndex, &quot;Invalid instance index or id &#39;#{str}&#39;&quot; if str !~ /^[A-Fa-f0-9]{8}-[A-Fa-f0-9-]{27}$/
+      end
+
+      def create_vms_response(vms_instances_hash)
+        results = []
+        vms_instances_hash.each_pair do |instance, vms|
+          vms.each do |vm|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#create_vms_response contains iterators nested 2 deep</span>          </div>  </li></ol>
+            results &lt;&lt; create_vm_response(instance, vm).merge(&#39;active&#39; =&gt; vm.active)
+          end
+        end
+        results
+      end
+
+      def create_instances_response_with_vm_expected(instances)
+        instances.map do |instance|
+          create_vm_response(instance, instance.active_vm).merge(&#39;expects_vm&#39; =&gt; instance.expects_vm?)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#create_instances_response_with_vm_expected refers to 'instance' more than self (maybe move it to another class?)</span>          </div>  </li></ol>
+        end
+      end
+
+      def create_vm_response(instance, vm)
+        {
+          &#39;agent_id&#39; =&gt; vm&amp;.agent_id,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#create_vm_response performs a nil-check</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L579" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L580" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L586" class="js-smell-location">2</a>                  </div>  </li></ol>
+          &#39;cid&#39; =&gt; vm&amp;.cid,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#create_vm_response performs a nil-check</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L579" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L580" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L586" class="js-smell-location">2</a>                  </div>  </li></ol>
+          &#39;job&#39; =&gt; instance.job,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#create_vm_response refers to 'instance' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L581" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L582" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L583" class="js-smell-location">2</a>                  <a href="deployments_controller.html#L584" class="js-smell-location">3</a>                  </div>  </li></ol>
+          &#39;index&#39; =&gt; instance.index,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#create_vm_response refers to 'instance' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L581" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L582" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L583" class="js-smell-location">2</a>                  <a href="deployments_controller.html#L584" class="js-smell-location">3</a>                  </div>  </li></ol>
+          &#39;id&#39; =&gt; instance.uuid,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#create_vm_response refers to 'instance' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L581" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L582" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L583" class="js-smell-location">2</a>                  <a href="deployments_controller.html#L584" class="js-smell-location">3</a>                  </div>  </li></ol>
+          &#39;az&#39; =&gt; instance.availability_zone,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#create_vm_response refers to 'instance' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L581" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L582" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L583" class="js-smell-location">2</a>                  <a href="deployments_controller.html#L584" class="js-smell-location">3</a>                  </div>  </li></ol>
+          &#39;ips&#39; =&gt; ips(vm),
+          &#39;vm_created_at&#39; =&gt; vm&amp;.created_at&amp;.utc&amp;.iso8601,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#create_vm_response performs a nil-check</span>              <span>Locations:</span>                  <a href="deployments_controller.html#L579" class="js-smell-location">0</a>                  <a href="deployments_controller.html#L580" class="js-smell-location">1</a>                  <a href="deployments_controller.html#L586" class="js-smell-location">2</a>                  </div>  </li></ol>
+        }
+      end
+
+      def ips(vm)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#ips has approx 6 statements</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#ips doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        return [] if vm.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#ips performs a nil-check</span>          </div>  </li></ol>
+
+        # For manual and vip networks
+        result = vm.ip_addresses.map { |ip| NetAddr::CIDR.create(ip.address).ip }
+
+        # For dynamic networks
+        result = vm.network_spec.map { |_, network| network[&#39;ip&#39;] } if result.empty? &amp;&amp; !vm.network_spec.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Api::Controllers::DeploymentsController#ips calls 'vm.network_spec' 2 times</span>          </div>  </li></ol>
+        result
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

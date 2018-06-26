@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-02-16 10:57:03 -0800'>2017-02-16 10:57:03 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/gocli/integration /</small> upload_stemcells_permission_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">42</span><small> lines of codes</small></div>
+              <div><span class="metric">1</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">67.5</span><small> complexity/method</small></div>
+              <div><span class="metric">1</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">67.5</span><small> complexity</small></div>
+              <div><span class="metric">78</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                1
+                smell
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require_relative &#39;../spec_helper&#39;
+
+describe &#39;upload stemcell with permissions&#39;, type: :integration do
+  with_reset_sandbox_before_each(user_authentication: &#39;uaa&#39;)
+
+  director_client_env = {&#39;BOSH_CLIENT&#39; =&gt; &#39;director-access&#39;, &#39;BOSH_CLIENT_SECRET&#39; =&gt; &#39;secret&#39;}
+  stemcells_upload_env = {&#39;BOSH_CLIENT&#39; =&gt; &#39;upload-stemcells-access&#39;, &#39;BOSH_CLIENT_SECRET&#39; =&gt; &#39;stemcells-secret&#39;}
+  no_access_client_env = {&#39;BOSH_CLIENT&#39; =&gt; &#39;no-access&#39;, &#39;BOSH_CLIENT_SECRET&#39; =&gt; &#39;secret&#39;}
+
+  def run_upload_stemcell_cmd(env)
+    return bosh_runner.run(&quot;upload-stemcell #{spec_asset(&#39;valid_stemcell.tgz&#39;)}&quot;,
+      client: env[&#39;BOSH_CLIENT&#39;],
+      client_secret: env[&#39;BOSH_CLIENT_SECRET&#39;],
+      return_exit_code: true,
+      failure_expected: true
+    )
+  end
+
+  it &#39;bosh.stemcells.upload should be able to upload stemcells to the director&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="upload_stemcells_permission_spec.html#L19" class="js-smell-location">0</a>                  <a href="upload_stemcells_permission_spec.html#L27" class="js-smell-location">1</a>                  <a href="upload_stemcells_permission_spec.html#L35" class="js-smell-location">2</a>                  </div>  </li></ol>
+    output, exit_code = run_upload_stemcell_cmd(stemcells_upload_env)
+
+    expect(exit_code).to eq(0)
+    expect(output).to include &#39;Save stemcell&#39;
+    expect(output).to include &#39;Succeeded&#39;
+  end
+
+  it &#39;bosh.X.admin should be able to upload stemcells to the director&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="upload_stemcells_permission_spec.html#L19" class="js-smell-location">0</a>                  <a href="upload_stemcells_permission_spec.html#L27" class="js-smell-location">1</a>                  <a href="upload_stemcells_permission_spec.html#L35" class="js-smell-location">2</a>                  </div>  </li></ol>
+    output, exit_code = run_upload_stemcell_cmd(director_client_env)
+
+    expect(exit_code).to eq(0)
+    expect(output).to include &#39;Save stemcell&#39;
+    expect(output).to include &#39;Succeeded&#39;
+  end
+
+  it &#39;no-access should not be able to upload stemcells to the director&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="upload_stemcells_permission_spec.html#L19" class="js-smell-location">0</a>                  <a href="upload_stemcells_permission_spec.html#L27" class="js-smell-location">1</a>                  <a href="upload_stemcells_permission_spec.html#L35" class="js-smell-location">2</a>                  </div>  </li></ol>
+    output, exit_code = run_upload_stemcell_cmd(no_access_client_env)
+
+    expect(exit_code).to_not eq(0)
+    expect(output).to_not include &#39;Save stemcell&#39;
+    expect(output).to_not include &#39;Succeeded&#39;
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../overview.html"><img src="../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-03-17 08:46:55 -0700'>2017-03-17 08:46:55 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-director/lib/bosh/director/api /</small> resource_manager.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating a big">
+              A
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">83</span><small> lines of codes</small></div>
+              <div><span class="metric">7</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">6.5</span><small> complexity/method</small></div>
+              <div><span class="metric">12</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">45.68</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                8
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;fileutils&#39;
+
+module Bosh::Director
+  module Api
+    class ResourceManager<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::Api::ResourceManager has no descriptive comment</span>          </div>  </li></ol>
+
+      def initialize(blobstore_client=App.instance.blobstores.blobstore)
+        @logger = Config.logger
+        @blobstore_client = blobstore_client
+      end
+
+      # Retrieves the resource `id` from the blobstore and stores it
+      # locally, and returns the path to the file. It is the caller&#39;s
+      # responsibility to delete the resulting file at some point.
+      # An easy option is to call clean_old_tmpfiles before each call
+      # to this method.
+      #
+      # @param [String] id
+      # @return [String] path to the contents of the blobstore id
+      def get_resource_path(id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::Api::ResourceManager#get_resource_path has approx 6 statements</span>          </div>  </li></ol>
+        blobstore_resource(id) do |blobstore|
+          random_name = &quot;resource-#{SecureRandom.uuid}&quot;
+          path = File.join(resource_tmpdir, random_name)
+
+          File.open(path, &quot;w&quot;) do |f|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::Api::ResourceManager#get_resource_path contains iterators nested 2 deep</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::Api::ResourceManager#get_resource_path has the variable name 'f'</span>          </div>  </li></ol>
+            blobstore.get(id, f)
+          end
+
+          path
+        end
+      end
+
+      # Returns the directory where files created by get_resource_path will be written.
+      def resource_tmpdir<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::ResourceManager#resource_tmpdir doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        Dir.tmpdir
+      end
+
+      # Deletes all get_resource_path temporary files that are more than 5 minutes old.
+      def clean_old_tmpfiles
+        Dir.glob(&quot;#{resource_tmpdir}/resource-*&quot;).
+            select{|f| File.mtime(f) &lt; (Time.now - (60*5)) }.<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::Api::ResourceManager#clean_old_tmpfiles has the variable name 'f'</span>              <span>Locations:</span>                  <a href="resource_manager.html#L41" class="js-smell-location">0</a>                  <a href="resource_manager.html#L42" class="js-smell-location">1</a>                  </div>  </li></ol>
+            each{|f| FileUtils.rm_f(f) }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::Api::ResourceManager#clean_old_tmpfiles has the variable name 'f'</span>              <span>Locations:</span>                  <a href="resource_manager.html#L41" class="js-smell-location">0</a>                  <a href="resource_manager.html#L42" class="js-smell-location">1</a>                  </div>  </li></ol>
+      end
+      # Retrieves the resource `id` from the blobstore and returns the
+      # contents of it.
+      # @param [String] id
+      # @return [String] contents of the blobstore id
+      def get_resource(id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::Api::ResourceManager#get_resource has approx 6 statements</span>          </div>  </li></ol>
+        @logger.debug(&quot;Downloading #{id} from blobstore...&quot;)
+
+        blob = nil
+        blobstore_resource(id) do |blobstore|
+          blob = blobstore.get(id)
+        end
+
+        @logger.debug(&quot;Downloaded #{id} from blobstore&quot;)
+        blob
+      end
+
+      # Deletes the resource `id` from the blobstore
+      # @param [String] id
+      def delete_resource(id)
+        @logger.debug(&quot;Deleting #{id} from blobstore...&quot;)
+
+        blobstore_resource(id) do |blobstore|
+          blobstore.delete(id)
+        end
+
+        @logger.debug(&quot;Deleted #{id} from blobstore&quot;)
+      end
+
+      private
+
+      def blobstore_resource(id)
+        yield @blobstore_client
+      rescue Bosh::Blobstore::NotFound
+        raise ResourceNotFound, &quot;Resource &#39;#{id}&#39; not found in the blobstore&quot;
+      rescue Bosh::Blobstore::BlobstoreError =&gt; e<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::Api::ResourceManager#blobstore_resource has the variable name 'e'</span>          </div>  </li></ol>
+        raise ResourceError, &quot;Blobstore error accessing resource &#39;#{id}&#39;: #{e}&quot;
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

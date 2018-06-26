@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../overview.html"><img src="../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-11-29 15:33:50 -0800'>2017-11-29 15:33:50 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-registry/spec /</small> spec_helper.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">121</span><small> lines of codes</small></div>
+              <div><span class="metric">9</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">7.5</span><small> complexity/method</small></div>
+              <div><span class="metric">14</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">67.13</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                6
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require File.expand_path(&#39;../../../spec/shared/spec_helper&#39;, __FILE__)
+
+require &#39;fileutils&#39;
+require &#39;mono_logger&#39;
+require &#39;tmpdir&#39;
+require &#39;rack/test&#39;
+
+module SpecHelper<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>SpecHelper has no descriptive comment</span>          </div>  </li></ol>
+  class &lt;&lt; self
+    attr_accessor :logger<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>SpecHelper#logger is a writable attribute</span>          </div>  </li></ol>
+    attr_accessor :temp_dir<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>SpecHelper#temp_dir is a writable attribute</span>          </div>  </li></ol>
+    attr_reader :registry_migrations_dir
+
+    def init<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>SpecHelper#init has approx 6 statements</span>          </div>  </li></ol>
+      ENV[&#39;RACK_ENV&#39;] = &#39;test&#39;
+      configure_logging
+      configure_temp_dir
+
+      require &#39;bosh/registry&#39;
+      init_database
+      @registry_migrations_dir = File.expand_path(&#39;../../db/migrations&#39;, __FILE__)
+    end
+
+    def configure_logging
+      if ENV[&#39;DEBUG&#39;]
+        @logger = MonoLogger.new(STDOUT)
+      else
+        path = File.expand_path(&#39;/tmp/spec.log&#39;, __FILE__)
+        log_file = File.open(path, &#39;w&#39;)
+        log_file.sync = true
+        @logger = MonoLogger.new(log_file)
+      end
+    end
+
+    def configure_temp_dir<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>SpecHelper#configure_temp_dir has approx 8 statements</span>          </div>  </li></ol>
+      @temp_dir = Dir.mktmpdir
+      ENV[&#39;TMPDIR&#39;] = @temp_dir
+      FileUtils.mkdir_p(@temp_dir)
+      at_exit do
+        begin
+          if $!
+            status = $!.is_a?(::SystemExit) ? $!.status : 1
+          else
+            status = 0
+          end
+          FileUtils.rm_rf(@temp_dir)
+        ensure
+          exit status
+        end
+      end
+    end
+
+    def init_database<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>SpecHelper#init_database has approx 6 statements</span>          </div>  </li></ol>
+      @migrations_dir = File.expand_path(&#39;../../db/migrations&#39;, __FILE__)
+
+      Sequel.extension :migration
+
+      @db = Sequel.sqlite(:database =&gt; nil, :max_connections =&gt; 32, :pool_timeout =&gt; 10)
+      @db.loggers &lt;&lt; @logger
+      Bosh::Registry.db = @db
+
+      run_migrations
+    end
+
+    def run_migrations
+      Sequel::Migrator.apply(@db, @migrations_dir, nil)
+    end
+
+    def reset_database
+      @db.execute(&#39;PRAGMA foreign_keys = OFF&#39;)
+      @db.tables.each do |table|
+        @db.drop_table(table)
+      end
+      @db.execute(&#39;PRAGMA foreign_keys = ON&#39;)
+    end
+
+    def get_migrations
+      Dir.glob(File.join(@registry_migrations_dir, &#39;[0-9]*_*.rb&#39;))
+    end
+
+    def reset
+      reset_database
+      run_migrations
+
+      Bosh::Registry.db = @db
+      Bosh::Registry.logger = @logger
+    end
+  end
+end
+
+SpecHelper.init
+
+def valid_config
+  {
+    &#39;logfile&#39; =&gt; nil,
+    &#39;loglevel&#39; =&gt; &#39;debug&#39;,
+    &#39;http&#39; =&gt; {
+      &#39;user&#39; =&gt; &#39;admin&#39;,
+      &#39;password&#39; =&gt; &#39;admin&#39;,
+      &#39;port&#39; =&gt; 25777
+    },
+    &#39;db&#39; =&gt; {
+      &#39;connection_options&#39; =&gt; {
+        &#39;max_connections&#39; =&gt; 433,
+        &#39;pool_timeout&#39; =&gt; 227,
+      },
+      &#39;database&#39; =&gt; &#39;/:memory:&#39;,
+      &#39;adapter&#39; =&gt; &#39;sqlite&#39;
+    },
+    &#39;cloud&#39; =&gt; {
+      &#39;plugin&#39; =&gt; &#39;dummy&#39;
+    }
+  }
+end
+
+RSpec.configure do |rspec|
+  rspec.before(:each) do
+    SpecHelper.reset
+    Bosh::Registry.logger = MonoLogger.new(StringIO.new)
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/prettify.js'></script>
+    <script src='../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+    <script src='../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

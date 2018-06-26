@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../overview.html"><img src="../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-05-14 00:04:05 +0200'>2018-05-14 00:04:05 +0200</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-monitor/spec/unit/bosh/monitor /</small> resurrection_manager_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">268</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">5</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">453.56</span><small> complexity</small></div>
+              <div><span class="metric">268</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                7
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+module Bhm<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bhm has no descriptive comment</span>          </div>  </li></ol>
+  describe ResurrectionManager do
+    let(:manager) { described_class.new }
+
+    let(:include_spec) do
+      {
+        &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;],
+        &#39;instance_groups&#39; =&gt; [&#39;foobar-1&#39;],
+      }
+    end
+    let(:exclude_spec) { { &#39;deployments&#39; =&gt; [&#39;deployment_exclude&#39;] } }
+
+    let(:resurrection_config) do
+      [
+        {
+          &#39;content&#39; =&gt; YAML.dump(resurrection_config_content),
+          &#39;id&#39; =&gt; &#39;1&#39;, &#39;type&#39; =&gt; &#39;resurrection&#39;,
+          &#39;name&#39; =&gt; &#39;some-name&#39;
+        },
+      ]
+    end
+
+    let(:resurrection_configs) do
+      [
+        { &#39;content&#39; =&gt; YAML.dump(resurrection_config_content), &#39;id&#39; =&gt; &#39;1&#39;, &#39;type&#39; =&gt; &#39;resurrection&#39;, &#39;name&#39; =&gt; &#39;some-name&#39; },
+        { &#39;content&#39; =&gt; YAML.dump(resurrection_config_content), &#39;id&#39; =&gt; &#39;2&#39;, &#39;type&#39; =&gt; &#39;resurrection&#39;, &#39;name&#39; =&gt; &#39;another-name&#39; },
+      ]
+    end
+
+    before do
+      Bhm.config = { &#39;director&#39; =&gt; {} }
+      Bhm.plugins = [{ &#39;name&#39; =&gt; &#39;logger&#39; }, { &#39;name&#39; =&gt; &#39;logger&#39; }]
+    end
+
+    describe &#39;#update_rules&#39; do
+      let(:resurrection_config_content) do
+        {
+          &#39;rules&#39; =&gt; [
+            {
+              &#39;enabled&#39; =&gt; true,
+              &#39;include&#39; =&gt; include_spec,
+            },
+            {
+              &#39;enabled&#39; =&gt; false,
+              &#39;exclude&#39; =&gt; exclude_spec,
+            },
+          ],
+        }
+      end
+
+      it &#39;parses resurrection config&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bhm::describe(#update_rules)::it#parses resurrection config has a flog score of 53</span>          </div>  </li></ol>
+        expect(logger).to receive(:info).with(&#39;Resurrection config update starting...&#39;)
+        expect(logger).to receive(:info).with(&#39;Resurrection config update finished&#39;)
+        manager.update_rules(resurrection_config)
+        resurrection_rules = manager.instance_variable_get(:@parsed_rules)
+        expect(resurrection_rules.count).to eq(2)
+        expect(resurrection_rules[0].enabled?).to be_truthy
+        expect(resurrection_rules[1].enabled?).to be_falsey
+      end
+
+      it &#39;parses several resurrection configs with different names&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bhm::describe(#update_rules)::it#parses several resurrection configs with different names has a flog score of 72</span>          </div>  </li></ol>
+        expect(logger).to receive(:info).with(&#39;Resurrection config update starting...&#39;)
+        expect(logger).to receive(:info).with(&#39;Resurrection config update finished&#39;)
+        manager.update_rules(resurrection_configs)
+        resurrection_rules = manager.instance_variable_get(:@parsed_rules)
+        expect(resurrection_rules.count).to eq(4)
+        expect(resurrection_rules[0].enabled?).to be_truthy
+        expect(resurrection_rules[1].enabled?).to be_falsey
+        expect(resurrection_rules[2].enabled?).to be_truthy
+        expect(resurrection_rules[3].enabled?).to be_falsey
+      end
+
+      context &#39;when resurrection config does not have enabled property&#39; do
+        let(:resurrection_config_content) do
+          {
+            &#39;rules&#39; =&gt; [
+              {
+                &#39;include&#39; =&gt; { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] },
+              },
+            ],
+          }
+        end
+
+        it &#39;returns an error&#39; do
+          expect(logger).to receive(:error)
+            .with(/Required property &#39;enabled&#39; was not specified in object&gt;/)
+          manager.update_rules(resurrection_config)
+        end
+      end
+
+      context &#39;when enabled property is not boolean&#39; do
+        let(:resurrection_config_content) do
+          {
+            &#39;rules&#39; =&gt; [
+              { &#39;enabled&#39; =&gt; 5,
+                &#39;include&#39; =&gt; { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] } },
+            ],
+          }
+        end
+
+        it &#39;returns an error&#39; do
+          expect(logger).to receive(:error)
+            .with(/Property &#39;enabled&#39; value \(5\) did not match the required type &#39;Boolean&#39;/)
+          manager.update_rules(resurrection_config)
+        end
+      end
+
+      context &#39;when resurrection config was not updated&#39; do
+        it &#39;uses existing resurrection rules&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bhm::describe(#update_rules)::context(when resurrection config was not updated)::it#uses existing resurrection rules has a flog score of 57</span>          </div>  </li></ol>
+          manager.update_rules(resurrection_config)
+          expect(logger).not_to receive(:info).with(&#39;Resurrection config update starting...&#39;)
+          expect(logger).to receive(:info).with(&#39;Resurrection config remains the same&#39;)
+          manager.update_rules(resurrection_config)
+          resurrection_rules = manager.instance_variable_get(:@parsed_rules)
+          expect(resurrection_rules.count).to eq(2)
+          expect(resurrection_rules[0].enabled?).to be_truthy
+          expect(resurrection_rules[1].enabled?).to be_falsey
+        end
+      end
+    end
+
+    describe &#39;#resurrection_enabled?&#39; do
+      let(:resurrection_config_content) do
+        {
+          &#39;rules&#39; =&gt; [
+            {
+              &#39;enabled&#39; =&gt; enabled,
+              &#39;include&#39; =&gt; include_spec,
+              &#39;exclude&#39; =&gt; exclude_spec,
+            },
+          ],
+        }
+      end
+      let(:exclude_spec) { {} }
+      before { manager.update_rules(resurrection_config) }
+
+      context &#39;when `enabled` equals true&#39; do
+        let(:enabled) { true }
+
+        context &#39;when the resurrection config is applicable by deployment name&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L142" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L149" class="js-smell-location">1</a>                  <a href="resurrection_manager_spec.html#L157" class="js-smell-location">2</a>                  <a href="resurrection_manager_spec.html#L165" class="js-smell-location">3</a>                  <a href="resurrection_manager_spec.html#L195" class="js-smell-location">4</a>                  <a href="resurrection_manager_spec.html#L203" class="js-smell-location">5</a>                  <a href="resurrection_manager_spec.html#L211" class="js-smell-location">6</a>                  <a href="resurrection_manager_spec.html#L219" class="js-smell-location">7</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] } }
+          it &#39;sends to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_truthy
+          end
+        end
+
+        context &#39;when the deployment is neither included nor excluded&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L142" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L149" class="js-smell-location">1</a>                  <a href="resurrection_manager_spec.html#L157" class="js-smell-location">2</a>                  <a href="resurrection_manager_spec.html#L165" class="js-smell-location">3</a>                  <a href="resurrection_manager_spec.html#L195" class="js-smell-location">4</a>                  <a href="resurrection_manager_spec.html#L203" class="js-smell-location">5</a>                  <a href="resurrection_manager_spec.html#L211" class="js-smell-location">6</a>                  <a href="resurrection_manager_spec.html#L219" class="js-smell-location">7</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;deployments&#39; =&gt; [&#39;no_findy&#39;] } }
+
+          it &#39;sends to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_truthy
+          end
+        end
+
+        context &#39;when the resurrection config is applicable by instance group&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L142" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L149" class="js-smell-location">1</a>                  <a href="resurrection_manager_spec.html#L157" class="js-smell-location">2</a>                  <a href="resurrection_manager_spec.html#L165" class="js-smell-location">3</a>                  <a href="resurrection_manager_spec.html#L195" class="js-smell-location">4</a>                  <a href="resurrection_manager_spec.html#L203" class="js-smell-location">5</a>                  <a href="resurrection_manager_spec.html#L211" class="js-smell-location">6</a>                  <a href="resurrection_manager_spec.html#L219" class="js-smell-location">7</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;instance_groups&#39; =&gt; [&#39;foobar&#39;] } }
+
+          it &#39;sends to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_truthy
+          end
+        end
+
+        context &#39;when the instance group is neither included nor excluded&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L142" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L149" class="js-smell-location">1</a>                  <a href="resurrection_manager_spec.html#L157" class="js-smell-location">2</a>                  <a href="resurrection_manager_spec.html#L165" class="js-smell-location">3</a>                  <a href="resurrection_manager_spec.html#L195" class="js-smell-location">4</a>                  <a href="resurrection_manager_spec.html#L203" class="js-smell-location">5</a>                  <a href="resurrection_manager_spec.html#L211" class="js-smell-location">6</a>                  <a href="resurrection_manager_spec.html#L219" class="js-smell-location">7</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;instance_groups&#39; =&gt; [&#39;no_findy&#39;] } }
+
+          it &#39;sends to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_truthy
+          end
+        end
+
+        context &#39;when the resurrection config has empty include and exclude&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L173" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L227" class="js-smell-location">1</a>                  </div>  </li></ol>
+          let(:include_spec) { {} }
+          let(:exclude_spec) { {} }
+
+          it &#39;sends to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_truthy
+          end
+        end
+
+        context &#39;when the resurrection config has the same include and exclude &#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L182" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L236" class="js-smell-location">1</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] } }
+          let(:exclude_spec) { { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] } }
+
+          it &#39;sends to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_truthy
+          end
+        end
+      end
+
+      context &#39;when `enabled` equals false&#39; do
+        let(:enabled) { false }
+
+        context &#39;when the resurrection config is applicable by deployment name&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L142" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L149" class="js-smell-location">1</a>                  <a href="resurrection_manager_spec.html#L157" class="js-smell-location">2</a>                  <a href="resurrection_manager_spec.html#L165" class="js-smell-location">3</a>                  <a href="resurrection_manager_spec.html#L195" class="js-smell-location">4</a>                  <a href="resurrection_manager_spec.html#L203" class="js-smell-location">5</a>                  <a href="resurrection_manager_spec.html#L211" class="js-smell-location">6</a>                  <a href="resurrection_manager_spec.html#L219" class="js-smell-location">7</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] } }
+
+          it &#39;does not send to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_falsey
+          end
+        end
+
+        context &#39;when the deployment is neither included nor excluded&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L142" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L149" class="js-smell-location">1</a>                  <a href="resurrection_manager_spec.html#L157" class="js-smell-location">2</a>                  <a href="resurrection_manager_spec.html#L165" class="js-smell-location">3</a>                  <a href="resurrection_manager_spec.html#L195" class="js-smell-location">4</a>                  <a href="resurrection_manager_spec.html#L203" class="js-smell-location">5</a>                  <a href="resurrection_manager_spec.html#L211" class="js-smell-location">6</a>                  <a href="resurrection_manager_spec.html#L219" class="js-smell-location">7</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;deployments&#39; =&gt; [&#39;no_findy&#39;] } }
+
+          it &#39;sends to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_truthy
+          end
+        end
+
+        context &#39;when the resurrection config is applicable by instance group&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L142" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L149" class="js-smell-location">1</a>                  <a href="resurrection_manager_spec.html#L157" class="js-smell-location">2</a>                  <a href="resurrection_manager_spec.html#L165" class="js-smell-location">3</a>                  <a href="resurrection_manager_spec.html#L195" class="js-smell-location">4</a>                  <a href="resurrection_manager_spec.html#L203" class="js-smell-location">5</a>                  <a href="resurrection_manager_spec.html#L211" class="js-smell-location">6</a>                  <a href="resurrection_manager_spec.html#L219" class="js-smell-location">7</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;instance_groups&#39; =&gt; [&#39;foobar&#39;] } }
+
+          it &#39;does not send to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_falsey
+          end
+        end
+
+        context &#39;when the instance group is neither included nor excluded&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 8 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L142" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L149" class="js-smell-location">1</a>                  <a href="resurrection_manager_spec.html#L157" class="js-smell-location">2</a>                  <a href="resurrection_manager_spec.html#L165" class="js-smell-location">3</a>                  <a href="resurrection_manager_spec.html#L195" class="js-smell-location">4</a>                  <a href="resurrection_manager_spec.html#L203" class="js-smell-location">5</a>                  <a href="resurrection_manager_spec.html#L211" class="js-smell-location">6</a>                  <a href="resurrection_manager_spec.html#L219" class="js-smell-location">7</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;instance_groups&#39; =&gt; [&#39;no_findy&#39;] } }
+
+          it &#39;sends to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_truthy
+          end
+        end
+
+        context &#39;when the resurrection config has empty include and exclude&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L173" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L227" class="js-smell-location">1</a>                  </div>  </li></ol>
+          let(:include_spec) { {} }
+          let(:exclude_spec) { {} }
+
+          it &#39;does not send to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_falsey
+          end
+        end
+
+        context &#39;when the resurrection config has the same include and exclude &#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="resurrection_manager_spec.html#L182" class="js-smell-location">0</a>                  <a href="resurrection_manager_spec.html#L236" class="js-smell-location">1</a>                  </div>  </li></ol>
+          let(:include_spec) { { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] } }
+          let(:exclude_spec) { { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] } }
+
+          it &#39;sends to resurrection&#39; do
+            expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_truthy
+          end
+        end
+      end
+
+      context &#39;when several rules are applied&#39; do
+        let(:resurrection_config_content) do
+          {
+            &#39;rules&#39; =&gt; [
+              {
+                &#39;enabled&#39; =&gt; true,
+                &#39;include&#39; =&gt; { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] },
+              },
+              {
+                &#39;enabled&#39; =&gt; false,
+                &#39;include&#39; =&gt; { &#39;deployments&#39; =&gt; [&#39;deployment_include&#39;] },
+              },
+            ],
+          }
+        end
+
+        it &#39;does not send to resurrection&#39; do
+          expect(manager.resurrection_enabled?(&#39;deployment_include&#39;, &#39;foobar&#39;)).to be_falsey
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

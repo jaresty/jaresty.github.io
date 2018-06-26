@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../overview.html"><img src="../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-05-31 14:40:48 -0400'>2018-05-31 14:40:48 -0400</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-director/lib/bosh/director/deployment_plan /</small> instance.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">347</span><small> lines of codes</small></div>
+              <div><span class="metric">42</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">4.5</span><small> complexity/method</small></div>
+              <div><span class="metric">221</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">188.21</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                30
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;securerandom&#39;
+
+module Bosh::Director
+  module DeploymentPlan
+    # Represents a single Instance Group instance.
+    class Instance<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance assumes too much for instance variable '@cloud_properties_changed'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance assumes too much for instance variable '@is_deploy_action'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance assumes too much for instance variable '@model'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance assumes too much for instance variable '@uuid'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance has at least 20 instance variables</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Methods.md" target="_blank"><b>TooManyMethods</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance has at least 41 methods</span>          </div>  </li></ol>
+      # @return [Integer] Instance index
+      attr_reader :index
+
+      attr_reader :uuid
+
+      # @return [Models::Instance] Instance model
+      attr_reader :model
+
+      # @return [String] Checksum all of the configuration templates
+      attr_accessor :configuration_hash<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#configuration_hash is a writable attribute</span>          </div>  </li></ol>
+
+      # @return [Hash] A hash of template SHA1 hashes
+      attr_accessor :template_hashes<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#template_hashes is a writable attribute</span>          </div>  </li></ol>
+
+      # @return [Bosh::Director::Core::Templates::RenderedTemplatesArchive]
+      attr_accessor :rendered_templates_archive<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#rendered_templates_archive is a writable attribute</span>          </div>  </li></ol>
+
+      # @return [Bosh::Director::Models::VariableSet]
+      attr_accessor :desired_variable_set<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#desired_variable_set is a writable attribute</span>          </div>  </li></ol>
+      attr_reader :previous_variable_set
+
+      # @return [String] job state
+      attr_reader :virtual_state
+
+      attr_reader :availability_zone
+
+      attr_reader :existing_network_reservations
+
+      attr_reader :instance_group_name
+
+      attr_reader :stemcell
+
+      attr_reader :deployment_model
+
+      def self.create_from_instance_group(instance_group, index, virtual_state, deployment_model, instance_state, az, logger)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#self.create_from_instance_group has 7 parameters</span>          </div>  </li></ol>
+        new(
+          instance_group.name,
+          index,
+          virtual_state,
+          MergedCloudProperties.new(az, instance_group.vm_type, instance_group.vm_extensions).get,
+          instance_group.stemcell,
+          instance_group.env,
+          instance_group.compilation?,
+          deployment_model,
+          instance_state,
+          az,
+          logger,
+        )
+      end
+
+      def initialize(instance_group_name,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#initialize has 11 parameters</span>          </div>  </li></ol>
+                     index,
+                     virtual_state,
+                     merged_cloud_properties,
+                     stemcell,
+                     env,
+                     compilation,
+                     deployment_model,
+                     instance_state,
+                     availability_zone,
+                     logger)
+        @index = index
+        @availability_zone = availability_zone
+        @logger = logger
+        @deployment_model = deployment_model
+        @instance_group_name = instance_group_name
+        @stemcell = stemcell
+        @env = env
+        @compilation = compilation
+        @merged_cloud_properties = merged_cloud_properties
+
+        @configuration_hash = nil
+        @template_hashes = nil
+
+        @desired_variable_set = nil
+        @previous_variable_set = nil
+
+        # This state is coming from the agent, we
+        # only need networks and job_state from it.
+        @current_state = instance_state || {}<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Control-Parameter.md" target="_blank"><b>ControlParameter</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#initialize is controlled by argument 'instance_state'</span>          </div>  </li></ol>
+
+        # reservation generated from current state/DB
+        @existing_network_reservations = InstanceNetworkReservations.new(logger)
+
+        @virtual_state = virtual_state
+      end
+
+      def bootstrap?
+        @model&amp;.bootstrap<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#bootstrap? performs a nil-check</span>          </div>  </li></ol>
+      end
+
+      def compilation?
+        @compilation
+      end
+
+      def is_deploy_action?
+        @is_deploy_action
+      end
+
+      def is_deploy_action=(is_deploy_action)
+        @is_deploy_action = is_deploy_action
+      end
+
+      def to_s
+        if @uuid.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#to_s performs a nil-check</span>          </div>  </li></ol>
+          &quot;#{@instance_group_name}/#{@index}&quot;
+        else
+          &quot;#{@instance_group_name}/#{@uuid} (#{@index})&quot;
+        end
+      end
+
+      def ensure_model_bound
+        @model ||= find_or_create_model
+      end
+
+      def bind_new_instance_model
+        @model = Models::Instance.create(
+          deployment_id: @deployment_model.id,
+          job: @instance_group_name,
+          index: index,
+          state: state,
+          compilation: @compilation,
+          uuid: SecureRandom.uuid,
+          availability_zone: availability_zone_name,
+          bootstrap: false,
+          variable_set_id: @deployment_model.current_variable_set.id
+        )
+        @uuid = @model.uuid
+        @desired_variable_set = @model.variable_set<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#bind_new_instance_model calls '@model.variable_set' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L135" class="js-smell-location">0</a>                  <a href="instance.html#L136" class="js-smell-location">1</a>                  </div>  </li></ol>
+        @previous_variable_set = @model.variable_set<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#bind_new_instance_model calls '@model.variable_set' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L135" class="js-smell-location">0</a>                  <a href="instance.html#L136" class="js-smell-location">1</a>                  </div>  </li></ol>
+      end
+
+
+      def stemcell_model
+        @stemcell.model_for_az(availability_zone_name)
+      end
+
+      def env
+        @env.spec
+      end
+
+      # Updates this domain object to reflect an existing instance running on an existing vm
+      def bind_existing_instance_model(existing_instance_model)
+        @uuid = existing_instance_model.uuid
+        check_model_not_bound
+        @model = existing_instance_model
+        @desired_variable_set = existing_instance_model.variable_set<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#bind_existing_instance_model calls 'existing_instance_model.variable_set' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L153" class="js-smell-location">0</a>                  <a href="instance.html#L154" class="js-smell-location">1</a>                  </div>  </li></ol>
+        @previous_variable_set = existing_instance_model.variable_set<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#bind_existing_instance_model calls 'existing_instance_model.variable_set' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L153" class="js-smell-location">0</a>                  <a href="instance.html#L154" class="js-smell-location">1</a>                  </div>  </li></ol>
+      end
+
+      def bind_existing_reservations(reservations)
+        @existing_network_reservations = reservations
+      end
+
+      def apply_vm_state(spec)
+        @logger.info(&#39;Applying VM state&#39;)
+
+        @current_state = spec.full_spec
+        agent_client.apply(spec.as_apply_spec)
+        @model.update(spec: @current_state)
+      end
+
+      def add_state_to_model(state)
+        @current_state.merge!(state)
+        @model.update(spec: @current_state)
+      end
+
+      def update_instance_settings<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#update_instance_settings has approx 6 statements</span>          </div>  </li></ol>
+        disk_associations = @model.reload.active_persistent_disks.collection.reject do |disk|
+          disk.model.managed?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#update_instance_settings calls 'disk.model' 3 times</span>              <span>Locations:</span>                  <a href="instance.html#L176" class="js-smell-location">0</a>                  <a href="instance.html#L180" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+
+        disk_associations.map! do |disk|
+          { &#39;name&#39; =&gt; disk.model.name, &#39;cid&#39; =&gt; disk.model.disk_cid }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#update_instance_settings calls 'disk.model' 3 times</span>              <span>Locations:</span>                  <a href="instance.html#L176" class="js-smell-location">0</a>                  <a href="instance.html#L180" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+
+        agent_client.update_settings(Config.trusted_certs, disk_associations)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#update_instance_settings calls 'Config.trusted_certs' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L183" class="js-smell-location">0</a>                  <a href="instance.html#L184" class="js-smell-location">1</a>                  </div>  </li></ol>
+        @model.active_vm.update(trusted_certs_sha1: ::Digest::SHA1.hexdigest(Config.trusted_certs))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#update_instance_settings calls 'Config.trusted_certs' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L183" class="js-smell-location">0</a>                  <a href="instance.html#L184" class="js-smell-location">1</a>                  </div>  </li></ol>
+      end
+
+      def update_cloud_properties!<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Prima-Donna-Method.md" target="_blank"><b>PrimaDonnaMethod</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance has prima donna method 'update_cloud_properties!'</span>          </div>  </li></ol>
+        @model.update(cloud_properties: JSON.dump(cloud_properties))
+      end
+
+      def agent_client
+        AgentClient.with_agent_id(@model.agent_id)
+      end
+
+      def cloud_properties_changed?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#cloud_properties_changed? has approx 7 statements</span>          </div>  </li></ol>
+        config_server_client_factory = Bosh::Director::ConfigServer::ClientFactory.create(@logger)
+        config_server_client = config_server_client_factory.create_client
+
+        proposed = config_server_client.interpolate_with_versioning(cloud_properties, @desired_variable_set)
+        existing = config_server_client.interpolate_with_versioning(@model.cloud_properties_hash, @previous_variable_set)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#cloud_properties_changed? calls '@model.cloud_properties_hash' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L200" class="js-smell-location">0</a>                  <a href="instance.html#L203" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+        @cloud_properties_changed = existing != proposed
+        log_changes(__method__, @model.cloud_properties_hash, cloud_properties) if @cloud_properties_changed<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#cloud_properties_changed? calls '@model.cloud_properties_hash' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L200" class="js-smell-location">0</a>                  <a href="instance.html#L203" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+        @cloud_properties_changed
+      end
+
+      def current_job_spec
+        @model.spec_p(&#39;job&#39;)
+      end
+
+      def current_packages
+        @model.spec_p(&#39;packages&#39;)
+      end
+
+      def current_job_state
+        @current_state[&#39;job_state&#39;]
+      end
+
+      def current_networks
+        @current_state[&#39;networks&#39;]
+      end
+
+      def update_state
+        @model.update(state: state)
+      end
+
+      def dirty?
+        !@model.update_completed
+      end
+
+      def update_description
+        @model.update(job: instance_group_name, index: index)
+      end
+
+      def mark_as_bootstrap
+        @model.update(bootstrap: true)
+      end
+
+      def unmark_as_bootstrap
+        @model.update(bootstrap: false)
+      end
+
+      def assign_availability_zone_and_update_cloud_properties(availability_zone, vm_type, vm_extensions)
+        @availability_zone = availability_zone
+        @merged_cloud_properties = MergedCloudProperties.new(availability_zone, vm_type, vm_extensions).get
+        @model.update(availability_zone: availability_zone_name)
+      end
+
+      def update_variable_set
+        @model.update(variable_set: @desired_variable_set)
+      end
+
+      def state
+        case @virtual_state
+        when &#39;recreate&#39;
+          &#39;started&#39;
+        when &#39;restart&#39;
+          &#39;started&#39;
+        else
+          @virtual_state
+        end
+      end
+
+      ##
+      # Checks if the target VM already has the same set of trusted SSL certificates
+      # as the director currently wants to install on all managed VMs. This will
+      # differ for VMs that existed before the director&#39;s configuration changed.
+      #
+      # @return [Boolean] true if the VM needs to be sent a new set of trusted certificates
+      def trusted_certs_changed?
+        config_trusted_certs = ::Digest::SHA1.hexdigest(Bosh::Director::Config.trusted_certs)
+        changed = config_trusted_certs != @model.trusted_certs_sha1<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#trusted_certs_changed? calls '@model.trusted_certs_sha1' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L273" class="js-smell-location">0</a>                  <a href="instance.html#L274" class="js-smell-location">1</a>                  </div>  </li></ol>
+        log_changes(__method__, @model.trusted_certs_sha1, config_trusted_certs) if changed<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#trusted_certs_changed? calls '@model.trusted_certs_sha1' 2 times</span>              <span>Locations:</span>                  <a href="instance.html#L273" class="js-smell-location">0</a>                  <a href="instance.html#L274" class="js-smell-location">1</a>                  </div>  </li></ol>
+        changed
+      end
+
+      def vm_created?
+        !@model.active_vm.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#vm_created? performs a nil-check</span>          </div>  </li></ol>
+      end
+
+      def cloud_properties
+        @merged_cloud_properties
+      end
+
+      def availability_zone_name
+        return nil if @availability_zone.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#availability_zone_name performs a nil-check</span>          </div>  </li></ol>
+
+        @availability_zone.name
+      end
+
+      def update_templates(templates)
+        transactor = Transactor.new
+        transactor.retryable_transaction(Bosh::Director::Config.db) do
+          @model.remove_all_templates
+          templates.map(&amp;:model).each do |template_model|
+            @model.add_template(template_model)
+          end
+        end
+      end
+
+      def update_vm_cloud_properties(vm_cloud_properties)
+        @merged_cloud_properties ||= {}
+        @merged_cloud_properties.merge!(vm_cloud_properties)
+      end
+
+      private
+
+      # Looks up instance model in DB
+      # @return [Models::Instance]
+      def find_or_create_model<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#find_or_create_model has approx 7 statements</span>          </div>  </li></ol>
+        raise DirectorError, &#39;Deployment model is not bound&#39; if @deployment_model.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#find_or_create_model performs a nil-check</span>          </div>  </li></ol>
+
+        conditions = {
+          deployment_id: @deployment_model.id,
+          job: @instance_group_name,
+          index: @index,
+        }
+
+        Models::Instance.find_or_create(conditions) do |model|
+          model.state = &#39;started&#39;
+          model.compilation = @compilation
+          model.uuid = SecureRandom.uuid
+          model.variable_set_id = @deployment_model.current_variable_set.id
+        end
+      end
+
+      # @param [Hash] network_settings map of network name to settings
+      # @return [Hash] map of network name to IP address
+      def network_to_ip(network_settings)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#network_to_ip doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        Hash[network_settings.map { |network_name, settings| [network_name, settings[&#39;ip&#39;]] }]
+      end
+
+      def check_model_bound
+        raise DirectorError, &quot;Instance &#39;#{self}&#39; model is not bound&quot; if @model.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::Instance#check_model_bound performs a nil-check</span>          </div>  </li></ol>
+      end
+
+      def check_model_not_bound
+        raise DirectorError, &quot;Instance &#39;#{self}&#39; model is already bound&quot; if @model
+      end
+
+      def log_changes(method_sym, old_state, new_state)
+        @logger.debug(&quot;#{method_sym} changed FROM: #{old_state} TO: #{new_state}&quot;)
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

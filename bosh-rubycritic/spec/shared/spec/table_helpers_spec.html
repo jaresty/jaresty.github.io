@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-08-21 08:05:16 -0700'>2017-08-21 08:05:16 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/shared/spec /</small> table_helpers_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">199</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">4</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">69.74</span><small> complexity</small></div>
+              <div><span class="metric">54</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                2
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;rspec&#39;
+require_relative &#39;../support/table_helpers&#39;
+
+module Support<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Support has no descriptive comment</span>          </div>  </li></ol>
+  describe TableHelpers::Parser do
+    let(:parser) { TableHelpers::Parser.new(source) }
+
+    describe &#39;#data&#39; do
+      let(:source) do
+        %q({
+    &quot;Tables&quot;: [
+        {
+            &quot;Content&quot;: &quot;stemcells&quot;,
+            &quot;Header&quot;: {
+                &quot;name&quot;: &quot;Name&quot;,
+                &quot;version&quot;: &quot;Version&quot;,
+                &quot;os&quot;: &quot;OS&quot;,
+                &quot;cid&quot;: &quot;CID&quot;
+            },
+            &quot;Rows&quot;: [
+                {
+                    &quot;name&quot;: &quot;stemcell&quot;,
+                    &quot;version&quot;: &quot;3142*&quot;,
+                    &quot;os&quot;: &quot;ubuntu-trusty&quot;,
+                    &quot;cid&quot;: &quot;cid1&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;stemcell&quot;,
+                    &quot;version&quot;: &quot;3143*&quot;,
+                    &quot;os&quot;: &quot;ubuntu-trusty&quot;,
+                    &quot;cid&quot;: &quot;cid2&quot;
+                }
+            ],
+            &quot;Notes&quot;: [
+                &quot;(*) Currently deployed&quot;
+            ]
+        }
+    ],
+    &quot;Blocks&quot;: null,
+    &quot;Lines&quot;: [
+        &quot;Using environment &#39;micro&#39; as user &#39;admin&#39;&quot;,
+        &quot;Succeeded&quot;
+    ]
+})
+      end
+
+      it &#39;parses the table&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="table_helpers_spec.html#L47" class="js-smell-location">0</a>                  <a href="table_helpers_spec.html#L103" class="js-smell-location">1</a>                  </div>  </li></ol>
+        expect(parser.data).to eq([
+          { &#39;name&#39; =&gt; &#39;stemcell&#39;, &#39;os&#39; =&gt; &#39;ubuntu-trusty&#39;, &#39;version&#39; =&gt; &#39;3142*&#39;, &#39;cid&#39; =&gt; &#39;cid1&#39; },
+          { &#39;name&#39; =&gt; &#39;stemcell&#39;, &#39;os&#39; =&gt; &#39;ubuntu-trusty&#39;, &#39;version&#39; =&gt; &#39;3143*&#39;, &#39;cid&#39; =&gt; &#39;cid2&#39; }
+        ])
+      end
+
+      context &#39;when the output is non-json&#39; do
+        let(:source) do
+          &#39;I     Am    A     Table&#39;
+        end
+
+        it &#39;raises an error&#39; do
+          expect { parser.data }.to raise_error(&#39;Be sure to pass `json: true` arg to bosh_runner.run&#39;)
+        end
+      end
+
+      context &#39;when there are empty elements&#39; do
+        let(:source) do
+          %q({
+    &quot;Tables&quot;: [
+        {
+            &quot;Content&quot;: &quot;stemcells&quot;,
+            &quot;Header&quot;: {
+                &quot;name&quot;: &quot;Name&quot;,
+                &quot;version&quot;: &quot;Version&quot;,
+                &quot;os&quot;: &quot;OS&quot;,
+                &quot;cid&quot;: &quot;CID&quot;
+            },
+            &quot;Rows&quot;: [
+                {
+                    &quot;name&quot;: &quot;stemcell&quot;,
+                    &quot;version&quot;: &quot;&quot;,
+                    &quot;os&quot;: &quot;ubuntu-trusty&quot;,
+                    &quot;cid&quot;: &quot;cid1&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;stemcell&quot;,
+                    &quot;version&quot;: &quot;3143*&quot;,
+                    &quot;os&quot;: &quot;ubuntu-trusty&quot;,
+                    &quot;cid&quot;: &quot;cid2&quot;
+                }
+            ],
+            &quot;Notes&quot;: [
+                &quot;(*) Currently deployed&quot;
+            ]
+        }
+    ],
+    &quot;Blocks&quot;: null,
+    &quot;Lines&quot;: [
+        &quot;Using environment &#39;micro&#39; as user &#39;admin&#39;&quot;,
+        &quot;Succeeded&quot;
+    ]
+})
+        end
+
+        it &#39;parses the table&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="table_helpers_spec.html#L47" class="js-smell-location">0</a>                  <a href="table_helpers_spec.html#L103" class="js-smell-location">1</a>                  </div>  </li></ol>
+          expect(parser.data).to eq([
+            { &#39;name&#39; =&gt; &#39;stemcell&#39;, &#39;os&#39; =&gt; &#39;ubuntu-trusty&#39;, &#39;version&#39; =&gt; &#39;&#39;, &#39;cid&#39; =&gt; &#39;cid1&#39; },
+            { &#39;name&#39; =&gt; &#39;stemcell&#39;, &#39;os&#39; =&gt; &#39;ubuntu-trusty&#39;, &#39;version&#39; =&gt; &#39;3143*&#39;, &#39;cid&#39; =&gt; &#39;cid2&#39; }
+          ])
+        end
+      end
+
+      context &#39;multiple tables&#39; do
+        let(:source) do
+          %q({
+    &quot;Tables&quot;: [
+        {
+            &quot;Content&quot;: &quot;stemcells&quot;,
+            &quot;Header&quot;: {
+                &quot;name&quot;: &quot;Name&quot;,
+                &quot;version&quot;: &quot;Version&quot;,
+                &quot;os&quot;: &quot;OS&quot;,
+                &quot;cid&quot;: &quot;CID&quot;
+            },
+            &quot;Rows&quot;: [
+                {
+                    &quot;name&quot;: &quot;stemcell&quot;,
+                    &quot;version&quot;: &quot;&quot;,
+                    &quot;os&quot;: &quot;ubuntu-trusty&quot;,
+                    &quot;cid&quot;: &quot;cid1&quot;
+                }
+            ],
+            &quot;Notes&quot;: [
+                &quot;(*) Currently deployed&quot;
+            ]
+        },
+        {
+            &quot;Content&quot;: &quot;releases&quot;,
+            &quot;Header&quot;: {
+                &quot;name&quot;: &quot;Name&quot;,
+                &quot;version&quot;: &quot;Version&quot;
+            },
+            &quot;Rows&quot;: [
+                {
+                    &quot;name&quot;: &quot;release&quot;,
+                    &quot;version&quot;: &quot;1.2.3&quot;
+                }
+            ],
+            &quot;Notes&quot;: [
+                &quot;(*) Currently deployed&quot;
+            ]
+        }
+    ],
+    &quot;Blocks&quot;: null,
+    &quot;Lines&quot;: [
+        &quot;Using environment &#39;micro&#39; as user &#39;admin&#39;&quot;,
+        &quot;Succeeded&quot;
+    ]
+})
+        end
+
+        it &#39;parses rows from all tables&#39; do
+          expect(parser.data).to eq([
+            { &#39;name&#39; =&gt; &#39;stemcell&#39;, &#39;os&#39; =&gt; &#39;ubuntu-trusty&#39;, &#39;version&#39; =&gt; &#39;&#39;, &#39;cid&#39; =&gt; &#39;cid1&#39; },
+            { &#39;name&#39; =&gt; &#39;release&#39;, &#39;version&#39; =&gt; &#39;1.2.3&#39; }
+          ])
+        end
+      end
+
+      context &#39;table has no rows&#39; do
+        let(:source) do
+          %q({
+    &quot;Tables&quot;: [
+        {
+            &quot;Content&quot;: &quot;stemcells&quot;,
+            &quot;Header&quot;: {
+                &quot;name&quot;: &quot;Name&quot;,
+                &quot;version&quot;: &quot;Version&quot;,
+                &quot;os&quot;: &quot;OS&quot;,
+                &quot;cid&quot;: &quot;CID&quot;
+            },
+            &quot;Notes&quot;: [
+                &quot;(*) Currently deployed&quot;
+            ]
+        }
+    ],
+    &quot;Blocks&quot;: null,
+    &quot;Lines&quot;: [
+        &quot;Using environment &#39;micro&#39; as user &#39;admin&#39;&quot;,
+        &quot;Succeeded&quot;
+    ]
+})
+        end
+
+        it &#39;parses the table and returns empty list&#39; do
+          expect(parser.data).to eq([])
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

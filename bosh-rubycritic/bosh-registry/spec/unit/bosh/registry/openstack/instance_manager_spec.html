@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../../overview.html"><img src="../../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-05-31 11:26:55 -0700'>2018-05-31 11:26:55 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-registry/spec/unit/bosh/registry/openstack /</small> instance_manager_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating d big">
+              D
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">116</span><small> lines of codes</small></div>
+              <div><span class="metric">2</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">100.4</span><small> complexity/method</small></div>
+              <div><span class="metric">23</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">200.81</span><small> complexity</small></div>
+              <div><span class="metric">65</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                6
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+require &#39;json&#39;
+
+describe Bosh::Registry::InstanceManager do
+  let(:connection_options) { nil }
+  let(:config) do
+    valid_config.merge(
+      &#39;cloud&#39; =&gt; {
+        &#39;plugin&#39; =&gt; &#39;openstack&#39;,
+        &#39;openstack&#39; =&gt; {
+          &#39;auth_url&#39; =&gt; &#39;http://127.0.0.1:5000/v3&#39;,
+          &#39;username&#39; =&gt; &#39;foo&#39;,
+          &#39;api_key&#39; =&gt; &#39;bar&#39;,
+          &#39;project&#39; =&gt; &#39;foo&#39;,
+          &#39;domain&#39; =&gt; &#39;mydomain&#39;,
+          &#39;region&#39; =&gt; &#39;&#39;,
+          &#39;connection_options&#39; =&gt; connection_options,
+        },
+      },
+    )
+  end
+  let(:manager) do
+    Bosh::Registry.configure(config)
+    Bosh::Registry.instance_manager
+  end
+  let(:compute) { double(&#39;Fog::Compute&#39;) }
+
+  def create_instance(params)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>create_instance doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    Bosh::Registry::Models::RegistryInstance.create(params)
+  end
+
+  def actual_ip_is(private_ip, floating_ip)
+    servers = double(&#39;servers&#39;)
+    instance = double(&#39;instance&#39;)
+
+    expect(compute).to receive(:servers).and_return(servers)
+    expect(servers).to receive(:find).and_return(instance)
+    expect(instance).to receive(:ip_addresses).and_return([private_ip, floating_ip])
+  end
+
+  describe :openstack do
+    let(:openstack_compute) do
+      {
+        provider: &#39;OpenStack&#39;,
+        openstack_auth_url: &#39;http://127.0.0.1:5000/v3/auth/tokens&#39;,
+        openstack_username: &#39;foo&#39;,
+        openstack_api_key: &#39;bar&#39;,
+        openstack_tenant: nil,
+        openstack_project_name: &#39;foo&#39;,
+        openstack_domain_name: &#39;mydomain&#39;,
+        openstack_region: &#39;&#39;,
+        openstack_endpoint_type: nil,
+        connection_options: connection_options,
+      }
+    end
+
+    it &#39;should create a Fog::Compute connection&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="instance_manager_spec.html#L57" class="js-smell-location">0</a>                  <a href="instance_manager_spec.html#L67" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(openstack)::itshould create a Fog::Compute connection has a flog score of 25</span>          </div>  </li></ol>
+      expect(Fog::Compute).to receive(:new).with(openstack_compute).and_return(compute)
+      expect(manager.openstack).to eql(compute)
+    end
+
+    context &#39;with connection options&#39; do
+      let(:connection_options) do
+        JSON.generate(&#39;ssl_verify_peer&#39; =&gt; false)
+      end
+
+      it &#39;should add optional options to the Fog::Compute connection&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="instance_manager_spec.html#L57" class="js-smell-location">0</a>                  <a href="instance_manager_spec.html#L67" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(openstack)::context(with connection options)::itshould add optional options to the Fog::Compute connection has a flog score of 27</span>          </div>  </li></ol>
+        expect(Fog::Compute).to receive(:new).with(openstack_compute).and_return(compute)
+        expect(manager.openstack).to eql(compute)
+      end
+    end
+  end
+
+  describe &#39;reading settings&#39; do
+    before(:each) do
+      allow(Fog::Compute).to receive(:new).and_return(compute)
+    end
+
+    it &#39;returns settings after verifying IP address&#39; do
+      create_instance(:instance_id =&gt; &#39;foo&#39;, :settings =&gt; &#39;bar&#39;)
+      actual_ip_is(&#39;10.0.0.1&#39;, nil)
+      expect(manager.read_settings(&#39;foo&#39;, &#39;10.0.0.1&#39;)).to eq(&#39;bar&#39;)
+    end
+
+    it &#39;returns settings after verifying floating IP address&#39; do
+      create_instance(:instance_id =&gt; &#39;foo&#39;, :settings =&gt; &#39;bar&#39;)
+      actual_ip_is(nil, &#39;10.0.1.1&#39;)
+      expect(manager.read_settings(&#39;foo&#39;, &#39;10.0.1.1&#39;)).to eq(&#39;bar&#39;)
+    end
+
+    it &#39;raises an error if IP cannot be verified&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="../aws/instance_manager_spec.html#L57" class="js-smell-location">0</a>                  <a href="instance_manager_spec.html#L91" class="js-smell-location">1</a>                  </div>  </li></ol>
+      create_instance(:instance_id =&gt; &#39;foo&#39;, :settings =&gt; &#39;bar&#39;)
+      actual_ip_is(&#39;10.0.0.1&#39;, &#39;10.0.1.1&#39;)
+      expect {
+        manager.read_settings(&#39;foo&#39;, &#39;10.0.2.1&#39;)
+      }.to raise_error(Bosh::Registry::InstanceError,
+                       &quot;Instance IP mismatch, expected IP is &#39;10.0.2.1&#39;, &quot; \
+                       &quot;actual IP(s): &#39;10.0.0.1, 10.0.1.1&#39;&quot;)
+    end
+
+    it &#39;it should create a new fog connection if there is an Unauthorized error&#39; do
+      create_instance(:instance_id =&gt; &#39;foo&#39;, :settings =&gt; &#39;bar&#39;)
+      expect(compute).to receive(:servers).and_raise(Excon::Errors::Unauthorized, &#39;Unauthorized&#39;)
+      actual_ip_is(&#39;10.0.0.1&#39;, nil)
+      expect(manager.read_settings(&#39;foo&#39;, &#39;10.0.0.1&#39;)).to eq(&#39;bar&#39;)
+    end
+
+    it &#39;it should raise a ConnectionError if there is a persistent Unauthorized error&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(reading settings)::it#it should raise a ConnectionError if there is a persistent Unauthorized error has a flog score of 29</span>          </div>  </li></ol>
+      create_instance(:instance_id =&gt; &#39;foo&#39;, :settings =&gt; &#39;bar&#39;)
+      expect(compute).to receive(:servers).twice.and_raise(Excon::Errors::Unauthorized, &#39;Unauthorized&#39;)
+      expect {
+        expect(manager.read_settings(&#39;foo&#39;, &#39;10.0.0.1&#39;)).to eq(&#39;bar&#39;)
+      }.to raise_error(Bosh::Registry::ConnectionError, &#39;Unable to connect to OpenStack API: Unauthorized&#39;)
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

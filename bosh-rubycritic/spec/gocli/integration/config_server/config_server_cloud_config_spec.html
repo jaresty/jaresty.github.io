@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-05-31 11:26:55 -0700'>2018-05-31 11:26:55 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/gocli/integration/config_server /</small> config_server_cloud_config_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">1097</span><small> lines of codes</small></div>
+              <div><span class="metric">1</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">2185.8</span><small> complexity/method</small></div>
+              <div><span class="metric">20</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">2185.77</span><small> complexity</small></div>
+              <div><span class="metric">2087</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                48
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require_relative &#39;../../spec_helper&#39;
+
+describe &#39;using director with config server&#39;, type: :integration do
+  with_reset_sandbox_before_each(config_server_enabled: true, user_authentication: &#39;uaa&#39;, uaa_encryption: &#39;asymmetric&#39;)
+  let(:manifest_hash) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L5" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L233" class="js-smell-location">1</a>                  </div>  </li></ol>
+    {
+        &#39;name&#39; =&gt; &#39;simple&#39;,
+        &#39;director_uuid&#39; =&gt; &#39;deadbeef&#39;,
+        &#39;releases&#39; =&gt; [{&#39;name&#39; =&gt; &#39;bosh-release&#39;, &#39;version&#39; =&gt; &#39;0.1-dev&#39;}],
+        &#39;update&#39; =&gt; {
+            &#39;canaries&#39; =&gt; 2,
+            &#39;canary_watch_time&#39; =&gt; 4000,
+            &#39;max_in_flight&#39; =&gt; 1,
+            &#39;update_watch_time&#39; =&gt; 20
+        },
+        &#39;instance_groups&#39; =&gt; [{
+            &#39;name&#39; =&gt; &#39;our_instance_group&#39;,
+            &#39;templates&#39; =&gt; [{
+                &#39;name&#39; =&gt; &#39;job_1_with_many_properties&#39;,
+                &#39;properties&#39; =&gt; {
+                    &#39;gargamel&#39; =&gt; {
+                        &#39;color&#39; =&gt; &#39;pitch black&#39;
+                    }
+                }
+            }],
+            &#39;instances&#39; =&gt; 1,
+            &#39;networks&#39; =&gt; [{&#39;name&#39; =&gt; &#39;private&#39;}],
+            &#39;properties&#39; =&gt; {},
+            &#39;vm_type&#39; =&gt; &#39;medium&#39;,
+            &#39;persistent_disk_type&#39; =&gt; &#39;large&#39;,
+            &#39;azs&#39; =&gt; [&#39;z1&#39;],
+            &#39;stemcell&#39; =&gt; &#39;default&#39;
+        }],
+        &#39;stemcells&#39; =&gt; [{&#39;alias&#39; =&gt; &#39;default&#39;, &#39;os&#39; =&gt; &#39;toronto-os&#39;, &#39;version&#39; =&gt; &#39;1&#39;}]
+    }
+  end
+
+  let(:client_env) do
+    { &#39;BOSH_CLIENT&#39; =&gt; &#39;test&#39;, &#39;BOSH_CLIENT_SECRET&#39; =&gt; &#39;secret&#39;, &#39;BOSH_CA_CERT&#39; =&gt; current_sandbox.certificate_path.to_s }
+  end
+  let(:config_server_helper) { Bosh::Spec::ConfigServerHelper.new(current_sandbox, logger)}
+
+  let(:log_options) do
+    { include_credentials: false, env: client_env }
+  end
+
+  def bosh_run_cck_with_resolution(num_errors, option=1, env={})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 4 nodes</span>              <span>Locations:</span>                  <a href="../cli_cck/config_server_enabled_spec.html#L60" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L47" class="js-smell-location">1</a>                  <a href="config_server_runtime_config_spec.html#L45" class="js-smell-location">2</a>                  <a href="tags_spec.html#L51" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe#bosh_run_cck_with_resolution has a flog score of 29</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>bosh_run_cck_with_resolution has approx 10 statements</span>          </div>  </li></ol>
+    output = &#39;&#39;
+    bosh_runner.run_interactively(&#39;cck&#39;, deployment_name: &#39;simple&#39;, client: env[&#39;BOSH_CLIENT&#39;], client_secret: env[&#39;BOSH_CLIENT_SECRET&#39;]) do |runner|
+      (1..num_errors).each do
+        expect(runner).to have_output &#39;Skip for now&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>bosh_run_cck_with_resolution calls 'expect(runner)' 3 times</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L51" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L56" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L59" class="js-smell-location">2</a>                  </div>  </li></ol>
+
+        runner.send_keys option.to_s
+      end
+
+      expect(runner).to have_output &#39;Continue?&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>bosh_run_cck_with_resolution calls 'expect(runner)' 3 times</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L51" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L56" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L59" class="js-smell-location">2</a>                  </div>  </li></ol>
+      runner.send_keys &#39;y&#39;
+
+      expect(runner).to have_output &#39;Succeeded&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>bosh_run_cck_with_resolution calls 'expect(runner)' 3 times</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L51" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L56" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L59" class="js-smell-location">2</a>                  </div>  </li></ol>
+      output = runner.output
+    end
+    output
+  end
+
+
+  context &#39;cloud config contains placeholders&#39; do
+    let(:cloud_config) { Bosh::Spec::Deployments.cloud_config_with_placeholders }
+
+    context &#39;all placeholders are set in config server&#39; do
+      before do
+        config_server_helper.put_value(&#39;/z1_cloud_properties&#39;, {&#39;availability_zone&#39; =&gt; &#39;us-east-1a&#39;})
+        config_server_helper.put_value(&#39;/z2_cloud_properties&#39;, {&#39;availability_zone&#39; =&gt; &#39;us-east-1b&#39;})
+        config_server_helper.put_value(&#39;/ephemeral_disk_placeholder&#39;, {&#39;size&#39; =&gt; &#39;3000&#39;, &#39;type&#39; =&gt; &#39;gp2&#39;})
+        config_server_helper.put_value(&#39;/disk_types_placeholder&#39;, [
+            {
+                &#39;name&#39; =&gt; &#39;small&#39;,
+                &#39;disk_size&#39; =&gt; 3000,
+                &#39;cloud_properties&#39; =&gt; {&#39;type&#39; =&gt; &#39;gp2&#39;}
+            }, {
+                &#39;name&#39; =&gt; &#39;large&#39;,
+                &#39;disk_size&#39; =&gt; 50_000,
+                &#39;cloud_properties&#39; =&gt; {&#39;type&#39; =&gt; &#39;gp2&#39;}
+            }
+        ])<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L84" class="js-smell-location">0</a>                  <a href="../links_api_spec.html#L53" class="js-smell-location">1</a>                  </div>  </li></ol>
+        config_server_helper.put_value(&#39;/subnets_placeholder&#39;, [
+            {
+                &#39;range&#39; =&gt; &#39;10.10.0.0/24&#39;,
+                &#39;gateway&#39; =&gt; &#39;10.10.0.1&#39;,
+                &#39;az&#39; =&gt; &#39;z1&#39;,
+                &#39;static&#39; =&gt; [&#39;10.10.0.62&#39;],
+                &#39;dns&#39; =&gt; [&#39;10.10.0.2&#39;],
+                &#39;cloud_properties&#39; =&gt; {&#39;subnet&#39; =&gt; &#39;subnet-f2744a86&#39;}
+            }, {
+                &#39;range&#39; =&gt; &#39;10.10.64.0/24&#39;,
+                &#39;gateway&#39; =&gt; &#39;10.10.64.1&#39;,
+                &#39;az&#39; =&gt; &#39;z2&#39;,
+                &#39;static&#39; =&gt; [&#39;10.10.64.121&#39;, &#39;10.10.64.122&#39;],
+                &#39;dns&#39; =&gt; [&#39;10.10.0.2&#39;],
+                &#39;cloud_properties&#39; =&gt; {&#39;subnet&#39; =&gt; &#39;subnet-eb8bd3ad&#39;}
+            }
+        ])
+        config_server_helper.put_value(&#39;/workers_placeholder&#39;, 5)
+      end
+
+      it &#39;uses the interpolated values for a successful deploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud config contains placeholders)::context(all placeholders are set in config server)::it#uses the interpolated values for a successful deploy has a flog score of 52</span>          </div>  </li></ol>
+        deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config, include_credentials: false, env: client_env)
+        
+        create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+        expect(create_vm_invocations.last.inputs[&#39;cloud_properties&#39;]).to eq({&#39;availability_zone&#39;=&gt;&#39;us-east-1a&#39;, &#39;ephemeral_disk&#39;=&gt;{&#39;size&#39;=&gt;&#39;3000&#39;,&#39;type&#39;=&gt;&#39;gp2&#39;}, &#39;instance_type&#39;=&gt;&#39;m3.medium&#39;})
+
+        create_disk_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_disk&#39;)
+        expect(create_disk_invocations.last.inputs[&#39;size&#39;]).to eq(50_000)
+        expect(create_disk_invocations.last.inputs[&#39;cloud_properties&#39;]).to eq({&#39;type&#39; =&gt; &#39;gp2&#39;})
+      end
+
+      context &#39;after a successful deployment&#39; do
+        before do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L117" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L204" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L223" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L281" class="js-smell-location">3</a>                  </div>  </li></ol>
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config, return_exit_code: true, include_credentials: false, env: client_env)
+        end
+
+        context &#39;variable values were changed&#39; do
+          before do
+            config_server_helper.put_value(&#39;/z1_cloud_properties&#39;, {&#39;availability_zone&#39; =&gt; &#39;us-mid-west&#39;})
+            config_server_helper.put_value(&#39;/disk_types_placeholder&#39;, [{&#39;name&#39; =&gt; &#39;large&#39;, &#39;disk_size&#39; =&gt; 100_000, &#39;cloud_properties&#39; =&gt; {&#39;type&#39; =&gt; &#39;gp1&#39;}}])
+          end
+
+          context &#39;deployment has unresponsive agents&#39; do
+            before {
+              current_sandbox.cpi.kill_agents
+            }
+
+            it &#39;should use old variable value during CCK - recreate VM&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud config contains placeholders)::context(all placeholders are set in config server)::context(after a successful deployment)::context(variable values were changed)::context(deployment has unresponsive agents)::it#should use old variable value during CCK - recreate VM has a flog score of 43</span>          </div>  </li></ol>
+              pre_kill_invocations_size = current_sandbox.cpi.invocations.size
+
+              recreate_vm = 3
+              bosh_run_cck_with_resolution(1, recreate_vm, client_env)
+
+              invocations = current_sandbox.cpi.invocations.drop(pre_kill_invocations_size)
+              create_vm_invocation = invocations.select { |invocation| invocation.method_name == &#39;create_vm&#39; }.last
+              expect(create_vm_invocation.inputs[&#39;cloud_properties&#39;]).to eq({&#39;availability_zone&#39;=&gt;&#39;us-east-1a&#39;, &#39;ephemeral_disk&#39;=&gt;{&#39;size&#39;=&gt;&#39;3000&#39;,&#39;type&#39;=&gt;&#39;gp2&#39;}, &#39;instance_type&#39;=&gt;&#39;m3.medium&#39;})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L140" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L154" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L163" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L190" class="js-smell-location">3</a>                  </div>  </li></ol>
+            end
+          end
+
+          it &#39;should use old variable value during hard stop, start&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud config contains placeholders)::context(all placeholders are set in config server)::context(after a successful deployment)::context(variable values were changed)::it#should use old variable value during hard stop, start has a flog score of 60</span>          </div>  </li></ol>
+            instance = director.instance(&#39;our_instance_group&#39;, &#39;0&#39;, deployment_name: &#39;simple&#39;, include_credentials: false, env: client_env)
+
+            bosh_runner.run(&quot;stop --hard #{instance.instance_group_name}/#{instance.id}&quot;, deployment_name: &#39;simple&#39;, no_login: true, include_credentials: false, env: client_env)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L147" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L150" class="js-smell-location">1</a>                  </div>  </li></ol>
+            pre_start_invocations_size = current_sandbox.cpi.invocations.size
+
+            bosh_runner.run(&quot;start #{instance.instance_group_name}/#{instance.id}&quot;, deployment_name: &#39;simple&#39;, no_login: true, include_credentials: false, env: client_env)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L147" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L150" class="js-smell-location">1</a>                  </div>  </li></ol>
+            invocations = current_sandbox.cpi.invocations.drop(pre_start_invocations_size)
+
+            create_vm_invocation = invocations.select { |invocation| invocation.method_name == &#39;create_vm&#39; }.last
+            expect(create_vm_invocation.inputs[&#39;cloud_properties&#39;]).to eq({&#39;availability_zone&#39;=&gt;&#39;us-east-1a&#39;, &#39;ephemeral_disk&#39;=&gt;{&#39;size&#39;=&gt;&#39;3000&#39;,&#39;type&#39;=&gt;&#39;gp2&#39;}, &#39;instance_type&#39;=&gt;&#39;m3.medium&#39;})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L140" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L154" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L163" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L190" class="js-smell-location">3</a>                  </div>  </li></ol>
+          end
+
+          it &#39;should use the new variable values on redeploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud config contains placeholders)::context(all placeholders are set in config server)::context(after a successful deployment)::context(variable values were changed)::it#should use the new variable values on redeploy has a flog score of 71</span>          </div>  </li></ol>
+            pre_second_deploy_invocations_size = current_sandbox.cpi.invocations.size
+            deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config, return_exit_code: true, include_credentials: false, env: client_env)
+            invocations = current_sandbox.cpi.invocations.drop(pre_second_deploy_invocations_size)
+
+            create_vm_invocation = invocations.select { |invocation| invocation.method_name == &#39;create_vm&#39; }.last
+            expect(create_vm_invocation.inputs[&#39;cloud_properties&#39;]).to eq({&#39;availability_zone&#39;=&gt;&#39;us-mid-west&#39;, &#39;ephemeral_disk&#39;=&gt;{&#39;size&#39;=&gt;&#39;3000&#39;,&#39;type&#39;=&gt;&#39;gp2&#39;}, &#39;instance_type&#39;=&gt;&#39;m3.medium&#39;})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L140" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L154" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L163" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L190" class="js-smell-location">3</a>                  </div>  </li></ol>
+
+            create_disk_invocation = invocations.select { |invocation| invocation.method_name == &#39;create_disk&#39; }.last
+            expect(create_disk_invocation.inputs[&#39;cloud_properties&#39;]).to eq({&#39;type&#39; =&gt; &#39;gp1&#39;})
+            expect(create_disk_invocation.inputs[&#39;size&#39;]).to eq(100_000)
+          end
+        end
+
+        context &#39;only leaf-cloud-property variable values were changed&#39; do
+          before do
+            config_server_helper.put_value(&#39;/ephemeral_disk_placeholder&#39;,{&#39;size&#39; =&gt; &#39;2000&#39;, &#39;type&#39; =&gt; &#39;gp1&#39;})
+          end
+
+          it &#39;should recreate the VM on redeploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud config contains placeholders)::context(all placeholders are set in config server)::context(after a successful deployment)::context(only leaf-cloud-property variable values were changed)::it#should recreate the VM on redeploy has a flog score of 30</span>          </div>  </li></ol>
+            old_instance = director.instance(&#39;our_instance_group&#39;, &#39;0&#39;, deployment_name: &#39;simple&#39;, include_credentials: false, env: client_env)
+            deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config, return_exit_code: true, include_credentials: false, env: client_env)
+            new_instance = director.instance(&#39;our_instance_group&#39;, &#39;0&#39;, deployment_name: &#39;simple&#39;, include_credentials: false, env: client_env)
+
+            expect(old_instance.vm_cid).to_not eq(new_instance.vm_cid)
+          end
+
+          it &#39;should use the new variable values on redeploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud config contains placeholders)::context(all placeholders are set in config server)::context(after a successful deployment)::context(only leaf-cloud-property variable values were changed)::it#should use the new variable values on redeploy has a flog score of 43</span>          </div>  </li></ol>
+            pre_second_deploy_invocations_size = current_sandbox.cpi.invocations.size
+            deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config, return_exit_code: true, include_credentials: false, env: client_env)
+            invocations = current_sandbox.cpi.invocations.drop(pre_second_deploy_invocations_size)
+
+            create_vm_invocation = invocations.select { |invocation| invocation.method_name == &#39;create_vm&#39; }.last
+            expect(create_vm_invocation.inputs[&#39;cloud_properties&#39;]).to eq({&#39;availability_zone&#39;=&gt;&#39;us-east-1a&#39;, &#39;ephemeral_disk&#39;=&gt;{&#39;size&#39;=&gt;&#39;2000&#39;,&#39;type&#39;=&gt;&#39;gp1&#39;}, &#39;instance_type&#39;=&gt;&#39;m3.medium&#39;})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L140" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L154" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L163" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L190" class="js-smell-location">3</a>                  </div>  </li></ol>
+          end
+        end
+      end
+    end
+
+    context &#39;all placeholders are NOT set in config server&#39; do
+      before do
+        config_server_helper.put_value(&#39;/z1_cloud_properties&#39;, {&#39;availability_zone&#39; =&gt; &#39;us-east-1a&#39;})
+        config_server_helper.put_value(&#39;/z2_cloud_properties&#39;, {&#39;availability_zone&#39; =&gt; &#39;us-east-1b&#39;})
+        config_server_helper.put_value(&#39;/ephemeral_disk_placeholder&#39;, {&#39;size&#39; =&gt; &#39;3000&#39;, &#39;type&#39; =&gt; &#39;gp2&#39;})
+      end
+
+      it &#39;errors on deploy&#39; do
+        expect {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L117" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L204" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L223" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L281" class="js-smell-location">3</a>                  </div>  </li></ol>
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config, return_exit_code: true, include_credentials: false, env: client_env)
+        }.to raise_error
+      end
+    end
+
+    context &#39;some placeholders have relative (non-absolute) path&#39; do
+      before do
+        cloud_config[&#39;azs&#39;][0][&#39;cloud_properties&#39;] = &#39;((z1_cloud_properties))&#39;
+      end
+
+      it &#39;does NOT error on update of cloud-config&#39; do
+        cloud_config_manifest = yaml_file(&#39;cloud_manifest&#39;, cloud_config)
+        expect {
+          bosh_runner.run(&quot;update-cloud-config #{cloud_config_manifest.path}&quot;, no_login: true, include_credentials: false, env: client_env)
+        }.to_not raise_error
+      end
+
+      it &#39;errors on deploy&#39; do
+        expect {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L117" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L204" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L223" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L281" class="js-smell-location">3</a>                  </div>  </li></ol>
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config, return_exit_code: true, include_credentials: false, env: client_env)
+        }.to raise_error(RuntimeError, /Relative paths are not allowed in this context. The following must be be switched to use absolute paths: &#39;z1_cloud_properties&#39;/)
+      end
+    end
+  end
+
+  context &#39;cloud config contains cloud properties only placeholders&#39; do
+    let(:cloud_config) { Bosh::Spec::Deployments::cloud_config_with_cloud_properties_placeholders }
+
+    let(:manifest_hash) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L5" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L233" class="js-smell-location">1</a>                  </div>  </li></ol>
+      {
+        &#39;name&#39; =&gt; &#39;simple&#39;,
+        &#39;director_uuid&#39; =&gt; &#39;deadbeef&#39;,
+        &#39;releases&#39; =&gt; [{&#39;name&#39; =&gt; &#39;bosh-release&#39;, &#39;version&#39; =&gt; &#39;0.1-dev&#39;}],
+        &#39;update&#39; =&gt; {
+            &#39;canaries&#39; =&gt; 2,
+            &#39;canary_watch_time&#39; =&gt; 4000,
+            &#39;max_in_flight&#39; =&gt; 1,
+            &#39;update_watch_time&#39; =&gt; 20
+        },
+        &#39;instance_groups&#39; =&gt; [{
+            &#39;name&#39; =&gt; &#39;our_instance_group&#39;,
+            &#39;templates&#39; =&gt; [{
+                &#39;name&#39; =&gt; &#39;job_1_with_many_properties&#39;,
+                &#39;properties&#39; =&gt; {
+                    &#39;gargamel&#39; =&gt; {
+                        &#39;color&#39; =&gt; &#39;pitch black&#39;
+                    }
+                }
+            }],
+            &#39;instances&#39; =&gt; 1,
+            &#39;networks&#39; =&gt; [{&#39;name&#39; =&gt; &#39;private&#39;}],
+            &#39;properties&#39; =&gt; {},
+            &#39;vm_type&#39; =&gt; &#39;small&#39;,
+            &#39;persistent_disk_type&#39; =&gt; &#39;small&#39;,
+            &#39;azs&#39; =&gt; [&#39;z1&#39;],
+            &#39;stemcell&#39; =&gt; &#39;default&#39;
+        }],
+        &#39;stemcells&#39; =&gt; [{&#39;alias&#39; =&gt; &#39;default&#39;, &#39;os&#39; =&gt; &#39;toronto-os&#39;, &#39;version&#39; =&gt; &#39;1&#39;}]
+      }
+    end
+
+    before do
+      config_server_helper.put_value(&#39;/never-log-me&#39;, &#39;super-secret&#39;)
+    end
+
+    it &#39;does not log interpolated cloud properties in the task logs and deploy output&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud config contains cloud properties only placeholders)::it#does not log interpolated cloud properties in the task logs and deploy output has a flog score of 28</span>          </div>  </li></ol>
+      deploy_output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config, include_credentials: false, env: client_env)
+      expect(deploy_output).to_not include(&#39;super-secret&#39;)
+
+      task_id = deploy_output.match(/^Task (\d+)$/)[1]
+
+      debug_output = bosh_runner.run(&quot;task --debug --event --cpi --result #{task_id}&quot;, no_login: true, include_credentials: false, env: client_env)
+      expect(debug_output).to_not include(&#39;super-secret&#39;)
+    end
+
+    context &#39;after a successful deployment&#39; do
+      before do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L117" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L204" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L223" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L281" class="js-smell-location">3</a>                  </div>  </li></ol>
+        deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config, return_exit_code: true, include_credentials: false, env: client_env)
+      end
+
+      context &#39;deployment has unresponsive agents&#39; do
+        before {
+          current_sandbox.cpi.kill_agents
+        }
+
+        it &#39;does not log interpolated cloud properties in the task logs during CCK - recreate VM&#39; do
+          recreate_vm = 3
+          cck_output = bosh_run_cck_with_resolution(1, recreate_vm, client_env)
+
+          expect_logs_not_to_contain(&#39;my-dep&#39;, Bosh::Spec::OutputParser.new(cck_output).task_id, [&#39;super-secret&#39;], log_options)
+        end
+      end
+    end
+  end
+
+  context &#39;#146889417 Expected variable to be already versioned in deployment&#39; do
+    let(:manifest_hash) do
+      {
+        &#39;name&#39; =&gt; &#39;foo-deployment&#39;,
+        &#39;director_uuid&#39; =&gt; nil,
+        &#39;releases&#39; =&gt; [{ &#39;name&#39; =&gt; &#39;bosh-release&#39;, &#39;version&#39; =&gt; &#39;latest&#39; }],
+        &#39;jobs&#39; =&gt; [
+          {
+            &#39;azs&#39; =&gt; [&#39;z1&#39;],
+            &#39;instances&#39; =&gt; 1,
+            &#39;name&#39; =&gt; &#39;hjMOn&#39;,
+            &#39;networks&#39; =&gt; [{ &#39;name&#39; =&gt; &#39;j6XUS1M&#39;, &#39;static_ips&#39; =&gt; [&#39;192.168.3.246&#39;] }],
+            &#39;vm_type&#39; =&gt; &#39;dMF8vIexnI&#39;,
+            &#39;templates&#39; =&gt; [{
+              &#39;name&#39; =&gt; &#39;foobar&#39;,
+              &#39;release&#39; =&gt; &#39;bosh-release&#39;,
+            }],
+            &#39;stemcell&#39; =&gt; &#39;default&#39;,
+          },
+        ],
+        &#39;update&#39; =&gt; {
+          &#39;canaries&#39; =&gt; 1,
+          &#39;canary_watch_time&#39; =&gt; 4000,
+          &#39;max_in_flight&#39; =&gt; 100,
+          &#39;update_watch_time&#39; =&gt; 20,
+        },
+        &#39;stemcells&#39; =&gt; [{ &#39;os&#39; =&gt; &#39;toronto-os&#39;, &#39;version&#39; =&gt; 1, &#39;alias&#39; =&gt; &#39;default&#39; }],
+      }
+    end
+
+    let(:cloud_config_hash) do
+      {
+        &#39;azs&#39; =&gt; [
+          {
+            &#39;cloud_properties&#39; =&gt; { &#39;hz4RwVr&#39; =&gt; &#39;((/moVsfGUa))&#39; },
+            &#39;name&#39; =&gt; &#39;z1&#39;,
+          },
+        ],
+        &#39;compilation&#39; =&gt; { &#39;network&#39; =&gt; &#39;cAknaSb&#39;, &#39;workers&#39; =&gt; 1 },
+        &#39;networks&#39; =&gt; [
+          {
+            &#39;name&#39; =&gt; &#39;j6XUS1M&#39;,
+            &#39;subnets&#39; =&gt; [
+              {
+                &#39;azs&#39; =&gt; [&#39;z1&#39;],
+                &#39;cloud_properties&#39; =&gt; {},
+                &#39;dns&#39; =&gt; [&#39;8.8.8.8&#39;],
+                &#39;gateway&#39; =&gt; &#39;192.168.3.1&#39;,
+                &#39;range&#39; =&gt; &#39;192.168.3.0/24&#39;,
+                &#39;reserved&#39; =&gt; [
+                  &#39;192.168.3.13&#39;,
+                  &#39;192.168.3.104-192.168.3.137&#39;,
+                  &#39;192.168.3.139-192.168.3.198&#39;,
+                ],
+                &#39;static&#39; =&gt; [&#39;192.168.3.200-192.168.3.253&#39;],
+              },
+            ],
+            &#39;type&#39; =&gt; &#39;manual&#39;,
+          },
+          {
+            &#39;name&#39; =&gt; &#39;cAknaSb&#39;,
+            &#39;subnets&#39; =&gt; [
+              {
+                &#39;cloud_properties&#39; =&gt; {},
+                &#39;dns&#39; =&gt; [&#39;8.8.8.8&#39;],
+              },
+            ],
+            &#39;type&#39; =&gt; &#39;dynamic&#39;,
+          },
+        ],
+        &#39;vm_types&#39; =&gt; [{ &#39;cloud_properties&#39; =&gt; {}, &#39;name&#39; =&gt; &#39;dMF8vIexnI&#39; }],
+      }
+    end
+
+    before do
+      config_server_helper.put_value(&#39;/moVsfGUa&#39;,&quot;c8jNLgq&quot;)
+    end
+
+    it &#39;should not raise an error&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(#146889417 Expected variable to be already versioned in deployment)::it#should not raise an error has a flog score of 27</span>          </div>  </li></ol>
+      deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, return_exit_code: true, include_credentials: false, env: client_env)
+
+      manifest = yaml_file(&#39;manifest&#39;, manifest_hash)
+      bosh_runner.run(&quot;deploy #{manifest.path}&quot;, deployment_name: &#39;foo-deployment&#39;, return_exit_code: true, include_credentials: false, env: client_env)
+
+      expect {
+        bosh_runner.run(&quot;recreate&quot;, deployment_name: &#39;foo-deployment&#39;, return_exit_code: true, include_credentials: false, env: client_env)
+      }.to_not raise_error
+    end
+  end
+
+  context &#39;when persistent disks have variables in their cloud_properties&#39; do
+    let(:manifest) do
+      {
+        &#39;name&#39; =&gt; &#39;foo-deployment&#39;,
+        &#39;instance_groups&#39; =&gt; [
+          {
+            &#39;name&#39; =&gt; &#39;ig_1&#39;,
+            &#39;instances&#39; =&gt; 2,
+            &#39;vm_type&#39; =&gt; &#39;default&#39;,
+            &#39;azs&#39; =&gt; [&#39;z1&#39;],
+            &#39;networks&#39; =&gt; [
+              {
+                &#39;name&#39; =&gt; &#39;default&#39;,
+              },
+            ],
+            &#39;persistent_disk_type&#39; =&gt; &#39;default&#39;,
+            &#39;stemcell&#39; =&gt; &#39;default&#39;,
+            &#39;jobs&#39; =&gt; [
+              {
+                &#39;name&#39; =&gt; &#39;foobar&#39;,
+                &#39;release&#39; =&gt; &#39;bosh-release&#39;,
+              },
+            ],
+          },
+        ],
+        &#39;releases&#39; =&gt; [
+          {
+            &#39;name&#39; =&gt; &#39;bosh-release&#39;,
+            &#39;version&#39; =&gt; &#39;0+dev.1&#39;,
+          },
+        ],
+        &#39;stemcells&#39; =&gt; [{
+          &#39;alias&#39; =&gt; &#39;default&#39;,
+          &#39;os&#39; =&gt; &#39;toronto-os&#39;,
+          &#39;version&#39; =&gt; &#39;latest&#39;,
+        }],
+        &#39;update&#39; =&gt; {
+          &#39;canaries&#39; =&gt; 5,
+          &#39;canary_watch_time&#39; =&gt; 4000,
+          &#39;max_in_flight&#39; =&gt; 2,
+          &#39;update_watch_time&#39; =&gt; 20,
+        },
+      }
+    end
+
+    let(:cloud_config) do
+      {
+        &#39;azs&#39; =&gt; [
+          {
+            &#39;name&#39; =&gt; &#39;z1&#39;,
+          },
+        ],
+        &#39;compilation&#39; =&gt; {
+          &#39;az&#39; =&gt; &#39;z1&#39;,
+          &#39;network&#39; =&gt; &#39;default&#39;,
+          &#39;workers&#39; =&gt; 1,
+        },
+        &#39;vm_types&#39; =&gt; [
+          &#39;name&#39; =&gt; &#39;default&#39;,
+        ],
+        &#39;disk_types&#39; =&gt; [
+          {
+            &#39;cloud_properties&#39; =&gt; {
+              &#39;prop_1&#39; =&gt; &#39;((/smurf_1))&#39;,
+            },
+            &#39;disk_size&#39; =&gt; 100,
+            &#39;name&#39; =&gt; &#39;default&#39;,
+          },
+        ],
+        &#39;networks&#39; =&gt; [
+          {
+            &#39;name&#39; =&gt; &#39;default&#39;,
+            &#39;subnets&#39; =&gt; [
+              {
+                &#39;azs&#39; =&gt; [&#39;z1&#39;],
+                &#39;dns&#39; =&gt; [&#39;8.8.8.8&#39;],
+                &#39;gateway&#39; =&gt; &#39;192.168.4.1&#39;,
+                &#39;range&#39; =&gt; &#39;192.168.4.0/24&#39;,
+              },
+            ],
+            &#39;type&#39; =&gt; &#39;manual&#39;,
+          },
+        ],
+      }
+    end
+
+    context &#39;when there are changes to variable value on config-server&#39; do
+      before do
+        config_server_helper.put_value(&#39;/smurf_1&#39;, &#39;my_value_1&#39;)
+        deploy_from_scratch(no_login: true, manifest_hash: manifest, cloud_config_hash: cloud_config, include_credentials: false, env: client_env)
+        config_server_helper.put_value(&#39;/smurf_1&#39;, &#39;my_value_2&#39;)
+      end
+
+      it &#39;should update instances when redeploying&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(when persistent disks have variables in their cloud_properties)::context(when there are changes to variable value on config-server)::it#should update instances when redeploying has a flog score of 31</span>          </div>  </li></ol>
+        created_instance = director.instances(deployment_name: &#39;foo-deployment&#39;, include_credentials: false, env: client_env)
+
+        output = deploy_from_scratch(no_login: true, manifest_hash: manifest, cloud_config_hash: cloud_config, include_credentials: false, env: client_env)
+
+        expect(created_instance.count).to eq(2)
+        created_instance.each do |instance|
+          expect(output).to include(&quot;Updating instance ig_1: ig_1/#{instance.id}&quot;)
+        end
+      end
+    end
+
+    context &#39;when there are NO changes to variables value on config-server&#39; do
+      before do
+        config_server_helper.put_value(&#39;/smurf_1&#39;, &#39;my_value_1&#39;)
+        deploy_from_scratch(no_login: true, manifest_hash: manifest, cloud_config_hash: cloud_config, include_credentials: false, env: client_env)
+      end
+
+      it &#39;should not make any updates when redeploying&#39; do
+        output = deploy_from_scratch(no_login: true, manifest_hash: manifest, cloud_config_hash: cloud_config, include_credentials: false, env: client_env)
+        task_id = Bosh::Spec::OutputParser.new(output).task_id
+        task_output = bosh_runner.run(&quot;task #{task_id} --debug&quot;, deployment_name: &#39;foo-deployment&#39;, include_credentials: false, env: client_env)
+        expect(task_output).to include(&quot;No instances to update for &#39;ig_1&#39;&quot;)
+      end
+    end
+  end
+
+  context &#39;cloud properties interpolation&#39; do
+
+    let(:manifest_hash) do
+      {
+        &#39;name&#39; =&gt; &#39;my-dep&#39;,
+        &#39;director_uuid&#39; =&gt; &#39;deadbeef&#39;,
+        &#39;releases&#39; =&gt; [{&#39;name&#39; =&gt; &#39;bosh-release&#39;, &#39;version&#39; =&gt; &#39;0.1-dev&#39;}],
+        &#39;update&#39; =&gt; {
+          &#39;canaries&#39; =&gt; 2,
+          &#39;canary_watch_time&#39; =&gt; 4000,
+          &#39;max_in_flight&#39; =&gt; 1,
+          &#39;update_watch_time&#39; =&gt; 20
+        },
+        &#39;instance_groups&#39; =&gt; [
+          {
+            &#39;name&#39; =&gt; &#39;instance_group_1&#39;,
+            &#39;jobs&#39; =&gt; [
+              {
+                &#39;name&#39; =&gt; &#39;job_1_with_many_properties&#39;,
+                &#39;properties&#39; =&gt; {
+                  &#39;gargamel&#39; =&gt; {
+                    &#39;color&#39; =&gt; &#39;pitch black&#39;
+                  }
+                }
+              }
+            ],
+            &#39;instances&#39; =&gt; 1,
+            &#39;networks&#39; =&gt; [{&#39;name&#39; =&gt; &#39;private&#39;}],
+            &#39;vm_extensions&#39; =&gt; [&#39;vm-extension-1&#39;],
+            &#39;vm_type&#39; =&gt; &#39;small&#39;,
+            &#39;persistent_disk_type&#39; =&gt; &#39;normal_disk&#39;,
+            &#39;azs&#39; =&gt; [&#39;z1&#39;],
+            &#39;stemcell&#39; =&gt; &#39;default&#39;
+          }
+        ],
+        &#39;stemcells&#39; =&gt; [{&#39;alias&#39; =&gt; &#39;default&#39;, &#39;os&#39; =&gt; &#39;toronto-os&#39;, &#39;version&#39; =&gt; &#39;1&#39;}]
+      }
+    end
+
+    let(:cloud_config_hash) do
+      {
+        &#39;azs&#39; =&gt; [
+          {&#39;name&#39; =&gt; &#39;z1&#39;, &#39;cloud_properties&#39; =&gt; {}},
+          {&#39;name&#39; =&gt; &#39;z2&#39;, &#39;cloud_properties&#39; =&gt; {}}
+        ],
+
+        &#39;vm_types&#39; =&gt; [
+          {
+            &#39;name&#39; =&gt; &#39;small&#39;,
+            &#39;cloud_properties&#39; =&gt; {
+              &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;
+            }
+          },
+          {
+            &#39;name&#39; =&gt; &#39;medium&#39;,
+            &#39;cloud_properties&#39; =&gt; {
+              &#39;instance_type&#39; =&gt; &#39;m3.medium&#39;
+            }
+          }
+        ],
+
+        &#39;disk_types&#39; =&gt; [
+          {
+          &#39;name&#39; =&gt; &#39;normal_disk&#39;,
+          &#39;disk_size&#39; =&gt; 504,
+          &#39;cloud_properties&#39; =&gt; {}
+          }
+        ],
+
+        &#39;vm_extensions&#39; =&gt; [{&#39;name&#39; =&gt; &#39;vm-extension-1&#39;, &#39;cloud_properties&#39; =&gt; {}}],
+
+        &#39;networks&#39; =&gt; [
+          {
+            &#39;name&#39; =&gt; &#39;private&#39;,
+            &#39;type&#39; =&gt; &#39;manual&#39;,
+            &#39;subnets&#39; =&gt; [
+              {
+                &#39;range&#39; =&gt; &#39;10.10.0.0/24&#39;,
+                &#39;gateway&#39; =&gt; &#39;10.10.0.1&#39;,
+                &#39;az&#39; =&gt; &#39;z1&#39;,
+                &#39;static&#39; =&gt; [&#39;10.10.0.62&#39;],
+                &#39;dns&#39; =&gt; [&#39;10.10.0.2&#39;],
+                &#39;cloud_properties&#39; =&gt; {}
+              }, {
+                &#39;range&#39; =&gt; &#39;10.10.64.0/24&#39;,
+                &#39;gateway&#39; =&gt; &#39;10.10.64.1&#39;,
+                &#39;az&#39; =&gt; &#39;z2&#39;,
+                &#39;static&#39; =&gt; [&#39;10.10.64.121&#39;, &#39;10.10.64.122&#39;],
+                &#39;dns&#39; =&gt; [&#39;10.10.0.2&#39;],
+                &#39;cloud_properties&#39; =&gt; {}
+              }
+            ]
+          },
+          {
+            &#39;name&#39; =&gt; &#39;vip&#39;,
+            &#39;type&#39; =&gt; &#39;vip&#39;,
+            &#39;cloud_properties&#39; =&gt; {}
+          }
+        ],
+
+        &#39;compilation&#39; =&gt; {
+          &#39;workers&#39; =&gt; 10,
+          &#39;reuse_compilation_vms&#39; =&gt; true,
+          &#39;az&#39; =&gt; &#39;z1&#39;,
+          &#39;vm_type&#39; =&gt; &#39;medium&#39;,
+          &#39;network&#39; =&gt; &#39;private&#39;
+        }
+      }
+    end
+
+    context &#39;azs cloud_properties&#39; do
+      before do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L621" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L738" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L795" class="js-smell-location">2</a>                  </div>  </li></ol>
+        cloud_config_hash[&#39;azs&#39;][0][&#39;cloud_properties&#39;] = { &#39;smurf_1&#39; =&gt; &#39;((/smurf_1_variable))&#39; }
+        config_server_helper.put_value(&#39;/smurf_1_variable&#39;, &#39;cat_1&#39;)
+      end
+
+      it &#39;interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L626" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L665" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L686" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L743" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(azs cloud_properties)::it#interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs has a flog score of 54</span>          </div>  </li></ol>
+        output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+        expect(create_vm_invocations.size).to eq(1)
+        expect(create_vm_invocations[0].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1&#39;, &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;})
+
+        variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+        expect(variables_names).to match_array([&#39;/smurf_1_variable&#39;])
+
+        expect_logs_not_to_contain(&#39;my-dep&#39;, Bosh::Spec::OutputParser.new(output).task_id, [&#39;cat_1&#39;], log_options)
+      end
+
+      it &#39;does not update deployment when variables values do not change before a second deploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(azs cloud_properties)::it#does not update deployment when variables values do not change before a second deploy has a flog score of 76</span>          </div>  </li></ol>
+        # First Deploy
+        deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        # Second Deploy
+        output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+        expect(output).to_not include(&#39;Updating instance instance_group_1&#39;)
+
+        task_id = Bosh::Spec::OutputParser.new(output).task_id
+        task_output = bosh_runner.run(&quot;task #{task_id} --debug&quot;, deployment_name: &#39;my-dep&#39;, include_credentials: false, env: client_env)
+        expect(task_output).to include(&quot;No instances to update for &#39;instance_group_1&#39;&quot;)
+
+        create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+        expect(create_vm_invocations.size).to eq(1)
+        expect(create_vm_invocations[0].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1&#39;, &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;})
+
+        variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+        expect(variables_names).to match_array([&#39;/smurf_1_variable&#39;])
+      end
+
+      context &#39;when variables value gets updated after deploying&#39; do
+        before do
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+          config_server_helper.put_value(&#39;/smurf_1_variable&#39;, &#39;cat_2&#39;)
+        end
+
+        it &#39;updates the deployment with new values when deploying for second time&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L626" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L665" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L686" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L743" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(azs cloud_properties)::context(when variables value gets updated after deploying)::it#updates the deployment with new values when deploying for second time has a flog score of 58</span>          </div>  </li></ol>
+          output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+          expect(create_vm_invocations.size).to eq(2)
+          expect(create_vm_invocations[1].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_2&#39;, &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable&#39;])
+
+          expect_logs_not_to_contain(&#39;my-dep&#39;, Bosh::Spec::OutputParser.new(output).task_id, [&#39;cat_2&#39;], log_options)
+        end
+      end
+    end
+
+    context &#39;vm_types cloud_properties&#39; do
+      before do
+        cloud_config_hash[&#39;vm_types&#39;][0][&#39;cloud_properties&#39;][&#39;smurf_1&#39;] = &#39;((/smurf_1_variable))&#39;
+        config_server_helper.put_value(&#39;/smurf_1_variable&#39;, &#39;cat_1&#39;)
+      end
+
+      it &#39;interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L626" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L665" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L686" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L743" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(vm_types cloud_properties)::it#interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs has a flog score of 54</span>          </div>  </li></ol>
+        output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+        expect(create_vm_invocations.size).to eq(1)
+        expect(create_vm_invocations[0].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1&#39;, &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;})
+
+        variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+        expect(variables_names).to match_array([&#39;/smurf_1_variable&#39;])
+
+        expect_logs_not_to_contain(&#39;my-dep&#39;, Bosh::Spec::OutputParser.new(output).task_id, [&#39;cat_1&#39;], log_options)
+      end
+
+      it &#39;does not update deployment when variables values do not change before a second deploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L699" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L756" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(vm_types cloud_properties)::it#does not update deployment when variables values do not change before a second deploy has a flog score of 69</span>          </div>  </li></ol>
+        # First Deploy
+        deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        # Second Deploy
+        second_deploy_output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        task_id = Bosh::Spec::OutputParser.new(second_deploy_output).task_id
+        task_output = bosh_runner.run(&quot;task #{task_id} --debug&quot;, deployment_name: &#39;my-dep&#39;, include_credentials: false, env: client_env)
+        expect(task_output).to include(&quot;No instances to update for &#39;instance_group_1&#39;&quot;)
+
+        create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+        expect(create_vm_invocations.size).to eq(1)
+        expect(create_vm_invocations[0].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1&#39;, &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;})
+
+        variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+        expect(variables_names).to match_array([&#39;/smurf_1_variable&#39;])
+      end
+
+      context &#39;when variables value gets updated after deploying&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L718" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L775" class="js-smell-location">1</a>                  </div>  </li></ol>
+        before do
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+          config_server_helper.put_value(&#39;/smurf_1_variable&#39;, &#39;cat_2&#39;)
+        end
+
+        it &#39;updates the deployment with new values when deploying for second time&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(vm_types cloud_properties)::context(when variables value gets updated after deploying)::it#updates the deployment with new values when deploying for second time has a flog score of 51</span>          </div>  </li></ol>
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+          expect(create_vm_invocations.size).to eq(2)
+          expect(create_vm_invocations[1].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_2&#39;, &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable&#39;])
+        end
+      end
+    end
+
+    context &#39;vm_extensions cloud_properties&#39; do
+      before do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L621" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L738" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L795" class="js-smell-location">2</a>                  </div>  </li></ol>
+        cloud_config_hash[&#39;vm_extensions&#39;][0][&#39;cloud_properties&#39;] = { &#39;smurf_1&#39; =&gt; &#39;((/smurf_1_variable_vm_extension))&#39; }
+        config_server_helper.put_value(&#39;/smurf_1_variable_vm_extension&#39;, &#39;cat_1_vm_extension&#39;)
+      end
+
+      it &#39;interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L626" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L665" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L686" class="js-smell-location">2</a>                  <a href="config_server_cloud_config_spec.html#L743" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(vm_extensions cloud_properties)::it#interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs has a flog score of 54</span>          </div>  </li></ol>
+        output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+        expect(create_vm_invocations.size).to eq(1)
+        expect(create_vm_invocations[0].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_vm_extension&#39;, &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;})
+
+        variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+        expect(variables_names).to match_array([&#39;/smurf_1_variable_vm_extension&#39;])
+
+        expect_logs_not_to_contain(&#39;my-dep&#39;, Bosh::Spec::OutputParser.new(output).task_id, [&#39;cat_1_vm_extension&#39;], log_options)
+      end
+
+      it &#39;does not update deployment when variables values do not change before a second deploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L699" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L756" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(vm_extensions cloud_properties)::it#does not update deployment when variables values do not change before a second deploy has a flog score of 69</span>          </div>  </li></ol>
+        # First Deploy
+        deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        # Second Deploy
+        second_deploy_output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        task_id = Bosh::Spec::OutputParser.new(second_deploy_output).task_id
+        task_output = bosh_runner.run(&quot;task #{task_id} --debug&quot;, deployment_name: &#39;my-dep&#39;, include_credentials: false, env: client_env)
+        expect(task_output).to include(&quot;No instances to update for &#39;instance_group_1&#39;&quot;)
+
+        create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+        expect(create_vm_invocations.size).to eq(1)
+        expect(create_vm_invocations[0].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_vm_extension&#39;, &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;})
+
+        variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+        expect(variables_names).to match_array([&#39;/smurf_1_variable_vm_extension&#39;])
+      end
+
+      context &#39;when variables value gets updated after deploying&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L718" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L775" class="js-smell-location">1</a>                  </div>  </li></ol>
+        before do
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+          config_server_helper.put_value(&#39;/smurf_1_variable_vm_extension&#39;, &#39;cat_2_vm_extension&#39;)
+        end
+
+        it &#39;updates the deployment with new values when deploying for second time&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(vm_extensions cloud_properties)::context(when variables value gets updated after deploying)::it#updates the deployment with new values when deploying for second time has a flog score of 51</span>          </div>  </li></ol>
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+          expect(create_vm_invocations.size).to eq(2)
+          expect(create_vm_invocations[1].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_2_vm_extension&#39;, &#39;instance_type&#39; =&gt; &#39;t2.micro&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable_vm_extension&#39;])
+        end
+      end
+    end
+
+    context &#39;disk_types cloud_properties&#39; do
+      before do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L621" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L738" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L795" class="js-smell-location">2</a>                  </div>  </li></ol>
+        cloud_config_hash[&#39;disk_types&#39;][0][&#39;cloud_properties&#39;] = { &#39;smurf_1&#39; =&gt; &#39;((/smurf_1_variable))&#39; }
+        config_server_helper.put_value(&#39;/smurf_1_variable&#39;, &#39;cat_1_disk&#39;)
+      end
+
+      it &#39;interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(disk_types cloud_properties)::it#interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs has a flog score of 54</span>          </div>  </li></ol>
+        output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        create_disk_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_disk&#39;)
+        expect(create_disk_invocations.size).to eq(1)
+        expect(create_disk_invocations[0].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_disk&#39;})
+
+        variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+        expect(variables_names).to match_array([&#39;/smurf_1_variable&#39;])
+
+        expect_logs_not_to_contain(&#39;my-dep&#39;, Bosh::Spec::OutputParser.new(output).task_id, [&#39;cat_1_disk&#39;], log_options)
+      end
+
+      it &#39;does not update deployment when variables values do not change before a second deploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(disk_types cloud_properties)::it#does not update deployment when variables values do not change before a second deploy has a flog score of 69</span>          </div>  </li></ol>
+        # First Deploy
+        deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        # Second Deploy
+        second_deploy_output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+        task_id = Bosh::Spec::OutputParser.new(second_deploy_output).task_id
+        task_output = bosh_runner.run(&quot;task #{task_id} --debug&quot;, deployment_name: &#39;my-dep&#39;, include_credentials: false, env: client_env)
+        expect(task_output).to include(&quot;No instances to update for &#39;instance_group_1&#39;&quot;)
+
+        create_disk_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_disk&#39;)
+        expect(create_disk_invocations.size).to eq(1)
+        expect(create_disk_invocations[0].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_disk&#39;})
+
+        variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+        expect(variables_names).to match_array([&#39;/smurf_1_variable&#39;])
+      end
+
+      context &#39;when variables value gets updated after deploying&#39; do
+        before do
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+          config_server_helper.put_value(&#39;/smurf_1_variable&#39;, &#39;cat_2_disk&#39;)
+        end
+
+        it &#39;updates the deployment with new values when deploying for second time&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(disk_types cloud_properties)::context(when variables value gets updated after deploying)::it#updates the deployment with new values when deploying for second time has a flog score of 51</span>          </div>  </li></ol>
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          create_disk_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_disk&#39;)
+          expect(create_disk_invocations.size).to eq(2)
+          expect(create_disk_invocations[1].inputs[&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_2_disk&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable&#39;])
+        end
+      end
+    end
+
+    context &#39;networks cloud_properties&#39; do
+      context &#39;manual networks&#39; do
+        let(:networks) do
+          [
+            {
+              &#39;name&#39; =&gt; &#39;private&#39;,
+              &#39;type&#39; =&gt; &#39;manual&#39;,
+              &#39;subnets&#39; =&gt; [
+                {
+                  &#39;range&#39; =&gt; &#39;10.10.0.0/24&#39;,
+                  &#39;gateway&#39; =&gt; &#39;10.10.0.1&#39;,
+                  &#39;az&#39; =&gt; &#39;z1&#39;,
+                  &#39;static&#39; =&gt; [&#39;10.10.0.62&#39;],
+                  &#39;dns&#39; =&gt; [&#39;10.10.0.2&#39;],
+                  &#39;cloud_properties&#39; =&gt; {
+                    &#39;smurf_1&#39; =&gt; &#39;((/smurf_1_variable_manual_network))&#39;
+                  }
+                }
+              ]
+            }
+          ]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L871" class="js-smell-location">0</a>                  <a href="../../../support/deployments.html#L112" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+
+        before do
+          cloud_config_hash[&#39;networks&#39;] = networks
+          config_server_helper.put_value(&#39;/smurf_1_variable_manual_network&#39;, &#39;cat_1_manual_network&#39;)
+        end
+
+        it &#39;interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L879" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L953" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L1045" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(networks cloud_properties)::context(manual networks)::it#interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs has a flog score of 63</span>          </div>  </li></ol>
+          output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+          expect(create_vm_invocations.size).to eq(1)
+          expect(create_vm_invocations[0].inputs[&#39;networks&#39;][&#39;private&#39;][&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_manual_network&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable_manual_network&#39;])
+
+          expect_logs_not_to_contain(&#39;my-dep&#39;, Bosh::Spec::OutputParser.new(output).task_id, [&#39;cat_1_manual_network&#39;], log_options)
+        end
+
+        it &#39;does not update deployment when variables values do not change before a second deploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L892" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L966" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L1058" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(networks cloud_properties)::context(manual networks)::it#does not update deployment when variables values do not change before a second deploy has a flog score of 79</span>          </div>  </li></ol>
+          # First Deploy
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          # Second Deploy
+          second_deploy_output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          task_id = Bosh::Spec::OutputParser.new(second_deploy_output).task_id
+          task_output = bosh_runner.run(&quot;task #{task_id} --debug&quot;, deployment_name: &#39;my-dep&#39;, include_credentials: false, env: client_env)
+          expect(task_output).to include(&quot;No instances to update for &#39;instance_group_1&#39;&quot;)
+
+          create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+          expect(create_vm_invocations.size).to eq(1)
+          expect(create_vm_invocations[0].inputs[&#39;networks&#39;][&#39;private&#39;][&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_manual_network&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable_manual_network&#39;])
+        end
+
+        context &#39;when variables value gets updated after deploying&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L911" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L985" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L1077" class="js-smell-location">2</a>                  </div>  </li></ol>
+          before do
+            deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+            config_server_helper.put_value(&#39;/smurf_1_variable_manual_network&#39;, &#39;cat_2_manual_network&#39;)
+          end
+
+          it &#39;updates the deployment with new values when deploying for second time&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(networks cloud_properties)::context(manual networks)::context(when variables value gets updated after deploying)::it#updates the deployment with new values when deploying for second time has a flog score of 59</span>          </div>  </li></ol>
+            deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+            create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+            expect(create_vm_invocations.size).to eq(2)
+            expect(create_vm_invocations[1].inputs[&#39;networks&#39;][&#39;private&#39;][&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_2_manual_network&#39;})
+
+            variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+            expect(variables_names).to match_array([&#39;/smurf_1_variable_manual_network&#39;])
+          end
+        end
+      end
+
+      context &#39;dynamic networks&#39; do
+        let(:networks) do
+          [
+            {
+              &#39;name&#39; =&gt; &#39;private&#39;,
+              &#39;type&#39; =&gt; &#39;dynamic&#39;,
+              &#39;subnets&#39; =&gt; [
+                {
+                  &#39;az&#39; =&gt; &#39;z1&#39;,
+                  &#39;cloud_properties&#39; =&gt; {
+                    &#39;smurf_1&#39; =&gt; &#39;((/smurf_1_variable_dynamic_network))&#39;
+                  }
+                }
+              ]
+            }
+          ]
+        end
+
+        before do
+          cloud_config_hash[&#39;networks&#39;] = networks
+          config_server_helper.put_value(&#39;/smurf_1_variable_dynamic_network&#39;, &#39;cat_1_dynamic_network&#39;)
+        end
+
+        it &#39;interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L879" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L953" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L1045" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(networks cloud_properties)::context(dynamic networks)::it#interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs has a flog score of 63</span>          </div>  </li></ol>
+          output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+          expect(create_vm_invocations.size).to eq(1)
+          expect(create_vm_invocations[0].inputs[&#39;networks&#39;][&#39;private&#39;][&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_dynamic_network&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable_dynamic_network&#39;])
+
+          expect_logs_not_to_contain(&#39;my-dep&#39;, Bosh::Spec::OutputParser.new(output).task_id, [&#39;cat_1_dynamic_network&#39;], log_options)
+        end
+
+        it &#39;does not update deployment when variables values do not change before a second deploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L892" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L966" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L1058" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(networks cloud_properties)::context(dynamic networks)::it#does not update deployment when variables values do not change before a second deploy has a flog score of 79</span>          </div>  </li></ol>
+          # First Deploy
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          # Second Deploy
+          second_deploy_output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          task_id = Bosh::Spec::OutputParser.new(second_deploy_output).task_id
+          task_output = bosh_runner.run(&quot;task #{task_id} --debug&quot;, deployment_name: &#39;my-dep&#39;, include_credentials: false, env: client_env)
+          expect(task_output).to include(&quot;No instances to update for &#39;instance_group_1&#39;&quot;)
+
+          create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+          expect(create_vm_invocations.size).to eq(1)
+          expect(create_vm_invocations[0].inputs[&#39;networks&#39;][&#39;private&#39;][&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_dynamic_network&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable_dynamic_network&#39;])
+        end
+
+        context &#39;when variables value gets updated after deploying&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L911" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L985" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L1077" class="js-smell-location">2</a>                  </div>  </li></ol>
+          before do
+            deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+            config_server_helper.put_value(&#39;/smurf_1_variable_dynamic_network&#39;, &#39;cat_2_dynamic_network&#39;)
+          end
+
+          it &#39;updates the deployment with new values when deploying for second time&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(networks cloud_properties)::context(dynamic networks)::context(when variables value gets updated after deploying)::it#updates the deployment with new values when deploying for second time has a flog score of 59</span>          </div>  </li></ol>
+            deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+            create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+            expect(create_vm_invocations.size).to eq(2)
+            expect(create_vm_invocations[1].inputs[&#39;networks&#39;][&#39;private&#39;][&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_2_dynamic_network&#39;})
+
+            variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+            expect(variables_names).to match_array([&#39;/smurf_1_variable_dynamic_network&#39;])
+          end
+        end
+      end
+
+      context &#39;vip networks&#39; do
+        let(:networks) do
+          [
+            {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="../../../assets/upgrade/bosh-v262.3-2e94c7cdc76928162d346863270690dfec8c70ee/generate_sql_blobstore_dump_spec.html#L49" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L1007" class="js-smell-location">1</a>                  </div>  </li></ol>
+              &#39;name&#39; =&gt; &#39;private&#39;,
+              &#39;type&#39; =&gt; &#39;manual&#39;,
+              &#39;subnets&#39; =&gt; [
+                {
+                  &#39;range&#39; =&gt; &#39;10.10.0.0/24&#39;,
+                  &#39;gateway&#39; =&gt; &#39;10.10.0.1&#39;,
+                  &#39;az&#39; =&gt; &#39;z1&#39;,
+                  &#39;static&#39; =&gt; [&#39;10.10.0.62&#39;],
+                  &#39;dns&#39; =&gt; [&#39;10.10.0.2&#39;],
+                }
+              ]
+            },
+            {
+              &#39;name&#39; =&gt; &#39;vip&#39;,
+              &#39;type&#39; =&gt; &#39;vip&#39;,
+              &#39;cloud_properties&#39; =&gt; {
+                &#39;smurf_1&#39; =&gt; &#39;((/smurf_1_variable_vip_network))&#39;
+              }
+            }
+          ]
+        end
+
+        before do
+          cloud_config_hash[&#39;networks&#39;] = networks
+          manifest_hash[&#39;instance_groups&#39;][0][&#39;networks&#39;] = [
+            {
+              &#39;name&#39; =&gt; &#39;private&#39;,
+              &#39;default&#39; =&gt; [&#39;dns&#39;, &#39;gateway&#39;]
+            },
+            {
+              &#39;name&#39; =&gt; &#39;vip&#39;,
+              &#39;static_ips&#39; =&gt; [&#39;8.8.8.8&#39;]
+            }
+          ]
+          config_server_helper.put_value(&#39;/smurf_1_variable_vip_network&#39;, &#39;cat_1_vip_network&#39;)
+        end
+
+        it &#39;interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L879" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L953" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L1045" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(networks cloud_properties)::context(vip networks)::it#interpolates them correctly, sends interpolated values to CPI, records variable as used, and does not write interpolated values to logs has a flog score of 63</span>          </div>  </li></ol>
+          output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+          expect(create_vm_invocations.size).to eq(1)
+          expect(create_vm_invocations[0].inputs[&#39;networks&#39;][&#39;vip&#39;][&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_vip_network&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable_vip_network&#39;])
+
+          expect_logs_not_to_contain(&#39;my-dep&#39;, Bosh::Spec::OutputParser.new(output).task_id, [&#39;cat_1_vip_network&#39;], log_options)
+        end
+
+        it &#39;does not update deployment when variables values do not change before a second deploy&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L892" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L966" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L1058" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(networks cloud_properties)::context(vip networks)::it#does not update deployment when variables values do not change before a second deploy has a flog score of 79</span>          </div>  </li></ol>
+          # First Deploy
+          deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          # Second Deploy
+          second_deploy_output = deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+          task_id = Bosh::Spec::OutputParser.new(second_deploy_output).task_id
+          task_output = bosh_runner.run(&quot;task #{task_id} --debug&quot;, deployment_name: &#39;my-dep&#39;, include_credentials: false, env: client_env)
+          expect(task_output).to include(&quot;No instances to update for &#39;instance_group_1&#39;&quot;)
+
+          create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+          expect(create_vm_invocations.size).to eq(1)
+          expect(create_vm_invocations[0].inputs[&#39;networks&#39;][&#39;vip&#39;][&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_1_vip_network&#39;})
+
+          variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+          expect(variables_names).to match_array([&#39;/smurf_1_variable_vip_network&#39;])
+        end
+
+        context &#39;when variables value gets updated after deploying&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="config_server_cloud_config_spec.html#L911" class="js-smell-location">0</a>                  <a href="config_server_cloud_config_spec.html#L985" class="js-smell-location">1</a>                  <a href="config_server_cloud_config_spec.html#L1077" class="js-smell-location">2</a>                  </div>  </li></ol>
+          before do
+            deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+            config_server_helper.put_value(&#39;/smurf_1_variable_vip_network&#39;, &#39;cat_2_vip_network&#39;)
+          end
+
+          it &#39;updates the deployment with new values when deploying for second time&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(using director with config server)::context(cloud properties interpolation)::context(networks cloud_properties)::context(vip networks)::context(when variables value gets updated after deploying)::it#updates the deployment with new values when deploying for second time has a flog score of 59</span>          </div>  </li></ol>
+            deploy_from_scratch(no_login: true, manifest_hash: manifest_hash, cloud_config_hash: cloud_config_hash, include_credentials: false, env: client_env, deployment_name: &#39;my-dep&#39;)
+
+            create_vm_invocations = current_sandbox.cpi.invocations_for_method(&#39;create_vm&#39;)
+            expect(create_vm_invocations.size).to eq(2)
+            expect(create_vm_invocations[1].inputs[&#39;networks&#39;][&#39;vip&#39;][&#39;cloud_properties&#39;]).to eq({&#39;smurf_1&#39; =&gt; &#39;cat_2_vip_network&#39;})
+
+            variables_names = table(bosh_runner.run(&#39;variables&#39;, json: true, include_credentials: false, deployment_name: &#39;my-dep&#39;, env: client_env)).map{|v| v[&#39;name&#39;]}
+            expect(variables_names).to match_array([&#39;/smurf_1_variable_vip_network&#39;])
+          end
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

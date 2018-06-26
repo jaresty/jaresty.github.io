@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-04-11 16:01:36 -0700'>2018-04-11 16:01:36 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-director/spec/unit/deployment_plan /</small> update_config_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">452</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">15</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">782.78</span><small> complexity</small></div>
+              <div><span class="metric">265</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                11
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+module Bosh::Director<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director has no descriptive comment</span>          </div>  </li></ol>
+  describe DeploymentPlan::UpdateConfig do
+    describe &#39;#initialize&#39; do
+      it &#39;should create an update configuration from the spec&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#initialize)::it#should create an update configuration from the spec has a flog score of 52</span>          </div>  </li></ol>
+        config = DeploymentPlan::UpdateConfig.new(
+          &#39;canaries&#39; =&gt; 2,
+          &#39;max_in_flight&#39; =&gt; 4,
+          &#39;canary_watch_time&#39; =&gt; 60_000,
+          &#39;update_watch_time&#39; =&gt; 30_000,
+          &#39;serial&#39; =&gt; true,
+        )
+
+        expect(config.canaries_before_calculation).to eq(&#39;2&#39;)
+        expect(config.max_in_flight_before_calculation).to eq(&#39;4&#39;)
+        expect(config.min_canary_watch_time).to eq(60_000)
+        expect(config.max_canary_watch_time).to eq(60_000)
+        expect(config.min_update_watch_time).to eq(30_000)
+        expect(config.max_update_watch_time).to eq(30_000)
+        expect(config).to be_serial
+      end
+
+      it &#39;should return Integer after calculation&#39; do
+        config = DeploymentPlan::UpdateConfig.new(
+          &#39;canaries&#39; =&gt; 2,
+          &#39;max_in_flight&#39; =&gt; 4,
+          &#39;canary_watch_time&#39; =&gt; 60_000,
+          &#39;update_watch_time&#39; =&gt; 30_000,
+        )
+        expect(config.canaries(10)).to eq(2)
+        expect(config.max_in_flight(10)).to eq(4)
+      end
+
+      context &#39;when canary_watch_time is a range&#39; do
+        it &#39;should allow ranges for canary watch time&#39; do
+          config = DeploymentPlan::UpdateConfig.new(
+            &#39;canaries&#39; =&gt; 2,
+            &#39;max_in_flight&#39; =&gt; 4,
+            &#39;canary_watch_time&#39; =&gt; &#39;60000-120000&#39;,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          )
+          expect(config.min_canary_watch_time).to eq(60_000)
+          expect(config.max_canary_watch_time).to eq(120_000)
+        end
+      end
+
+      context &#39;when update_watch_time is a range&#39; do
+        it &#39;should allow ranges for update watch time&#39; do
+          config = DeploymentPlan::UpdateConfig.new(
+            &#39;canaries&#39; =&gt; 2,
+            &#39;max_in_flight&#39; =&gt; 4,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+            &#39;update_watch_time&#39; =&gt; &#39;5000-30000&#39;,
+          )
+          expect(config.min_update_watch_time).to eq(5000)
+          expect(config.max_update_watch_time).to eq(30_000)
+        end
+      end
+
+      it &#39;should require canaries when there is no default config&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L61" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L71" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L81" class="js-smell-location">2</a>                  <a href="update_config_spec.html#L91" class="js-smell-location">3</a>                  </div>  </li></ol>
+        expect do
+          DeploymentPlan::UpdateConfig.new(
+            &#39;max_in_flight&#39; =&gt; 4,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          )
+        end.to raise_error(ValidationMissingField)
+      end
+
+      it &#39;should require max_in_flight when there is no default config&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L61" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L71" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L81" class="js-smell-location">2</a>                  <a href="update_config_spec.html#L91" class="js-smell-location">3</a>                  </div>  </li></ol>
+        expect do
+          DeploymentPlan::UpdateConfig.new(
+            &#39;canaries&#39; =&gt; 2,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          )
+        end.to raise_error(ValidationMissingField)
+      end
+
+      it &#39;should require update_watch_time when there is no default config&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L61" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L71" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L81" class="js-smell-location">2</a>                  <a href="update_config_spec.html#L91" class="js-smell-location">3</a>                  </div>  </li></ol>
+        expect do
+          DeploymentPlan::UpdateConfig.new(
+            &#39;canaries&#39; =&gt; 2,
+            &#39;max_in_flight&#39; =&gt; 4,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+          )
+        end.to raise_error(ValidationMissingField)
+      end
+
+      it &#39;should require canary_watch_time when there is no default config&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 4 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L61" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L71" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L81" class="js-smell-location">2</a>                  <a href="update_config_spec.html#L91" class="js-smell-location">3</a>                  </div>  </li></ol>
+        expect do
+          DeploymentPlan::UpdateConfig.new(
+            &#39;canaries&#39; =&gt; 2,
+            &#39;max_in_flight&#39; =&gt; 4,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          )
+        end.to raise_error(ValidationMissingField)
+      end
+
+      describe &#39;serial&#39; do
+        let(:other_opts) do
+          {
+            &#39;canaries&#39; =&gt; 2,
+            &#39;max_in_flight&#39; =&gt; 4,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          } end
+
+        it &#39;raises an error if property is not TrueClass/FalseClass&#39; do
+          expect do
+            DeploymentPlan::UpdateConfig.new(other_opts.merge(&#39;serial&#39; =&gt; double))
+          end.to raise_error(ValidationInvalidType, /serial/)
+        end
+
+        context &#39;when default config is nil&#39; do
+          let(:default_config) { nil }
+
+          it &#39;can be set to be serial&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 3 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L119" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L139" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L159" class="js-smell-location">2</a>                  </div>  </li></ol>
+            config = DeploymentPlan::UpdateConfig.new(other_opts.merge(&#39;serial&#39; =&gt; true), default_config)
+            expect(config).to be_serial
+          end
+
+          it &#39;can be set to be not serial (parallel)&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 3 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L124" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L144" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L164" class="js-smell-location">2</a>                  </div>  </li></ol>
+            config = DeploymentPlan::UpdateConfig.new(other_opts.merge(&#39;serial&#39; =&gt; false), default_config)
+            expect(config).to_not be_serial
+          end
+
+          it &#39;is serial (not parallel) if serial option is not set&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L129" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L149" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L169" class="js-smell-location">2</a>                  </div>  </li></ol>
+            other_opts.delete(&#39;serial&#39;)
+            config = DeploymentPlan::UpdateConfig.new(other_opts, default_config)
+            expect(config).to be_serial
+          end
+        end
+
+        context &#39;when default config specifies serial to be true&#39; do
+          let(:default_config) { DeploymentPlan::UpdateConfig.new(other_opts.merge(&#39;serial&#39; =&gt; true)) }
+
+          it &#39;can be set to be serial&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 3 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L119" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L139" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L159" class="js-smell-location">2</a>                  </div>  </li></ol>
+            config = DeploymentPlan::UpdateConfig.new(other_opts.merge(&#39;serial&#39; =&gt; true), default_config)
+            expect(config).to be_serial
+          end
+
+          it &#39;can be set to be not serial (parallel)&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 3 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L124" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L144" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L164" class="js-smell-location">2</a>                  </div>  </li></ol>
+            config = DeploymentPlan::UpdateConfig.new(other_opts.merge(&#39;serial&#39; =&gt; false), default_config)
+            expect(config).to_not be_serial
+          end
+
+          it &#39;is serial if serial option is not set&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L129" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L149" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L169" class="js-smell-location">2</a>                  </div>  </li></ol>
+            other_opts.delete(&#39;serial&#39;)
+            config = DeploymentPlan::UpdateConfig.new(other_opts, default_config)
+            expect(config).to be_serial
+          end
+        end
+
+        context &#39;when default config specifies serial to be false&#39; do
+          let(:default_config) { DeploymentPlan::UpdateConfig.new(other_opts.merge(&#39;serial&#39; =&gt; false)) }
+
+          it &#39;can be set to be serial&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 3 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L119" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L139" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L159" class="js-smell-location">2</a>                  </div>  </li></ol>
+            config = DeploymentPlan::UpdateConfig.new(other_opts.merge(&#39;serial&#39; =&gt; true), default_config)
+            expect(config).to be_serial
+          end
+
+          it &#39;can be set to be not serial (parallel)&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 3 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L124" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L144" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L164" class="js-smell-location">2</a>                  </div>  </li></ol>
+            config = DeploymentPlan::UpdateConfig.new(other_opts.merge(&#39;serial&#39; =&gt; false), default_config)
+            expect(config).to_not be_serial
+          end
+
+          it &#39;is not serial (parallel) if serial option is not set&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L129" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L149" class="js-smell-location">1</a>                  <a href="update_config_spec.html#L169" class="js-smell-location">2</a>                  </div>  </li></ol>
+            other_opts.delete(&#39;serial&#39;)
+            config = DeploymentPlan::UpdateConfig.new(other_opts, default_config)
+            expect(config).to_not be_serial
+          end
+
+          context &#39;when the hash is nil&#39; do
+            it &#39;returns false&#39; do
+              config = DeploymentPlan::UpdateConfig.new(nil, default_config)
+              expect(config.to_hash[&#39;serial&#39;]).to be(false)
+            end
+          end
+        end
+      end
+
+      describe &#39;defaults&#39; do
+        let(:default_config) do
+          DeploymentPlan::UpdateConfig.new(
+            &#39;canaries&#39; =&gt; 1,
+            &#39;max_in_flight&#39; =&gt; 2,
+            &#39;canary_watch_time&#39; =&gt; 10_000,
+            &#39;update_watch_time&#39; =&gt; 5000,
+          )
+        end
+
+        it &#39;should allow values as string&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#initialize)::describe(defaults)::it#should allow values as string has a flog score of 36</span>          </div>  </li></ol>
+          config = DeploymentPlan::UpdateConfig.new({
+            &#39;canaries&#39; =&gt; &#39;2&#39;,
+            &#39;max_in_flight&#39; =&gt; &#39;4&#39;,
+          }, default_config)
+          expect(config.canaries_before_calculation).to eq(&#39;2&#39;)
+          expect(config.max_in_flight_before_calculation).to eq(&#39;4&#39;)
+          expect(config.canaries(10)).to eq(2)
+          expect(config.max_in_flight(10)).to eq(4)
+        end
+
+        it &#39;should let you override all defaults&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#initialize)::describe(defaults)::it#should let you override all defaults has a flog score of 52</span>          </div>  </li></ol>
+          config = DeploymentPlan::UpdateConfig.new({
+            &#39;canaries&#39; =&gt; 2,
+            &#39;max_in_flight&#39; =&gt; 4,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          }, default_config)
+
+          expect(config.canaries_before_calculation).to eq(&#39;2&#39;)
+          expect(config.max_in_flight_before_calculation).to eq(&#39;4&#39;)
+          expect(config.min_canary_watch_time).to eq(60_000)
+          expect(config.max_canary_watch_time).to eq(60_000)
+          expect(config.min_update_watch_time).to eq(30_000)
+          expect(config.max_update_watch_time).to eq(30_000)
+        end
+
+        it &#39;should inherit settings from default config&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#initialize)::describe(defaults)::it#should inherit settings from default config has a flog score of 67</span>          </div>  </li></ol>
+          config = DeploymentPlan::UpdateConfig.new({}, default_config)
+          expect(config.canaries_before_calculation).to eq(&#39;1&#39;)
+          expect(config.max_in_flight_before_calculation).to eq(&#39;2&#39;)
+          expect(config.canaries(10)).to eq(1)
+          expect(config.max_in_flight(10)).to eq(2)
+          expect(config.min_canary_watch_time).to eq(10_000)
+          expect(config.max_canary_watch_time).to eq(10_000)
+          expect(config.min_update_watch_time).to eq(5000)
+          expect(config.max_update_watch_time).to eq(5000)
+        end
+      end
+
+      context &#39;vm_strategy&#39; do
+        it &#39;should return the vm_strategy configuration from the spec&#39; do
+          config = DeploymentPlan::UpdateConfig.new(
+            &#39;vm_strategy&#39; =&gt; &#39;create-swap-delete&#39;,
+            &#39;canaries&#39; =&gt; 2,
+            &#39;max_in_flight&#39; =&gt; 4,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          )
+
+          expect(config.vm_strategy).to eq(&#39;create-swap-delete&#39;)
+        end
+
+        context &#39;when vm_strategy has a wrong format&#39; do
+          it &#39;raises an error&#39; do
+            expect do
+              DeploymentPlan::UpdateConfig.new(
+                &#39;vm_strategy&#39; =&gt; &#39;incorrect-strategy-value&#39;,
+                &#39;canaries&#39; =&gt; 2,
+                &#39;max_in_flight&#39; =&gt; 4,
+                &#39;canary_watch_time&#39; =&gt; 60_000,
+                &#39;update_watch_time&#39; =&gt; 30_000,
+              )
+            end.to raise_error(Bosh::Director::ValidationInvalidValue, /Invalid vm_strategy &#39;incorrect-strategy-value&#39;, valid strategies are: create-swap-delete, delete-create/)
+          end
+        end
+
+        context &#39;when vm_strategy is created from previously created vm_strategy (such as happens in cck)&#39; do
+          let(:old_config) do
+            DeploymentPlan::UpdateConfig.new(
+              &#39;canaries&#39; =&gt; 2,
+              &#39;max_in_flight&#39; =&gt; 4,
+              &#39;canary_watch_time&#39; =&gt; 60_000,
+              &#39;update_watch_time&#39; =&gt; 30_000,
+            )
+          end
+
+          it &#39;can make an update from the hash of the old config&#39; do
+            expect { DeploymentPlan::UpdateConfig.new(old_config.to_hash) }.to_not raise_error
+          end
+        end
+
+        context &#39;when default update_config is provided and vm_strategy is not provided&#39; do
+          let(:default_config) do
+            DeploymentPlan::UpdateConfig.new(
+              &#39;vm_strategy&#39; =&gt; &#39;create-swap-delete&#39;,
+              &#39;canaries&#39; =&gt; 2,
+              &#39;max_in_flight&#39; =&gt; 4,
+              &#39;canary_watch_time&#39; =&gt; 60_000,
+              &#39;update_watch_time&#39; =&gt; 30_000,
+            )
+          end
+
+          it &#39;should use vm_strategy value from default_update_config&#39; do
+            config = DeploymentPlan::UpdateConfig.new({}, default_config)
+
+            expect(config.vm_strategy).to eq(&#39;create-swap-delete&#39;)
+          end
+
+          context &#39;when vm_strategy has a wrong format&#39; do
+            it &#39;raises an error&#39; do
+              expect do
+                DeploymentPlan::UpdateConfig.new(
+                  {
+                    &#39;vm_strategy&#39; =&gt; &#39;&#39;,
+                    &#39;canaries&#39; =&gt; 2,
+                    &#39;max_in_flight&#39; =&gt; 4,
+                    &#39;canary_watch_time&#39; =&gt; 60_000,
+                    &#39;update_watch_time&#39; =&gt; 30_000,
+                  }, default_config
+                )
+              end.to raise_error(Bosh::Director::ValidationInvalidValue, /Invalid vm_strategy &#39;&#39;, valid strategies are: create-swap-delete, delete-create/)
+            end
+          end
+        end
+      end
+    end
+
+    describe &#39;#parse_watch_times&#39; do
+      let(:basic_config) do
+        DeploymentPlan::UpdateConfig.new(
+          &#39;canaries&#39; =&gt; 1,
+          &#39;max_in_flight&#39; =&gt; 2,
+          &#39;canary_watch_time&#39; =&gt; 10_000,
+          &#39;update_watch_time&#39; =&gt; 5000,
+        )
+      end
+
+      it(&#39;should parse literals&#39;) { expect(basic_config.parse_watch_times(1000)).to eq([1000, 1000]) }
+      it(&#39;should parse ranges&#39;) { expect(basic_config.parse_watch_times(&#39;100 - 1000&#39;)).to eq([100, 1000]) }
+
+      it &#39;should fail parsing garbage&#39; do
+        expect do
+          basic_config.parse_watch_times(&#39;100 - 1000 - 5000&#39;)
+        end.to raise_error(/Watch time should be/)
+      end
+
+      it &#39;should fail parsing ranges with a higher min than max value&#39; do
+        expect do
+          basic_config.parse_watch_times(&#39;1001 - 100&#39;)
+        end.to raise_error(/Min watch time cannot/)
+      end
+    end
+
+    describe &#39;#to_hash&#39; do
+      it &#39;should create a valid hash&#39; do
+        config = DeploymentPlan::UpdateConfig.new(
+          &#39;vm_strategy&#39; =&gt; &#39;create-swap-delete&#39;,
+          &#39;canaries&#39; =&gt; 2,
+          &#39;max_in_flight&#39; =&gt; 4,
+          &#39;canary_watch_time&#39; =&gt; 60_000,
+          &#39;update_watch_time&#39; =&gt; 30_000,
+        )
+
+        config_hash = config.to_hash
+        expect(config_hash).to eq(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L349" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L369" class="js-smell-location">1</a>                  </div>  </li></ol>
+          &#39;vm_strategy&#39; =&gt; &#39;create-swap-delete&#39;,
+          &#39;canaries&#39; =&gt; &#39;2&#39;,
+          &#39;max_in_flight&#39; =&gt; &#39;4&#39;,
+          &#39;canary_watch_time&#39; =&gt; &#39;60000-60000&#39;,
+          &#39;update_watch_time&#39; =&gt; &#39;30000-30000&#39;,
+          &#39;serial&#39; =&gt; true,
+        )
+      end
+
+      context &#39;when vm_strategy is nil&#39; do
+        it &#39;should set vm_strategy to delete-create vm_strategy&#39; do
+          config = DeploymentPlan::UpdateConfig.new(
+            &#39;canaries&#39; =&gt; 2,
+            &#39;max_in_flight&#39; =&gt; 4,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          )
+
+          config_hash = config.to_hash
+          expect(config_hash).to eq(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="update_config_spec.html#L349" class="js-smell-location">0</a>                  <a href="update_config_spec.html#L369" class="js-smell-location">1</a>                  </div>  </li></ol>
+            &#39;vm_strategy&#39; =&gt; &#39;delete-create&#39;,
+            &#39;canaries&#39; =&gt; &#39;2&#39;,
+            &#39;max_in_flight&#39; =&gt; &#39;4&#39;,
+            &#39;canary_watch_time&#39; =&gt; &#39;60000-60000&#39;,
+            &#39;update_watch_time&#39; =&gt; &#39;30000-30000&#39;,
+            &#39;serial&#39; =&gt; true,
+          )
+        end
+      end
+    end
+
+    context &#39;when max_in_flight or canaries have wrong format&#39; do
+      it &#39;raises an error&#39; do
+        config = DeploymentPlan::UpdateConfig.new(
+          &#39;canaries&#39; =&gt; &#39;blala&#39;,
+          &#39;max_in_flight&#39; =&gt; &#39;blabla&#39;,
+          &#39;canary_watch_time&#39; =&gt; 60_000,
+          &#39;update_watch_time&#39; =&gt; 30_000,
+        )
+        expect do
+          config.canaries(10)
+        end.to raise_error(/cannot be calculated/)
+        expect do
+          config.max_in_flight(10)
+        end.to raise_error(/cannot be calculated/)
+      end
+    end
+
+    context &#39;when max_in_flight or canaries are percents&#39; do
+      let(:default_config) do
+        DeploymentPlan::UpdateConfig.new(
+          &#39;canaries&#39; =&gt; canaries_before_calculation,
+          &#39;max_in_flight&#39; =&gt; max_in_flight_before_calculation,
+          &#39;canary_watch_time&#39; =&gt; 60_000,
+          &#39;update_watch_time&#39; =&gt; 30_000,
+        )
+      end
+      let(:canaries_before_calculation) { &#39;20%&#39; }
+      let(:max_in_flight_before_calculation) { &#39;40%&#39; }
+      let(:size) { 10 }
+
+      it &#39;should work with percents &#39; do
+        expect(default_config.canaries(size)).to eq(2)
+        expect(default_config.max_in_flight(size)).to eq(4)
+      end
+
+      it &#39;should be minimum 1 for max_in_flight&#39; do
+        expect(default_config.max_in_flight(0)).to eq(1)
+      end
+
+      it &#39;should inherit settings from default config&#39; do
+        config = DeploymentPlan::UpdateConfig.new({}, default_config)
+        expect(config.canaries_before_calculation).to eq(canaries_before_calculation)
+        expect(config.max_in_flight_before_calculation).to eq(max_in_flight_before_calculation)
+      end
+
+      it &#39;should let you override all defaults&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(when max_in_flight or canaries are percents)::it#should let you override all defaults has a flog score of 38</span>          </div>  </li></ol>
+        config = DeploymentPlan::UpdateConfig.new(
+          {
+            &#39;canaries&#39; =&gt; 1,
+            &#39;max_in_flight&#39; =&gt; 2,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          }, default_config
+        )
+
+        expect(config.canaries_before_calculation).to eq(&#39;1&#39;)
+        expect(config.max_in_flight_before_calculation).to eq(&#39;2&#39;)
+
+        config = DeploymentPlan::UpdateConfig.new(
+          {
+            &#39;canaries&#39; =&gt; &#39;30%&#39;,
+            &#39;max_in_flight&#39; =&gt; &#39;50%&#39;,
+            &#39;canary_watch_time&#39; =&gt; 60_000,
+            &#39;update_watch_time&#39; =&gt; 30_000,
+          }, default_config
+        )
+        expect(config.canaries_before_calculation).to eq(&#39;30%&#39;)
+        expect(config.max_in_flight_before_calculation).to eq(&#39;50%&#39;)
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-03-29 13:38:14 -0400'>2018-03-29 13:38:14 -0400</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/shared/support /</small> api_helpers.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">52</span><small> lines of codes</small></div>
+              <div><span class="metric">5</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">8.6</span><small> complexity/method</small></div>
+              <div><span class="metric">4</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">43.0</span><small> complexity</small></div>
+              <div><span class="metric">64</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                8
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Support
+  module ApiHelpers<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Support::ApiHelpers has no descriptive comment</span>          </div>  </li></ol>
+    def send_director_post_request(url_path, query, request_body, auth = {username: &#39;test&#39;, password: &#39;test&#39;}, init_header = {&#39;Content-Type&#39; =&gt;&#39;application/json&#39;})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Data-Clump.md" target="_blank"><b>DataClump</b></a>        </span>      </div>      <span>Support::ApiHelpers takes parameters ['auth', 'query', 'url_path'] to 3 methods</span>              <span>Locations:</span>                  <a href="api_helpers.html#L3" class="js-smell-location">0</a>                  <a href="api_helpers.html#L12" class="js-smell-location">1</a>                  <a href="api_helpers.html#L21" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Support::ApiHelpers#send_director_post_request has 5 parameters</span>          </div>  </li></ol>
+      director_url = build_director_api_url(url_path, query)
+
+      req = Net::HTTP::Post.new(director_url, init_header)
+      req.body = request_body
+      req.basic_auth(auth[:username], auth[:password]) unless auth.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Support::ApiHelpers#send_director_post_request refers to 'auth' more than self (maybe move it to another class?)</span>          </div>  </li></ol>
+      send_director_api_request(director_url, req)
+    end
+
+    def send_director_get_request(url_path, query, auth = {username: &#39;test&#39;, password: &#39;test&#39;})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="../../gocli/integration/links_migrated_from_spec.html#L6" class="js-smell-location">0</a>                  <a href="api_helpers.html#L12" class="js-smell-location">1</a>                  <a href="api_helpers.html#L21" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Data-Clump.md" target="_blank"><b>DataClump</b></a>        </span>      </div>      <span>Support::ApiHelpers takes parameters ['auth', 'query', 'url_path'] to 3 methods</span>              <span>Locations:</span>                  <a href="api_helpers.html#L3" class="js-smell-location">0</a>                  <a href="api_helpers.html#L12" class="js-smell-location">1</a>                  <a href="api_helpers.html#L21" class="js-smell-location">2</a>                  </div>  </li></ol>
+      director_url = build_director_api_url(url_path, query)
+
+      req = Net::HTTP::Get.new(director_url)
+      req.basic_auth(auth[:username], auth[:password]) unless auth.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Support::ApiHelpers#send_director_get_request refers to 'auth' more than self (maybe move it to another class?)</span>          </div>  </li></ol>
+
+      send_director_api_request(director_url, req)
+    end
+
+    def send_director_delete_request(url_path, query, auth = {username: &#39;test&#39;, password: &#39;test&#39;})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="../../gocli/integration/links_migrated_from_spec.html#L6" class="js-smell-location">0</a>                  <a href="api_helpers.html#L12" class="js-smell-location">1</a>                  <a href="api_helpers.html#L21" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Data-Clump.md" target="_blank"><b>DataClump</b></a>        </span>      </div>      <span>Support::ApiHelpers takes parameters ['auth', 'query', 'url_path'] to 3 methods</span>              <span>Locations:</span>                  <a href="api_helpers.html#L3" class="js-smell-location">0</a>                  <a href="api_helpers.html#L12" class="js-smell-location">1</a>                  <a href="api_helpers.html#L21" class="js-smell-location">2</a>                  </div>  </li></ol>
+      director_url = build_director_api_url(url_path, query)
+
+      req = Net::HTTP::Delete.new(director_url)
+      req.basic_auth(auth[:username], auth[:password]) unless auth.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Support::ApiHelpers#send_director_delete_request refers to 'auth' more than self (maybe move it to another class?)</span>          </div>  </li></ol>
+
+      send_director_api_request(director_url, req)
+    end
+
+    def send_director_api_request(director_url, request)
+      Net::HTTP.start(
+        director_url.hostname,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Support::ApiHelpers#send_director_api_request refers to 'director_url' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="api_helpers.html#L32" class="js-smell-location">0</a>                  <a href="api_helpers.html#L33" class="js-smell-location">1</a>                  </div>  </li></ol>
+        director_url.port,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Support::ApiHelpers#send_director_api_request refers to 'director_url' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="api_helpers.html#L32" class="js-smell-location">0</a>                  <a href="api_helpers.html#L33" class="js-smell-location">1</a>                  </div>  </li></ol>
+        :use_ssl =&gt; true,
+        :verify_mode =&gt; OpenSSL::SSL::VERIFY_PEER,
+        :ca_file =&gt; current_sandbox.certificate_path) {|http|
+        http.request(request)
+      }
+    end
+
+    def build_director_api_url(url_path, query)
+      director_url = URI(current_sandbox.director_url)
+      director_url.path = URI.escape(url_path)
+      director_url.query = URI.escape(query)
+      return director_url
+    end
+  end
+end
+
+RSpec.configure do |config|
+  config.include(Support::ApiHelpers)
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

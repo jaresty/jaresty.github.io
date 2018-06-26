@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../../../overview.html"><img src="../../../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-08-21 14:36:44 -0700'>2017-08-21 14:36:44 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-monitor/spec/unit/bosh/monitor/events /</small> heartbeat_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">118</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">17</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">253.59</span><small> complexity</small></div>
+              <div><span class="metric">46</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                2
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+describe Bhm::Events::Heartbeat do
+  let(:timestamp) { 1320196099  }
+
+  let(:heartbeat) { make_heartbeat(timestamp: timestamp) }
+
+  context &#39;validations&#39; do
+    it &#39;requires id&#39; do
+      expect(make_heartbeat(:id =&gt; nil)).not_to be_valid
+    end
+
+    it &#39;requires timestamp&#39; do
+      expect(make_heartbeat(:timestamp =&gt; nil)).not_to be_valid
+    end
+
+    it &#39;supports attributes validation&#39; do
+      bad_heartbeat = make_heartbeat(:id =&gt; nil, :timestamp =&gt; nil)
+      expect(bad_heartbeat).not_to be_valid
+      expect(bad_heartbeat.error_message).to eq(&#39;id is missing, timestamp is missing&#39;)
+    end
+
+    it &#39;should be valid&#39; do
+      expect(heartbeat).to be_valid
+      expect(heartbeat.kind).to eq(:heartbeat)
+    end
+  end
+
+  it &#39;has short description&#39; do
+    expect(heartbeat.short_description).to eq(&#39;Heartbeat from mysql_node/instance_id_abc (agent_id=deadbeef index=0) @ 2011-11-02 01:08:19 UTC&#39;)
+
+    expect(make_heartbeat(:index =&gt; nil, :timestamp =&gt; timestamp).short_description).to eq(&quot;Heartbeat from mysql_node/instance_id_abc (agent_id=deadbeef) @ 2011-11-02 01:08:19 UTC&quot;)
+  end
+
+  it &#39;has hash representation&#39; do
+    expect(heartbeat.to_hash).to eq({
+      :kind =&gt; &#39;heartbeat&#39;,
+      :id =&gt; 1,
+      :timestamp =&gt; timestamp,
+      :deployment =&gt; &#39;oleg-cloud&#39;,
+      :agent_id =&gt; &#39;deadbeef&#39;,
+      :instance_id =&gt; &#39;instance_id_abc&#39;,
+      :job =&gt; &#39;mysql_node&#39;,
+      :index =&gt; &#39;0&#39;,
+      :job_state =&gt; &#39;running&#39;,
+      :vitals =&gt; {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="../../../../spec_helper.html#L66" class="js-smell-location">0</a>                  <a href="heartbeat_spec.html#L46" class="js-smell-location">1</a>                  </div>  </li></ol>
+          &#39;load&#39; =&gt; [0.2, 0.3, 0.6],
+          &#39;cpu&#39; =&gt; {&#39;user&#39; =&gt; 22.3, &#39;sys&#39; =&gt; 23.4, &#39;wait&#39; =&gt; 33.22 },
+          &#39;mem&#39; =&gt; {&#39;percent&#39; =&gt; 32.2, &#39;kb&#39; =&gt; 512031 },
+          &#39;swap&#39; =&gt; {&#39;percent&#39; =&gt; 32.6, &#39;kb&#39; =&gt; 231312 },
+          &#39;disk&#39; =&gt; {
+            &#39;system&#39; =&gt; {&#39;percent&#39; =&gt; 74, &#39;inode_percent&#39; =&gt; 68 },
+            &#39;ephemeral&#39; =&gt; {&#39;percent&#39; =&gt; 33, &#39;inode_percent&#39; =&gt; 74 },
+            &#39;persistent&#39; =&gt; {&#39;percent&#39; =&gt; 97, &#39;inode_percent&#39; =&gt; 10 },
+        }
+      },
+      :teams =&gt; [&#39;ateam&#39;, &#39;bteam&#39;],
+      :metrics =&gt; [
+          {:name =&gt; &quot;system.load.1m&quot;, :value =&gt; &quot;0.2&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.cpu.user&quot;, :value =&gt; &quot;22.3&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.cpu.sys&quot;, :value =&gt; &quot;23.4&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.cpu.wait&quot;, :value =&gt; &quot;33.22&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.mem.percent&quot;, :value =&gt; &quot;32.2&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.mem.kb&quot;, :value =&gt; &quot;512031&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.swap.percent&quot;, :value =&gt; &quot;32.6&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.swap.kb&quot;, :value =&gt; &quot;231312&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.disk.system.percent&quot;, :value =&gt; &quot;74&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.disk.system.inode_percent&quot;, :value =&gt; &quot;68&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.disk.ephemeral.percent&quot;, :value =&gt; &quot;33&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.disk.ephemeral.inode_percent&quot;, :value =&gt; &quot;74&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.disk.persistent.percent&quot;, :value =&gt; &quot;97&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.disk.persistent.inode_percent&quot;, :value =&gt; &quot;10&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}},
+          {:name =&gt; &quot;system.healthy&quot;, :value =&gt; &quot;1&quot;, :timestamp =&gt; 1320196099, :tags =&gt; {&quot;job&quot; =&gt; &quot;mysql_node&quot;, &quot;index&quot; =&gt; &quot;0&quot;, &quot;id&quot; =&gt; &quot;instance_id_abc&quot;}}
+      ],
+    })
+  end
+
+  it &#39;has plain text representation&#39; do
+    hb = heartbeat
+    expect(hb.to_plain_text).to eq(hb.short_description)
+  end
+
+  it &#39;has json representation&#39; do
+    hb = heartbeat
+    expect(hb.to_json).to eq(JSON.dump(hb.to_hash))
+  end
+
+  it &#39;has string representation&#39; do
+    hb = heartbeat
+    expect(hb.to_s).to eq(hb.short_description)
+  end
+
+  it &#39;has metrics&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>it#has metrics has a flog score of 123</span>          </div>  </li></ol>
+    hb = heartbeat
+    metrics = hb.metrics.inject({}) do |h, m|
+      expect(m).to be_kind_of(Bhm::Metric)
+      expect(m.tags).to eq({&#39;job&#39; =&gt; &#39;mysql_node&#39;, &#39;index&#39; =&gt; &#39;0&#39;, &#39;id&#39; =&gt; &#39;instance_id_abc&#39;})
+      h[m.name] = m.value; h
+    end
+
+    expect(metrics[&#39;system.load.1m&#39;]).to eq(0.2)
+    expect(metrics[&#39;system.cpu.user&#39;]).to eq(22.3)
+    expect(metrics[&#39;system.cpu.sys&#39;]).to eq(23.4)
+    expect(metrics[&#39;system.cpu.wait&#39;]).to eq(33.22)
+    expect(metrics[&#39;system.mem.percent&#39;]).to eq(32.2)
+    expect(metrics[&#39;system.mem.kb&#39;]).to eq(512031)
+    expect(metrics[&#39;system.swap.percent&#39;]).to eq(32.6)
+    expect(metrics[&#39;system.swap.kb&#39;]).to eq(231312)
+    expect(metrics[&#39;system.disk.system.percent&#39;]).to eq(74)
+    expect(metrics[&#39;system.disk.system.inode_percent&#39;]).to eq(68)
+    expect(metrics[&#39;system.disk.ephemeral.percent&#39;]).to eq(33)
+    expect(metrics[&#39;system.disk.ephemeral.inode_percent&#39;]).to eq(74)
+    expect(metrics[&#39;system.disk.persistent.percent&#39;]).to eq(97)
+    expect(metrics[&#39;system.disk.persistent.inode_percent&#39;]).to eq(10)
+    expect(metrics[&#39;system.healthy&#39;]).to eq(1)
+  end
+
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2016-11-28 13:48:14 -0800'>2016-11-28 13:48:14 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh-monitor/spec/functional /</small> notifying_plugins_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating d big">
+              D
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">128</span><small> lines of codes</small></div>
+              <div><span class="metric">6</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">29.2</span><small> complexity/method</small></div>
+              <div><span class="metric">13</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">175.21</span><small> complexity</small></div>
+              <div><span class="metric">36</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                8
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+require &#39;timecop&#39;
+
+class FakeNATS<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>FakeNATS has no descriptive comment</span>          </div>  </li></ol>
+  def initialize(verbose=false)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Boolean-Parameter.md" target="_blank"><b>BooleanParameter</b></a>        </span>      </div>      <span>FakeNATS#initialize has boolean parameter 'verbose'</span>          </div>  </li></ol>
+    @subscribers = []
+    @verbose = verbose
+  end
+
+  def subscribe(channel, &amp;block)
+    puts &quot;Adding subscriber (#{channel}): #{block.inspect}&quot; if @verbose
+    @subscribers &lt;&lt; block
+  end
+
+  def alert(message)
+    reply = &#39;reply&#39;
+    subject = &#39;1.2.3.not-an-agent&#39;
+
+    @subscribers.each do |subscriber|
+      puts &quot;Alerting subscriber: #{subscriber}&quot; if @verbose
+      subscriber.call(message, reply, subject)
+    end
+  end
+end
+
+describe &#39;notifying plugins&#39; do
+  WebMock.allow_net_connect!
+
+  let(:runner) { Bosh::Monitor::Runner.new(spec_asset(&#39;dummy_plugin_config.yml&#39;)) }
+  let(:hm_process) { MonitorProcess.new(runner) }
+
+  before do
+    free_port = find_free_tcp_port
+    allow(Bhm).to receive(:http_port).and_return(free_port)
+  end
+
+  context &#39;when alert is received via nats&#39; do
+    it &#39;sends an alert to its plugins&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(notifying plugins)::context(when alert is received via nats)::it#sends an alert to its plugins has a flog score of 50</span>          </div>  </li></ol>
+      payload = {
+        &#39;id&#39; =&gt; &#39;payload-id&#39;,
+        &#39;severity&#39; =&gt; 3,
+        &#39;title&#39; =&gt; &#39;payload-title&#39;,
+        &#39;summary&#39; =&gt; &#39;payload-summary&#39;,
+        &#39;created_at&#39; =&gt; Time.now.to_i,
+      }
+
+      called = false
+      alert = nil
+      EM.run do
+        nats = FakeNATS.new
+        allow(NATS).to receive(:connect).and_return(nats)
+        runner.run
+        wait_for_plugins
+        nats.alert(JSON.dump(payload))
+        EM.add_timer(2) { EM.stop }
+        EM.add_periodic_timer(0.1) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="notifying_plugins_spec.html#L56" class="js-smell-location">0</a>                  <a href="notifying_plugins_spec.html#L96" class="js-smell-location">1</a>                  </div>  </li></ol>
+          alert = get_alert
+          called = true
+          EM.stop if alert &amp;&amp; alert.attributes.match(payload)
+        end
+      end
+
+      expect(alert).to_not be_nil
+      expect(alert.attributes).to eq(payload)
+      expect(called).to be(true)
+    end
+  end
+
+  context &#39;when health monitor fails to fetch deployments&#39; do
+    # director is not running
+
+    before do
+      created_at_time = Time.now
+      Timecop.freeze(created_at_time)
+    end
+
+    it &#39;sends an alert to its plugins&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(notifying plugins)::context(when health monitor fails to fetch deployments)::it#sends an alert to its plugins has a flog score of 56</span>          </div>  </li></ol>
+      allow(SecureRandom).to receive(:uuid).and_return(&#39;random-id&#39;)
+      alert_json = {
+        &#39;id&#39; =&gt; &#39;random-id&#39;,
+        &#39;severity&#39; =&gt; 3,
+        &#39;title&#39; =&gt; &#39;Health monitor failed to connect to director&#39;,
+        &#39;summary&#39; =&gt; /Cannot get status from director/,
+        &#39;created_at&#39; =&gt; Time.now.to_i,
+        &#39;source&#39; =&gt; &#39;hm&#39;
+      }
+
+      called = false
+      alert = nil
+      EM.run do
+        nats = FakeNATS.new
+        allow(NATS).to receive(:connect).and_return(nats)
+        runner.run
+        wait_for_plugins
+        EM.add_timer(5) { EM.stop }
+        EM.add_periodic_timer(0.1) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="notifying_plugins_spec.html#L56" class="js-smell-location">0</a>                  <a href="notifying_plugins_spec.html#L96" class="js-smell-location">1</a>                  </div>  </li></ol>
+          alert = get_alert
+          called = true
+          EM.stop if alert &amp;&amp; alert.attributes.match(alert_json)
+        end
+      end
+
+      expect(alert).to_not be_nil
+      expect(alert.attributes).to match(alert_json)
+      expect(called).to be(true)
+    end
+  end
+
+  def start_fake_nats
+    @nats = FakeNATS.new
+    allow(NATS).to receive(:connect).and_return(@nats)
+  end
+
+  def wait_for_plugins(tries=60)
+    while tries &gt; 0
+      tries -= 1
+      # wait for alert plugin to load
+      return if Bosh::Monitor.event_processor &amp;&amp; Bosh::Monitor.event_processor.plugins[:alert]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>wait_for_plugins calls 'Bosh::Monitor.event_processor' 2 times</span>          </div>  </li></ol>
+      sleep 0.2
+    end
+    raise &#39;Failed to configure event_processor in time&#39;
+  end
+
+  def get_alert<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>get_alert doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    dummy_plugin = Bosh::Monitor.event_processor.plugins[:alert].first
+    return dummy_plugin.events.first if dummy_plugin.events<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>get_alert calls 'dummy_plugin.events' 2 times</span>          </div>  </li></ol>
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>
