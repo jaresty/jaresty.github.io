@@ -85,7 +85,7 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                19
+                18
                 smells
               </a>
             </li>
@@ -156,8 +156,8 @@
     end
 
     def validate_config(config)
-      unless config.is_a?(Hash)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Monitor#validate_config refers to 'config' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="config.html#L63" class="js-smell-location">0</a>                  <a href="config.html#L64" class="js-smell-location">1</a>                  </div>  </li></ol>
-        raise ConfigError, &quot;Invalid config format, Hash expected, #{config.class} given&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Monitor#validate_config refers to 'config' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="config.html#L63" class="js-smell-location">0</a>                  <a href="config.html#L64" class="js-smell-location">1</a>                  </div>  </li></ol>
+      unless config.is_a?(Hash)
+        raise ConfigError, &quot;Invalid config format, Hash expected, #{config.class} given&quot;
       end
     end
   end
