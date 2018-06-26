@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-03-06 11:47:34 -0500'>2018-03-06 11:47:34 -0500</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>lib/bosh/director/problem_handlers /</small> inactive_disk.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">96</span><small> lines of codes</small></div>
+              <div><span class="metric">5</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">13.0</span><small> complexity/method</small></div>
+              <div><span class="metric">30</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">65.16</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                7
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director
+  module ProblemHandlers
+    class InactiveDisk &lt; Base<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk assumes too much for instance variable '@logger'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk has no descriptive comment</span>          </div>  </li></ol>
+
+      register_as :inactive_disk
+      auto_resolution :ignore
+
+      def initialize(disk_id, data)
+        super
+        @disk_id = disk_id
+        @data = data
+        @disk = Models::PersistentDisk[@disk_id]
+
+        if @disk.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk#initialize performs a nil-check</span>              <span>Locations:</span>                  <a href="inactive_disk.html#L14" class="js-smell-location">0</a>                  <a href="inactive_disk.html#L23" class="js-smell-location">1</a>                  </div>  </li></ol>
+          handler_error(&quot;Disk &#39;#{@disk_id}&#39; is no longer in the database&quot;)
+        end
+
+        if @disk.active
+          handler_error(&quot;Disk &#39;#{@disk.disk_cid}&#39; is no longer inactive&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk#initialize calls '@disk.disk_cid' 2 times</span>              <span>Locations:</span>                  <a href="inactive_disk.html#L19" class="js-smell-location">0</a>                  <a href="inactive_disk.html#L24" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+
+        @instance = @disk.instance
+        if @instance.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk#initialize performs a nil-check</span>              <span>Locations:</span>                  <a href="inactive_disk.html#L14" class="js-smell-location">0</a>                  <a href="inactive_disk.html#L23" class="js-smell-location">1</a>                  </div>  </li></ol>
+          handler_error(&quot;Cannot find instance for disk &#39;#{@disk.disk_cid}&#39;&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk#initialize calls '@disk.disk_cid' 2 times</span>              <span>Locations:</span>                  <a href="inactive_disk.html#L19" class="js-smell-location">0</a>                  <a href="inactive_disk.html#L24" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+      end
+
+      def description
+        job = @instance.job || &#39;unknown job&#39;
+        uuid = @instance.uuid || &#39;unknown id&#39;
+        index = @instance.index || &#39;unknown index&#39;
+        disk_label = &quot;&#39;#{@disk.disk_cid}&#39; (#{@disk.size.to_i}M) for instance &#39;#{job}/#{uuid} (#{index})&#39;&quot;
+        &quot;Disk #{disk_label} is inactive&quot;
+      end
+
+      resolution :ignore do
+        plan { &#39;Skip for now&#39; }
+        action { }
+      end
+
+      resolution :delete_disk do
+        plan { &#39;Delete disk&#39; }
+        action { delete_disk }
+      end
+
+      resolution :activate_disk do
+        plan { &#39;Activate disk&#39; }
+        action { activate_disk }
+      end
+
+      def activate_disk
+        unless disk_mounted?
+          handler_error(&#39;Disk is not mounted&#39;)
+        end
+        # Currently the director allows ONLY one managed persistent disk per
+        # instance. We are about to activate a disk but the instance already
+        # has an active disk.
+        # For now let&#39;s be conservative and return an error.
+        if @instance.managed_persistent_disk
+          handler_error(&#39;Instance already has an active disk&#39;)
+        end
+        @disk.active = true
+        @disk.save
+      end
+
+      def delete_disk<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk#delete_disk has approx 7 statements</span>          </div>  </li></ol>
+        if disk_mounted?
+          handler_error(&#39;Disk is currently in use&#39;)
+        end
+
+        active_vm = @instance.active_vm
+
+        if active_vm
+          begin
+            cloud = CloudFactory.create.get(active_vm.cpi, active_vm.stemcell_api_version)
+            cloud.detach_disk(active_vm.cid, @disk.disk_cid)
+          rescue =&gt; e<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk#delete_disk has the variable name 'e'</span>          </div>  </li></ol>
+            # We are going to delete this disk anyway
+            # and we know it&#39;s not in use, so we can ignore
+            # detach errors here.
+            @logger.warn(e)
+          end
+        end
+
+        OrphanDiskManager.new(@logger).orphan_disk(@disk)
+      end
+
+      def disk_mounted?
+        return false unless @instance.vm_cid<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk#disk_mounted? calls '@instance.vm_cid' 2 times</span>              <span>Locations:</span>                  <a href="inactive_disk.html#L89" class="js-smell-location">0</a>                  <a href="inactive_disk.html#L90" class="js-smell-location">1</a>                  </div>  </li></ol>
+        agent_timeout_guard(@instance.vm_cid, @instance.agent_id) do |agent|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::InactiveDisk#disk_mounted? calls '@instance.vm_cid' 2 times</span>              <span>Locations:</span>                  <a href="inactive_disk.html#L89" class="js-smell-location">0</a>                  <a href="inactive_disk.html#L90" class="js-smell-location">1</a>                  </div>  </li></ol>
+          agent.list_disk.include?(@disk.disk_cid)
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

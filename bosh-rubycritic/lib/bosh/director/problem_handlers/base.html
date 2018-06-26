@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-06-23 15:26:08 -0700'>2017-06-23 15:26:08 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>lib/bosh/director/problem_handlers /</small> base.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">149</span><small> lines of codes</small></div>
+              <div><span class="metric">21</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">4.0</span><small> complexity/method</small></div>
+              <div><span class="metric">18</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">83.1</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                14
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director
+  module ProblemHandlers
+    class Base<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base has at least 8 instance variables</span>          </div>  </li></ol>
+      include CloudcheckHelper
+      attr_reader :data
+      attr_accessor :job # so we can checkpoint task<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#job is a writable attribute</span>          </div>  </li></ol>
+
+      def self.create_from_model(model)
+        create_by_type(model.type, model.resource_id, model.data)
+      end
+
+      # create_by_type might not be able to initialize
+      # problem handler if some part of its state
+      # or dependencies is invalid. In this case it
+      # just substitutes a generic &quot;invalid_problem&quot;
+      # handler that reports the fact that the original
+      # problem is invalid and offers closing it as
+      # the only solution.
+      def self.create_by_type(type, resource_id, data)
+        handler_class = Base.handlers[type.to_s]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#self.create_by_type calls 'type.to_s' 2 times</span>              <span>Locations:</span>                  <a href="base.html#L20" class="js-smell-location">0</a>                  <a href="base.html#L28" class="js-smell-location">1</a>                  </div>  </li></ol>
+        if handler_class.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#self.create_by_type performs a nil-check</span>          </div>  </li></ol>
+          raise &quot;Cannot find handler for &#39;#{type}&#39; problem&quot;
+        end
+
+        handler_class.new(resource_id, data)
+      rescue ProblemHandlerError =&gt; e<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#self.create_by_type has the variable name 'e'</span>          </div>  </li></ol>
+        create_by_type(:invalid_problem, resource_id,
+                       {&quot;error&quot; =&gt; e, &quot;original_type&quot; =&gt; type.to_s})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#self.create_by_type calls 'type.to_s' 2 times</span>              <span>Locations:</span>                  <a href="base.html#L20" class="js-smell-location">0</a>                  <a href="base.html#L28" class="js-smell-location">1</a>                  </div>  </li></ol>
+      end
+
+      # Problem state is  described by constructor parameters.
+      # Problem handler can reach out to check if the problem
+      # is still present and attempt to fix it by applying
+      # a potential resolution tagged with one or more labels.
+      def initialize(resource_id, data)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Unused-Parameters.md" target="_blank"><b>UnusedParameters</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#initialize has unused parameter 'data'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Unused-Parameters.md" target="_blank"><b>UnusedParameters</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#initialize has unused parameter 'resource_id'</span>          </div>  </li></ol>
+        @logger = Config.logger
+        @event_log = Config.event_log
+        @job = nil
+      end
+
+      def checkpoint
+        @job.task_checkpoint if @job
+      end
+
+      # Talking to cloud should only be possible
+      # in the context of DJ job
+      def cloud
+        if @job.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#cloud performs a nil-check</span>          </div>  </li></ol>
+          handler_error(&quot;Cannot talk to cloud outside of job context&quot;)
+        end
+        super
+      end
+
+      # Problem description
+      def description; end
+
+      def resolutions
+        self.class.resolutions.map do |name|
+          { :name =&gt; name.to_s, :plan =&gt; resolution_plan(name) }
+        end
+      end
+
+      def resolution_plan(resolution)
+        plan = self.class.plan_for(resolution)
+        return nil if plan.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#resolution_plan performs a nil-check</span>          </div>  </li></ol>
+        instance_eval(&amp;plan)
+      end
+
+      def auto_resolution
+        self.class.get_auto_resolution
+      end
+
+      # @param resolution desired resolution
+      def apply_resolution(resolution)
+        action = self.class.action_for(resolution)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#apply_resolution calls 'self.class' 2 times</span>              <span>Locations:</span>                  <a href="base.html#L75" class="js-smell-location">0</a>                  <a href="base.html#L77" class="js-smell-location">1</a>                  </div>  </li></ol>
+        if action.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#apply_resolution performs a nil-check</span>          </div>  </li></ol>
+          handler_error(&quot;Cannot find &#39;#{resolution}&#39; resolution for &#39;#{self.class}&#39;&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#apply_resolution calls 'self.class' 2 times</span>              <span>Locations:</span>                  <a href="base.html#L75" class="js-smell-location">0</a>                  <a href="base.html#L77" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+        instance_eval(&amp;action)
+      end
+
+      def auto_resolve
+        apply_resolution(auto_resolution)
+      end
+
+      # Registration DSL
+      class &lt;&lt; self
+        attr_accessor :handlers<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#handlers is a writable attribute</span>          </div>  </li></ol>
+      end
+
+      def self.register_as(type)
+        Base.handlers ||= {}<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#self.register_as calls 'Base.handlers' 2 times</span>              <span>Locations:</span>                  <a href="base.html#L92" class="js-smell-location">0</a>                  <a href="base.html#L93" class="js-smell-location">1</a>                  </div>  </li></ol>
+        Base.handlers[type.to_s] = self<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ProblemHandlers::Base#self.register_as calls 'Base.handlers' 2 times</span>              <span>Locations:</span>                  <a href="base.html#L92" class="js-smell-location">0</a>                  <a href="base.html#L93" class="js-smell-location">1</a>                  </div>  </li></ol>
+      end
+
+      # Resolution DSL
+      class &lt;&lt; self
+        attr_reader :resolutions
+      end
+
+      def self.init_dsl_data
+        @resolutions = []
+        @plans = {}
+        @actions = {}
+        @auto_resolution = nil
+      end
+
+      init_dsl_data
+
+      def self.inherited(base)
+        base.class_eval { init_dsl_data }
+      end
+
+      def self.plan_for(resolution)
+        @plans[resolution.to_s]
+      end
+
+      def self.action_for(resolution)
+        @actions[resolution.to_s]
+      end
+
+      def self.plan(&amp;block)
+        @plans[@pending_name.to_s] = block
+      end
+
+      def self.action(&amp;block)
+        @actions[@pending_name.to_s] = block
+      end
+
+      def self.get_auto_resolution
+        @auto_resolution
+      end
+
+      def self.auto_resolution(name)
+        @auto_resolution = name
+      end
+
+      def self.resolution(name, &amp;block)
+        @resolutions &lt;&lt; name
+        @pending_name = name
+        instance_eval(&amp;block)
+      ensure
+        @pending_name = nil
+      end
+
+    end
+  end
+end
+
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

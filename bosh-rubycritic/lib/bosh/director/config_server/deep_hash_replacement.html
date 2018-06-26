@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-05-15 15:21:57 -0700'>2018-05-15 15:21:57 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>lib/bosh/director/config_server /</small> deep_hash_replacement.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">126</span><small> lines of codes</small></div>
+              <div><span class="metric">5</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">29.3</span><small> complexity/method</small></div>
+              <div><span class="metric">18</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">146.73</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                20
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;bosh/director/config_server/config_server_helper&#39;
+
+module Bosh::Director::ConfigServer
+  class DeepHashReplacement<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement has no descriptive comment</span>          </div>  </li></ol>
+
+    def variables_path(obj, subtrees_to_ignore = [])
+      map = []
+      construct_variables_paths(map, obj)
+
+      result = map.select do |elem|
+        !path_matches_subtrees_to_ignore?(subtrees_to_ignore, elem[&#39;path&#39;])
+      end
+
+      result
+    end
+
+    def replace_variables(obj_to_be_resolved, variables_paths, variable_values)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables has a flog score of 92</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables has approx 29 statements</span>          </div>  </li></ol>
+      result = Bosh::Common::DeepCopy.copy(obj_to_be_resolved)
+      errors = []
+
+      variables_paths.each do |variables_path|
+        config_path = variables_path[&#39;path&#39;]
+        variable_values_copy = Bosh::Common::DeepCopy.copy(variable_values)
+
+        ret = result
+
+        if config_path.length &gt; 1<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'config_path.length' 3 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables refers to 'config_path' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">4</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">5</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">6</a>                  </div>  </li></ol>
+          ret = config_path[0..config_path.length-2].inject(result) do |obj, el|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'config_path.length' 3 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables refers to 'config_path' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">4</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">5</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">6</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables contains iterators nested 2 deep</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L52" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L60" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L61" class="js-smell-location">3</a>                  </div>  </li></ol>
+            obj[el]
+          end
+        end
+
+        variable_list = variables_path[&#39;variables&#39;]
+        target_to_replace = ret[config_path.last]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'config_path.last' 5 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'ret[config_path.last]' 3 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables refers to 'config_path' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">4</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">5</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">6</a>                  </div>  </li></ol>
+
+        if variables_path[&#39;is_key&#39;]
+          uninterpolated_key = variable_list.first<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'variable_list.first' 3 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L37" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L47" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">2</a>                  </div>  </li></ol>
+          interpolated_key = variable_values_copy[uninterpolated_key]
+          if config_path.length &gt;= 1<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'config_path.length' 3 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables refers to 'config_path' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">4</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">5</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">6</a>                  </div>  </li></ol>
+             ret[config_path.last][interpolated_key] = ret[config_path.last].delete(uninterpolated_key)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'config_path.last' 5 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'ret[config_path.last]' 3 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables refers to 'config_path' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">4</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">5</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">6</a>                  </div>  </li></ol>
+          else
+            ret[interpolated_key] = ret.delete(uninterpolated_key)
+          end
+          next
+        end
+
+        if variable_list.size == 1 &amp;&amp; variable_list.first == target_to_replace<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'variable_list.first' 3 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L37" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L47" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">2</a>                  </div>  </li></ol>
+          ret[config_path.last] = variable_values_copy[variable_list.first]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'config_path.last' 5 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'variable_list.first' 3 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L37" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L47" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables refers to 'config_path' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">4</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">5</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">6</a>                  </div>  </li></ol>
+        else
+          current_errors = []
+
+          variable_list.each do |variable|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables contains iterators nested 2 deep</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L52" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L60" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L61" class="js-smell-location">3</a>                  </div>  </li></ol>
+            variable_value = variable_values_copy[variable]
+            unless variable_value.is_a?(String) || variable_value.is_a?(Integer)
+              current_errors &lt;&lt;  &quot;- Failed to substitute variable: Can not replace &#39;#{variable}&#39; in &#39;#{target_to_replace}&#39;. The value should be a String or an Integer.&quot;
+            end
+          end
+
+          if current_errors.empty?
+            replacement_regex = Regexp.new(variable_values_copy.keys.map { |x| Regexp.escape(x) }.join(&#39;|&#39;))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables contains iterators nested 2 deep</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L52" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L60" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L61" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables has the variable name 'x'</span>          </div>  </li></ol>
+            needed_variables = variable_values_copy.select { |key, _| variable_list.include? key }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables contains iterators nested 2 deep</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L52" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L60" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L61" class="js-smell-location">3</a>                  </div>  </li></ol>
+            ret[config_path.last] = target_to_replace.gsub(replacement_regex, needed_variables)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables calls 'config_path.last' 5 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#replace_variables refers to 'config_path' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L27" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L28" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L34" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L39" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L40" class="js-smell-location">4</a>                  <a href="deep_hash_replacement.html#L48" class="js-smell-location">5</a>                  <a href="deep_hash_replacement.html#L62" class="js-smell-location">6</a>                  </div>  </li></ol>
+          else
+            errors &lt;&lt; current_errors
+          end
+        end
+      end
+
+      if errors.length &gt; 0
+        message = errors.join(&quot;\n&quot;)
+        raise Bosh::Director::ConfigServerIncorrectVariablePlacement, message
+      end
+
+      result
+    end
+
+    private
+
+    def construct_variables_paths(result, obj, path=nil, is_key=false)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths has a flog score of 29</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Boolean-Parameter.md" target="_blank"><b>BooleanParameter</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths has boolean parameter 'is_key'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths has 4 parameters</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths has approx 12 statements</span>          </div>  </li></ol>
+      if obj.is_a? Array<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths refers to 'obj' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L80" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L81" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L85" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L86" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L93" class="js-smell-location">4</a>                  </div>  </li></ol>
+        obj.each_with_index do |item, index|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths refers to 'obj' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L80" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L81" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L85" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L86" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L93" class="js-smell-location">4</a>                  </div>  </li></ol>
+          new_path = path.nil? ? [] : Bosh::Common::DeepCopy.copy(path)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths calls 'Bosh::Common::DeepCopy.copy(path)' 2 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L82" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L87" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths calls 'path.nil?' 2 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L82" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L87" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths performs a nil-check</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L82" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L87" class="js-smell-location">1</a>                  </div>  </li></ol>
+          construct_variables_paths(result, item, new_path + [index])
+        end
+      elsif obj.is_a? Hash<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths refers to 'obj' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L80" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L81" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L85" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L86" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L93" class="js-smell-location">4</a>                  </div>  </li></ol>
+        obj.each do |key, value|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths refers to 'obj' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L80" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L81" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L85" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L86" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L93" class="js-smell-location">4</a>                  </div>  </li></ol>
+          new_path = path.nil? ? [] : Bosh::Common::DeepCopy.copy(path)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths calls 'Bosh::Common::DeepCopy.copy(path)' 2 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L82" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L87" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths calls 'path.nil?' 2 times</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L82" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L87" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths performs a nil-check</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L82" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L87" class="js-smell-location">1</a>                  </div>  </li></ol>
+          construct_variables_paths(result, value, new_path + [key])
+          construct_variables_paths(result, key, new_path, true) if ConfigServerHelper.is_full_variable?(key)
+        end
+      else
+        path ||= []
+        variables = ConfigServerHelper.extract_variables_from_string(obj.to_s)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#construct_variables_paths refers to 'obj' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="deep_hash_replacement.html#L80" class="js-smell-location">0</a>                  <a href="deep_hash_replacement.html#L81" class="js-smell-location">1</a>                  <a href="deep_hash_replacement.html#L85" class="js-smell-location">2</a>                  <a href="deep_hash_replacement.html#L86" class="js-smell-location">3</a>                  <a href="deep_hash_replacement.html#L93" class="js-smell-location">4</a>                  </div>  </li></ol>
+        result &lt;&lt; { &#39;variables&#39; =&gt; variables, &#39;path&#39; =&gt; path, &#39;is_key&#39; =&gt; is_key } unless variables.empty?
+      end
+    end
+
+    def path_matches_subtrees_to_ignore?(subtrees_to_ignore, element_path)
+      path_matches = false
+      subtrees_to_ignore.each do |subtree_to_ignore|
+        if paths_match?(subtree_to_ignore, element_path)
+          path_matches = true
+          break
+        end
+      end
+      path_matches
+    end
+
+    def paths_match?(ignore_path, element_path)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#paths_match? has approx 7 statements</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::ConfigServer::DeepHashReplacement#paths_match? doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+      paths_match = true
+      if ignore_path.size &lt;= element_path.size
+        ignore_path.each_with_index do | ignored_node, index |
+          element_node = element_path[index]
+          if ignored_node.is_a?(Class)
+            (paths_match = false) unless element_node.is_a?(ignored_node)
+          else
+            (paths_match = false) unless element_node == ignored_node
+          end
+        end
+      else
+        paths_match = false
+      end
+      paths_match
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

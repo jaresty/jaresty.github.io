@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-02-19 13:35:11 +0100'>2018-02-19 13:35:11 +0100</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/unit/api /</small> config_manager_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">286</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">9</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">590.41</span><small> complexity</small></div>
+              <div><span class="metric">178</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                13
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+describe Bosh::Director::Api::ConfigManager do
+  subject(:manager) { Bosh::Director::Api::ConfigManager.new }
+
+  describe &#39;#create&#39; do
+    let(:type) { &#39;my-type&#39; }
+    let(:name) { &#39;some-name&#39; }
+    let(:valid_yaml) { YAML.dump(&quot;---\n{key: value&quot;) }
+
+    it &#39;saves the config&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(#create)::it#saves the config has a flog score of 38</span>          </div>  </li></ol>
+      expect do
+        manager.create(type, name, valid_yaml)
+      end.to change(Bosh::Director::Models::Config, :count).from(0).to(1)
+
+      config = Bosh::Director::Models::Config.first
+      expect(config.created_at).to_not be_nil
+      expect(config.content).to eq(valid_yaml)
+    end
+  end
+
+  describe &#39;#find&#39; do
+    before do
+      Bosh::Director::Models::Config.make(type: &#39;4total-4names&#39;, name: &#39;b&#39;, content: &#39;1&#39;)
+      Bosh::Director::Models::Config.make(type: &#39;4total-4names&#39;, name: &#39;e&#39;, content: &#39;2&#39;)
+      Bosh::Director::Models::Config.make(type: &#39;3total-2names&#39;, name: &#39;default&#39;, content: &#39;3&#39;)
+      Bosh::Director::Models::Config.make(type: &#39;4total-4names&#39;, name: &#39;default&#39;, content: &#39;4&#39;)
+      Bosh::Director::Models::Config.make(type: &#39;4total-4names&#39;, name: &#39;a&#39;, content: &#39;5&#39;)
+      Bosh::Director::Models::Config.make(type: &#39;3total-2names&#39;, name: &#39;a&#39;, content: &#39;6&#39;)
+      Bosh::Director::Models::Config.make(type: &#39;3total-2names&#39;, name: &#39;a&#39;, content: &#39;7&#39;)
+    end
+
+    context &#39;when limit is greater one&#39; do
+      before do
+        Bosh::Director::Models::Config.make(type: &#39;3total-1name&#39;, name: &#39;a&#39;, content: &#39;9&#39;)
+        Bosh::Director::Models::Config.make(type: &#39;3total-1name&#39;, name: &#39;a&#39;, content: &#39;10&#39;)
+        Bosh::Director::Models::Config.make(type: &#39;3total-1name&#39;, name: &#39;a&#39;, content: &#39;11&#39;)
+      end
+
+      context &#39;when no filtering&#39; do
+        it &#39;returns all configs including outdated ones&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(#find)::context(when limit is greater one)::context(when no filtering)::it#returns all configs including outdated ones has a flog score of 28</span>          </div>  </li></ol>
+          configs = manager.find(limit: 999)
+          expect(configs.count).to eq(10)
+          (0..6).each do |val|
+            expect(configs).to include(Bosh::Director::Models::Config.all[val])
+          end
+        end
+
+        it &#39;returns only `limit` amount per combination&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(#find)::context(when limit is greater one)::context(when no filtering)::it#returns only `limit` amount per combination has a flog score of 70</span>          </div>  </li></ol>
+          configs = manager.find(limit: 2)
+
+          groups = configs.select { |config| config.type == &#39;4total-4names&#39; }
+          expect(groups.count).to eq(4)
+          groups = configs.select { |config| config.name == &#39;default&#39; &amp;&amp; config.type == &#39;3total-2names&#39; }
+          expect(groups.count).to eq(1)
+          groups = configs.select { |config| config.name == &#39;a&#39; &amp;&amp; config.type == &#39;3total-2names&#39; }
+          expect(groups.count).to eq(2)
+          groups = configs.select { |config| config.type == &#39;3total-1name&#39; }
+          expect(groups.count).to eq(2)
+        end
+
+        it &#39;sorts type -&gt; name `default` first -&gt; name -&gt; id&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(#find)::context(when limit is greater one)::context(when no filtering)::it#sorts type -> name `default` first -> name -> id has a flog score of 28</span>          </div>  </li></ol>
+          configs = manager.find(limit: 3)
+
+          filtered_configs = configs.map(&amp;:values).map { |e| e.select { |k, _| k == :name || k == :type || k == :content } }
+          expect(filtered_configs).to eq([
+                                           { type: &#39;3total-1name&#39;, name: &#39;a&#39;, content: &#39;11&#39; },
+                                           { type: &#39;3total-1name&#39;, name: &#39;a&#39;, content: &#39;10&#39; },
+                                           { type: &#39;3total-1name&#39;, name: &#39;a&#39;, content: &#39;9&#39; },
+                                           { type: &#39;3total-2names&#39;, name: &#39;default&#39;, content: &#39;3&#39; },
+                                           { type: &#39;3total-2names&#39;, name: &#39;a&#39;, content: &#39;7&#39; },
+                                           { type: &#39;3total-2names&#39;, name: &#39;a&#39;, content: &#39;6&#39; },
+                                           { type: &#39;4total-4names&#39;, name: &#39;default&#39;, content: &#39;4&#39; },
+                                           { type: &#39;4total-4names&#39;, name: &#39;a&#39;, content: &#39;5&#39; },
+                                           { type: &#39;4total-4names&#39;, name: &#39;b&#39;, content: &#39;1&#39; },
+                                           { type: &#39;4total-4names&#39;, name: &#39;e&#39;, content: &#39;2&#39; },
+                                         ])
+        end
+      end
+
+      context &#39;when filtering&#39; do
+        it &#39;returns only the elements with the given type&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L82" class="js-smell-location">0</a>                  <a href="config_manager_spec.html#L87" class="js-smell-location">1</a>                  </div>  </li></ol>
+          configs = manager.find(type: &#39;4total-4names&#39;, limit: 999)
+          expect(configs.count).to eq(4)
+        end
+
+        it &#39;returns only the elements with the given name&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L82" class="js-smell-location">0</a>                  <a href="config_manager_spec.html#L87" class="js-smell-location">1</a>                  </div>  </li></ol>
+          configs = manager.find(name: &#39;a&#39;, limit: 999)
+          expect(configs.count).to eq(6)
+        end
+
+        it &#39;returns only the elements matching type and name&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L92" class="js-smell-location">0</a>                  <a href="config_manager_spec.html#L97" class="js-smell-location">1</a>                  </div>  </li></ol>
+          configs = manager.find(name: &#39;a&#39;, type: &#39;3total-2names&#39;, limit: 999)
+          expect(configs.count).to eq(2)
+        end
+
+        it &#39;returns no elements with no matches&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L92" class="js-smell-location">0</a>                  <a href="config_manager_spec.html#L97" class="js-smell-location">1</a>                  </div>  </li></ol>
+          configs = manager.find(type: &#39;foo&#39;, name: &#39;bar&#39;, limit: 999)
+          expect(configs.count).to eq(0)
+        end
+      end
+    end
+
+    context &#39;when limit is one&#39; do
+      context &#39;when no filtering&#39; do
+        it &#39;returns the latest config for each type/name combination&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(#find)::context(when limit is one)::context(when no filtering)::it#returns the latest config for each type/name combination has a flog score of 28</span>          </div>  </li></ol>
+          configs = manager.find
+          expect(configs.count).to eq(6)
+
+          [0, 1, 2, 3, 4, 6].each do |val|
+            expect(configs).to include(Bosh::Director::Models::Config.all[val])
+          end
+        end
+      end
+
+      context &#39;when filtering&#39; do
+        it &#39;returns only the elements with the given type&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L117" class="js-smell-location">0</a>                  <a href="config_manager_spec.html#L122" class="js-smell-location">1</a>                  </div>  </li></ol>
+          configs = manager.find(type: &#39;4total-4names&#39;)
+          expect(configs.count).to eq(4)
+        end
+
+        it &#39;returns only the elements with the given name&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L117" class="js-smell-location">0</a>                  <a href="config_manager_spec.html#L122" class="js-smell-location">1</a>                  </div>  </li></ol>
+          configs = manager.find(name: &#39;a&#39;)
+          expect(configs.count).to eq(2)
+        end
+
+        it &#39;returns only the elements matching type and name&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L127" class="js-smell-location">0</a>                  <a href="config_manager_spec.html#L132" class="js-smell-location">1</a>                  </div>  </li></ol>
+          configs = manager.find(name: &#39;a&#39;, type: &#39;3total-2names&#39;)
+          expect(configs.count).to eq(1)
+        end
+
+        it &#39;returns no elements with no matches&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L127" class="js-smell-location">0</a>                  <a href="config_manager_spec.html#L132" class="js-smell-location">1</a>                  </div>  </li></ol>
+          configs = manager.find(type: &#39;foo&#39;, name: &#39;bar&#39;)
+          expect(configs.count).to eq(0)
+        end
+      end
+
+      context &#39;when configs have been deleted&#39; do
+        it &#39;returns only not deleted configs&#39; do
+          Bosh::Director::Models::Config.make(type: &#39;4total-4names&#39;, name: &#39;a&#39;, deleted: true)
+
+          configs = manager.find(type: &#39;4total-4names&#39;, name: &#39;a&#39;, limit: 999)
+
+          expect(configs.count).to eq(1)
+        end
+      end
+    end
+  end
+
+  describe &#39;#find_max_id&#39; do
+    let!(:config) { Bosh::Director::Models::Config.make(id: 1) }
+    let!(:config) { Bosh::Director::Models::Config.make(id: 2) }
+    let!(:config) { Bosh::Director::Models::Config.make(id: 5) }
+
+    it &#39;returns the max ID&#39; do
+      result = manager.find_max_id
+
+      expect(result).to eq(5)
+    end
+
+    context &#39;when no config exists&#39; do
+      let!(:config) { }
+
+      it &#39;returns 0&#39; do
+        result = manager.find_max_id
+
+        expect(result).to eq(0)
+      end
+    end
+  end
+
+  describe &#39;#find_by_Id&#39; do
+    let!(:config) { Bosh::Director::Models::Config.make(id: 123, type: &#39;4total-4names&#39;, name: &#39;b&#39;, content: &#39;1&#39;) }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L173" class="js-smell-location">0</a>                  <a href="controllers/configs_controller_spec.html#L1179" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+    it &#39;returns config with specified id&#39; do
+      result = manager.find_by_id(123)
+      expect(result).to eq(config)
+    end
+
+    context &#39;when config is deleted&#39; do
+      let!(:config) { Bosh::Director::Models::Config.make(id: 12345, deleted: true) }
+
+      it &#39;raises ConfigNotFound&#39; do
+        expect do
+          manager.find_by_id(12345)
+        end.to raise_error(Bosh::Director::ConfigNotFound, &#39;Config 12345 not found&#39;)
+      end
+    end
+
+    context &#39;when config is missing&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="config_manager_spec.html#L190" class="js-smell-location">0</a>                  <a href="../config_server/config_server_http_client_spec.html#L58" class="js-smell-location">1</a>                  </div>  </li></ol>
+      it &#39;raises ConfigNotFound&#39; do
+        expect do
+          manager.find_by_id(124)
+        end.to raise_error(Bosh::Director::ConfigNotFound, &#39;Config 124 not found&#39;)
+      end
+    end
+  end
+
+  describe &#39;#delete&#39; do
+    context &#39;when config entry exists&#39; do
+      it &quot;sets deleted to &#39;true&#39;&quot; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(#delete)::context(when config entry exists)::it#sets deleted to 'true' has a flog score of 29</span>          </div>  </li></ol>
+        Bosh::Director::Models::Config.make(type: &#39;my-type&#39;, name: &#39;my-name&#39;)
+
+        count = manager.delete(&#39;my-type&#39;, &#39;my-name&#39;)
+
+        expect(count).to eq(1)
+
+        configs = Bosh::Director::Models::Config.where(type: &#39;my-type&#39;, name: &#39;my-name&#39;)
+
+        expect(configs.count).to eq(1)
+        expect(configs.first.deleted).to eq(true)
+      end
+    end
+
+    context &#39;when multiple config entries exist&#39; do
+      it &quot;sets deleted to all matching configs to &#39;true&#39;&quot; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(#delete)::context(when multiple config entries exist)::it#sets deleted to all matching configs to 'true' has a flog score of 38</span>          </div>  </li></ol>
+        Bosh::Director::Models::Config.make(type: &#39;my-type&#39;, name: &#39;my-name&#39;)
+        Bosh::Director::Models::Config.make(type: &#39;my-type&#39;, name: &#39;my-name&#39;)
+        Bosh::Director::Models::Config.make(type: &#39;other-type&#39;, name: &#39;other-name&#39;)
+
+        count = manager.delete(&#39;my-type&#39;, &#39;my-name&#39;)
+
+        expect(count).to eq(2)
+
+        configs = Bosh::Director::Models::Config.where(type: &#39;my-type&#39;, name: &#39;my-name&#39;)
+
+        expect(configs.map(:deleted)).to all(eq(true))
+
+        configs = Bosh::Director::Models::Config.where(type: &#39;other-type&#39;, name: &#39;other-name&#39;)
+
+        expect(configs.first.deleted).to eq(false)
+      end
+
+      it &#39;does not delete a deleted config again&#39; do
+        Bosh::Director::Models::Config.make(type: &#39;my-type&#39;, name: &#39;my-name&#39;, deleted: true)
+        Bosh::Director::Models::Config.make(type: &#39;my-type&#39;, name: &#39;my-name&#39;)
+
+        count = manager.delete(&#39;my-type&#39;, &#39;my-name&#39;)
+
+        expect(count).to eq(1)
+      end
+    end
+
+    context &#39;when the configs table is empty&#39; do
+      it &#39;does not crash&#39; do
+        count = manager.delete(&#39;my-type&#39;, &#39;my-name&#39;)
+
+        expect(count).to eq(0)
+      end
+    end
+  end
+
+  describe &#39;#delete_by_id&#39; do
+    context &#39;when config entry exists for given id&#39; do
+      let!(:config_id) { Bosh::Director::Models::Config.make(type: &#39;my-type&#39;, name: &#39;my-name&#39;).id }
+
+      it &quot;sets deleted to &#39;true&#39;&quot; do
+
+        count = manager.delete_by_id(config_id)
+
+        expect(Bosh::Director::Models::Config[config_id].deleted).to eq(true)
+        expect(count).to eq(1)
+      end
+    end
+
+    context &#39;when config is deleted for given id&#39; do
+      let!(:config_id) { Bosh::Director::Models::Config.make(deleted: true).id }
+
+      it &quot;does not update any entry&quot; do
+        count = manager.delete_by_id(config_id)
+
+        expect(count).to eq(0)
+      end
+    end
+
+    context &#39;when no config entry exists for given id&#39; do
+      it &quot;does not update any entry&quot; do
+        count = manager.delete_by_id(5)
+
+        expect(count).to eq(0)
+      end
+    end
+  end
+
+
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

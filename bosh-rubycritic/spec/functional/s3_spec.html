@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../overview.html"><img src="../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-03-30 11:30:45 -0700'>2017-03-30 11:30:45 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/functional /</small> s3_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">293</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">20</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">371.06</span><small> complexity</small></div>
+              <div><span class="metric">172</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                7
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;tempfile&#39;
+require &#39;net/http&#39;
+
+require &#39;erb&#39;
+require &#39;tempfile&#39;
+require &#39;bosh/director&#39;
+require_relative &#39;blobstore_shared_examples&#39;
+
+module Bosh::Blobstore<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Blobstore has no descriptive comment</span>          </div>  </li></ol>
+  describe S3cliBlobstoreClient do
+    let(:access_key_id) do
+      key = ENV[&#39;AWS_ACCESS_KEY_ID&#39;]
+      raise &#39;need to set AWS_ACCESS_KEY_ID environment variable&#39; unless key
+      key
+    end
+
+    let(:secret_access_key) do
+      key = ENV[&#39;AWS_SECRET_ACCESS_KEY&#39;]
+      raise &#39;need to set AWS_SECRET_ACCESS_KEY environment variable&#39; unless key
+      key
+    end
+
+    let(:s3_host) do
+      ENV.fetch(&#39;S3_HOST&#39;, &#39;s3.amazonaws.com&#39;)
+    end
+
+    let(:s3cli_path) do
+      Dir.glob(File.join(File.dirname(__FILE__), &quot;../../../../blobs/s3cli/&quot;, &quot;s3cli-*-linux-amd64&quot;)).first
+    end
+
+    let(:bucket_name) do
+      key = ENV[&#39;S3_BUCKET_NAME&#39;]
+      raise &#39;need to set S3_BUCKET_NAME environment variable&#39; unless key
+      key
+    end
+
+    let(:logger) {Logging::Logger.new(&#39;test-logger&#39;)}
+
+    before do
+      allow(Bosh::Director::Config).to receive(:logger).and_return(logger)
+    end
+
+    context &#39;External Endpoint&#39;, aws_s3: true do
+      let(:s3_options) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="s3_spec.html#L44" class="js-smell-location">0</a>                  <a href="s3_spec.html#L146" class="js-smell-location">1</a>                  </div>  </li></ol>
+        {
+          bucket_name: bucket_name,
+          access_key_id: access_key_id,
+          secret_access_key: secret_access_key,
+          host: &#39;s3-external-1.amazonaws.com&#39;,
+          credentials_source: &#39;static&#39;,
+          s3cli_path: s3cli_path
+        }
+      end
+
+      let(:s3) do
+        Client.create(&#39;s3cli&#39;, s3_options)
+      end
+
+      after(:each) do
+        s3.delete(@oid) if @oid
+      end
+
+      describe &#39;get object&#39; do
+        it &#39;should save to a file&#39; do
+          @oid = s3.create(&#39;foobar&#39;)
+          file = Tempfile.new(&#39;contents&#39;)
+          s3.get(@oid, file)
+          file.rewind
+          expect(file.read).to eq &#39;foobar&#39;
+        end
+
+        it &#39;should save a file using v2 signature version&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="s3_spec.html#L72" class="js-smell-location">0</a>                  <a href="s3_spec.html#L81" class="js-smell-location">1</a>                  </div>  </li></ol>
+          custom_s3 = Client.create(&#39;s3cli&#39;, s3_options.merge({signature_version: &quot;2&quot;}))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Blobstore has the variable name 'custom_s3'</span>              <span>Locations:</span>                  <a href="s3_spec.html#L73" class="js-smell-location">0</a>                  <a href="s3_spec.html#L82" class="js-smell-location">1</a>                  </div>  </li></ol>
+          @oid = custom_s3.create(&#39;foobar&#39;)
+          file = Tempfile.new(&#39;contents&#39;)
+          custom_s3.get(@oid, file)
+          file.rewind
+          expect(file.read).to eq &#39;foobar&#39;
+        end
+
+        it &#39;should save a file using v4 signature version&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="s3_spec.html#L72" class="js-smell-location">0</a>                  <a href="s3_spec.html#L81" class="js-smell-location">1</a>                  </div>  </li></ol>
+          custom_s3 = Client.create(&#39;s3cli&#39;, s3_options.merge({signature_version: &quot;4&quot;}))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Blobstore has the variable name 'custom_s3'</span>              <span>Locations:</span>                  <a href="s3_spec.html#L73" class="js-smell-location">0</a>                  <a href="s3_spec.html#L82" class="js-smell-location">1</a>                  </div>  </li></ol>
+          @oid = custom_s3.create(&#39;foobar&#39;)
+          file = Tempfile.new(&#39;contents&#39;)
+          custom_s3.get(@oid, file)
+          file.rewind
+          expect(file.read).to eq &#39;foobar&#39;
+        end
+      end
+    end
+
+    context &#39;External Frankfurt Endpoint&#39;, aws_frankfurt_s3: true do
+      let(:bucket_name) do
+        key = ENV[&#39;S3_FRANKFURT_BUCKET_NAME&#39;]
+        raise &#39;need to set S3_FRANKFURT_BUCKET_NAME environment variable&#39; unless key
+        key
+      end
+
+      let(:s3_options) do
+        {
+          bucket_name: bucket_name,
+          access_key_id: access_key_id,
+          secret_access_key: secret_access_key,
+          host: &#39;s3.eu-central-1.amazonaws.com&#39;,
+          region: &#39;eu-central-1&#39;,
+          credentials_source: &#39;static&#39;,
+          s3cli_path: s3cli_path
+        }
+      end
+
+      let(:s3) do
+        Client.create(&#39;s3cli&#39;, s3_options)
+      end
+
+      after(:each) do
+        s3.delete(@oid) if @oid
+      end
+
+      describe &#39;get object&#39; do
+        it &#39;should save to a file&#39; do
+          @oid = s3.create(&#39;foobar&#39;)
+          file = Tempfile.new(&#39;contents&#39;)
+          s3.get(@oid, file)
+          file.rewind
+          expect(file.read).to eq &#39;foobar&#39;
+        end
+
+        context &#39;when forcing the signature_version to v2&#39; do
+          it &#39;should not be able to save a file&#39; do
+            s3 = Client.create(&#39;s3cli&#39;, s3_options.merge({&#39;signature_version&#39; =&gt; &quot;2&quot;}))<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Blobstore has the variable name 's3'</span>          </div>  </li></ol>
+            expect {
+              @oid = s3.create(&#39;foobar&#39;)
+            }.to raise_error(/Upload failed: InvalidRequest: The authorization mechanism you have provided is not supported. Please use AWS4-HMAC-SHA256/)
+          end
+        end
+      end
+    end
+
+    context &#39;Frankfurt Region&#39;, aws_frankfurt_s3: true do
+      let(:bucket_name) do
+        key = ENV[&#39;S3_FRANKFURT_BUCKET_NAME&#39;]
+        raise &#39;need to set S3_FRANKFURT_BUCKET_NAME environment variable&#39; unless key
+        key
+      end
+
+      let(:s3_options) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="s3_spec.html#L44" class="js-smell-location">0</a>                  <a href="s3_spec.html#L146" class="js-smell-location">1</a>                  </div>  </li></ol>
+        {
+          bucket_name: bucket_name,
+          access_key_id: access_key_id,
+          secret_access_key: secret_access_key,
+          region: &#39;eu-central-1&#39;,
+          credentials_source: &#39;static&#39;,
+          s3cli_path: s3cli_path
+        }
+      end
+
+      let(:s3) do
+        Client.create(&#39;s3cli&#39;, s3_options)
+      end
+
+      after(:each) do
+        s3.delete(@oid) if @oid
+      end
+
+      describe &#39;get object&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="gcs_spec.html#L85" class="js-smell-location">0</a>                  <a href="s3_spec.html#L165" class="js-smell-location">1</a>                  <a href="s3_spec.html#L198" class="js-smell-location">2</a>                  </div>  </li></ol>
+        it &#39;should save to a file&#39; do
+          @oid = s3.create(&#39;foobar&#39;)
+          file = Tempfile.new(&#39;contents&#39;)
+          s3.get(@oid, file)
+          file.rewind
+          expect(file.read).to eq &#39;foobar&#39;
+        end
+      end
+    end
+
+    context &#39;General S3&#39;, general_s3: true do
+      context &#39;with force_path_style=true&#39; do
+        let(:s3_options) do
+          {
+            bucket_name: bucket_name,
+            access_key_id: access_key_id,
+            secret_access_key: secret_access_key,
+            s3_force_path_style: true,
+            host: s3_host,
+            credentials_source: &#39;static&#39;,
+            s3cli_path: s3cli_path
+          }
+        end
+
+        let(:s3) do
+          Client.create(&#39;s3cli&#39;, s3_options)
+        end
+
+        after(:each) do
+          s3.delete(@oid) if @oid
+        end
+
+        describe &#39;get object&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="gcs_spec.html#L85" class="js-smell-location">0</a>                  <a href="s3_spec.html#L165" class="js-smell-location">1</a>                  <a href="s3_spec.html#L198" class="js-smell-location">2</a>                  </div>  </li></ol>
+          it &#39;should save to a file&#39; do
+            @oid = s3.create(&#39;foobar&#39;)
+            file = Tempfile.new(&#39;contents&#39;)
+            s3.get(@oid, file)
+            file.rewind
+            expect(file.read).to eq &#39;foobar&#39;
+          end
+        end
+      end
+
+      context &#39;Read/Write&#39; do
+        let(:s3_options) do
+          {
+            bucket_name: bucket_name,
+            access_key_id: access_key_id,
+            secret_access_key: secret_access_key,
+            host: s3_host,
+            credentials_source: &#39;static&#39;,
+            s3cli_path: s3cli_path
+          }
+        end
+
+        let(:s3) do
+          Client.create(&#39;s3cli&#39;, s3_options)
+        end
+
+        it_behaves_like &#39;any blobstore client&#39; do
+          let(:blobstore) { s3 }
+        end
+      end
+    end
+
+    # TODO: Make simple blobstore work with s3-compatible services
+    context &#39;Read-Only&#39;, aws_s3: true do
+      let(:s3_options) do
+        {
+          bucket_name: bucket_name,
+          s3cli_path: s3cli_path,
+          credentials_source: &#39;none&#39;
+        }
+      end
+
+      let(:s3) do
+        Client.create(&#39;s3cli&#39;, s3_options)
+      end
+
+      let(:contents) do
+        &#39;foobar&#39;
+      end
+
+      describe &#39;get object&#39; do
+        it &#39;should save to a file&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="gcs_spec.html#L178" class="js-smell-location">0</a>                  <a href="s3_spec.html#L250" class="js-smell-location">1</a>                  </div>  </li></ol>
+          file = Tempfile.new(&#39;contents&#39;)
+          s3.get(&#39;public&#39;, file)
+          file.rewind
+          expect(file.read).to eq contents
+        end
+
+        it &#39;should return the contents&#39; do
+          expect(s3.get(&#39;public&#39;)).to eq contents
+        end
+
+        it &#39;should raise an error when the object is missing&#39; do
+          expect { s3.get(&#39;nonexistent-key&#39;) }.to raise_error NotFound, /Blobstore object &#39;nonexistent-key&#39; not found/
+        end
+      end
+
+      describe &#39;create object&#39; do
+        it &#39;should raise an error&#39; do
+          expect { s3.create(contents) }.to raise_error BlobstoreError, /performing operation put: the client operates in read only mode./
+        end
+      end
+
+      describe &#39;delete object&#39; do
+        context &#39;when the key exists&#39; do
+          it &#39;should raise an error&#39; do
+            expect { s3.delete(&#39;public&#39;) }.to raise_error BlobstoreError, /performing operation delete: the client operates in read only mode./
+          end
+        end
+
+        context &#39;when the key does not exist&#39; do
+          it &#39;should raise an error&#39; do
+            expect { s3.delete(&#39;nonexistent-key&#39;) }.to raise_error BlobstoreError, /performing operation delete: the client operates in read only mode./
+          end
+        end
+      end
+
+      describe &#39;object exists?&#39; do
+        it &#39;the object should exist&#39; do
+          expect(s3.exists?(&#39;public&#39;)).to be true
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/prettify.js'></script>
+    <script src='../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+    <script src='../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

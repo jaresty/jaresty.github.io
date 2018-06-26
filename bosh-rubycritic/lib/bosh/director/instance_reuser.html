@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2016-11-28 13:48:14 -0800'>2016-11-28 13:48:14 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>lib/bosh/director /</small> instance_reuser.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">105</span><small> lines of codes</small></div>
+              <div><span class="metric">11</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">8.1</span><small> complexity/method</small></div>
+              <div><span class="metric">5</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">89.39</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                19
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director
+  class NilInstanceError &lt; ArgumentError; end<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::NilInstanceError has no descriptive comment</span>          </div>  </li></ol>
+
+  class InstanceReuser<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser has no descriptive comment</span>          </div>  </li></ol>
+    def initialize
+      @idle_instances_by_stemcell = {}
+      @in_use_instances_by_stemcell = {}
+      @mutex = Mutex.new
+    end
+
+    def add_in_use_instance(instance, stemcell)
+      raise NilInstanceError if instance.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#add_in_use_instance performs a nil-check</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser tests 'instance.nil?' at least 4 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L12" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L25" class="js-smell-location">1</a>                  <a href="instance_reuser.html#L33" class="js-smell-location">2</a>                  <a href="instance_reuser.html#L40" class="js-smell-location">3</a>                  </div>  </li></ol>
+      canonical_stemcell = canonical(stemcell)
+      @mutex.synchronize do
+        @in_use_instances_by_stemcell[canonical_stemcell] ||= []<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#add_in_use_instance calls '@in_use_instances_by_stemcell[canonical_stemcell]' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L15" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L16" class="js-smell-location">1</a>                  </div>  </li></ol>
+        @in_use_instances_by_stemcell[canonical_stemcell] &lt;&lt; instance<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#add_in_use_instance calls '@in_use_instances_by_stemcell[canonical_stemcell]' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L15" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L16" class="js-smell-location">1</a>                  </div>  </li></ol>
+      end
+    end
+
+    def get_instance(stemcell)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#get_instance has approx 8 statements</span>          </div>  </li></ol>
+      canonical_stemcell = canonical(stemcell)
+      @mutex.synchronize do
+        return nil if @idle_instances_by_stemcell[canonical_stemcell].nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#get_instance calls '@idle_instances_by_stemcell[canonical_stemcell]' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L23" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L24" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#get_instance performs a nil-check</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L23" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L25" class="js-smell-location">1</a>                  </div>  </li></ol>
+        instance = @idle_instances_by_stemcell[canonical_stemcell].pop<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#get_instance calls '@idle_instances_by_stemcell[canonical_stemcell]' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L23" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L24" class="js-smell-location">1</a>                  </div>  </li></ol>
+        return nil if instance.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#get_instance performs a nil-check</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L23" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L25" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser tests 'instance.nil?' at least 4 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L12" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L25" class="js-smell-location">1</a>                  <a href="instance_reuser.html#L33" class="js-smell-location">2</a>                  <a href="instance_reuser.html#L40" class="js-smell-location">3</a>                  </div>  </li></ol>
+        @in_use_instances_by_stemcell[canonical_stemcell] ||= []<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#get_instance calls '@in_use_instances_by_stemcell[canonical_stemcell]' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L26" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L27" class="js-smell-location">1</a>                  </div>  </li></ol>
+        @in_use_instances_by_stemcell[canonical_stemcell] &lt;&lt; instance<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#get_instance calls '@in_use_instances_by_stemcell[canonical_stemcell]' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L26" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L27" class="js-smell-location">1</a>                  </div>  </li></ol>
+        return instance
+      end
+    end
+
+    def release_instance(instance)
+      raise NilInstanceError if instance.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#release_instance performs a nil-check</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser tests 'instance.nil?' at least 4 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L12" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L25" class="js-smell-location">1</a>                  <a href="instance_reuser.html#L33" class="js-smell-location">2</a>                  <a href="instance_reuser.html#L40" class="js-smell-location">3</a>                  </div>  </li></ol>
+      @mutex.synchronize do
+        release_without_lock(instance)
+      end
+    end
+
+    def remove_instance(instance)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#remove_instance has approx 6 statements</span>          </div>  </li></ol>
+      raise NilInstanceError if instance.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#remove_instance performs a nil-check</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser tests 'instance.nil?' at least 4 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L12" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L25" class="js-smell-location">1</a>                  <a href="instance_reuser.html#L33" class="js-smell-location">2</a>                  <a href="instance_reuser.html#L40" class="js-smell-location">3</a>                  </div>  </li></ol>
+      @mutex.synchronize do
+        release_without_lock(instance)
+        @idle_instances_by_stemcell.each_value do |idle_instances|
+          idle_instances.each do |idle_instance|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#remove_instance contains iterators nested 2 deep</span>          </div>  </li></ol>
+            idle_instances.delete(idle_instance) if instance == idle_instance
+          end
+        end
+      end
+    end
+
+    def remove_idle_instance_not_matching_stemcell(stemcell)
+      canonical_stemcell = canonical(stemcell)
+      @mutex.synchronize do
+        @idle_instances_by_stemcell.each do |stemcell, idle_instances|
+          if stemcell != canonical_stemcell &amp;&amp; !idle_instances.empty?
+            return idle_instances.pop
+          end
+        end
+      end
+    end
+
+    def get_num_instances(stemcell)
+      canonical_stemcell = canonical(stemcell)
+      @mutex.synchronize do
+        idle_count = @idle_instances_by_stemcell.fetch(canonical_stemcell, []).size
+        in_use_count = @in_use_instances_by_stemcell.fetch(canonical_stemcell, []).size
+        idle_count + in_use_count
+      end
+    end
+
+    def total_instance_count<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#total_instance_count has approx 7 statements</span>          </div>  </li></ol>
+      @mutex.synchronize do
+        sum = 0
+        @idle_instances_by_stemcell.values.each{|instances| sum += instances.to_a.count }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#total_instance_count calls 'instances.to_a' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L74" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L75" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#total_instance_count calls 'instances.to_a.count' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L74" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L75" class="js-smell-location">1</a>                  </div>  </li></ol>
+        @in_use_instances_by_stemcell.values.each{|instances| sum += instances.to_a.count }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#total_instance_count calls 'instances.to_a' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L74" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L75" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#total_instance_count calls 'instances.to_a.count' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L74" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L75" class="js-smell-location">1</a>                  </div>  </li></ol>
+        sum
+      end
+    end
+
+    def each
+      all_instances = (@idle_instances_by_stemcell.values + @in_use_instances_by_stemcell.values).flatten
+      all_instances.each do |instance|
+        yield instance
+      end
+    end
+
+    private
+
+    def release_without_lock(instance)
+      @in_use_instances_by_stemcell.each do |canonical_stemcell, in_use_instances|
+        in_use_instances.each do |in_use_instance|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#release_without_lock contains iterators nested 2 deep</span>          </div>  </li></ol>
+          if instance == in_use_instance
+            in_use_instances.delete(in_use_instance)
+            @idle_instances_by_stemcell[canonical_stemcell] ||= []<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#release_without_lock calls '@idle_instances_by_stemcell[canonical_stemcell]' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L94" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L95" class="js-smell-location">1</a>                  </div>  </li></ol>
+            @idle_instances_by_stemcell[canonical_stemcell] &lt;&lt; instance<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#release_without_lock calls '@idle_instances_by_stemcell[canonical_stemcell]' 2 times</span>              <span>Locations:</span>                  <a href="instance_reuser.html#L94" class="js-smell-location">0</a>                  <a href="instance_reuser.html#L95" class="js-smell-location">1</a>                  </div>  </li></ol>
+          end
+        end
+      end
+    end
+
+    def canonical(stemcell)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::InstanceReuser#canonical doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+      stemcell.desc
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

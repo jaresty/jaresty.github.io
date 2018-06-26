@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-03-20 16:50:19 -0400'>2018-03-20 16:50:19 -0400</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/unit/problem_handlers /</small> missing_disk_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">220</span><small> lines of codes</small></div>
+              <div><span class="metric">1</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">668.0</span><small> complexity/method</small></div>
+              <div><span class="metric">31</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">668.04</span><small> complexity</small></div>
+              <div><span class="metric">52</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                20
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+describe Bosh::Director::ProblemHandlers::MissingDisk do
+  let(:handler) { described_class.new(disk.id, {}) }
+  before do
+    allow(handler).to receive(:agent_client).with(instance.agent_id).and_return(agent_client)
+    allow(Bosh::Director::AZCloudFactory).to receive(:create_with_latest_configs).and_return(cloud_factory)
+    allow(cloud_factory).to receive(:get_name_for_az).with(&#39;az1&#39;).and_return(&#39;cpi1&#39;)
+  end
+
+  let(:cloud) { instance_double(Bosh::Clouds::ExternalCpi) }
+  let(:cloud_factory) { instance_double(Bosh::Director::AZCloudFactory) }
+
+  let(:agent_client) { instance_double(&#39;Bosh::Director::AgentClient&#39;, unmount_disk: nil) }
+
+  let(:instance) do
+    instance = Bosh::Director::Models::Instance.
+      make(job: &#39;mysql_node&#39;, index: 3, uuid: &quot;uuid-42&quot;, availability_zone: &#39;az1&#39;)
+    vm = Bosh::Director::Models::Vm.make(cid: &#39;vm-cid&#39;, instance_id: instance.id, stemcell_api_version: 25)
+    instance.active_vm = vm
+    instance.save
+  end
+
+  let!(:disk) do
+    Bosh::Director::Models::PersistentDisk.
+      make(disk_cid: &#39;disk-cid&#39;, instance_id: instance.id,
+      size: 300, active: false)
+  end
+
+  it &#39;registers under missing_disk type&#39; do
+    handler = Bosh::Director::ProblemHandlers::Base.create_by_type(:missing_disk, disk.id, {})
+    expect(handler).to be_kind_of(Bosh::Director::ProblemHandlers::MissingDisk)
+  end
+
+  it &#39;has well-formed description&#39; do
+    expect(handler.description).to eq(&quot;Disk &#39;disk-cid&#39; (mysql_node/uuid-42, 300M) is missing&quot;)
+  end
+
+  describe &#39;resolutions&#39; do
+    describe &#39;delete_disk_reference&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe#delete_disk_reference has a flog score of 25</span>          </div>  </li></ol>
+      let(:event_manager) {Bosh::Director::Api::EventManager.new(true)}
+      let(:update_job) {instance_double(Bosh::Director::Jobs::UpdateDeployment, username: &#39;user&#39;, task_id: 42, event_manager: event_manager)}
+
+      before do
+        Bosh::Director::Models::Snapshot.make(persistent_disk: disk, snapshot_cid: &#39;snapshot-cid&#39;)
+        allow(agent_client).to receive(:list_disk).and_return({})
+        allow(Bosh::Director::Config).to receive(:current_job).and_return(update_job)
+      end
+
+      def self.it_ignores_cloud_disk_errors<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe::it_ignores_cloud_disk_errors has a flog score of 48</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors has approx 10 statements</span>          </div>  </li></ol>
+        it &#39;ignores the error if disk is not attached&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L51" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L61" class="js-smell-location">1</a>                  </div>  </li></ol>
+          allow(cloud).to receive(:detach_disk).with(&#39;vm-cid&#39;, &#39;disk-cid&#39;) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'allow(cloud)' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L52" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'allow(cloud).to receive(:detach_disk).with('vm-cid', 'disk-cid')' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L52" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'receive(:detach_disk)' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L52" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'receive(:detach_disk).with('vm-cid', 'disk-cid')' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L52" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li></ol>
+            raise Bosh::Clouds::DiskNotAttached.new(false)
+          end
+
+          expect {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'expect { ... }' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L56" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L66" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'expect { ... }.to_not raise_error' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L56" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L66" class="js-smell-location">1</a>                  </div>  </li></ol>
+            handler.apply_resolution(:delete_disk_reference)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'handler.apply_resolution(:delete_disk_reference)' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L57" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L67" class="js-smell-location">1</a>                  </div>  </li></ol>
+          }.to_not raise_error
+        end
+
+        it &#39;ignores the error if disk is not found&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L51" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L61" class="js-smell-location">1</a>                  </div>  </li></ol>
+          allow(cloud).to receive(:detach_disk).with(&#39;vm-cid&#39;, &#39;disk-cid&#39;) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'allow(cloud)' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L52" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'allow(cloud).to receive(:detach_disk).with('vm-cid', 'disk-cid')' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L52" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'receive(:detach_disk)' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L52" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'receive(:detach_disk).with('vm-cid', 'disk-cid')' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L52" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li></ol>
+            raise Bosh::Clouds::DiskNotFound.new(false)
+          end
+
+          expect {<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'expect { ... }' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L56" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L66" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'expect { ... }.to_not raise_error' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L56" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L66" class="js-smell-location">1</a>                  </div>  </li></ol>
+            handler.apply_resolution(:delete_disk_reference)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>self.it_ignores_cloud_disk_errors calls 'handler.apply_resolution(:delete_disk_reference)' 2 times</span>              <span>Locations:</span>                  <a href="missing_disk_spec.html#L57" class="js-smell-location">0</a>                  <a href="missing_disk_spec.html#L67" class="js-smell-location">1</a>                  </div>  </li></ol>
+          }.to_not raise_error
+        end
+      end
+
+      context &#39;when vm is present&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe(delete_disk_reference)::context#when vm is present has a flog score of 32</span>          </div>  </li></ol>
+        before do
+          allow(cloud).to receive(:has_vm).and_return(true)
+          expect(cloud_factory).to receive(:get_for_az).with(instance.availability_zone, 25).and_return(cloud)
+        end
+
+        context &#39;when agent responds to list_disk&#39; do
+          context &#39;when disk is in the list of agent disks&#39; do
+            before do
+              allow(agent_client).to receive(:list_disk).and_return([&#39;disk-cid&#39;])
+            end
+
+            it_ignores_cloud_disk_errors
+
+            it &#39;deactivates, unmounts, detaches, deletes snapshots, deletes disk reference&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe(delete_disk_reference)::context(when vm is present)::context(when agent responds to list_disk)::context(when disk is in the list of agent disks)::it#deactivates, unmounts, detaches, deletes snapshots, deletes disk reference has a flog score of 77</span>          </div>  </li></ol>
+              expect(agent_client).to receive(:unmount_disk) do
+                db_disk = Bosh::Director::Models::PersistentDisk[disk.id]
+                expect(db_disk.active).to be(false)
+              end.ordered
+
+              expect(cloud).to receive(:detach_disk).with(&#39;vm-cid&#39;, &#39;disk-cid&#39;).ordered
+
+              handler.apply_resolution(:delete_disk_reference)
+
+              expect(Bosh::Director::Models::PersistentDisk[disk.id]).to be_nil
+              expect(Bosh::Director::Models::Snapshot.all).to be_empty
+              expect(instance.managed_persistent_disk_cid).to be_nil
+            end
+
+            context &#39;when unmount_disk fails with RpcTimeout error&#39; do
+              before do
+                allow(agent_client).to receive(:unmount_disk).and_raise(
+                  Bosh::Director::RpcTimeout.new(&#39;agent is unresponsive&#39;)
+                )
+              end
+
+              it &#39;detaches disk, deletes snapshots, deletes disk reference&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe(delete_disk_reference)::context(when vm is present)::context(when agent responds to list_disk)::context(when disk is in the list of agent disks)::context(when unmount_disk fails with RpcTimeout error)::it#detaches disk, deletes snapshots, deletes disk reference has a flog score of 41</span>          </div>  </li></ol>
+                expect(cloud).to receive(:detach_disk).with(&#39;vm-cid&#39;, &#39;disk-cid&#39;).ordered
+
+                handler.apply_resolution(:delete_disk_reference)
+
+                expect(Bosh::Director::Models::PersistentDisk[disk.id]).to be_nil
+                expect(Bosh::Director::Models::Snapshot.all).to be_empty
+              end
+            end
+
+            context &#39;when unmount_disk fails with RpcRemoteException error&#39; do
+              before do
+                allow(agent_client).to receive(:unmount_disk).and_raise(
+                  Bosh::Director::RpcRemoteException.new(&#39;something bad happened&#39;)
+                )
+              end
+
+              it &#39;raises the error&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe(delete_disk_reference)::context(when vm is present)::context(when agent responds to list_disk)::context(when disk is in the list of agent disks)::context(when unmount_disk fails with RpcRemoteException error)::it#raises the error has a flog score of 61</span>          </div>  </li></ol>
+                expect(cloud).to_not receive(:detach_disk).with(&#39;vm-cid&#39;, &#39;disk-cid&#39;).ordered
+                expect(cloud).to_not receive(:delete_snapshot).with(&#39;snapshot-cid&#39;).ordered
+
+                expect {
+                  handler.apply_resolution(:delete_disk_reference)
+                }.to raise_error(Bosh::Director::ProblemHandlerError)
+
+                expect(Bosh::Director::Models::PersistentDisk[disk.id]).to_not be_nil
+                expect(Bosh::Director::Models::Snapshot.all).to_not be_empty
+              end
+            end
+          end
+
+          context &#39;when disk is not in the list of agent disks&#39; do
+            before do
+              allow(agent_client).to receive(:list_disk).and_return([])
+            end
+
+            it_ignores_cloud_disk_errors
+
+            it &#39;deactivates, detaches, deletes snapshots, deletes disk reference&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe(delete_disk_reference)::context(when vm is present)::context(when agent responds to list_disk)::context(when disk is not in the list of agent disks)::it#deactivates, detaches, deletes snapshots, deletes disk reference has a flog score of 64</span>          </div>  </li></ol>
+              expect(agent_client).to_not receive(:unmount_disk)
+
+              expect(cloud).to receive(:detach_disk).with(&#39;vm-cid&#39;, &#39;disk-cid&#39;) do
+                db_disk = Bosh::Director::Models::PersistentDisk[disk.id]
+                expect(db_disk.active).to be(false)
+              end.ordered
+
+              handler.apply_resolution(:delete_disk_reference)
+
+              expect(Bosh::Director::Models::PersistentDisk[disk.id]).to be_nil
+              expect(Bosh::Director::Models::Snapshot.all).to be_empty
+            end
+          end
+        end
+
+        context &#39;when agent does not respond to list_disk&#39; do
+          before do
+            allow(agent_client).to receive(:list_disk).and_raise(Bosh::Director::RpcTimeout)
+          end
+
+          it_ignores_cloud_disk_errors
+
+          it &#39;detaches disk, deletes snapshots, deletes disk reference&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe(delete_disk_reference)::context(when vm is present)::context(when agent does not respond to list_disk)::it#detaches disk, deletes snapshots, deletes disk reference has a flog score of 43</span>          </div>  </li></ol>
+            expect(agent_client).to_not receive(:unmount_disk)
+            expect(cloud).to receive(:detach_disk).ordered
+
+            handler.apply_resolution(:delete_disk_reference)
+
+            expect(Bosh::Director::Models::PersistentDisk[disk.id]).to be_nil
+            expect(Bosh::Director::Models::Snapshot.all).to be_empty
+          end
+        end
+      end
+
+      context &#39;when vm is missing&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe(delete_disk_reference)::context#when vm is missing has a flog score of 34</span>          </div>  </li></ol>
+        before do
+          allow(cloud).to receive(:has_vm).and_return(false)
+          expect(cloud_factory).to receive(:get_for_az).with(instance.availability_zone, 25).and_return(cloud)
+        end
+
+        it_ignores_cloud_disk_errors
+
+        it &#39;deletes snapshots, deletes disk reference&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe(delete_disk_reference)::context(when vm is missing)::it#deletes snapshots, deletes disk reference has a flog score of 38</span>          </div>  </li></ol>
+          expect(agent_client).to_not receive(:unmount_disk)
+          expect(cloud).to_not receive(:detach_disk)
+
+          handler.apply_resolution(:delete_disk_reference)
+
+          expect(Bosh::Director::Models::PersistentDisk[disk.id]).to be_nil
+          expect(Bosh::Director::Models::Snapshot.all).to be_empty
+        end
+      end
+
+      context &#39;when vm is destroyed&#39; do
+        before do
+          instance.active_vm = nil
+        end
+
+        it &#39;deletes disk related info from database directly&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>describe(resolutions)::describe(delete_disk_reference)::context(when vm is destroyed)::it#deletes disk related info from database directly has a flog score of 62</span>          </div>  </li></ol>
+          expect(cloud_factory).to receive(:get_for_az).with(instance.availability_zone, nil).and_return(cloud)
+          handler = described_class.new(disk.id, {})
+          allow(handler).to receive(:cloud).and_return(cloud)
+
+          expect {
+            handler.apply_resolution(:delete_disk_reference)
+          }.to_not raise_error
+
+          expect(Bosh::Director::Models::PersistentDisk[disk.id]).to be_nil
+          expect(Bosh::Director::Models::Snapshot.all).to be_empty
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

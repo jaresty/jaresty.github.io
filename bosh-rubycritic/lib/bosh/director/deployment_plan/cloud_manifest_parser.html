@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-02-15 16:44:39 +0100'>2018-02-15 16:44:39 +0100</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>lib/bosh/director/deployment_plan /</small> cloud_manifest_parser.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating d big">
+              D
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">185</span><small> lines of codes</small></div>
+              <div><span class="metric">9</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">13.3</span><small> complexity/method</small></div>
+              <div><span class="metric">40</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">119.33</span><small> complexity</small></div>
+              <div><span class="metric">120</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                19
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director
+  module DeploymentPlan
+    class CloudManifestParser<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser has no descriptive comment</span>          </div>  </li></ol>
+      include ValidationHelper
+      include DuplicateDetector
+
+      def initialize(logger)
+        @logger = logger
+      end
+
+      def parse(cloud_manifest, global_network_resolver, ip_provider_factory)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse has approx 9 statements</span>          </div>  </li></ol>
+        azs = parse_availability_zones(cloud_manifest)
+        az_list = CloudPlanner.index_by_name(azs)
+        networks = parse_networks(cloud_manifest, global_network_resolver, azs)
+        resource_pools = parse_resource_pools(cloud_manifest)
+        vm_types = parse_vm_types(cloud_manifest)
+        vm_extensions = parse_vm_extensions(cloud_manifest)
+        disk_types = parse_disk_types(cloud_manifest)
+        compilation_config = parse_compilation(cloud_manifest, networks, az_list, vm_types, vm_extensions)
+
+        CloudPlanner.new({
+          availability_zones_list: az_list,
+          networks: networks,
+          global_network_resolver: global_network_resolver,
+          ip_provider_factory: ip_provider_factory,
+          compilation: compilation_config,
+          resource_pools: resource_pools,
+          vm_types: vm_types,
+          vm_extensions: vm_extensions,
+          disk_types: disk_types,
+          logger: @logger,
+        })
+      end
+
+      def parse_availability_zones(cloud_manifest)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L35" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L123" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L138" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_availability_zones has approx 7 statements</span>          </div>  </li></ol>
+        availability_zones = safe_property(cloud_manifest, &#39;azs&#39;, :class =&gt; Array, :optional =&gt; true, :default =&gt; [])
+        parsed_availability_zones = availability_zones.map do |availability_zone|
+          AvailabilityZone.parse(availability_zone)
+        end
+
+        duplicates = detect_duplicates(parsed_availability_zones) { |az| az.name }
+        unless duplicates.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser tests 'duplicates.empty?' at least 6 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L42" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L74" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L116" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L131" class="js-smell-location">3</a>                  <a href="cloud_manifest_parser.html#L146" class="js-smell-location">4</a>                  <a href="cloud_manifest_parser.html#L177" class="js-smell-location">5</a>                  </div>  </li></ol>
+          raise DeploymentDuplicateAvailabilityZoneName, &quot;Duplicate az name &#39;#{duplicates.first.name}&#39;&quot;
+        end
+
+        parsed_availability_zones
+      end
+
+      private
+
+      def parse_networks(cloud_manifest, global_network_resolver, availability_zones)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_networks has approx 12 statements</span>          </div>  </li></ol>
+        networks = safe_property(cloud_manifest, &#39;networks&#39;, :class =&gt; Array)
+        if networks.empty?
+          raise DeploymentNoNetworks, &#39;No networks specified&#39;
+        end
+
+        parsed_networks = networks.map do |network_spec|
+          type = safe_property(network_spec, &#39;type&#39;, :class =&gt; String, :default =&gt; &#39;manual&#39;)
+
+          case type
+            when &#39;manual&#39;
+              ManualNetwork.parse(network_spec, availability_zones, global_network_resolver, @logger)
+            when &#39;dynamic&#39;
+              DynamicNetwork.parse(network_spec, availability_zones, @logger)
+            when &#39;vip&#39;
+              VipNetwork.new(network_spec, @logger)
+            else
+              raise DeploymentInvalidNetworkType,
+                &quot;Invalid network type &#39;#{type}&#39;&quot;
+          end
+        end
+
+        duplicates = detect_duplicates(parsed_networks) { |network| network.canonical_name }
+        unless duplicates.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser tests 'duplicates.empty?' at least 6 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L42" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L74" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L116" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L131" class="js-smell-location">3</a>                  <a href="cloud_manifest_parser.html#L146" class="js-smell-location">4</a>                  <a href="cloud_manifest_parser.html#L177" class="js-smell-location">5</a>                  </div>  </li></ol>
+          raise DeploymentCanonicalNetworkNameTaken, &quot;Invalid network name &#39;#{duplicates.first.name}&#39;, canonical name already taken&quot;
+        end
+
+        parsed_networks
+      end
+
+      def parse_compilation(cloud_manifest, networks, az_list, vm_types, vm_extensions)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation has 5 parameters</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation has approx 7 statements</span>          </div>  </li></ol>
+        compilation_spec = safe_property(cloud_manifest, &#39;compilation&#39;, :class =&gt; Hash)
+        config = CompilationConfig.new(compilation_spec, az_list, vm_types, vm_extensions)
+
+        compilation_network = networks.find { |network| network.name == config.network_name }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation calls 'config.network_name' 2 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L85" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L89" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation refers to 'config' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L85" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L89" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L92" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L94" class="js-smell-location">3</a>                  </div>  </li></ol>
+        if compilation_network.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation performs a nil-check</span>          </div>  </li></ol>
+          raise CompilationConfigUnknownNetwork,
+            &quot;Compilation config references an unknown &quot; +
+              &quot;network &#39;#{config.network_name}&#39;&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation calls 'config.network_name' 2 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L85" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L89" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation refers to 'config' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L85" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L89" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L92" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L94" class="js-smell-location">3</a>                  </div>  </li></ol>
+        end
+
+        unless compilation_network.has_azs?([config.availability_zone_name])<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation calls 'config.availability_zone_name' 2 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L92" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L94" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation refers to 'config' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L85" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L89" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L92" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L94" class="js-smell-location">3</a>                  </div>  </li></ol>
+          raise JobNetworkMissingRequiredAvailabilityZone,
+            &quot;Compilation config refers to az &#39;#{config.availability_zone_name}&#39; but network &#39;#{compilation_network.name}&#39; has no matching subnet(s).&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation calls 'config.availability_zone_name' 2 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L92" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L94" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_compilation refers to 'config' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L85" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L89" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L92" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L94" class="js-smell-location">3</a>                  </div>  </li></ol>
+        end
+
+        config
+      end
+
+      def parse_resource_pools(cloud_manifest)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_resource_pools has approx 9 statements</span>          </div>  </li></ol>
+        resource_pools = safe_property(cloud_manifest, &#39;resource_pools&#39;, :class =&gt; Array, optional: true)
+
+        if resource_pools.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_resource_pools performs a nil-check</span>          </div>  </li></ol>
+          return {}
+        end
+
+        if resource_pools.empty?
+          raise DeploymentNoResourcePools, &#39;No resource_pools specified&#39;
+        end
+
+        parsed_resource_pools = resource_pools.map do |rp_spec|
+          ResourcePool.new(rp_spec)
+        end
+
+        duplicates = detect_duplicates(parsed_resource_pools) { |rp| rp.name }
+        unless duplicates.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser tests 'duplicates.empty?' at least 6 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L42" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L74" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L116" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L131" class="js-smell-location">3</a>                  <a href="cloud_manifest_parser.html#L146" class="js-smell-location">4</a>                  <a href="cloud_manifest_parser.html#L177" class="js-smell-location">5</a>                  </div>  </li></ol>
+          raise DeploymentDuplicateResourcePoolName, &quot;Duplicate resource pool name &#39;#{duplicates.first.name}&#39;&quot;
+        end
+
+        parsed_resource_pools
+      end
+
+      def parse_vm_types(cloud_manifest)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L35" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L123" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L138" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_vm_types has approx 7 statements</span>          </div>  </li></ol>
+        vm_types = safe_property(cloud_manifest, &#39;vm_types&#39;, :class =&gt; Array, :optional =&gt; true, :default =&gt; [])
+
+        parsed_vm_types = vm_types.map do |vmt_spec|
+          VmType.new(vmt_spec)
+        end
+
+        duplicates = detect_duplicates(parsed_vm_types) { |vmt| vmt.name }
+        unless duplicates.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser tests 'duplicates.empty?' at least 6 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L42" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L74" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L116" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L131" class="js-smell-location">3</a>                  <a href="cloud_manifest_parser.html#L146" class="js-smell-location">4</a>                  <a href="cloud_manifest_parser.html#L177" class="js-smell-location">5</a>                  </div>  </li></ol>
+          raise DeploymentDuplicateVmTypeName, &quot;Duplicate vm type name &#39;#{duplicates.first.name}&#39;&quot;
+        end
+
+        parsed_vm_types
+      end
+
+      def parse_vm_extensions(cloud_manifest)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 3 nodes</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L35" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L123" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L138" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_vm_extensions has approx 7 statements</span>          </div>  </li></ol>
+        vm_extensions = safe_property(cloud_manifest, &#39;vm_extensions&#39;, :class =&gt; Array, :optional =&gt; true, :default =&gt; [])
+
+        parsed_vm_extensions = vm_extensions.map do |vmt_spec|
+          VmExtension.new(vmt_spec)
+        end
+
+        duplicates = detect_duplicates(parsed_vm_extensions) { |vmt| vmt.name }
+        unless duplicates.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser tests 'duplicates.empty?' at least 6 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L42" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L74" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L116" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L131" class="js-smell-location">3</a>                  <a href="cloud_manifest_parser.html#L146" class="js-smell-location">4</a>                  <a href="cloud_manifest_parser.html#L177" class="js-smell-location">5</a>                  </div>  </li></ol>
+          raise DeploymentDuplicateVmExtensionName, &quot;Duplicate vm extension name &#39;#{duplicates.first.name}&#39;&quot;
+        end
+
+        parsed_vm_extensions
+      end
+
+      def parse_disk_types(cloud_manifest)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_disk_types has approx 14 statements</span>          </div>  </li></ol>
+        disk_pools = safe_property(cloud_manifest, &#39;disk_pools&#39;, :class =&gt; Array, :optional =&gt; true, :default =&gt; [])
+        disk_types = safe_property(cloud_manifest, &#39;disk_types&#39;, :class =&gt; Array, :optional =&gt; true, :default =&gt; [])
+
+        if disk_pools.any? &amp;&amp; disk_types.any?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_disk_types calls 'disk_pools.any?' 2 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L157" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L163" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_disk_types calls 'disk_types.any?' 2 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L157" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L166" class="js-smell-location">1</a>                  </div>  </li></ol>
+          raise DeploymentInvalidDiskSpecification, &quot;Both &#39;disk_types&#39; and &#39;disk_pools&#39; are specified, only one key is allowed. &#39;disk_pools&#39; key will be DEPRECATED in the future.&quot;
+        end
+
+        disk_names = []
+
+        if disk_pools.any?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_disk_types calls 'disk_pools.any?' 2 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L157" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L163" class="js-smell-location">1</a>                  </div>  </li></ol>
+          disk_source = &#39;pool&#39;
+          disk_names = disk_pools
+        elsif disk_types.any?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser#parse_disk_types calls 'disk_types.any?' 2 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L157" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L166" class="js-smell-location">1</a>                  </div>  </li></ol>
+          disk_source = &#39;type&#39;
+          disk_names = disk_types
+        end
+
+        parsed_disk_types = disk_names.map do |dp_spec|
+          DiskType.parse(dp_spec)
+        end
+
+
+        duplicates = detect_duplicates(parsed_disk_types) { |dp| dp.name }
+        unless duplicates.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Repeated-Conditional.md" target="_blank"><b>RepeatedConditional</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::CloudManifestParser tests 'duplicates.empty?' at least 6 times</span>              <span>Locations:</span>                  <a href="cloud_manifest_parser.html#L42" class="js-smell-location">0</a>                  <a href="cloud_manifest_parser.html#L74" class="js-smell-location">1</a>                  <a href="cloud_manifest_parser.html#L116" class="js-smell-location">2</a>                  <a href="cloud_manifest_parser.html#L131" class="js-smell-location">3</a>                  <a href="cloud_manifest_parser.html#L146" class="js-smell-location">4</a>                  <a href="cloud_manifest_parser.html#L177" class="js-smell-location">5</a>                  </div>  </li></ol>
+          raise DeploymentDuplicateDiskTypeName, &quot;Duplicate disk #{disk_source} name &#39;#{duplicates.first.name}&#39;&quot;
+        end
+
+        parsed_disk_types
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

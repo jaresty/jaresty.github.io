@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-03-19 10:52:09 -0700'>2018-03-19 10:52:09 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>lib/bosh/director/api /</small> stemcell_manager.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating d big">
+              D
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">123</span><small> lines of codes</small></div>
+              <div><span class="metric">10</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">8.7</span><small> complexity/method</small></div>
+              <div><span class="metric">32</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">86.8</span><small> complexity</small></div>
+              <div><span class="metric">117</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                21
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;securerandom&#39;
+require &#39;common/version/stemcell_version_list&#39;
+
+module Bosh::Director
+  module Api
+    class StemcellManager<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager has no descriptive comment</span>          </div>  </li></ol>
+      include ApiHelper
+
+      def all_by_name_and_version(name, version)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#all_by_name_and_version doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        Models::Stemcell.where(name: name, version: version).all
+      end
+
+      def find_by_name_and_version_and_cpi(name, version, cpi)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_by_name_and_version_and_cpi has approx 6 statements</span>          </div>  </li></ol>
+        cloud_factory = Bosh::Director::CloudFactory.create
+
+        found_cpis = Bosh::Director::Models::Stemcell.where(name: name, version: version).all.map(&amp;:cpi)
+        cpi_aliases = cloud_factory.get_cpi_aliases(cpi)
+
+        matched_cpis = found_cpis &amp; cpi_aliases
+        raise StemcellNotFound, &quot;Stemcell &#39;#{name}/#{version}&#39; and cpi #{cpi} doesn&#39;t exist&quot; if matched_cpis.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_by_name_and_version_and_cpi refers to 'matched_cpis' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="stemcell_manager.html#L20" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L22" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+        return Models::Stemcell[:name =&gt; name, :version =&gt; version, :cpi =&gt; matched_cpis[0]]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_by_name_and_version_and_cpi refers to 'matched_cpis' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="stemcell_manager.html#L20" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L22" class="js-smell-location">1</a>                  </div>  </li></ol>
+      end
+
+      def find_all_stemcells<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_all_stemcells doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        Models::Stemcell.order_by(Sequel.asc(:name)).map do |stemcell|
+          {
+            &#39;name&#39; =&gt; stemcell.name,
+            &#39;operating_system&#39; =&gt; stemcell.operating_system,
+            &#39;version&#39; =&gt; stemcell.version,
+            &#39;cid&#39; =&gt; stemcell.cid,
+            &#39;cpi&#39; =&gt; stemcell.cpi,
+            &#39;deployments&#39; =&gt; stemcell.deployments.map { |d| { name: d.name } },<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_all_stemcells contains iterators nested 2 deep</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_all_stemcells has the variable name 'd'</span>          </div>  </li></ol>
+            &#39;api_version&#39; =&gt; stemcell.api_version,
+          }
+        end
+      end
+
+      def latest_by_os(os, prefix = nil)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="stemcell_manager.html#L39" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L57" class="js-smell-location">1</a>                  </div>  </li></ol>
+        stemcells = Bosh::Director::Models::Stemcell.where(:operating_system =&gt; os).all
+
+        if stemcells.empty?
+          raise StemcellNotFound,
+            &quot;Stemcell with Operating System &#39;#{os}&#39; doesn&#39;t exist&quot;
+        end
+
+        latest = find_latest(stemcells, prefix)
+
+        if latest.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#latest_by_os performs a nil-check</span>          </div>  </li></ol>
+          raise StemcellNotFound,
+            &quot;Stemcell with Operating System &#39;#{os}&#39; exists, but version with prefix &#39;#{prefix}&#39; not found.&quot;
+        end
+
+        latest
+      end
+
+      def latest_by_name(name, prefix = nil)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="stemcell_manager.html#L39" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L57" class="js-smell-location">1</a>                  </div>  </li></ol>
+        stemcells = Bosh::Director::Models::Stemcell.where(:name =&gt; name).all
+
+        if stemcells.empty?
+          raise StemcellNotFound,
+            &quot;Stemcell &#39;#{name}&#39; doesn&#39;t exist&quot;
+        end
+
+        latest = find_latest(stemcells, prefix)
+
+        if latest.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#latest_by_name performs a nil-check</span>          </div>  </li></ol>
+          raise StemcellNotFound,
+            &quot;Stemcell &#39;#{name}&#39; exists, but version with prefix &#39;#{prefix}&#39; not found.&quot;
+        end
+
+        latest
+      end
+
+      def all_by_os_and_version(os, version)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#all_by_os_and_version doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        Bosh::Director::Models::Stemcell.dataset
+          .order(:name)
+          .where(:operating_system =&gt; os, :version =&gt; version)
+          .all
+      end
+
+      def create_stemcell_from_url(username, stemcell_url, options)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="release_manager.html#L79" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L82" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Data-Clump.md" target="_blank"><b>DataClump</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager takes parameters ['options', 'username'] to 3 methods</span>              <span>Locations:</span>                  <a href="stemcell_manager.html#L82" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L87" class="js-smell-location">1</a>                  <a href="stemcell_manager.html#L95" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#create_stemcell_from_url doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        options[:remote] = true
+        JobQueue.new.enqueue(username, Jobs::UpdateStemcell, &#39;create stemcell&#39;, [stemcell_url, options])
+      end
+
+      def create_stemcell_from_file_path(username, stemcell_path, options)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="release_manager.html#L84" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L87" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Data-Clump.md" target="_blank"><b>DataClump</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager takes parameters ['options', 'username'] to 3 methods</span>              <span>Locations:</span>                  <a href="stemcell_manager.html#L82" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L87" class="js-smell-location">1</a>                  <a href="stemcell_manager.html#L95" class="js-smell-location">2</a>                  </div>  </li></ol>
+        unless File.exists?(stemcell_path)
+          raise DirectorError, &quot;Failed to create stemcell: file not found - #{stemcell_path}&quot;
+        end
+
+        JobQueue.new.enqueue(username, Jobs::UpdateStemcell, &#39;create stemcell&#39;, [stemcell_path, options])
+      end
+
+      def delete_stemcell(username, stemcell_name, stemcell_version, options = {})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Data-Clump.md" target="_blank"><b>DataClump</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager takes parameters ['options', 'username'] to 3 methods</span>              <span>Locations:</span>                  <a href="stemcell_manager.html#L82" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L87" class="js-smell-location">1</a>                  <a href="stemcell_manager.html#L95" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#delete_stemcell has 4 parameters</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#delete_stemcell doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        description = &quot;delete stemcell: #{stemcell_name}/#{stemcell_version}&quot;
+
+        JobQueue.new.enqueue(username, Jobs::DeleteStemcell, description, [stemcell_name, stemcell_version, options])
+      end
+
+      private
+
+      def find_latest(stemcells, prefix = nil)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_latest has approx 8 statements</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_latest doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+        unless prefix.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_latest performs a nil-check</span>          </div>  </li></ol>
+          stemcells = stemcells.select do |stemcell|
+            stemcell.version =~ /^#{prefix}([\.\-\+]|$)/<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_latest calls 'stemcell.version' 2 times</span>              <span>Locations:</span>                  <a href="stemcell_manager.html#L106" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L115" class="js-smell-location">1</a>                  </div>  </li></ol>
+          end
+        end
+
+        versions = stemcells.map(&amp;:version)
+
+        latest_version = Bosh::Common::Version::StemcellVersionList.parse(versions).latest.to_s
+
+        latest_stemcell = stemcells.find do |stemcell|
+          parsed_version = Bosh::Common::Version::StemcellVersion.parse(stemcell.version).to_s<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Api::StemcellManager#find_latest calls 'stemcell.version' 2 times</span>              <span>Locations:</span>                  <a href="stemcell_manager.html#L106" class="js-smell-location">0</a>                  <a href="stemcell_manager.html#L115" class="js-smell-location">1</a>                  </div>  </li></ol>
+          parsed_version == latest_version
+        end
+
+        latest_stemcell
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

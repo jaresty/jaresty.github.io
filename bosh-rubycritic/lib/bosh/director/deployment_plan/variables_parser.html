@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-05-30 09:20:21 -0400'>2018-05-30 09:20:21 -0400</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>lib/bosh/director/deployment_plan /</small> variables_parser.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating c big">
+              C
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">113</span><small> lines of codes</small></div>
+              <div><span class="metric">9</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">11.5</span><small> complexity/method</small></div>
+              <div><span class="metric">2</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">103.13</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                17
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;bosh/template/property_helper&#39;
+
+module Bosh::Director::DeploymentPlan
+  class VariablesSpecParser<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser has no descriptive comment</span>          </div>  </li></ol>
+
+    def initialize(logger, deployment_model)
+      @logger = logger
+      @deployment_model = deployment_model
+    end
+
+    # @param [Array] spec Raw variables spec from the deployment manifest
+    # @return [DeploymentPlan::Variables] Variables object
+    def parse(spec)
+      validate(spec) if spec
+      parse_links(spec)
+      Variables.new(spec)
+    end
+
+    private
+
+    def parse_links(spec)
+      return if spec.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#parse_links refers to 'spec' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L22" class="js-smell-location">0</a>                  <a href="variables_parser.html#L24" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#parse_links performs a nil-check</span>          </div>  </li></ol>
+      parser = Bosh::Director::Links::LinksParser.new
+      spec.each do |variable|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#parse_links refers to 'spec' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L22" class="js-smell-location">0</a>                  <a href="variables_parser.html#L24" class="js-smell-location">1</a>                  </div>  </li></ol>
+        parser.parse_consumers_from_variable(variable, @deployment_model)
+      end
+    end
+
+    def validate(spec)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate has approx 6 statements</span>          </div>  </li></ol>
+      unless spec.is_a?(Array)
+        raise Bosh::Director::VariablesInvalidFormat,
+              &quot;Key &#39;variables&#39; expects an array, but received &#39;#{spec.class}&#39;&quot;
+      end
+
+      validate_elements_are_hashes(spec)
+      validate_mandatory_fields(spec)
+      validate_consumes_field(spec)
+      validate_duplicate_names(spec)
+      validate_options(spec)
+    end
+
+    def validate_elements_are_hashes(spec)
+      spec.each do |variable|
+        unless variable.is_a?(Hash)
+          raise Bosh::Director::VariablesInvalidFormat, &quot;All &#39;variables&#39; elements should be Hashes&quot;
+        end
+      end
+    end
+
+    def validate_mandatory_fields(spec)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields has a flog score of 44</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields has approx 7 statements</span>          </div>  </li></ol>
+      spec.each do |variable|
+        if !variable.has_key?(&#39;name&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li></ol>
+          raise Bosh::Director::VariablesInvalidFormat,
+                &quot;At least one of the variables is missing the &#39;name&#39; key; &#39;name&#39; must be specified&quot;
+        end
+
+        if !variable[&#39;name&#39;] || variable[&#39;name&#39;].strip.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields calls 'variable['name']' 6 times</span>              <span>Locations:</span>                  <a href="variables_parser.html#L57" class="js-smell-location">0</a>                  <a href="variables_parser.html#L64" class="js-smell-location">1</a>                  <a href="variables_parser.html#L69" class="js-smell-location">2</a>                  <a href="variables_parser.html#L74" class="js-smell-location">3</a>                  <a href="variables_parser.html#L79" class="js-smell-location">4</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li></ol>
+          raise Bosh::Director::VariablesInvalidFormat,
+                &quot;At least one of the variables has an empty &#39;name&#39;; &#39;name&#39; must not be empty or nil&quot;
+        end
+
+        if !variable.has_key?(&#39;type&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li></ol>
+          raise Bosh::Director::VariablesInvalidFormat,
+                &quot;Type for variable &#39;#{variable[&#39;name&#39;]}&#39; is missing; &#39;type&#39; must be specified&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields calls 'variable['name']' 6 times</span>              <span>Locations:</span>                  <a href="variables_parser.html#L57" class="js-smell-location">0</a>                  <a href="variables_parser.html#L64" class="js-smell-location">1</a>                  <a href="variables_parser.html#L69" class="js-smell-location">2</a>                  <a href="variables_parser.html#L74" class="js-smell-location">3</a>                  <a href="variables_parser.html#L79" class="js-smell-location">4</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li></ol>
+        end
+
+        if variable[&#39;type&#39;].nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields calls 'variable['type']' 4 times</span>              <span>Locations:</span>                  <a href="variables_parser.html#L67" class="js-smell-location">0</a>                  <a href="variables_parser.html#L72" class="js-smell-location">1</a>                  <a href="variables_parser.html#L74" class="js-smell-location">2</a>                  <a href="variables_parser.html#L77" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields performs a nil-check</span>          </div>  </li></ol>
+          raise Bosh::Director::VariablesInvalidFormat,
+                &quot;Type for variable &#39;#{variable[&#39;name&#39;]}&#39; is nil; &#39;type&#39; must not be nil&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields calls 'variable['name']' 6 times</span>              <span>Locations:</span>                  <a href="variables_parser.html#L57" class="js-smell-location">0</a>                  <a href="variables_parser.html#L64" class="js-smell-location">1</a>                  <a href="variables_parser.html#L69" class="js-smell-location">2</a>                  <a href="variables_parser.html#L74" class="js-smell-location">3</a>                  <a href="variables_parser.html#L79" class="js-smell-location">4</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li></ol>
+        end
+
+        if !variable[&#39;type&#39;].is_a?(String)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields calls 'variable['type']' 4 times</span>              <span>Locations:</span>                  <a href="variables_parser.html#L67" class="js-smell-location">0</a>                  <a href="variables_parser.html#L72" class="js-smell-location">1</a>                  <a href="variables_parser.html#L74" class="js-smell-location">2</a>                  <a href="variables_parser.html#L77" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li></ol>
+          raise Bosh::Director::VariablesInvalidFormat,
+                &quot;Type for variable &#39;#{variable[&#39;name&#39;]}&#39; must be a String, but was &#39;#{variable[&#39;type&#39;]}&#39;&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields calls 'variable['name']' 6 times</span>              <span>Locations:</span>                  <a href="variables_parser.html#L57" class="js-smell-location">0</a>                  <a href="variables_parser.html#L64" class="js-smell-location">1</a>                  <a href="variables_parser.html#L69" class="js-smell-location">2</a>                  <a href="variables_parser.html#L74" class="js-smell-location">3</a>                  <a href="variables_parser.html#L79" class="js-smell-location">4</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields calls 'variable['type']' 4 times</span>              <span>Locations:</span>                  <a href="variables_parser.html#L67" class="js-smell-location">0</a>                  <a href="variables_parser.html#L72" class="js-smell-location">1</a>                  <a href="variables_parser.html#L74" class="js-smell-location">2</a>                  <a href="variables_parser.html#L77" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li></ol>
+        end
+
+        if variable[&#39;type&#39;].strip.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields calls 'variable['type']' 4 times</span>              <span>Locations:</span>                  <a href="variables_parser.html#L67" class="js-smell-location">0</a>                  <a href="variables_parser.html#L72" class="js-smell-location">1</a>                  <a href="variables_parser.html#L74" class="js-smell-location">2</a>                  <a href="variables_parser.html#L77" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li></ol>
+          raise Bosh::Director::VariablesInvalidFormat,
+                &quot;Type for variable &#39;#{variable[&#39;name&#39;]}&#39; is empty; &#39;type&#39; must not be empty&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields calls 'variable['name']' 6 times</span>              <span>Locations:</span>                  <a href="variables_parser.html#L57" class="js-smell-location">0</a>                  <a href="variables_parser.html#L64" class="js-smell-location">1</a>                  <a href="variables_parser.html#L69" class="js-smell-location">2</a>                  <a href="variables_parser.html#L74" class="js-smell-location">3</a>                  <a href="variables_parser.html#L79" class="js-smell-location">4</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_mandatory_fields refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L52" class="js-smell-location">0</a>                  <a href="variables_parser.html#L57" class="js-smell-location">1</a>                  <a href="variables_parser.html#L62" class="js-smell-location">2</a>                  <a href="variables_parser.html#L64" class="js-smell-location">3</a>                  <a href="variables_parser.html#L67" class="js-smell-location">4</a>                  <a href="variables_parser.html#L69" class="js-smell-location">5</a>                  <a href="variables_parser.html#L72" class="js-smell-location">6</a>                  <a href="variables_parser.html#L74" class="js-smell-location">7</a>                  <a href="variables_parser.html#L77" class="js-smell-location">8</a>                  <a href="variables_parser.html#L79" class="js-smell-location">9</a>                  </div>  </li></ol>
+        end
+      end
+    end
+
+    def validate_consumes_field(spec)
+      spec.each do |variable|
+        if !variable[&#39;consumes&#39;].nil? &amp;&amp; !variable[&#39;consumes&#39;].is_a?(Hash)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_consumes_field calls 'variable['consumes']' 2 times</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_consumes_field refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L86" class="js-smell-location">0</a>                  <a href="variables_parser.html#L88" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_consumes_field performs a nil-check</span>          </div>  </li></ol>
+          raise Bosh::Director::VariablesInvalidFormat,
+                &quot;Consumes for variable &#39;#{variable[&#39;name&#39;]}&#39; must be a Hash or nil&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_consumes_field refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L86" class="js-smell-location">0</a>                  <a href="variables_parser.html#L88" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+      end
+    end
+
+    def validate_duplicate_names(spec)
+      duplicate_name = spec.detect do |variable|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_duplicate_names refers to 'spec' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L94" class="js-smell-location">0</a>                  <a href="variables_parser.html#L95" class="js-smell-location">1</a>                  </div>  </li></ol>
+        spec.count{ |v| v[&#39;name&#39;] == variable[&#39;name&#39;]} &gt; 1<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_duplicate_names refers to 'spec' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L94" class="js-smell-location">0</a>                  <a href="variables_parser.html#L95" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_duplicate_names contains iterators nested 2 deep</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_duplicate_names has the variable name 'v'</span>          </div>  </li></ol>
+      end
+      if duplicate_name
+        raise Bosh::Director::VariablesInvalidFormat,
+              &quot;Some of the variables have duplicate names, eg: &#39;#{duplicate_name[&#39;name&#39;]}&#39;&quot;
+      end
+    end
+
+    def validate_options(spec)
+      spec.each do |variable|
+        options = variable[&#39;options&#39;]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_options refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L105" class="js-smell-location">0</a>                  <a href="variables_parser.html#L108" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+        if options &amp;&amp; !options.is_a?(Hash)
+          raise Bosh::Director::VariablesInvalidFormat, &quot;options of variable with name &#39;#{variable[&#39;name&#39;]}&#39; is not a Hash&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::VariablesSpecParser#validate_options refers to 'variable' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="variables_parser.html#L105" class="js-smell-location">0</a>                  <a href="variables_parser.html#L108" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

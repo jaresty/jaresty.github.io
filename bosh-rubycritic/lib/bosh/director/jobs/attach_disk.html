@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-03-15 11:53:47 +0100'>2017-03-15 11:53:47 +0100</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>lib/bosh/director/jobs /</small> attach_disk.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">83</span><small> lines of codes</small></div>
+              <div><span class="metric">8</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">7.1</span><small> complexity/method</small></div>
+              <div><span class="metric">27</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">56.94</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                7
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director
+  module Jobs
+    class AttachDisk &lt; BaseJob<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::Jobs::AttachDisk has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Bosh::Director::Jobs::AttachDisk has at least 8 instance variables</span>          </div>  </li></ol>
+
+      @queue = :normal
+
+      def self.job_type
+        :attach_disk
+      end
+
+      def self.enqueue(username, deployment, job_name, instance_id, disk_cid, job_queue)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Long-Parameter-List.md" target="_blank"><b>LongParameterList</b></a>        </span>      </div>      <span>Bosh::Director::Jobs::AttachDisk#self.enqueue has 6 parameters</span>          </div>  </li></ol>
+        job_queue.enqueue(username, Jobs::AttachDisk, &quot;attach disk &#39;#{disk_cid}&#39; to &#39;#{job_name}/#{instance_id}&#39;&quot;, [deployment.name, job_name, instance_id, disk_cid], deployment)
+      end
+
+      def initialize(deployment_name, job_name, instance_id, disk_cid)
+        @deployment_name = deployment_name
+        @job_name = job_name
+        @instance_id = instance_id
+        @disk_cid = disk_cid
+        @transactor = Transactor.new
+        @disk_manager = DiskManager.new(logger)
+        @orphan_disk_manager = OrphanDiskManager.new(logger)
+      end
+
+      def perform<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::Jobs::AttachDisk#perform has approx 6 statements</span>          </div>  </li></ol>
+        instance = query_instance_model
+        validate_instance(instance)
+
+        @transactor.retryable_transaction(instance.db) do
+          handle_previous_disk(instance) if instance.managed_persistent_disk
+          handle_new_disk(instance)
+        end
+
+        &quot;attached disk &#39;#{@disk_cid}&#39; to &#39;#{@job_name}/#{@instance_id}&#39; in deployment &#39;#{@deployment_name}&#39;&quot;
+      end
+
+      private
+
+      def query_instance_model
+        Models::Instance.filter(job: @job_name, uuid: @instance_id).first
+      end
+
+      def validate_instance(instance)
+        if instance.nil? || instance.deployment.name != @deployment_name<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::Jobs::AttachDisk#validate_instance performs a nil-check</span>          </div>  </li></ol>
+          raise AttachDiskErrorUnknownInstance, &quot;Instance &#39;#{@job_name}/#{@instance_id}&#39; in deployment &#39;#{@deployment_name}&#39; was not found&quot;
+        end
+
+        if instance.ignore
+          raise AttachDiskInvalidInstanceState, &quot;Instance &#39;#{@job_name}/#{@instance_id}&#39; in deployment &#39;#{@deployment_name}&#39; is in &#39;ignore&#39; state. &quot; +
+              &#39;Attaching disks to ignored instances is not allowed.&#39;
+        end
+
+        if instance.state != &#39;detached&#39; &amp;&amp; instance.state != &#39;stopped&#39;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Jobs::AttachDisk#validate_instance calls 'instance.state' 2 times</span>          </div>  </li></ol>
+          raise AttachDiskInvalidInstanceState, &quot;Instance &#39;#{@job_name}/#{@instance_id}&#39; in deployment &#39;#{@deployment_name}&#39; must be in &#39;bosh stopped&#39; state&quot;
+        end
+      end
+
+      def handle_previous_disk(instance)
+        previous_persistent_disk = instance.managed_persistent_disk
+        previous_persistent_disk.update(active: false)
+
+        if instance.state == &#39;stopped&#39;
+          @disk_manager.detach_disk(previous_persistent_disk)
+        end
+
+        @orphan_disk_manager.orphan_disk(previous_persistent_disk)
+      end
+
+      def handle_new_disk(instance)
+        orphan_disk = Models::OrphanDisk[:disk_cid =&gt; @disk_cid]
+        if orphan_disk
+          disk = @orphan_disk_manager.unorphan_disk(orphan_disk, instance.id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Jobs::AttachDisk#handle_new_disk calls 'instance.id' 2 times</span>              <span>Locations:</span>                  <a href="attach_disk.html#L72" class="js-smell-location">0</a>                  <a href="attach_disk.html#L74" class="js-smell-location">1</a>                  </div>  </li></ol>
+        else
+          disk = Models::PersistentDisk.create(disk_cid: @disk_cid, instance_id: instance.id, active: true, size: 1, cloud_properties: {})<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::Jobs::AttachDisk#handle_new_disk calls 'instance.id' 2 times</span>              <span>Locations:</span>                  <a href="attach_disk.html#L72" class="js-smell-location">0</a>                  <a href="attach_disk.html#L74" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+
+        if instance.state == &#39;stopped&#39;
+          @disk_manager.attach_disk(disk, instance.deployment.tags)
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

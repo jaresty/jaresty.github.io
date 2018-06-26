@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../../overview.html"><img src="../../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-11-17 12:00:54 -0500'>2017-11-17 12:00:54 -0500</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>lib/bosh/director/dns /</small> dns_version_converger.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">59</span><small> lines of codes</small></div>
+              <div><span class="metric">3</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">12.6</span><small> complexity/method</small></div>
+              <div><span class="metric">12</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">37.75</span><small> complexity</small></div>
+              <div><span class="metric">33</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                9
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director
+  class DnsVersionConverger<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger has no descriptive comment</span>          </div>  </li></ol>
+
+    ONLY_OUT_OF_DATE_SELECTOR = lambda do |current_version, logger|
+      logger.info(&#39;Selected strategy: ONLY_OUT_OF_DATE_SELECTOR&#39;)
+      Models::Instance.inner_join(:vms, Sequel.qualify(&#39;vms&#39;, &#39;instance_id&#39;) =&gt; Sequel.qualify(&#39;instances&#39;, &#39;id&#39;))
+        .left_outer_join(:agent_dns_versions, Sequel.qualify(&#39;agent_dns_versions&#39;, &#39;agent_id&#39;) =&gt; Sequel.qualify(&#39;vms&#39;, &#39;agent_id&#39;))
+        .select_append(Sequel.expr(Sequel.qualify(&#39;vms&#39;,&#39;agent_id&#39;)).as(:agent_id))
+        .select_append(Sequel.expr(Sequel.qualify(&#39;instances&#39;,&#39;id&#39;)).as(:id))
+        .where { Sequel.expr(Sequel.qualify(&#39;vms&#39;,&#39;active&#39;) =&gt; true) }
+        .where { Sequel.expr(Sequel.qualify(&#39;instances&#39;,&#39;compilation&#39;) =&gt; false) }
+        .where { ((dns_version &lt; current_version) | Sequel.expr(dns_version: nil)) }
+    end
+
+    ALL_INSTANCES_WITH_VMS_SELECTOR = lambda do |_, logger|
+      logger.info(&#39;Selected strategy: ALL_INSTANCES_WITH_VMS_SELECTOR&#39;)
+      Models::Instance.inner_join(:vms, Sequel.qualify(&#39;vms&#39;, &#39;instance_id&#39;) =&gt; Sequel.qualify(&#39;instances&#39;, &#39;id&#39;))
+        .select_append(Sequel.expr(Sequel.qualify(&#39;instances&#39;,&#39;id&#39;)).as(:id))
+        .where { Sequel.expr(Sequel.qualify(&#39;vms&#39;, &#39;active&#39;) =&gt; true) }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="../agent_broadcaster.html#L107" class="js-smell-location">0</a>                  <a href="dns_version_converger.html#L19" class="js-smell-location">1</a>                  </div>  </li></ol>
+        .where { Sequel.expr(Sequel.qualify(&#39;instances&#39;, &#39;compilation&#39;) =&gt; false) }
+    end
+
+    def initialize(agent_broadcaster, logger, max_threads, strategy_selector=ONLY_OUT_OF_DATE_SELECTOR)
+      @agent_broadcaster = agent_broadcaster
+      @logger = logger
+      @max_threads = max_threads
+      @instances_strategy = strategy_selector
+    end
+
+    def update_instances_based_on_strategy<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#update_instances_based_on_strategy has a flog score of 26</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#update_instances_based_on_strategy has approx 9 statements</span>          </div>  </li></ol>
+      start = Time.now<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#update_instances_based_on_strategy calls 'Time.now' 2 times</span>              <span>Locations:</span>                  <a href="dns_version_converger.html#L31" class="js-smell-location">0</a>                  <a href="dns_version_converger.html#L49" class="js-smell-location">1</a>                  </div>  </li></ol>
+
+      dns_blob = Models::LocalDnsBlob.latest
+
+      if dns_blob.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#update_instances_based_on_strategy performs a nil-check</span>          </div>  </li></ol>
+        @logger.info(&quot;No dns record sets detected, no instances will be updated.&quot;)
+        return
+      end
+
+      instances = @instances_strategy.call(dns_blob.version, @logger)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#update_instances_based_on_strategy calls 'dns_blob.version' 3 times</span>              <span>Locations:</span>                  <a href="dns_version_converger.html#L40" class="js-smell-location">0</a>                  <a href="dns_version_converger.html#L41" class="js-smell-location">1</a>                  <a href="dns_version_converger.html#L44" class="js-smell-location">2</a>                  </div>  </li></ol>
+      @logger.info(&quot;Detected #{instances.count} instances with outdated dns versions. Current dns version is #{dns_blob.version}&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#update_instances_based_on_strategy calls 'dns_blob.version' 3 times</span>              <span>Locations:</span>                  <a href="dns_version_converger.html#L40" class="js-smell-location">0</a>                  <a href="dns_version_converger.html#L41" class="js-smell-location">1</a>                  <a href="dns_version_converger.html#L44" class="js-smell-location">2</a>                  </div>  </li></ol>
+
+      if !instances.empty?
+        @agent_broadcaster.sync_dns(instances.all, dns_blob.blob.blobstore_id, dns_blob.blob.sha1, dns_blob.version)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#update_instances_based_on_strategy calls 'dns_blob.blob' 2 times</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#update_instances_based_on_strategy calls 'dns_blob.version' 3 times</span>              <span>Locations:</span>                  <a href="dns_version_converger.html#L40" class="js-smell-location">0</a>                  <a href="dns_version_converger.html#L41" class="js-smell-location">1</a>                  <a href="dns_version_converger.html#L44" class="js-smell-location">2</a>                  </div>  </li></ol>
+      end
+
+      delete_orphaned_agent_dns_versions
+
+      @logger.info(&quot;Finished updating instances with latest dns versions. Elapsed time: #{Time.now-start}&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#update_instances_based_on_strategy calls 'Time.now' 2 times</span>              <span>Locations:</span>                  <a href="dns_version_converger.html#L31" class="js-smell-location">0</a>                  <a href="dns_version_converger.html#L49" class="js-smell-location">1</a>                  </div>  </li></ol>
+    end
+
+    private
+
+    def delete_orphaned_agent_dns_versions<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Bosh::Director::DnsVersionConverger#delete_orphaned_agent_dns_versions doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+      Models::AgentDnsVersion.exclude(
+        Sequel.qualify(&#39;agent_dns_versions&#39;,&#39;agent_id&#39;) =&gt; Models::Vm.select(Sequel.qualify(&#39;vms&#39;,&#39;agent_id&#39;))).delete
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../../assets/javascripts/application.js'></script>
+    <script src='../../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

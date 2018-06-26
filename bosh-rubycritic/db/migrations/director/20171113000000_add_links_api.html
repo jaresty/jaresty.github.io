@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-04-27 12:13:35 -0400'>2018-04-27 12:13:35 -0400</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>db/migrations/director /</small> 20171113000000_add_links_api.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">209</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
+              <div><span class="metric">16</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">84.9</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                0
+                smell
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">Sequel.migration do
+  up do
+    create_table :link_providers do
+      primary_key :id
+      foreign_key :deployment_id, :deployments, :null =&gt; false, :on_delete =&gt; :cascade
+      String :instance_group, :null =&gt; false
+      String :name, :null =&gt; false
+      String :type, :null =&gt; false
+      Integer :serial_id
+    end
+
+    alter_table(:link_providers) do
+      add_index [:deployment_id, :instance_group, :name, :type], unique: true, name: &#39;link_providers_constraint&#39;
+    end
+
+    create_table :link_provider_intents do
+      primary_key :id
+      foreign_key :link_provider_id, :link_providers, :on_delete =&gt; :cascade
+      String :original_name, :null =&gt; false
+      String :type, :null =&gt; false
+      String :name # This should never be null, but... because when we find/create we don&#39;t use it as a constraint and it can be updated at any moment.. We can&#39;t enforce it to start off as non-null.
+      String :content # rely on networks, make optional because of delayed content resolution
+      Boolean :shared, :null =&gt; false, :default =&gt; false
+      Boolean :consumable, :null =&gt; false, :default =&gt; true
+      String :metadata #mapped properties
+      Integer :serial_id
+    end
+
+    alter_table(:link_provider_intents) do
+      add_index [:link_provider_id, :original_name], unique: true, name: &#39;link_provider_intents_constraint&#39;
+    end
+
+    create_table :link_consumers do
+      primary_key :id
+      foreign_key :deployment_id, :deployments, :on_delete =&gt; :cascade
+      String :instance_group
+      String :name, :null =&gt; false
+      String :type, :null =&gt; false
+      Integer :serial_id
+    end
+
+    alter_table(:link_consumers) do
+      add_index [:deployment_id, :instance_group, :name, :type], unique: true, name: &#39;link_consumers_constraint&#39;
+    end
+
+    create_table :link_consumer_intents do
+      primary_key :id
+      foreign_key :link_consumer_id, :link_consumers, :on_delete =&gt; :cascade
+      String :original_name, :null =&gt; false
+      String :type, :null =&gt; false
+      String :name # This should never be null, but... because when we find/create we don&#39;t use it as a constraint and it can be updated at any moment.. We can&#39;t enforce it to start off as non-null.
+      Boolean :optional, :null =&gt; false, :default =&gt; false
+      Boolean :blocked, :null =&gt; false, :default =&gt; false # intentionally blocking the consumption of the link, consume: nil
+      String :metadata # put extra json object that has some flags, ip addresses true or false, network, from_deployment or any other potential thing
+      Integer :serial_id
+    end
+
+    alter_table(:link_consumer_intents) do
+      add_index [:link_consumer_id, :original_name], unique: true, name: &#39;link_consumer_intents_constraint&#39;
+    end
+
+    create_table :links do
+      primary_key :id
+      foreign_key :link_provider_intent_id, :link_provider_intents, :on_delete =&gt; :set_null
+      foreign_key :link_consumer_intent_id, :link_consumer_intents, :on_delete =&gt; :cascade, :null =&gt; false
+      String :name, :null =&gt; false
+      String :link_content
+      Time :created_at
+    end
+
+    create_table :instances_links do
+      primary_key :id
+      foreign_key :link_id, :links, :on_delete =&gt; :cascade, :null =&gt; false
+      foreign_key :instance_id, :instances, :on_delete =&gt; :cascade, :null =&gt; false
+      Integer :serial_id
+    end
+
+    alter_table(:instances_links) do
+      add_index [:link_id, :instance_id], unique: true, name: &#39;instances_links_constraint&#39;
+    end
+
+    alter_table(:deployments) do
+      add_column :has_stale_errand_links, &#39;boolean&#39;, null: false, default: false
+    end
+
+    if [:mysql, :mysql2].include? adapter_scheme
+      set_column_type :link_provider_intents, :content, &#39;longtext&#39;
+      set_column_type :links, :link_content, &#39;longtext&#39;
+    end
+
+    self[:deployments].each do |deployment|
+      link_spec_json = JSON.parse(deployment[:link_spec_json] || &#39;{}&#39;)
+      link_spec_json.each do |instance_group_name, provider_jobs|
+        provider_jobs.each do |provider_job_name, link_names|
+          provider_id = self[:link_providers].insert({
+            deployment_id: deployment[:id],
+            name: provider_job_name,
+            type: &#39;job&#39;,
+            instance_group: instance_group_name,
+            serial_id: 0,
+          })
+
+          link_names.each do |link_name, link_types|
+            link_types.each do |link_type, content|
+              self[:link_provider_intents].insert(
+                {
+                  link_provider_id: provider_id,
+                  original_name: link_name,
+                  type: link_type,
+                  name: link_name,
+                  shared: true,
+                  consumable: true,
+                  content: content.to_json,
+                  serial_id: 0,
+                }
+              )
+            end
+          end
+        end
+      end
+    end
+
+    self[:deployments].update(has_stale_errand_links: true)
+
+    links_to_migrate = {}
+
+    Struct.new(&#39;LinkKey&#39;, :deployment_id, :instance_group, :job, :link_name) unless defined?(Struct::LinkKey)
+    Struct.new(&#39;LinkDetail&#39;, :link_id, :content) unless defined?(Struct::LinkDetail)
+
+    self[:instances].each do |instance|
+      spec_json = JSON.parse(instance[:spec_json] || &#39;{}&#39;)
+      links = spec_json.delete(&#39;links&#39;) || {}
+      links.each do |job_name, consumed_links|
+        consumer = self[:link_consumers].where(deployment_id: instance[:deployment_id], instance_group: instance[:job], name: job_name).first
+
+        if consumer
+          consumer_id = consumer[:id]
+        else
+          consumer_id = self[:link_consumers].insert(
+            {
+              deployment_id: instance[:deployment_id],
+              instance_group: instance[:job],
+              name: job_name,
+              type: &#39;job&#39;,
+              serial_id: 0,
+            }
+          )
+        end
+
+        consumed_links.each do |link_name, link_data|
+          link_key = Struct::LinkKey.new(instance[:deployment_id], instance[:job], job_name, link_name)
+
+          # since we can go through multiple instances
+          link_details = links_to_migrate[link_key] || []
+          link_detail = link_details.find do |link_detail|
+            link_detail.content == link_data
+          end
+
+          link_consumer_intent = self[:link_consumer_intents].where(link_consumer_id: consumer_id, original_name: link_name).first
+
+          if link_consumer_intent
+            link_consumer_intent_id = link_consumer_intent[:id]
+          else
+            # #153608828 set original name and alias to the same value (link_name from consumed_links)
+            link_consumer_intent_id = self[:link_consumer_intents].insert(
+              {
+                link_consumer_id: consumer_id,
+                original_name: link_name,
+                name: link_name,
+                type: &#39;undefined-migration&#39;,
+                optional: false,
+                blocked: false,
+                serial_id: 0
+              }
+            )
+          end
+
+          unless link_detail
+            link_id = self[:links].insert(
+              {
+                name: link_name,
+                link_provider_intent_id: nil,
+                link_consumer_intent_id: link_consumer_intent_id,
+                link_content: link_data.to_json,
+                created_at: Time.now,
+              }
+            )
+            link_detail = Struct::LinkDetail.new(link_id, link_data)
+
+            link_details &lt;&lt; link_detail
+            links_to_migrate[link_key] = link_details
+          end
+
+          self[:instances_links] &lt;&lt; {
+            link_id: link_detail.link_id,
+            instance_id: instance[:id],
+            serial_id: 0,
+          }
+        end
+      end
+      self[:instances].where(id: instance[:id]).update(spec_json: JSON.dump(spec_json))
+    end
+
+    alter_table(:deployments) do
+      drop_column :link_spec_json
+      add_column :links_serial_id, Integer, default: 0
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

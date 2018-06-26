@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../overview.html"><img src="../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2018-05-31 10:14:31 -0700'>2018-05-31 10:14:31 -0700</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>spec/unit /</small> agent_client_spec.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating f big">
+              F
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">923</span><small> lines of codes</small></div>
+              <div><span class="metric">3</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">676.1</span><small> complexity/method</small></div>
+              <div><span class="metric">85</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">2028.36</span><small> complexity</small></div>
+              <div><span class="metric">253</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                49
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+module Bosh::Director<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director has no descriptive comment</span>          </div>  </li></ol>
+  describe AgentClient do
+    before do
+      RSpec.configure do |config|
+        config.mock_with :rspec do |mocks|
+          # Remove after fixing several specs that stub out private methods
+          mocks.verify_partial_doubles = false
+        end
+      end
+    end
+
+    after do
+      RSpec.configure do |config|
+        config.mock_with :rspec do |mocks|
+          # Remove after fixing several specs that stub out private methods
+          mocks.verify_partial_doubles = true
+        end
+      end
+    end
+
+    let(:options) do
+      { &#39;logging&#39; =&gt; true }
+    end
+    def self.it_acts_as_asynchronous_message(message_name)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::it_acts_as_asynchronous_message has a flog score of 107</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message has approx 23 statements</span>          </div>  </li></ol>
+      describe &quot;##{message_name}&quot; do
+        let(:task) do
+          {
+            &#39;agent_task_id&#39; =&gt; &#39;fake-agent_task_id&#39;,
+            &#39;state&#39; =&gt; &#39;running&#39;,
+            &#39;value&#39; =&gt; &#39;task value&#39;
+          }
+        end
+
+        before do
+          allow(client).to receive_messages(handle_message_with_retry: task)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'allow(client)' 3 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L37" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L38" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L43" class="js-smell-location">2</a>                  </div>  </li></ol>
+          allow(client).to receive(:get_task) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'allow(client)' 3 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L37" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L38" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L43" class="js-smell-location">2</a>                  </div>  </li></ol>
+            task[&#39;state&#39;] = &#39;no longer running&#39;
+            task
+          end
+
+          allow(client).to receive(:sleep).with(AgentClient::DEFAULT_POLL_INTERVAL)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'allow(client)' 3 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L37" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L38" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L43" class="js-smell-location">2</a>                  </div>  </li></ol>
+        end
+
+        it &#39;explicitly defines methods for long running messages (to poll)&#39; do
+          expect(client).to respond_to(message_name)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'expect(client)' 4 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L47" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L52" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L57" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L63" class="js-smell-location">3</a>                  </div>  </li></ol>
+        end
+
+        it &#39;decorates the original send_message implementation&#39; do
+          client.public_send(message_name, &#39;fake&#39;, &#39;args&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'client.public_send(message_name, 'fake', 'args')' 4 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L51" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L56" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L62" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L67" class="js-smell-location">3</a>                  </div>  </li></ol>
+          expect(client).to have_received(:handle_message_with_retry).with(message_name, &#39;fake&#39;, &#39;args&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'expect(client)' 4 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L47" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L52" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L57" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L63" class="js-smell-location">3</a>                  </div>  </li></ol>
+        end
+
+        it &#39;periodically polls the task while it is running&#39; do
+          client.public_send(message_name, &#39;fake&#39;, &#39;args&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'client.public_send(message_name, 'fake', 'args')' 4 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L51" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L56" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L62" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L67" class="js-smell-location">3</a>                  </div>  </li></ol>
+          expect(client).to have_received(:get_task).with(&#39;fake-agent_task_id&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'expect(client)' 4 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L47" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L52" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L57" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L63" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'have_received(:get_task)' 2 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L57" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L63" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'have_received(:get_task).with('fake-agent_task_id')' 2 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L57" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L63" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+
+        it &#39;stops polling once the task is no longer running&#39; do
+          task[&#39;state&#39;] = &#39;something other than running&#39;
+          client.public_send(message_name, &#39;fake&#39;, &#39;args&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'client.public_send(message_name, 'fake', 'args')' 4 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L51" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L56" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L62" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L67" class="js-smell-location">3</a>                  </div>  </li></ol>
+          expect(client).to have_received(:get_task).with(&#39;fake-agent_task_id&#39;).exactly(1).times<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'expect(client)' 4 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L47" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L52" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L57" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L63" class="js-smell-location">3</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'have_received(:get_task)' 2 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L57" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L63" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'have_received(:get_task).with('fake-agent_task_id')' 2 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L57" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L63" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+
+        it &#39;returns the task value&#39; do
+          expect(client.public_send(message_name, &#39;fake&#39;, &#39;args&#39;)).to eq(&#39;task value&#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_asynchronous_message calls 'client.public_send(message_name, 'fake', 'args')' 4 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L51" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L56" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L62" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L67" class="js-smell-location">3</a>                  </div>  </li></ol>
+        end
+      end
+    end
+
+    def self.it_acts_as_synchronous_message(message_name)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::it_acts_as_synchronous_message has a flog score of 53</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_synchronous_message has approx 13 statements</span>          </div>  </li></ol>
+      describe &quot;##{message_name}&quot; do
+        let(:task) do
+          {
+            &#39;state&#39; =&gt; &#39;running&#39;,
+            &#39;value&#39; =&gt; &#39;task value&#39;
+          }
+        end
+
+        before do
+          allow(client).to receive_messages(handle_message_with_retry: task)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_synchronous_message calls 'allow(client)' 3 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L82" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L83" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L85" class="js-smell-location">2</a>                  </div>  </li></ol>
+          allow(client).to receive(:wait_for_task)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_synchronous_message calls 'allow(client)' 3 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L82" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L83" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L85" class="js-smell-location">2</a>                  </div>  </li></ol>
+
+          allow(client).to receive(:get_task) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director#self.it_acts_as_synchronous_message calls 'allow(client)' 3 times</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L82" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L83" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L85" class="js-smell-location">2</a>                  </div>  </li></ol>
+            task[&#39;state&#39;] = &#39;no longer running&#39;
+            task
+          end
+        end
+
+        it &#39;does not wait for task&#39; do
+          expect(client).not_to have_received(:wait_for_task)
+        end
+
+        it &#39;returns the task value&#39; do
+          expect(client.public_send(message_name, &#39;fake&#39;, &#39;args&#39;)).to eq(&#39;task value&#39;)
+        end
+      end
+    end
+
+    def self.it_acts_as_message_with_timeout(message_name)
+      it &#39;waits for results with timeout&#39; do
+        expect(client).to receive(:send_message_with_timeout).exactly(1).times
+        client.public_send(message_name, &#39;fake&#39;, &#39;args&#39;)
+      end
+    end
+
+    context &#39;task is asynchronous&#39; do
+      describe &#39;it has agent_task_id&#39; do
+        subject(:client) { AgentClient.with_agent_id(&#39;fake-agent-id&#39;) }
+        let(:task) do
+          {
+              &#39;agent_task_id&#39; =&gt; &#39;fake-agent_task_id&#39;,
+              &#39;state&#39; =&gt; &#39;running&#39;,
+              &#39;value&#39; =&gt; &#39;task value&#39;
+          }
+        end
+
+        describe &#39;send asynchronous messages&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe#send asynchronous messages has a flog score of 33</span>          </div>  </li></ol>
+          before do
+            allow(Config).to receive(:nats_rpc)
+            allow(Api::ResourceManager).to receive(:new)
+          end
+
+          it_acts_as_asynchronous_message :prepare
+          it_acts_as_asynchronous_message :apply
+          it_acts_as_asynchronous_message :compile_package
+          it_acts_as_asynchronous_message :drain
+          it_acts_as_asynchronous_message :fetch_logs
+          it_acts_as_asynchronous_message :migrate_disk
+          it_acts_as_asynchronous_message :mount_disk
+          it_acts_as_asynchronous_message :unmount_disk
+          it_acts_as_asynchronous_message :stop
+          it_acts_as_asynchronous_message :cancel_task
+          it_acts_as_asynchronous_message :list_disk
+          it_acts_as_asynchronous_message :associate_disks
+          it_acts_as_asynchronous_message :start
+        end
+
+        describe &#39;update_settings&#39; do
+          it &#39;packages the certificates and disk associations into a map and sends to the agent&#39; do
+            expect(client).to receive(:send_message).with(
+              :update_settings,
+              {
+              &quot;trusted_certs&quot; =&gt; &quot;these are the certificates&quot;,
+              &#39;disk_associations&#39; =&gt; [{&#39;name&#39; =&gt; &#39;zak&#39;, &#39;cid&#39; =&gt; &#39;new-disk-cid&#39;}]
+              })
+            allow(client).to receive(:get_task)
+            client.update_settings(&quot;these are the certificates&quot;, [{&#39;name&#39; =&gt; &#39;zak&#39;, &#39;cid&#39; =&gt; &#39;new-disk-cid&#39;}])
+          end
+
+          it &#39;periodically polls the update settings task while it is running&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe(update_settings)::it#periodically polls the update settings task while it is running has a flog score of 35</span>          </div>  </li></ol>
+            allow(client).to receive(:handle_message_with_retry).and_return task
+            allow(client).to receive(:sleep).with(AgentClient::DEFAULT_POLL_INTERVAL)
+            expect(client).to receive(:get_task).with(&#39;fake-agent_task_id&#39;)
+            client.update_settings(&quot;these are the certificates&quot;, [{&#39;name&#39; =&gt; &#39;zak&#39;, &#39;cid&#39; =&gt; &#39;new-disk-cid&#39;}])
+          end
+
+          it &#39;is only a warning when the remote agent does not implement update_settings&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe(update_settings)::it#is only a warning when the remote agent does not implement update_settings has a flog score of 29</span>          </div>  </li></ol>
+            allow(client).to receive(:handle_method).and_raise(RpcRemoteException, &quot;unknown message update_settings&quot;)
+
+            expect(Config.logger).to receive(:warn).with(&quot;Ignoring update_settings &#39;unknown message&#39; error from the agent: #&lt;Bosh::Director::RpcRemoteException: unknown message update_settings&gt;&quot;)
+            expect { client.update_settings(&quot;no certs&quot;, &quot;no disks&quot;) }.to_not raise_error
+          end
+
+          it &#39;still raises an exception for other RPC failures&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe(update_settings)::it#still raises an exception for other RPC failures has a flog score of 27</span>          </div>  </li></ol>
+            allow(client).to receive(:handle_method).and_raise(RpcRemoteException, &quot;random failure!&quot;)
+
+            expect(client).to_not receive(:warning)
+            expect { client.update_settings(&quot;no certs&quot;, &quot;no disks&quot;) }.to raise_error
+          end
+        end
+
+        describe &#39;cancel drain&#39; do
+          it &#39;should stop execution if task was canceled&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe(cancel drain)::it#should stop execution if task was canceled has a flog score of 61</span>          </div>  </li></ol>
+            allow(client).to receive(:sleep).with(AgentClient::DEFAULT_POLL_INTERVAL)
+            expect(client).to receive(:start_task).and_return task
+            expect(client).to receive(:get_task_status).and_return task
+
+            cancel_task = task.dup
+            cancel_task[&#39;state&#39;] = &#39;not running&#39;
+            expect(client).to receive(:cancel_task).and_return cancel_task
+
+            task_cancelled = TaskCancelled.new(1)
+            expect(Config).to receive(:job_cancelled?).and_raise(task_cancelled)
+
+            expect{client.drain(&quot;fake&quot;, &quot;args&quot;)}.to raise_error(task_cancelled)
+          end
+        end
+
+        describe &#39;run_script&#39; do
+          it &#39;sends the script name to the agent&#39; do
+            expect(client).to receive(:send_message).with(:run_script, &quot;script_name&quot;, {})
+            allow(client).to receive(:get_task)
+            client.run_script(&quot;script_name&quot;, {})
+          end
+
+          it &#39;periodically polls the run_script task while it is running&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe(run_script)::it#periodically polls the run_script task while it is running has a flog score of 35</span>          </div>  </li></ol>
+            allow(client).to receive(:handle_message_with_retry).and_return task
+            allow(client).to receive(:sleep).with(AgentClient::DEFAULT_POLL_INTERVAL)
+            expect(client).to receive(:get_task).with(&#39;fake-agent_task_id&#39;)
+            client.run_script(&quot;script_name&quot;, {})
+          end
+
+          it &#39;is only a warning when the remote agent does not implement run_script&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe(run_script)::it#is only a warning when the remote agent does not implement run_script has a flog score of 31</span>          </div>  </li></ol>
+            allow(client).to receive(:handle_method).and_raise(RpcRemoteException, &quot;unknown message run_script&quot;)
+
+            expect(Config.logger).to receive(:warn).with(&quot;Ignoring run_script &#39;unknown message&#39; error from the agent: #&lt;Bosh::Director::RpcRemoteException: unknown message run_script&gt;.&quot; +
+            &quot; Received while trying to run: script_name&quot;)
+            expect { client.run_script(&quot;script_name&quot;, {})}.to_not raise_error
+          end
+
+          it &#39;still raises an exception for other RPC failures&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe(run_script)::it#still raises an exception for other RPC failures has a flog score of 27</span>          </div>  </li></ol>
+            allow(client).to receive(:handle_method).and_raise(RpcRemoteException, &quot;random failure wooooooow!&quot;)
+
+            expect(client).to_not receive(:warning)
+            expect { client.run_script(&quot;script_name&quot;, {}) }.to raise_error
+          end
+        end
+
+        describe &#39;upload_blob&#39; do
+          it &#39;sends payload, payload_checksum, and blob_id to the agent&#39; do
+            expect(client).to receive(:send_message).with(:upload_blob, {
+              &#39;blob_id&#39; =&gt; &#39;blob_id&#39;,
+              &#39;checksum&#39; =&gt;&#39;payload_checksum&#39;,
+              &#39;payload&#39; =&gt; &#39;base64_encoded_payload&#39;
+            })
+            allow(client).to receive(:get_task)
+            client.upload_blob(&#39;blob_id&#39;, &#39;payload_checksum&#39;, &#39;base64_encoded_payload&#39;)
+          end
+
+          it &#39;periodically polls the upload_blob task while it is running&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe(upload_blob)::it#periodically polls the upload_blob task while it is running has a flog score of 35</span>          </div>  </li></ol>
+            allow(client).to receive(:handle_message_with_retry).and_return task
+            allow(client).to receive(:sleep).with(AgentClient::DEFAULT_POLL_INTERVAL)
+            expect(client).to receive(:get_task).with(&#39;fake-agent_task_id&#39;)
+            client.upload_blob(&#39;blob_id&#39;, &#39;payload_checksum&#39;, &#39;base64_encoded_payload&#39;)
+          end
+
+          context &#39;when the agent does not implement upload_blob&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L239" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L249" class="js-smell-location">1</a>                  </div>  </li></ol>
+            it &#39;raises an unsupported action exception&#39; do
+              allow(client).to receive(:handle_method).and_raise(RpcRemoteException, &#39;unknown message&#39;)
+
+              expect {
+                client.upload_blob(&#39;blob_id&#39;, &#39;payload_checksum&#39;, &#39;base64_encoded_payload&#39;)
+              }.to raise_error(Bosh::Director::AgentUnsupportedAction, &#39;Unsupported action: upload_blob&#39;)
+            end
+          end
+
+          context &#39;when the agent returns an error &quot;Opening blob store file&quot;&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L239" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L249" class="js-smell-location">1</a>                  </div>  </li></ol>
+            it &#39;raises an AgentUploadBlobUnableToOpenFile exception&#39; do
+              allow(client).to receive(:handle_method).and_raise(RpcRemoteException, &#39;Opening blob store file: open \var\vcap\data\blobs/adaff25a-df7b-4f2f-86d5-74fd50fc8c06: The system cannot find the path specified.&#39;)
+
+              expect {
+                client.upload_blob(&#39;blob_id&#39;, &#39;payload_checksum&#39;, &#39;base64_encoded_payload&#39;)
+              }.to raise_error(Bosh::Director::AgentUploadBlobUnableToOpenFile, &quot;&#39;Upload blob&#39; action: failed to open blob&quot;)
+            end
+          end
+
+          it &#39;raises an exception for other RPC failures&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is asynchronous)::describe(it has agent_task_id)::describe(upload_blob)::it#raises an exception for other RPC failures has a flog score of 27</span>          </div>  </li></ol>
+            allow(client).to receive(:handle_method).and_raise(RpcRemoteException, &#39;failure has been found&#39;)
+
+            expect(client).to_not receive(:warning)
+            expect { client.upload_blob(&#39;blob_id&#39;, &#39;payload_checksum&#39;, &#39;base64_encoded_payload&#39;) }.to raise_error
+          end
+        end
+
+        context &#39;task can time out&#39; do
+          it_acts_as_message_with_timeout :stop
+        end
+      end
+    end
+
+    context &#39;task is fired and forgotten&#39; do
+      describe &#39;delete_arp_entries&#39; do
+        subject(:client) { AgentClient.with_agent_id(&#39;fake-agent-id&#39;) }
+        let(:task) do
+          {
+            &#39;agent_task_id&#39; =&gt; &#39;fake-agent_task_id&#39;,
+            &#39;state&#39; =&gt; &#39;running&#39;,
+            &#39;value&#39; =&gt; &#39;task value&#39;
+          }
+        end
+        let(:nats_rpc) { instance_double(Bosh::Director::NatsRpc, cancel_request: nil) }
+        let(:request_id) { &#39;my-request&#39; }
+
+        before do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 4 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L286" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L327" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L364" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L400" class="js-smell-location">3</a>                  </div>  </li></ol>
+          allow(Config).to receive(:nats_rpc).and_return(nats_rpc)
+          allow(Api::ResourceManager).to receive(:new)
+        end
+
+        it &#39;sends delete_arp_entries to the agent&#39; do
+          expect(client).to receive(:send_nats_request_quietly) do |message_name, args|
+            expect(message_name).to eq(:delete_arp_entries)
+            expect(args).to eq([ips: [&#39;10.10.10.1&#39;, &#39;10.10.10.2&#39;]])
+          end
+
+          client.delete_arp_entries(ips: [&#39;10.10.10.1&#39;, &#39;10.10.10.2&#39;])
+        end
+
+        it &#39;cancels the request on the NatsRPC to avoid memory leaks&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is fired and forgotten)::describe(delete_arp_entries)::it#cancels the request on the NatsRPC to avoid memory leaks has a flog score of 27</span>          </div>  </li></ol>
+          allow(client).to receive(:send_nats_request_quietly).and_return(request_id)
+          expect(nats_rpc).to receive(:cancel_request).with(request_id)
+
+          client.delete_arp_entries(ips: [&#39;10.10.10.1&#39;, &#39;10.10.10.2&#39;])
+        end
+
+        it &#39;does not raise an exception for failures&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is fired and forgotten)::describe(delete_arp_entries)::it#does not raise an exception for failures has a flog score of 29</span>          </div>  </li></ol>
+          allow(client).to receive(:send_nats_request_quietly).and_raise(RpcRemoteException, &#39;random failure!&#39;)
+
+          expect(Config.logger).to receive(:warn).with(&quot;Ignoring &#39;random failure!&#39; error from the agent: #&lt;Bosh::Director::RpcRemoteException: random failure!&gt;. Received while trying to run: delete_arp_entries on client: &#39;fake-agent-id&#39;&quot;)
+          expect { client.delete_arp_entries(ips: [&#39;10.10.10.1&#39;, &#39;10.10.10.2&#39;]) }.to_not raise_error
+        end
+      end
+
+      describe &#39;shutdown&#39; do
+        subject(:client) { AgentClient.with_agent_id(&#39;fake-agent-id&#39;) }
+        let(:task) do
+          {
+            &#39;agent_task_id&#39; =&gt; &#39;fake-agent_task_id&#39;,
+            &#39;state&#39; =&gt; &#39;running&#39;,
+            &#39;value&#39; =&gt; &#39;task value&#39;,
+          }
+        end
+        let(:nats_rpc) { instance_double(Bosh::Director::NatsRpc, cancel_request: nil) }
+        let(:request_id) { &#39;my-request-id&#39; }
+
+        before do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 4 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L286" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L327" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L364" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L400" class="js-smell-location">3</a>                  </div>  </li></ol>
+          allow(Config).to receive(:nats_rpc).and_return(nats_rpc)
+          allow(Api::ResourceManager).to receive(:new)
+        end
+
+        it &#39;sends shutdown to the agent&#39; do
+          expect(client).to receive(:send_nats_request_quietly) do |message_name, args|
+            expect(message_name).to eq(:shutdown)
+            expect(args).to eq([])
+          end
+
+          client.shutdown
+        end
+
+        it &#39;cancels the request on the NatsRPC to avoid memory leaks&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is fired and forgotten)::describe(shutdown)::it#cancels the request on the NatsRPC to avoid memory leaks has a flog score of 27</span>          </div>  </li></ol>
+          allow(client).to receive(:send_nats_request_quietly).and_return(request_id)
+          expect(nats_rpc).to receive(:cancel_request).with(request_id)
+
+          client.shutdown
+        end
+
+        it &#39;does not raise an exception for failures&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::context(task is fired and forgotten)::describe(shutdown)::it#does not raise an exception for failures has a flog score of 29</span>          </div>  </li></ol>
+          allow(client).to receive(:send_nats_request_quietly).and_raise(RpcRemoteException, &#39;random failure!&#39;)
+
+          expect(Config.logger).to receive(:warn).with(
+            &quot;Ignoring &#39;random failure!&#39; error from the agent: #&lt;Bosh::Director::RpcRemoteException: random failure!&gt;.&quot; \
+            &quot; Received while trying to run: shutdown on client: &#39;fake-agent-id&#39;&quot;,
+          )
+          expect { client.shutdown }.to_not raise_error
+        end
+      end
+    end
+
+    describe &#39;#sync_dns&#39; do
+      subject(:client) {AgentClient.with_agent_id(&#39;fake-agent-id&#39;, timeout: 0.1)}
+      let(:nats_rpc) {instance_double(Bosh::Director::NatsRpc)}
+
+      before do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 4 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L286" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L327" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L364" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L400" class="js-smell-location">3</a>                  </div>  </li></ol>
+        allow(Config).to receive(:nats_rpc).and_return(nats_rpc)
+        allow(Api::ResourceManager).to receive(:new)
+      end
+
+      it &#39;sends sync_dns to the agent&#39; do
+        expect(client).to receive(:send_nats_request_quietly) do |message_name, args|
+          expect(message_name).to eq(:sync_dns)
+          expect(args).to eq([blobstore_id: &#39;fake-blob-id&#39;, sha1: &#39;fakesha1&#39;])
+        end
+        client.sync_dns(blobstore_id: &#39;fake-blob-id&#39;, sha1: &#39;fakesha1&#39;)
+      end
+
+      it &#39;sends sync_dns to the agent with version parameter&#39; do
+        expect(client).to receive(:send_nats_request_quietly) do |message_name, args|
+          expect(message_name).to eq(:sync_dns)
+          expect(args).to eq([blobstore_id: &#39;fake-blob-id&#39;, sha1: &#39;fakesha1&#39;, version: 1])
+        end
+        client.sync_dns(blobstore_id: &#39;fake-blob-id&#39;, sha1: &#39;fakesha1&#39;, version: 1)
+      end
+
+      it &#39;does not log sync_dns calls&#39; do
+        expect(nats_rpc).to receive(:send_request).with(
+          &#39;agent.fake-agent-id&#39;,
+          &#39;fake-agent-id&#39;,
+          hash_including(:method=&gt;:sync_dns),
+          {&#39;logging&#39; =&gt; false}
+        )
+        client.sync_dns(blobstore_id: &#39;fake-blob-id&#39;, sha1: &#39;fakesha1&#39;, version: 1)
+      end
+    end
+
+    describe &#39;#cancel_sync_dns&#39; do
+      subject(:client) { AgentClient.with_agent_id(&#39;fake-agent-id&#39;, timeout: 0.1) }
+      let(:nats_rpc) { instance_double(Bosh::Director::NatsRpc) }
+
+      before do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 4 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L286" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L327" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L364" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L400" class="js-smell-location">3</a>                  </div>  </li></ol>
+        allow(Config).to receive(:nats_rpc).and_return(nats_rpc)
+        allow(Api::ResourceManager).to receive(:new)
+      end
+
+      it &#39;cancels the specified nats rpc request&#39; do
+        expect(nats_rpc).to receive(:cancel_request).with(&#39;some-id&#39;)
+
+        client.cancel_sync_dns(&#39;some-id&#39;)
+      end
+    end
+
+    context &#39;task is synchronous&#39; do
+      describe &#39;it does not have agent_task_id&#39; do
+        subject(:client) { AgentClient.with_agent_id(&#39;fake-agent-id&#39;) }
+
+        before do
+          allow(Config).to receive(:nats_rpc)
+          allow(Api::ResourceManager).to receive(:new)
+        end
+
+        it_acts_as_synchronous_message :stop
+        it_acts_as_synchronous_message :cancel_task
+        it_acts_as_synchronous_message :get_state
+        it_acts_as_synchronous_message :list_disk
+        it_acts_as_synchronous_message :start
+        it_acts_as_synchronous_message :info
+      end
+    end
+
+    describe &#39;#info&#39; do
+      subject(:client) { AgentClient.with_agent_id(&#39;fake-agent-id&#39;) }
+
+      it &#39;is returns api version 0 if the info endpoint is not implemented&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#info)::it#is returns api version 0 if the info endpoint is not implemented has a flog score of 28</span>          </div>  </li></ol>
+        allow(client).to receive(:send_message).and_raise(RpcRemoteException, &quot;unknown message info&quot;)
+
+        expect(Config.logger).to receive(:warn).with(&quot;Ignoring info &#39;unknown message&#39; error from the agent: #&lt;Bosh::Director::RpcRemoteException: unknown message info&gt;&quot;)
+        expect(client.info).to eq({ &#39;api_version&#39; =&gt; 0 })
+      end
+    end
+
+    describe &#39;ping &lt;=&gt; pong&#39; do
+      let(:stemcell) do
+        Models::Stemcell.make(:cid =&gt; &#39;stemcell-id&#39;)
+      end
+
+      let(:network_settings) do
+        { &#39;network_a&#39; =&gt; { &#39;ip&#39; =&gt; &#39;1.2.3.4&#39; } }
+      end
+
+      subject(:client) do
+        AgentClient.with_agent_id(&#39;fake-agent-id&#39;)
+      end
+
+      it &#39;should returns pong when pinged&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(ping <=> pong)::it#should returns pong when pinged has a flog score of 34</span>          </div>  </li></ol>
+        nats_rpc = double(&#39;nats_rpc&#39;)
+
+        allow(Config).to receive(:nats_rpc).and_return(nats_rpc)
+        allow(App).to receive_messages(instance: double(&#39;App Instance&#39;).as_null_object)
+
+        expect(nats_rpc).to receive(:send_request) do |*args, &amp;blk|
+          blk.call({&#39;value&#39; =&gt; &#39;pong&#39;})
+        end
+
+        expect(client.ping).to eq(&#39;pong&#39;)
+      end
+    end
+
+    before do
+      allow(Api::ResourceManager).to receive(:new)
+      @nats_rpc = instance_double(&#39;Bosh::Director::NatsRpc&#39;)
+      allow(Bosh::Director::Config).to receive(:nats_rpc).and_return(@nats_rpc)
+    end
+
+    let(:test_args) do
+      [&#39;arg 1&#39;, 2, { :test =&gt; &#39;blah&#39; }]
+    end
+
+    let(:expected_rpc_args) do
+      @expected_rpc_args = { protocol: Bosh::Director::AgentClient::PROTOCOL_VERSION, arguments: test_args, method: :baz }
+    end
+
+    it &#39;should send messages and return values&#39; do
+      response = { &#39;value&#39; =&gt; 5 }
+
+      expect(@nats_rpc).to receive(:send_request).
+        with(&#39;foo.bar&#39;, &#39;bar&#39;, expected_rpc_args, options).and_yield(response)
+
+      client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;)
+      expect(client.baz(*test_args)).to eq(5)
+    end
+
+    it &#39;should include the current protocol version in each request&#39; do
+      expect(@nats_rpc).to receive(:send_request).
+        with(anything(), &#39;bar&#39;, hash_including(protocol: Bosh::Director::AgentClient::PROTOCOL_VERSION), options).
+        and_yield({&#39;value&#39; =&gt; &#39;whatever&#39;})
+
+      client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;)
+      client.baz(*test_args)
+    end
+
+    it &#39;should handle exceptions&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::it#should handle exceptions has a flog score of 46</span>          </div>  </li></ol>
+      response = {
+        &#39;exception&#39; =&gt; {
+          &#39;message&#39; =&gt; &#39;test&#39;,
+          &#39;backtrace&#39; =&gt; %w(a b c),
+          &#39;blobstore_id&#39; =&gt; &#39;deadbeef&#39;
+        }
+      }
+
+      expect(@nats_rpc).to receive(:send_request).
+        with(&#39;foo.bar&#39;, &#39;bar&#39;, expected_rpc_args, options).and_yield(response)
+
+      rm = double(Bosh::Director::Api::ResourceManager)
+      expect(rm).to receive(:get_resource).with(&#39;deadbeef&#39;).and_return(&#39;an exception&#39;)
+      expect(rm).to receive(:delete_resource).with(&#39;deadbeef&#39;)
+      expect(Bosh::Director::Api::ResourceManager).to receive(:new).and_return(rm)
+
+      client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;)
+      expected_error_message = &quot;test\na\nb\nc\nan exception&quot;
+
+      expect {
+        client.baz(*test_args)
+      }.to raise_exception(Bosh::Director::RpcRemoteException, expected_error_message)
+    end
+
+    describe &#39;timeouts/retries&#39; do
+      it &#39;should handle timeouts&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(timeouts/retries)::it#should handle timeouts has a flog score of 32</span>          </div>  </li></ol>
+        expect(@nats_rpc).to receive(:send_request).
+          with(&#39;foo.bar&#39;, &#39;bar&#39;, expected_rpc_args, options).and_return(&#39;req_id&#39;)
+        expect(@nats_rpc).to receive(:cancel_request).with(&#39;req_id&#39;)
+
+        client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;, timeout: 0.1)
+
+        expect {
+          client.baz(*test_args)
+        }.to raise_exception(Bosh::Director::RpcTimeout)
+      end
+
+      it &#39;should retry only methods in the options list&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(timeouts/retries)::it#should retry only methods in the options list has a flog score of 26</span>          </div>  </li></ol>
+        client_opts = {
+          timeout: 0.1,
+          retry_methods: { foo: 10 }
+        }
+
+        args = { method: :baz, arguments: [] }
+
+        expect(@nats_rpc).to receive(:send_request).
+          with(&#39;foo.bar&#39;, &#39;bar&#39;, hash_including(args), options).once.and_raise(Bosh::Director::RpcTimeout)
+
+        client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;, client_opts)
+
+        expect {
+          client.baz
+        }.to raise_exception(Bosh::Director::RpcTimeout)
+      end
+
+      it &#39;should retry methods&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(timeouts/retries)::it#should retry methods has a flog score of 30</span>          </div>  </li></ol>
+        args = { method: :baz, arguments: [] }
+
+        expect(@nats_rpc).to receive(:send_request).
+          with(&#39;foo.bar&#39;, &#39;bar&#39;, hash_including(args), options).exactly(2).times.and_raise(Bosh::Director::RpcTimeout)
+
+        client_opts = {
+          timeout: 0.1,
+          retry_methods: { baz: 1 }
+        }
+
+        client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;, client_opts)
+
+        expect {
+          client.baz
+        }.to raise_exception(Bosh::Director::RpcTimeout)
+      end
+
+      it &#39;should retry only timeout errors&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(timeouts/retries)::it#should retry only timeout errors has a flog score of 28</span>          </div>  </li></ol>
+        args = { method: :baz, arguments: [] }
+
+        expect(@nats_rpc).to receive(:send_request).
+          with(&#39;foo.bar&#39;, &#39;bar&#39;, hash_including(args), options).once.and_raise(RuntimeError.new(&#39;foo&#39;))
+
+        client_opts = {
+          timeout: 0.1,
+          retry_methods: { retry_method: 10 }
+        }
+
+        client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;, client_opts)
+
+        expect {
+          client.baz
+        }.to raise_exception(RuntimeError, &#39;foo&#39;)
+      end
+
+      it &#39;should cancel even if not timeout&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(timeouts/retries)::it#should cancel even if not timeout has a flog score of 39</span>          </div>  </li></ol>
+        args = {method: :get_state, arguments: []}
+
+        expect(@nats_rpc).to receive(:send_request).
+          with(&#39;get_state.bar&#39;, &#39;bar&#39;, hash_including(args), options).once.and_return({})
+
+        allow(@nats_rpc).to receive(:cancel_request)
+
+        client_opts = {
+          timeout: 0.1,
+          retry_methods: {retry_method: 10}
+        }
+        client = AgentClient.new(&#39;get_state&#39;, &#39;bar&#39;, client_opts)
+
+        task_id = 1
+        task = Models::Task.make(:id =&gt; task_id, :state =&gt; &#39;cancelling&#39;)
+        job = Jobs::BaseJob.new()
+        job.task_id = task_id
+        Config.instance_variable_set(:@current_job, job)
+
+        expect {
+          client.get_state { Config.job_cancelled? }
+        }.to raise_exception(TaskCancelled)
+      end
+
+      describe :wait_until_ready do
+        let(:client) { AgentClient.new(&#39;foo&#39;, &#39;bar&#39;, timeout: 0.1) }
+
+        it &#39;should wait for the agent to be ready&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(timeouts/retries)::describe(wait_until_ready)::it#should wait for the agent to be ready has a flog score of 42</span>          </div>  </li></ol>
+          expect(client).to receive(:ping).and_raise(Bosh::Director::RpcTimeout)
+          expect(client).to receive(:ping).and_raise(Bosh::Director::RpcTimeout)
+          expect(client).to receive(:ping).and_raise(Bosh::Director::RpcTimeout)
+          expect(client).to receive(:ping).and_return(true)
+
+          client.wait_until_ready
+        end
+
+        it &#39;should wait for the agent if it is restarting&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(timeouts/retries)::describe(wait_until_ready)::it#should wait for the agent if it is restarting has a flog score of 33</span>          </div>  </li></ol>
+          expect(client).to receive(:ping).and_raise(Bosh::Director::RpcRemoteException, &#39;restarting agent&#39;)
+          expect(client).to receive(:ping).and_raise(Bosh::Director::RpcTimeout)
+          expect(client).to receive(:ping).and_return(true)
+
+          client.wait_until_ready
+        end
+
+        it &#39;should raise an exception if there is a remote exception&#39; do
+          expect(client).to receive(:ping).and_raise(Bosh::Director::RpcRemoteException, &#39;remote exception&#39;)
+
+          expect { client.wait_until_ready }.to raise_error(Bosh::Director::RpcRemoteException)
+        end
+
+        it &#39;should raise an exception if task was cancelled&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(timeouts/retries)::describe(wait_until_ready)::it#should raise an exception if task was cancelled has a flog score of 48</span>          </div>  </li></ol>
+          testjob_class = Class.new(Jobs::BaseJob) do
+            define_method :perform do
+              &#39;foo&#39;
+            end
+          end
+          task_id = 1
+          tasks_dir = Dir.mktmpdir
+          allow(Config).to receive(:runtime).and_return({&#39;instance&#39; =&gt; &#39;name/id&#39;, &#39;ip&#39; =&gt; &#39;127.0.127.0&#39;})
+          allow(Config).to receive(:base_dir).and_return(tasks_dir)
+          allow(Config).to receive(:cloud_options).and_return({})
+          task = Models::Task.make(:id =&gt; task_id, :state =&gt; &#39;cancelling&#39;)
+          testjob_class.perform(task_id, &#39;workername1&#39;)
+          expect { client.wait_until_ready }.to raise_error(Bosh::Director::TaskCancelled)
+        end
+      end
+    end
+
+    describe &#39;handling compilation log&#39; do
+      it &#39;should inject compile log into response&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(handling compilation log)::it#should inject compile log into response has a flog score of 49</span>          </div>  </li></ol>
+        response = {
+          &#39;value&#39; =&gt; {
+            &#39;result&#39; =&gt; {
+              &#39;compile_log_id&#39; =&gt; &#39;cafe&#39;
+            }
+          }
+        }
+
+        expect(@nats_rpc).to receive(:send_request).
+          with(&#39;foo.bar&#39;, &#39;bar&#39;, expected_rpc_args, options).and_yield(response)
+
+        rm = instance_double(&#39;Bosh::Director::Api::ResourceManager&#39;)
+        expect(rm).to receive(:get_resource).with(&#39;cafe&#39;).and_return(&#39;blob&#39;)
+        expect(rm).to receive(:delete_resource).with(&#39;cafe&#39;)
+        expect(Bosh::Director::Api::ResourceManager).to receive(:new).and_return(rm)
+
+        client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;)
+        value = client.baz(*test_args)
+        expect(value[&#39;result&#39;][&#39;compile_log&#39;]).to eq(&#39;blob&#39;)
+      end
+    end
+
+    describe &#39;formatting RPC remote exceptions&#39; do
+      it &#39;supports old style (String)&#39; do
+        client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;)
+        expect(client.format_exception(&#39;message string&#39;)).to eq(&#39;message string&#39;)
+      end
+
+      it &#39;supports new style (Hash)&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(formatting RPC remote exceptions)::it(supports new style (Hash))#supports new style (Hash) has a flog score of 34</span>          </div>  </li></ol>
+        exception = {
+          &#39;message&#39; =&gt; &#39;something happened&#39;,
+          &#39;backtrace&#39; =&gt; [&#39;in zbb.rb:35&#39;, &#39;in zbb.rb:26&#39;],
+          &#39;blobstore_id&#39; =&gt; &#39;deadbeef&#39;
+        }
+
+        rm = instance_double(&#39;Bosh::Director::Api::ResourceManager&#39;)
+        allow(Bosh::Director::Api::ResourceManager).to receive(:new).and_return(rm)
+        expect(rm).to receive(:get_resource).with(&#39;deadbeef&#39;).
+          and_return(&quot;Failed to compile: no such file &#39;zbb&#39;&quot;)
+        expect(rm).to receive(:delete_resource).with(&#39;deadbeef&#39;)
+
+        expected_error = &quot;something happened\nin zbb.rb:35\nin zbb.rb:26\nFailed to compile: no such file &#39;zbb&#39;&quot;
+
+        client = AgentClient.new(&#39;foo&#39;, &#39;bar&#39;)
+        expect(client.format_exception(exception)).to eq(expected_error)
+      end
+    end
+
+    describe &#39;#run_errand&#39; do
+      it &#39;sends a run errand message over nats and returns a task&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#run_errand)::it#sends a run errand message over nats and returns a task has a flog score of 31</span>          </div>  </li></ol>
+        nats_rpc = instance_double(&#39;Bosh::Director::NatsRpc&#39;)
+        allow(Config).to receive(:nats_rpc).and_return(nats_rpc)
+
+        client = AgentClient.new(&#39;fake-service-name&#39;, &#39;fake-client-id&#39;)
+
+        args = double
+        nats_rpc_response = {
+          &#39;value&#39; =&gt; {
+            &#39;state&#39; =&gt; &#39;running&#39;,
+            &#39;agent_task_id&#39; =&gt; &#39;fake-task-id&#39;,
+          }
+        }
+
+        expect(nats_rpc).to receive(:send_request).with(
+          &#39;fake-service-name.fake-client-id&#39;, &#39;fake-client-id&#39;, hash_including(method: :run_errand, arguments: [args]), options)
+          .and_yield(nats_rpc_response)
+
+        expect(client.run_errand(args)).to eq({
+          &#39;state&#39; =&gt; &#39;running&#39;,
+          &#39;agent_task_id&#39; =&gt; &#39;fake-task-id&#39;,
+        })
+      end
+    end
+
+    describe &#39;#wait_for_task&#39; do
+      let(:nats_rpc) { instance_double(&#39;Bosh::Director::NatsRpc&#39;) }
+      before { allow(Config).to receive(:nats_rpc).and_return(nats_rpc) }
+
+      context &#39;when a block is passed&#39; do
+        let(:fake_block) { Proc.new {} }
+
+        it &#39;calls the block while the task is running&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#wait_for_task)::context(when a block is passed)::it#calls the block while the task is running has a flog score of 59</span>          </div>  </li></ol>
+          client = AgentClient.new(&#39;fake-service-name&#39;, &#39;fake-client-id&#39;)
+
+          nats_rpc_response = {
+            &#39;value&#39; =&gt; {
+              &#39;state&#39; =&gt; &#39;running&#39;,
+              &#39;agent_task_id&#39; =&gt; &#39;fake-task-id&#39;,
+            }
+          }
+
+          expect(nats_rpc).to receive(:send_request).once.with(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 7 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L755" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L766" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L786" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L796" class="js-smell-location">3</a>                  <a href="agent_client_spec.html#L815" class="js-smell-location">4</a>                  <a href="agent_client_spec.html#L834" class="js-smell-location">5</a>                  <a href="agent_client_spec.html#L845" class="js-smell-location">6</a>                  </div>  </li></ol>
+            &#39;fake-service-name.fake-client-id&#39;, &#39;fake-client-id&#39;, hash_including(method: :get_task, arguments: [&#39;fake-task-id&#39;]), options)
+            .and_yield(nats_rpc_response)
+
+          nats_rpc_response = {
+            &#39;value&#39; =&gt; {
+              &#39;state&#39; =&gt; &#39;done&#39;,
+              &#39;agent_task_id&#39; =&gt; &#39;fake-task-id&#39;
+            }
+          }
+
+          expect(nats_rpc).to receive(:send_request).once.with(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 7 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L755" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L766" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L786" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L796" class="js-smell-location">3</a>                  <a href="agent_client_spec.html#L815" class="js-smell-location">4</a>                  <a href="agent_client_spec.html#L834" class="js-smell-location">5</a>                  <a href="agent_client_spec.html#L845" class="js-smell-location">6</a>                  </div>  </li></ol>
+            &#39;fake-service-name.fake-client-id&#39;, &#39;fake-client-id&#39;, hash_including(method: :get_task, arguments: [&#39;fake-task-id&#39;]), options)
+            .and_yield(nats_rpc_response)
+
+          expect(fake_block).to receive(:call).exactly(1).times
+
+          client.wait_for_task(&#39;fake-task-id&#39;, &amp;fake_block)
+        end
+
+        it &#39;sleeps for the default poll interval&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#wait_for_task)::context(when a block is passed)::it#sleeps for the default poll interval has a flog score of 61</span>          </div>  </li></ol>
+          client = AgentClient.new(&#39;fake-service-name&#39;, &#39;fake-client-id&#39;)
+
+          allow(fake_block).to receive(:call)
+
+          nats_rpc_response = {
+            &#39;value&#39; =&gt; {
+              &#39;state&#39; =&gt; &#39;running&#39;,
+            }
+          }
+
+          expect(nats_rpc).to receive(:send_request).once.with(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 7 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L755" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L766" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L786" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L796" class="js-smell-location">3</a>                  <a href="agent_client_spec.html#L815" class="js-smell-location">4</a>                  <a href="agent_client_spec.html#L834" class="js-smell-location">5</a>                  <a href="agent_client_spec.html#L845" class="js-smell-location">6</a>                  </div>  </li></ol>
+            &#39;fake-service-name.fake-client-id&#39;, &#39;fake-client-id&#39;, hash_including(method: :get_task, arguments: [&#39;fake-task-id&#39;]), options)
+            .and_yield(nats_rpc_response)
+
+          nats_rpc_response = {
+            &#39;value&#39; =&gt; {
+              &#39;value&#39; =&gt; &#39;fake-return-value&#39;,
+            }
+          }
+
+          expect(nats_rpc).to receive(:send_request).once.with(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 7 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L755" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L766" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L786" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L796" class="js-smell-location">3</a>                  <a href="agent_client_spec.html#L815" class="js-smell-location">4</a>                  <a href="agent_client_spec.html#L834" class="js-smell-location">5</a>                  <a href="agent_client_spec.html#L845" class="js-smell-location">6</a>                  </div>  </li></ol>
+            &#39;fake-service-name.fake-client-id&#39;, &#39;fake-client-id&#39;, hash_including(method: :get_task, arguments: [&#39;fake-task-id&#39;]), options)
+            .and_yield(nats_rpc_response)
+
+          expect(client).to receive(:sleep).with(1.0)
+
+          client.wait_for_task(&#39;fake-task-id&#39;, &amp;fake_block)
+        end
+
+        it &#39;returns the task value&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#wait_for_task)::context(when a block is passed)::it#returns the task value has a flog score of 35</span>          </div>  </li></ol>
+          client = AgentClient.new(&#39;fake-service-name&#39;, &#39;fake-client-id&#39;)
+
+          nats_rpc_response = {
+            &#39;value&#39; =&gt; {
+              &#39;state&#39; =&gt; &#39;done&#39;,
+              &#39;value&#39; =&gt; &#39;fake-return-value&#39;,
+            }
+          }
+
+          expect(nats_rpc).to receive(:send_request).once.with(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 7 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L755" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L766" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L786" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L796" class="js-smell-location">3</a>                  <a href="agent_client_spec.html#L815" class="js-smell-location">4</a>                  <a href="agent_client_spec.html#L834" class="js-smell-location">5</a>                  <a href="agent_client_spec.html#L845" class="js-smell-location">6</a>                  </div>  </li></ol>
+            &#39;fake-service-name.fake-client-id&#39;, &#39;fake-client-id&#39;, hash_including(method: :get_task, arguments: [&#39;fake-task-id&#39;]), options)
+            .and_yield(nats_rpc_response)
+
+          expect(client.wait_for_task(&#39;fake-task-id&#39;, &amp;fake_block)).to eq(&#39;fake-return-value&#39;)
+        end
+      end
+
+      context &#39;when no block is passed&#39; do
+        it &#39;sleeps for the default poll interval and returns task value&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#wait_for_task)::context(when no block is passed)::it#sleeps for the default poll interval and returns task value has a flog score of 46</span>          </div>  </li></ol>
+          client = AgentClient.new(&#39;fake-service-name&#39;, &#39;fake-client-id&#39;)
+
+          nats_rpc_response = {
+            &#39;value&#39; =&gt; {
+              &#39;state&#39; =&gt; &#39;running&#39;,
+              &#39;agent_task_id&#39; =&gt; &#39;fake-task-id&#39;
+            }
+          }
+
+          expect(nats_rpc).to receive(:send_request).once.with(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 7 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L755" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L766" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L786" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L796" class="js-smell-location">3</a>                  <a href="agent_client_spec.html#L815" class="js-smell-location">4</a>                  <a href="agent_client_spec.html#L834" class="js-smell-location">5</a>                  <a href="agent_client_spec.html#L845" class="js-smell-location">6</a>                  </div>  </li></ol>
+            &#39;fake-service-name.fake-client-id&#39;, &#39;fake-client-id&#39;, hash_including(method: :get_task, arguments: [&#39;fake-task-id&#39;]), options)
+            .and_yield(nats_rpc_response)
+
+          nats_rpc_response = {
+            &#39;value&#39; =&gt; {
+              &#39;state&#39; =&gt; &#39;done&#39;,
+              &#39;value&#39; =&gt; &#39;fake-return-value&#39;,
+            }
+          }
+
+          expect(nats_rpc).to receive(:send_request).once.with(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 7 nodes</span>              <span>Locations:</span>                  <a href="agent_client_spec.html#L755" class="js-smell-location">0</a>                  <a href="agent_client_spec.html#L766" class="js-smell-location">1</a>                  <a href="agent_client_spec.html#L786" class="js-smell-location">2</a>                  <a href="agent_client_spec.html#L796" class="js-smell-location">3</a>                  <a href="agent_client_spec.html#L815" class="js-smell-location">4</a>                  <a href="agent_client_spec.html#L834" class="js-smell-location">5</a>                  <a href="agent_client_spec.html#L845" class="js-smell-location">6</a>                  </div>  </li></ol>
+            &#39;fake-service-name.fake-client-id&#39;, &#39;fake-client-id&#39;, hash_including(method: :get_task, arguments: [&#39;fake-task-id&#39;]), options)
+            .and_yield(nats_rpc_response)
+
+          expect(client).to receive(:sleep).with(1.0)
+
+          client.wait_for_task(&#39;fake-task-id&#39;)
+        end
+      end
+
+      context &#39;when timeout is passed&#39; do
+        let(:fake_timeout_ticks) { 3 }
+
+        it &#39;uses the timeout if one is passed&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#wait_for_task)::context(when timeout is passed)::it#uses the timeout if one is passed has a flog score of 65</span>          </div>  </li></ol>
+          client = AgentClient.new(&#39;fake-service-name&#39;, &#39;fake-client-id&#39;)
+          timeout = Timeout.new(fake_timeout_ticks)
+
+          nats_rpc_response = {
+            &#39;value&#39; =&gt; {
+              &#39;state&#39; =&gt; &#39;running&#39;,
+              &#39;value&#39; =&gt; &#39;fake-return-value&#39;,
+            }
+          }
+
+          allow(nats_rpc).to receive(:send_request).with(
+            &#39;fake-service-name.fake-client-id&#39;, &#39;fake-client-id&#39;, hash_including(method: :get_task, arguments: [&#39;fake-task-id&#39;]), options)
+            .and_yield(nats_rpc_response)
+
+          expect(client).to receive(:sleep).with(AgentClient::DEFAULT_POLL_INTERVAL).exactly(fake_timeout_ticks).times
+          expect(timeout).to receive(:timed_out?).exactly(fake_timeout_ticks).times.and_return(false)
+          expect(timeout).to receive(:timed_out?).and_return(true)
+          expect(client.wait_for_task(&#39;fake-task-id&#39;, timeout)).to eq(&#39;fake-return-value&#39;)
+        end
+      end
+    end
+
+    describe &#39;#stop&#39; do
+      let(:nats_rpc) { instance_double(&#39;Bosh::Director::NatsRpc&#39;) }
+      let(:fake_timeout_ticks) { 3 }
+
+      before { allow(Config).to receive(:nats_rpc).and_return(nats_rpc) }
+
+      it &#39;should timeout and continue on after 5 minutes&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>VeryHighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#stop)::it#should timeout and continue on after 5 minutes has a flog score of 78</span>          </div>  </li></ol>
+        handle_method_response = {
+          &#39;agent_task_id&#39; =&gt; &#39;fake-task-id&#39;,
+          &#39;value&#39; =&gt; &#39;fake-return-value&#39;,
+          &#39;state&#39; =&gt; &#39;running&#39;,
+        }
+
+        timeout = Timeout.new(fake_timeout_ticks)
+
+        allow(Timeout).to receive(:new).and_return(timeout)
+        client = AgentClient.new(&#39;fake-service-name&#39;, &#39;fake-client-id&#39;)
+
+        expect(client).to receive(:handle_method).with(:stop, []).once.and_return(handle_method_response)
+        expect(client).to receive(:handle_method).with(:get_task, [&#39;fake-task-id&#39;]).exactly(fake_timeout_ticks + 1).times.and_return(handle_method_response)
+
+        expect(client).to receive(:sleep).with(AgentClient::DEFAULT_POLL_INTERVAL).exactly(fake_timeout_ticks).times
+        expect(timeout).to receive(:timed_out?).exactly(fake_timeout_ticks).times.and_return(false)
+        expect(timeout).to receive(:timed_out?).and_return(true)
+
+        client.stop
+      end
+
+      it &#39;should suppress timeout errors received from the agent&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Bosh::Director::describe(#stop)::it#should suppress timeout errors received from the agent has a flog score of 42</span>          </div>  </li></ol>
+        allow(Timeout).to receive(:new).and_return(Timeout.new(fake_timeout_ticks))
+
+        client = AgentClient.new(&#39;fake-service-name&#39;, &#39;fake-client-id&#39;)
+
+        expect(Config.logger).to receive(:warn).with(&quot;Ignoring stop timeout error from the agent: #&lt;Bosh::Director::RpcRemoteException: Timed out waiting for service &#39;foo&#39;.&gt;&quot;)
+
+        expect(client).to receive(:handle_method).with(:stop, []).once.and_return({ &#39;agent_task_id&#39; =&gt; &#39;fake-task-id&#39; })
+        expect(client).to receive(:handle_method).and_raise(RpcRemoteException, &quot;Timed out waiting for service &#39;foo&#39;.&quot;)
+
+        client.stop
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/prettify.js'></script>
+    <script src='../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+    <script src='../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>
