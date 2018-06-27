@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2017-01-19 10:14:47 -0800'>2017-01-19 10:14:47 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh/director/models /</small> compiled_package.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating a big">
+              A
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">55</span><small> lines of codes</small></div>
+              <div><span class="metric">7</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">5.1</span><small> complexity/method</small></div>
+              <div><span class="metric">23</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">36.04</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                3
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director::Models
+  class CompiledPackage &lt; Sequel::Model(Bosh::Director::Config.db)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::Models::CompiledPackage has no descriptive comment</span>          </div>  </li></ol>
+    many_to_one :package
+
+    # Creates a &#39;unique&#39; key to use in the global package cache
+    def self.create_cache_key(package, transitive_dependencies, stemcell_sha1)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Parameter-Name.md" target="_blank"><b>UncommunicativeParameterName</b></a>        </span>      </div>      <span>Bosh::Director::Models::CompiledPackage#self.create_cache_key has the parameter name 'stemcell_sha1'</span>          </div>  </li></ol>
+      dependency_fingerprints = transitive_dependencies.to_a.sort_by(&amp;:name).map {|p| p.fingerprint }<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank"><b>UncommunicativeVariableName</b></a>        </span>      </div>      <span>Bosh::Director::Models::CompiledPackage#self.create_cache_key has the variable name 'p'</span>          </div>  </li></ol>
+      hash_input = ([package.fingerprint, stemcell_sha1]+dependency_fingerprints).join(&#39;&#39;)
+      ::Digest::SHA1.hexdigest(hash_input)
+    end
+
+    # Marks job template model as being used by release version
+    # @param string stemcell os &amp; version, e.g. &#39;ubuntu_trusty/3146.1&#39;
+    # @return hash, e.g. { stemcell_os: &#39;ubuntu_trusty&#39;, stemcell_version: &#39;3146.1&#39; }
+    def self.split_stemcell_os_and_version(name)
+      values = name.split(&#39;/&#39;, 2)
+
+      unless 2 == values.length
+        raise &quot;Expected value to be in the format of \&quot;{os_name}/{stemcell_version}\&quot;, but given \&quot;#{name}\&quot;&quot;
+      end
+
+      return { os: values[0], version: values[1] }
+    end
+
+    def validate
+      validates_presence [:package_id, :stemcell_os, :stemcell_version, :sha1, :blobstore_id, :dependency_key]
+      validates_unique [:package_id, :stemcell_os, :stemcell_version, :dependency_key]
+      validates_unique [:package_id, :stemcell_os, :stemcell_version, :build]
+    end
+
+    def before_save
+      self.dependency_key_sha1 = ::Digest::SHA1.hexdigest(self.dependency_key)
+
+      super
+    end
+
+    def name
+      package.name
+    end
+
+    def version
+      package.version
+    end
+
+    def self.generate_build_number(package_model, stemcell_os, stemcell_version)
+      attrs = {
+        :package_id =&gt; package_model.id,
+        :stemcell_os =&gt; stemcell_os,
+        :stemcell_version =&gt; stemcell_version,
+      }
+
+      filter(attrs).max(:build).to_i + 1
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

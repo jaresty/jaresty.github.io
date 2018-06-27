@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2016-11-28 13:48:14 -0800'>2016-11-28 13:48:14 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh/director/deployment_plan /</small> instance_group_networks_parser.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating b big">
+              B
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">120</span><small> lines of codes</small></div>
+              <div><span class="metric">10</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">9.5</span><small> complexity/method</small></div>
+              <div><span class="metric">15</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">94.91</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                10
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;bosh/director/deployment_plan/job_network&#39;
+
+module Bosh::Director
+  module DeploymentPlan
+    class InstanceGroupNetworksParser<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser has no descriptive comment</span>          </div>  </li></ol>
+      include ValidationHelper
+      include IpUtil
+
+      def initialize(properties_that_require_defaults, properties_that_are_optional_defaults)
+        @properties_that_require_defaults = properties_that_require_defaults
+        @valid_properties = @properties_that_require_defaults | properties_that_are_optional_defaults
+      end
+
+      def parse(job_spec, job_name, manifest_networks)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Data-Clump.md" target="_blank"><b>DataClump</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser takes parameters ['job_name', 'manifest_networks'] to 3 methods</span>              <span>Locations:</span>                  <a href="instance_group_networks_parser.html#L14" class="js-smell-location">0</a>                  <a href="instance_group_networks_parser.html#L27" class="js-smell-location">1</a>                  <a href="instance_group_networks_parser.html#L44" class="js-smell-location">2</a>                  </div>  </li></ol>
+        networks = parse_networks(job_spec, job_name, manifest_networks)
+        networks.each do |network|
+          validate_default_properties(network, job_name)
+        end
+
+        validate_default_networks(networks, job_name)
+
+        networks
+      end
+
+      private
+
+      def parse_networks(job_spec, job_name, manifest_networks)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Data-Clump.md" target="_blank"><b>DataClump</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser takes parameters ['job_name', 'manifest_networks'] to 3 methods</span>              <span>Locations:</span>                  <a href="instance_group_networks_parser.html#L14" class="js-smell-location">0</a>                  <a href="instance_group_networks_parser.html#L27" class="js-smell-location">1</a>                  <a href="instance_group_networks_parser.html#L44" class="js-smell-location">2</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#parse_networks has approx 9 statements</span>          </div>  </li></ol>
+        network_specs = safe_property(job_spec, &quot;networks&quot;, :class =&gt; Array)
+        if network_specs.empty?
+          raise JobMissingNetwork, &quot;Instance group &#39;#{job_name}&#39; must specify at least one network&quot;
+        end
+        network_specs.map do |network_spec|
+          network_name = safe_property(network_spec, &quot;name&quot;, :class =&gt; String)
+          default_for = safe_property(network_spec, &quot;default&quot;, :class =&gt; Array, :default =&gt; [])
+          static_ips = parse_static_ips(network_spec[&#39;static_ips&#39;], job_name)
+
+          deployment_network = look_up_deployment_network(manifest_networks, job_name, network_name)
+          deployment_network.validate_reference_from_job!(network_spec, job_name)
+
+          JobNetwork.new(network_name, static_ips, default_for, deployment_network)
+        end
+      end
+
+      def look_up_deployment_network(manifest_networks, job_name, network_name)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Data-Clump.md" target="_blank"><b>DataClump</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser takes parameters ['job_name', 'manifest_networks'] to 3 methods</span>              <span>Locations:</span>                  <a href="instance_group_networks_parser.html#L14" class="js-smell-location">0</a>                  <a href="instance_group_networks_parser.html#L27" class="js-smell-location">1</a>                  <a href="instance_group_networks_parser.html#L44" class="js-smell-location">2</a>                  </div>  </li></ol>
+        deployment_network = manifest_networks.find{ |network| network.name == network_name }
+        if deployment_network.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#look_up_deployment_network performs a nil-check</span>          </div>  </li></ol>
+          raise JobUnknownNetwork, &quot;Instance group &#39;#{job_name}&#39; references an unknown network &#39;#{network_name}&#39;&quot;
+        end
+        deployment_network
+      end
+
+      def parse_static_ips(static_ips_raw, job_name)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#parse_static_ips has approx 6 statements</span>          </div>  </li></ol>
+        static_ips = nil
+        if static_ips_raw
+          static_ips = []
+          each_ip(static_ips_raw) do |ip|
+            if static_ips.include?(ip)
+              raise JobInvalidStaticIPs, &quot;Instance group &#39;#{job_name}&#39; specifies static IP &#39;#{format_ip(ip)}&#39; more than once&quot;
+            end
+
+            static_ips.push(ip)
+          end
+        end
+        static_ips
+      end
+
+      def validate_default_properties(network, job_name)
+        network.properties_for_which_the_network_is_the_default.each do |property|
+          unless @valid_properties.include?(property)
+            raise JobNetworkInvalidDefault,
+              &quot;Instance group &#39;#{job_name}&#39; specified an invalid default network property &#39;#{property}&#39;, &quot; +
+                &quot;valid properties are: &quot; + @properties_that_require_defaults.join(&quot;, &quot;)
+          end
+        end
+      end
+
+      def validate_default_networks(networks, job_name)
+        networks.first.make_default_for(@properties_that_require_defaults) if networks.count == 1
+
+        default_networks_for_properties = default_networks_for_properties(networks)
+        validate_only_one_default_network(default_networks_for_properties, job_name)
+        validate_default_network_for_each_property(default_networks_for_properties, job_name)
+      end
+
+      def validate_default_network_for_each_property(default_networks_for_properties, job_name)
+        missing_default_properties = default_networks_for_properties.select { |property, networks|
+          is_required = @properties_that_require_defaults.include?(property)
+          is_required &amp;&amp; networks.empty?
+        }.map { |property, _|
+          property
+        }
+        unless missing_default_properties.empty?
+          raise JobNetworkMissingDefault,
+            &quot;Instance group &#39;#{job_name}&#39; must specify which network is default for &quot; +
+              missing_default_properties.sort.join(&quot;, &quot;) + &quot;, since it has more than one network configured&quot;
+        end
+      end
+
+      def validate_only_one_default_network(default_networks_for_properties, job_name)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#validate_only_one_default_network has approx 7 statements</span>          </div>  </li></ol>
+        multiple_defaults = default_networks_for_properties.select { |_, networks|
+          networks.count &gt; 1<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#validate_only_one_default_network refers to 'networks' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="instance_group_networks_parser.html#L101" class="js-smell-location">0</a>                  <a href="instance_group_networks_parser.html#L105" class="js-smell-location">1</a>                  </div>  </li></ol>
+        }
+        unless multiple_defaults.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#validate_only_one_default_network refers to 'multiple_defaults' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="instance_group_networks_parser.html#L103" class="js-smell-location">0</a>                  <a href="instance_group_networks_parser.html#L104" class="js-smell-location">1</a>                  </div>  </li></ol>
+          message_for_each_property = multiple_defaults.map do |property, networks|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#validate_only_one_default_network refers to 'multiple_defaults' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="instance_group_networks_parser.html#L103" class="js-smell-location">0</a>                  <a href="instance_group_networks_parser.html#L104" class="js-smell-location">1</a>                  </div>  </li></ol>
+            quoted_network_names = networks.map { |network| &quot;&#39;#{network.name}&#39;&quot; }.join(&#39;, &#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank"><b>FeatureEnvy</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#validate_only_one_default_network refers to 'networks' more than self (maybe move it to another class?)</span>              <span>Locations:</span>                  <a href="instance_group_networks_parser.html#L101" class="js-smell-location">0</a>                  <a href="instance_group_networks_parser.html#L105" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#validate_only_one_default_network contains iterators nested 2 deep</span>          </div>  </li></ol>
+            &quot;&#39;#{property}&#39; has default networks: #{quoted_network_names}.&quot;
+          end
+          raise JobNetworkMultipleDefaults,
+            &quot;Instance group &#39;#{job_name}&#39; specified more than one network to contain default. #{message_for_each_property.join(&#39; &#39;)}&quot;
+        end
+      end
+
+      def default_networks_for_properties(networks)
+        @valid_properties.inject({}) do |defaults, property|
+          defaults.merge(property =&gt; networks.select { |network| network.default_for?(property) })<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nested-Iterators.md" target="_blank"><b>NestedIterators</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::InstanceGroupNetworksParser#default_networks_for_properties contains iterators nested 2 deep</span>          </div>  </li></ol>
+        end
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

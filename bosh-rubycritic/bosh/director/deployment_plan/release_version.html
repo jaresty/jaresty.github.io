@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="../../../assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="../../../overview.html"><img src="../../../assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="../../../overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="../../../smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+  <!--Page Title -->
+  <div class="Page_Title">
+    <div class="file-time">
+      <span class="committed-at">
+        
+          Updated <time class='js-timeago' datetime='2016-12-01 10:22:40 -0800'>2016-12-01 10:22:40 -0800</time>
+        
+      </span>
+    </div>
+    <div>
+      <h3><small>bosh/director/deployment_plan /</small> release_version.rb</h3>
+    </div>
+  </div>
+  <!--End Page Title -->
+  <div class="Content_Wrapper">
+    <!-- code detail -->
+    <div class="code-top-detail clearfix row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="rating a big">
+              A
+            </div>
+          </div>
+          <div class="code-statistics col-md-11">
+            <div class="col-md-3">
+              <div><span class="metric">118</span><small> lines of codes</small></div>
+              <div><span class="metric">9</span><small> methods</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">4.7</span><small> complexity/method</small></div>
+              <div><span class="metric">17</span><small> churn</small></div>
+            </div>
+            <div class="col-md-3">
+              <div><span class="metric">41.9</span><small> complexity</small></div>
+              <div><span class="metric">0</span><small> duplications</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="code-tabs">
+          <ul class="nav nav-pills right-to-left">
+            <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
+            <li class="active">
+              <a href="#" id="toggle-smells" class="toggle-button button">
+                7
+                smells
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Bosh::Director
+  module DeploymentPlan
+    class ReleaseVersion<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::ReleaseVersion assumes too much for instance variable '@all_templates'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::ReleaseVersion has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::ReleaseVersion has at least 7 instance variables</span>          </div>  </li></ol>
+      include ValidationHelper
+
+      # @return [String] Release name
+      attr_reader :name
+      # @return [String] Release version
+      attr_reader :version
+      # @return [Models::ReleaseVersion] Release version model
+      attr_reader :model
+
+      # @param [DeploymentPlan] deployment_plan Deployment plan
+      # @param [Hash] spec Raw release spec from the deployment
+      #   manifest
+      def initialize(deployment_model, spec)
+        @deployment_model = deployment_model
+
+        @name = safe_property(spec, &#39;name&#39;, :class =&gt; String)
+        @version = safe_property(spec, &#39;version&#39;, :class =&gt; String)
+
+        @model = nil
+        @templates = {}
+
+        @logger = Config.logger
+        @manager = Api::ReleaseManager.new
+      end
+
+      # Looks up release version in database and binds it to the deployment
+      # @return [void]
+      def bind_model<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::ReleaseVersion#bind_model has approx 6 statements</span>          </div>  </li></ol>
+        if @deployment_model.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::ReleaseVersion#bind_model performs a nil-check</span>          </div>  </li></ol>
+          raise DirectorError, &#39;Deployment not bound in the deployment plan&#39;
+        end
+
+        release = @manager.find_by_name(@name)
+        @model = @manager.find_version(release, @version)
+        @logger.debug(&quot;Found release &#39;#{@name}/#{@version}&#39;&quot;)
+
+        unless @deployment_model.release_versions.include?(@model)
+          @logger.debug(&quot;Binding release &#39;#{@name}/#{@version}&#39; &quot; +
+                        &quot;to deployment &#39;#{@deployment_model.name}&#39;&quot;)
+          @deployment_model.add_release_version(@model)
+        end
+      end
+
+      # Looks up package and template models in DB and binds them to this
+      # release spec
+      # @return [void]
+      def bind_templates
+        # ReleaseVersion model needs to be known so we can look up its
+        # templates
+        if @model.nil?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Nil-Check.md" target="_blank"><b>NilCheck</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::ReleaseVersion#bind_templates performs a nil-check</span>          </div>  </li></ol>
+          raise DirectorError, &#39;ReleaseVersion model not bound in release spec&#39;
+        end
+
+        # By now job specs from the deployment manifest should
+        # have been parsed, so we can assume @templates contains
+        # the list of templates that need to be bound
+        @templates.each_value do |template|
+          @logger.debug(&quot;Binding template &#39;#{template.name}&#39;&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::ReleaseVersion#bind_templates calls 'template.name' 2 times</span>              <span>Locations:</span>                  <a href="release_version.html#L61" class="js-smell-location">0</a>                  <a href="release_version.html#L63" class="js-smell-location">1</a>                  </div>  </li></ol>
+          template.bind_models
+          @logger.debug(&quot;Bound template &#39;#{template.name}&#39;&quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden"true"=""></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Bosh::Director::DeploymentPlan::ReleaseVersion#bind_templates calls 'template.name' 2 times</span>              <span>Locations:</span>                  <a href="release_version.html#L61" class="js-smell-location">0</a>                  <a href="release_version.html#L63" class="js-smell-location">1</a>                  </div>  </li></ol>
+        end
+      end
+
+      # @return [Hash] Hash representation
+      def spec
+        {
+          &#39;name&#39; =&gt; @name,
+          &#39;version&#39; =&gt; @version
+        }
+      end
+
+      # Looks up up template model by template name
+      # @param [String] name Template name
+      # @return [Models::Template]
+      def get_template_model_by_name(name)
+        @all_templates ||= @model.templates.inject({}) do |hash, template|
+          hash[template.name] = template
+          hash
+        end
+
+        @all_templates[name]
+      end
+
+      # Looks up up package model by package name
+      # @param [String] name Package name
+      # @return [Models::Package]
+      def get_package_model_by_name(name)
+        @model.package_by_name(name)
+      end
+
+      # Adds template to a list of templates used by this release for the
+      # current deployment
+      # @param [String] options Template name
+      def get_or_create_template(name)
+        @templates[name] ||= Job.new(self, name, @deployment_model.name)
+      end
+
+      # @param [String] name Job name
+      # @return [DeploymentPlan::Job] Job with given name used by this
+      #   release (if any)
+      def template(name)
+        @templates[name]
+      end
+
+      # Returns a list of job templates that need to be included into this
+      # release. Note that this is not just a list of all templates existing
+      # in the release but rather a list of templates for jobs that are included
+      # into current deployment plan.
+      # @return [Array&lt;DeploymentPlan::Job&gt;] List of job templates
+      def templates
+        @templates.values
+      end
+    end
+  end
+end
+</code>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='../../../assets/javascripts/jquery.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='../../../assets/javascripts/jquery.timeago.js'></script>
+    <script src='../../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../../assets/javascripts/prettify.js'></script>
+    <script src='../../../assets/javascripts/bootstrap.min.js'></script>
+    <script src='../../../assets/javascripts/application.js'></script>
+    <script src='../../../assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>
